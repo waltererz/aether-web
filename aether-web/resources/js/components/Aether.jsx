@@ -3,7 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import Layout from './Layout';
 
 const Aether = () => {
-  return <Layout></Layout>;
+    return (
+        <Layout>
+            <Switch></Switch>
+        </Layout>
+    );
 };
 
 export default Aether;

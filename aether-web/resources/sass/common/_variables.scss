@@ -1,5 +1,6 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #f0f2f5;
+$body-color: #333333;
 
 // Typography
 $font-family-sans-serif: 'Nanum Gothic', sans-serif;
@@ -7,6 +8,8 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
+$primary: #2d304b;
+$secondary: #9c27b0;
 $blue: #3490dc;
 $indigo: #6574cd;
 $purple: #9561e2;
@@ -17,3 +20,15 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+);
+
+// MediaQuery Resolutions
+$mq-res-0: '1440px';
+$mq-res-1: '1366px';
+$mq-res-2: '1280px';
+$mq-res-3: '1100px';
+$mq-res-4: '1024px';
+$mq-res-5: '900px';
