@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 
-const FullContents = (props) => {
+const FullContainer = (props) => {
     const { tab } = useSelector((state) => ({
         tab: state.layout.tab,
     }));
@@ -45,4 +45,4 @@ const FullContents = (props) => {
     );
 };
 
-export default FullContents;
+export default FullContainer;

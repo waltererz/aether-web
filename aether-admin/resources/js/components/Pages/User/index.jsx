@@ -1,10 +1,10 @@
 import React from 'react';
-import Content from '../../Layout/ContentStyles/FullContents';
+import Container from '../../Layout/ContainerStyles/FullContainer';
 
 const User = () => {
     return (
         <React.Fragment>
-            <Content content="사용자관리" right="" left="" />
+            <Container content="사용자관리" right="" left="" />
         </React.Fragment>
     );
 };

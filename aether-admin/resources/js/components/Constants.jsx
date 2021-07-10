@@ -1,4 +1,7 @@
 const CONSTANT = {
+    URL: {
+        BASE: 'http://52.141.4.213:38591',
+    },
     LAYOUT: {
         TAB: {
             HOME: 1,

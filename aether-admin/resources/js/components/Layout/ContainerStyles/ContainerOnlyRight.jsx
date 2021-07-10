@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-const ContentsOnlyRight = (props) => {
+const ContainerOnlyRight = (props) => {
     const { tab } = useSelector((state) => ({
         tab: state.layout.tab,
     }));
@@ -34,4 +34,4 @@ const ContentsOnlyRight = (props) => {
     );
 };
 
-export default ContentsOnlyRight;
+export default ContainerOnlyRight;

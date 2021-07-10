@@ -31,11 +31,14 @@ class GroupController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        //
+        return response()->json([
+            'name' => $request->post('name'),
+            'permissons' => $request->post('permissions'),
+        ]);
     }
 
     /**

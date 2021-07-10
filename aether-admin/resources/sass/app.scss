@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap');
@@ -6,18 +6,5 @@
 // Variables
 @import './common/variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
 // SCSSs
 @import './layout.scss';
-
-a,
-a:hover {
-    color: initial;
-    text-decoration: none;
-}
-
-body {
-    padding-top: 58px;
-}

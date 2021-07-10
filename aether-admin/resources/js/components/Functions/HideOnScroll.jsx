@@ -3,8 +3,8 @@ import Slide from '@material-ui/core/Slide';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const HideOnScroll = (props) => {
-    const { children, window, mediaQuery } = props;
-    const mediaQueryForSlide = useMediaQuery(mediaQuery);
+    const { children, window, breakpoint } = props;
+    const mediaQueryForSlide = useMediaQuery('(max-width: ' + breakpoint + 'px)');
 
     let trigger = useScrollTrigger({ target: window ? window() : undefined });
 

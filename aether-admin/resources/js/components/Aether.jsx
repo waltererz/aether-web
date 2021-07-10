@@ -10,8 +10,8 @@ const Aether = () => {
         <Layout>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/groups" component={Group} />
-                <Route axact path="/users" component={User} />
+                <Route path="/groups" component={Group} />
+                <Route path="/users" component={User} />
             </Switch>
         </Layout>
     );

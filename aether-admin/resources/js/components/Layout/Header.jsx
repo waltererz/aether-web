@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import CONSTANT from '../Constants';
 import { ReduxActionLayoutCurrentTab } from '../Redux/Actions/Layout';
 import HideOnScroll from '../Functions/HideOnScroll';
+import Theme from './Theme';
 
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
@@ -22,7 +23,7 @@ const Header = () => {
     const tabSelector = (event, tab) => dispatch(ReduxActionLayoutCurrentTab(tab));
 
     return (
-        <HideOnScroll mediaQuery="(max-width: 1160px)">
+        <HideOnScroll breakpoint={Theme.breakpoints.values.md}>
             <AppBar position="fixed">
                 <div style={{ flexGrow: 1 }}>
                     <Tabs
