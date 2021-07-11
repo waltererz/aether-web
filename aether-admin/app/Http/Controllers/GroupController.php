@@ -16,7 +16,8 @@ class GroupController extends Controller
      */
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $groups = Group::all();
+        $page = $request->post('page');
+        $groups = Group::paginate(2);
         return response()->json($groups);
     }
 
@@ -31,7 +32,7 @@ class GroupController extends Controller
         $group = new Group;
         $group->uuid = Str::uuid();
         $group->name = $request->post('name');
-        $group->permissions = $this->_encrypt($request->post('permissions'));
+        $group->permissions = $request->post('permissions');
         $group->save();
 
         if (Group::where('uuid', $group->uuid)->first()) {

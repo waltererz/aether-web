@@ -16,6 +16,7 @@ class Content extends React.Component {
         return (
             <Switch>
                 <Route exact path="/groups" component={Home} />
+                <Route exact path="/groups/page/:page" component={Home} />
                 <Route exact path="/groups/create" component={Create} />
             </Switch>
         );

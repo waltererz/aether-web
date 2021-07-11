@@ -29,7 +29,6 @@ class Group extends Model
      */
     protected $hidden = [
         'id',
-        'permissions',
         'deleted_at',
     ];
 

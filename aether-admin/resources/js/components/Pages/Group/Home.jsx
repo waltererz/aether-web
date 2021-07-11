@@ -17,16 +17,48 @@ const styles = {
     table: {
         minWidth: 300,
     },
+    pagination: {
+        marginTop: 20,
+    },
 };
 
 class Home extends React.Component {
-    render() {
-        const { classes } = this.props;
+    constructor(props) {
+        super(props);
+        this.page = Number(props.match.params.page);
+        this.changePage = this.changePage.bind(this);
+        this.state = {
+            metadata: [],
+            groups: [],
+        };
+    }
 
-        axios
+    componentDidMount() {
+        this._get(this.page);
+    }
+
+    changePage(event, new_page) {
+        this.props.history.push('/groups/page/' + new_page);
+        this._get(new_page);
+    }
+
+    fetchGroupList() {
+        return this.state.groups.map((group, index) => {
+            return (
+                <TableRow key={index}>
+                    <TableCell>{group.name}</TableCell>
+                </TableRow>
+            );
+        });
+    }
+
+    async _get(page) {
+        return await axios
             .post(
                 CONSTANTS.URL.BASE + '/groups/index',
-                {},
+                {
+                    page: page,
+                },
                 {
                     headers: {
                         'Content-type': 'application/json',
@@ -34,8 +66,22 @@ class Home extends React.Component {
                 },
             )
             .then((response) => {
-                console.log(response.data);
+                this.setState((state) => {
+                    if (state.groups != response.data) {
+                        console.log(response.data);
+                        return {
+                            metadata: response.data,
+                            groups: response.data.data,
+                        };
+                    } else {
+                        return null;
+                    }
+                });
             });
+    }
+
+    render() {
+        const { classes } = this.props;
 
         return (
             <Paper>
@@ -48,10 +94,9 @@ class Home extends React.Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell>사용자그룹</TableCell>
-                                <TableCell>권한</TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody id="groups"></TableBody>
+                        <TableBody>{this.state.groups ? this.fetchGroupList() : ''}</TableBody>
                     </Table>
                 </TableContainer>
             </Paper>
