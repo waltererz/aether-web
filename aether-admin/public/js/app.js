@@ -21733,7 +21733,7 @@ try {
 
 (axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.xsrfCookieName) = 'XSRF-TOKEN';
 (axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.xsrfHeaderName) = 'X-XSRF-TOKEN';
-(axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.withCredentials) = true;
+(axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.withCredentials) = false;
 var store = (0,redux__WEBPACK_IMPORTED_MODULE_7__.createStore)(_components_Redux_Reducer__WEBPACK_IMPORTED_MODULE_5__.default);
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {

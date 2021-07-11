@@ -15,7 +15,7 @@ try {
 
 axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const store = createStore(Reducers);
 
