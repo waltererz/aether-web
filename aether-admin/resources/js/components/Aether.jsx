@@ -5,16 +5,18 @@ import Home from './Pages/Home';
 import Group from './Pages/Group';
 import User from './Pages/User';
 
-const Aether = () => {
-    return (
-        <Layout>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/groups" component={Group} />
-                <Route path="/users" component={User} />
-            </Switch>
-        </Layout>
-    );
-};
+class Aether extends React.Component {
+    render() {
+        return (
+            <Layout>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/groups" component={Group} />
+                    <Route path="/users" component={User} />
+                </Switch>
+            </Layout>
+        );
+    }
+}
 
 export default Aether;

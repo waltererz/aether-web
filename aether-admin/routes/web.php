@@ -17,6 +17,7 @@ use App\Http\Controllers\GroupController;
 
 Route::prefix('groups')->group(function () {
     Route::post('/', [GroupController::class, 'store']);
+    Route::post('/index', [GroupController::class, 'index']);
 });
 
 // 지정되지 않은 모든 페이지는 리액트에서 처리함

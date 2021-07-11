@@ -1,4 +1,4 @@
-const CONSTANT = {
+const CONSTANTS = {
     URL: {
         BASE: 'http://52.141.4.213:38591',
     },
@@ -11,4 +11,4 @@ const CONSTANT = {
     },
 };
 
-export default CONSTANT;
+export default CONSTANTS;

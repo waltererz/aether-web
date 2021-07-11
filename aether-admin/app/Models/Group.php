@@ -17,6 +17,7 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'name',
         'permissions',
     ];
@@ -27,6 +28,8 @@ class Group extends Model
      * @var array
      */
     protected $hidden = [
+        'id',
+        'permissions',
         'deleted_at',
     ];
 

@@ -3,28 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
+use App\Models\Group;
 
 class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\View\View
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(): View
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('groups.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $groups = Group::all();
+        return response()->json($groups);
     }
 
     /**
@@ -35,10 +28,17 @@ class GroupController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        return response()->json([
-            'name' => $request->post('name'),
-            'permissons' => $request->post('permissions'),
-        ]);
+        $group = new Group;
+        $group->uuid = Str::uuid();
+        $group->name = $request->post('name');
+        $group->permissions = $this->_encrypt($request->post('permissions'));
+        $group->save();
+
+        if (Group::where('uuid', $group->uuid)->first()) {
+            return response()->json(true);
+        } else {
+            return response()->json(false);
+        }
     }
 
     /**
