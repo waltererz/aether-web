@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { ReduxActionLayoutCurrentTab } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/ContainerOnlyRight';
+import CONSTANTS from '../../Constants';
 
 class Content extends React.Component {
     render() {
@@ -12,6 +15,12 @@ class Content extends React.Component {
 }
 
 class Home extends React.Component {
+    componentDidMount() {
+        const { tab, changeTab } = this.props;
+        if (tab != CONSTANTS.LAYOUT.TAB.HOME) {
+            changeTab(CONSTANTS.LAYOUT.TAB.HOME);
+        }
+    }
     render() {
         return (
             <React.Fragment>
@@ -21,4 +30,12 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+    tab: state.layout.tab,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    changeTab: (tab) => dispatch(ReduxActionLayoutCurrentTab(tab)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

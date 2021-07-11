@@ -1,23 +1,9 @@
 import CONSTANT from '../../Constants';
 import { LAYOUT_CURRENT_TAB } from '../Constants';
-
-const path = window.location.pathname;
-let tab = 0;
-
-switch (true) {
-    case /^\/$/.test(path):
-        tab = CONSTANT.LAYOUT.TAB.HOME;
-        break;
-    case /^\/groups((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-        tab = CONSTANT.LAYOUT.TAB.GROUP;
-        break;
-    case /^\/users((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-        tab = CONSTANT.LAYOUT.TAB.USER;
-        break;
-}
+import getTabCode from '../../Functions/GetTabCode';
 
 const initialStates = {
-    tab: tab,
+    tab: getTabCode(),
 };
 
 function layout(state = initialStates, action) {

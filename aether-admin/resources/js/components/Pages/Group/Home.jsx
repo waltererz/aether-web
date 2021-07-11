@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '../../Functions/Paper';
+import Pagination from '../../Functions/Pagination';
 import CONSTANTS from '../../Constants';
 
 const styles = {
@@ -26,7 +27,6 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.page = Number(props.match.params.page);
-        this.changePage = this.changePage.bind(this);
         this.state = {
             metadata: [],
             groups: [],
@@ -37,47 +37,50 @@ class Home extends React.Component {
         this._get(this.page);
     }
 
-    changePage(event, new_page) {
-        this.props.history.push('/groups/page/' + new_page);
-        this._get(new_page);
+    componentDidUpdate() {
+        this._get(this.props.match.params.page);
     }
 
     fetchGroupList() {
         return this.state.groups.map((group, index) => {
             return (
-                <TableRow key={index}>
+                <TableRow key={`group_${index}`}>
                     <TableCell>{group.name}</TableCell>
                 </TableRow>
             );
         });
     }
 
-    async _get(page) {
-        return await axios
-            .post(
-                CONSTANTS.URL.BASE + '/groups/index',
-                {
-                    page: page,
-                },
-                {
-                    headers: {
-                        'Content-type': 'application/json',
+    async _get(page = 1) {
+        page = Number(page);
+        if (this.state.metadata.current_page != page) {
+            return await axios
+                .post(
+                    CONSTANTS.URL.BASE + '/groups/index',
+                    {
+                        page: page,
                     },
-                },
-            )
-            .then((response) => {
-                this.setState((state) => {
-                    if (state.groups != response.data) {
-                        console.log(response.data);
-                        return {
-                            metadata: response.data,
-                            groups: response.data.data,
-                        };
-                    } else {
-                        return null;
-                    }
+                    {
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                    },
+                )
+                .then((response) => {
+                    this.setState((state) => {
+                        if (state.groups != response.data.data) {
+                            return {
+                                metadata: response.data,
+                                groups: response.data.data,
+                            };
+                        } else {
+                            return null;
+                        }
+                    });
                 });
-            });
+        } else {
+            return null;
+        }
     }
 
     render() {
@@ -99,6 +102,11 @@ class Home extends React.Component {
                         <TableBody>{this.state.groups ? this.fetchGroupList() : ''}</TableBody>
                     </Table>
                 </TableContainer>
+                {this.state.groups ? (
+                    <Pagination metadata={this.state.metadata} baseUrl="/groups" />
+                ) : (
+                    ''
+                )}
             </Paper>
         );
     }

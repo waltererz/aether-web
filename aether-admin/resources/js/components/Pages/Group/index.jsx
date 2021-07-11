@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -7,9 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import Avatar from '@material-ui/core/Avatar';
+import { ReduxActionLayoutCurrentTab } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
 import Home from './Home';
 import Create from './Create';
+import CONSTANTS from '../../Constants';
 
 class Content extends React.Component {
     render() {
@@ -62,6 +65,12 @@ class LeftSide extends React.Component {
 }
 
 class Group extends React.Component {
+    componentDidMount() {
+        const { tab, changeTab } = this.props;
+        if (tab != CONSTANTS.LAYOUT.TAB.GROUP) {
+            changeTab(CONSTANTS.LAYOUT.TAB.GROUP);
+        }
+    }
     render() {
         return (
             <React.Fragment>
@@ -71,4 +80,12 @@ class Group extends React.Component {
     }
 }
 
-export default Group;
+const mapStateToProps = (state) => ({
+    tab: state.layout.tab,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    changeTab: (tab) => dispatch(ReduxActionLayoutCurrentTab(tab)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Group);
