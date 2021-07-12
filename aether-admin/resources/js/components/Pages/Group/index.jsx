@@ -10,9 +10,9 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import Avatar from '@material-ui/core/Avatar';
 import { ReduxActionLayoutCurrentTab } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
+import getTabCode from '../../Functions/GetTabCode';
 import Home from './Home';
 import Create from './Create';
-import CONSTANTS from '../../Constants';
 
 class Content extends React.Component {
     render() {
@@ -67,8 +67,9 @@ class LeftSide extends React.Component {
 class Group extends React.Component {
     componentDidMount() {
         const { tab, changeTab } = this.props;
-        if (tab != CONSTANTS.LAYOUT.TAB.GROUP) {
-            changeTab(CONSTANTS.LAYOUT.TAB.GROUP);
+        const current_tab = getTabCode();
+        if (tab != current_tab) {
+            changeTab(current_tab);
         }
     }
     render() {

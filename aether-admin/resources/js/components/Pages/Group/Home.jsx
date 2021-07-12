@@ -21,11 +21,15 @@ const styles = {
     pagination: {
         marginTop: 20,
     },
+    link: {
+        cursor: 'pointer',
+    },
 };
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.delete = this.delete.bind(this);
         this.page = Number(props.match.params.page);
         this.state = {
             metadata: [],
@@ -42,12 +46,31 @@ class Home extends React.Component {
     }
 
     fetchGroupList() {
+        const { classes } = this.props;
+
         return this.state.groups.map((group, index) => {
             return (
                 <TableRow key={`group_${index}`}>
                     <TableCell>{group.name}</TableCell>
+                    <TableCell align="center">{group.permissions}</TableCell>
+                    <TableCell align="center">
+                        <span className={classes.link} onClick={this.delete} data-uuid={group.uuid}>
+                            삭제
+                        </span>
+                    </TableCell>
                 </TableRow>
             );
+        });
+    }
+
+    async delete(event) {
+        const uuid = event.target.dataset.uuid;
+        await axios.delete(CONSTANTS.URL.BASE + '/groups/' + uuid).then((response) => {
+            if (response.data) {
+                this._get(this.page);
+            } else {
+                alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
+            }
         });
     }
 
@@ -96,7 +119,15 @@ class Home extends React.Component {
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>사용자그룹</TableCell>
+                                <TableCell>
+                                    <b>사용자그룹</b>
+                                </TableCell>
+                                <TableCell align="center">
+                                    <b>권한</b>
+                                </TableCell>
+                                <TableCell align="center">
+                                    <b>관리</b>
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>{this.state.groups ? this.fetchGroupList() : ''}</TableBody>

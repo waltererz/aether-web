@@ -16,8 +16,7 @@ class GroupController extends Controller
      */
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $page = $request->post('page');
-        $groups = Group::paginate(2);
+        $groups = Group::paginate(10);
         return response()->json($groups);
     }
 
@@ -79,11 +78,17 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $uuid
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
-        //
+        Group::where('uuid', $uuid)->delete();
+        if (Group::where('uuid', $uuid)->count()) {
+            $result = false;
+        } else {
+            $result = true;
+        }
+        return response()->json($result);
     }
 }
