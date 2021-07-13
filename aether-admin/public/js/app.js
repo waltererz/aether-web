@@ -23066,7 +23066,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate() {
       var page = this._getPage();
 
-      this._get(page);
+      if (this.state.metadata.current_page != page) {
+        this._get(page);
+      }
     }
   }, {
     key: "fetchGroupList",
@@ -23168,6 +23170,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
                 _context2.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/groups/index', {
+                  page: page,
                   pagination: true
                 }, {
                   headers: {
@@ -24303,6 +24306,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
                 _context2.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/users/index', {
+                  page: page,
                   pagination: true
                 }, {
                   headers: {

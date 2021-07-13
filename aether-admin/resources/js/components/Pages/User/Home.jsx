@@ -98,6 +98,7 @@ class Home extends React.Component {
                 .post(
                     CONSTANTS.URL.BASE + '/users/index',
                     {
+                        page: page,
                         pagination: true,
                     },
                     {

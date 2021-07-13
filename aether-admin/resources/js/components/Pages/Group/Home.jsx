@@ -37,7 +37,9 @@ class Home extends React.Component {
 
     componentDidUpdate() {
         const page = this._getPage();
-        this._get(page);
+        if (this.state.metadata.current_page != page) {
+            this._get(page);
+        }
     }
 
     fetchGroupList() {
@@ -86,6 +88,7 @@ class Home extends React.Component {
                 .post(
                     CONSTANTS.URL.BASE + '/groups/index',
                     {
+                        page: page,
                         pagination: true,
                     },
                     {
