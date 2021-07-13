@@ -1,4 +1,3 @@
-import CONSTANT from '../../Constants';
 import { LAYOUT_CURRENT_TAB } from '../Constants';
 import getTabCode from '../../Functions/GetTabCode';
 

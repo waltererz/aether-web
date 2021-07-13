@@ -5,17 +5,17 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Aether from './components/Aether';
+import Reducers from './components/Redux/Reducer';
 
 window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
-    require('bootstrap');
 } catch (e) {}
 
 axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const store = createStore(Reducers);
 

@@ -6,10 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Group;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes, HasApiTokens;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +22,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'uuid',
+        'unique_code',
+        'firstname',
+        'lastname',
+        'middlename',
         'email',
-        'password',
+        'group_id',
     ];
 
     /**
@@ -28,8 +37,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'id',
+        'group_id',
+        'unique_code',
+        'deleted_at',
+        'remember_tokens',
     ];
 
     /**
@@ -40,4 +52,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = true;
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

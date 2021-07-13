@@ -1,3 +1,10 @@
+// Breakpoints
+$breakpoint-xs: 0px;
+$breakpoint-sm: 1024px;
+$breakpoint-md: 1160px;
+$breakpoint-lg: 1366px;
+$breakpoint-xl: 1440px;
+
 // Body
 $body-bg: #f0f2f5;
 $body-color: #333333;
@@ -20,15 +27,16 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$error-color: #a10000;
+$success-color: #45bd00;
 $theme-colors: (
     'primary': $primary,
     'secondary': $secondary,
 );
 
-// MediaQuery Resolutions
-$mq-res-0: '1440px';
-$mq-res-1: '1366px';
-$mq-res-2: '1280px';
-$mq-res-3: '1100px';
-$mq-res-4: '1024px';
-$mq-res-5: '900px';
+$default-margin-top-bp-md: 70px;
+$default-margin-top-bp-xs: 62px;
+
+$drawer-width: 320px;
+$center-grid-item-width: 720px;
+$right-grid-item-width: 320px;

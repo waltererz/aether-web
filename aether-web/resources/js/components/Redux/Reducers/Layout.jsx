@@ -1,18 +1,8 @@
-import CONSTANT from '../../Constants';
 import { LAYOUT_CURRENT_TAB } from '../Constants';
-
-const path = window.location.pathname;
-let tab = 0;
-
-switch (true) {
-    case /^\/$/.test(path):
-        console.log('첫페이지');
-        tab = CONSTANT.LAYOUT.TAB.HOME;
-        break;
-}
+import getTabCode from '../../Functions/GetTabCode';
 
 const initialStates = {
-    tab: tab,
+    tab: getTabCode(),
 };
 
 function layout(state = initialStates, action) {
