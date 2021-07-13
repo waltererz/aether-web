@@ -63,12 +63,12 @@ a {
     box-sizing: border-box;
 }
 
-.app-drawer.current-tab-1 .drawer-paper {
+.app-drawer .drawer-paper {
     background-color: $body-bg;
     border: 0px;
 }
 
-.app-drawer:not(.current-tab-1) .drawer-paper {
+.app-drawer.is-b .drawer-paper {
     background-color: #ffffff;
     border: 0px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);

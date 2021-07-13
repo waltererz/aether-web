@@ -5,7 +5,7 @@ const getTabCode = () => {
     let tab = 0;
 
     switch (true) {
-        case /^\/$/.test(path):
+        case /^\/$/g.test(path):
             tab = CONSTANTS.LAYOUT.TAB.HOME;
             break;
         case /^\/groups((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):

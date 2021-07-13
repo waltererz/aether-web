@@ -15,7 +15,7 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 class Header extends React.Component {
     render() {
-        const { tab, changeTab } = this.props;
+        const { tab } = this.props;
 
         return (
             <HideOnScroll breakpoint={Theme.breakpoints.values.md}>
@@ -23,7 +23,6 @@ class Header extends React.Component {
                     <div style={{ flexGrow: 1 }}>
                         <Tabs
                             value={tab}
-                            onChange={changeTab}
                             centered={true}
                             indicatorColor="primary"
                             textColor="primary"

@@ -7,12 +7,17 @@ import Grid from '@material-ui/core/Grid';
 class FullContainer extends React.Component {
     render() {
         const { tab } = this.props;
+        let { drawerBackground } = this.props;
+        let drawer_class_options = '';
+        if (drawerBackground) {
+            drawer_class_options += ' is-b';
+        }
 
         return (
             <React.Fragment>
                 <Drawer
                     classes={{
-                        root: 'app-drawer current-tab-' + tab,
+                        root: `app-drawer current-tab-${tab}${drawer_class_options}`,
                         paper: 'drawer-paper',
                     }}
                     variant="permanent"

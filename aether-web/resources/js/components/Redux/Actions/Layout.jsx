@@ -1,4 +1,4 @@
-import { LAYOUT_CURRENT_TAB } from '../Constants';
+import { LAYOUT_CURRENT_TAB, LAYOUT_DRAWER } from '../Constants';
 
 const ReduxActionLayoutCurrentTab = (tab) => {
     return {
@@ -7,4 +7,11 @@ const ReduxActionLayoutCurrentTab = (tab) => {
     };
 };
 
-export { ReduxActionLayoutCurrentTab };
+const ReduxActionLayoutToggleDrawer = (open) => {
+    return {
+        type: LAYOUT_DRAWER,
+        state: open,
+    };
+};
+
+export { ReduxActionLayoutCurrentTab, ReduxActionLayoutToggleDrawer };

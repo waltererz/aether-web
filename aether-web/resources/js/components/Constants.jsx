@@ -5,6 +5,7 @@ const CONSTANTS = {
     LAYOUT: {
         TAB: {
             HOME: 1,
+            ADVISORS: 2,
         },
     },
 };

@@ -8,6 +8,14 @@ body {
   color: #333333;
 }
 
+header.aether-header {
+  background-color: #ffffff;
+}
+
+header.aether-header .tabs {
+  background-color: #ffffff;
+}
+
 a {
   color: initial;
   text-decoration: none;
@@ -64,18 +72,19 @@ a {
   box-sizing: border-box;
 }
 
-.app-drawer.current-tab-1 .drawer-paper {
+.app-drawer .drawer-paper {
   background-color: #f0f2f5;
   border: 0px;
 }
 
-.app-drawer:not(.current-tab-1) .drawer-paper {
+.app-drawer.is-b .drawer-paper {
   background-color: #ffffff;
   border: 0px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.app-drawer .drawer-paper .app-drawer-list .MuiListItem-root {
+.app-drawer .drawer-paper .app-drawer-list .MuiListItem-root,
+.app-swipeabledrawer .drawer-body .app-drawer-list .MuiListItem-root {
   border-radius: 5px;
 }
 
@@ -163,17 +172,58 @@ ul.pagination li.link.disabled {
   opacity: 0.3;
 }
 
+div.app-footer-mobile .bottomNavigation {
+  height: 56px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #1a1a1a;
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  left: auto;
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
+  z-index: 1200;
+}
+
+div.app-footer-mobile .bottomNavigation .navButton {
+  padding: 0px;
+  color: #cccccc;
+}
+
+.mobileButton.aether {
+  position: fixed;
+  z-index: 1200;
+  left: 15px;
+  bottom: calc(56px + 15px);
+}
+
+.app-swipeabledrawer .drawer-header {
+  height: 100px;
+  border-bottom: 1px solid #efefef;
+}
+
+.app-swipeabledrawer .drawer-body {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 320px;
+  background-color: #ffffff;
+}
+
 @media screen and (min-width: 0px) {
   body {
     padding-top: 62px;
   }
 
-  .app-drawer {
-    display: none;
+  .app-container.aether {
+    height: calc(100% - 56px + 10px);
+    margin-bottom: 56px;
+    padding: 0px;
   }
 
-  .app-container.aether {
-    padding: 0px;
+  .app-drawer {
+    display: none;
   }
 
   .app-container.aether .grid-container .grid-item-1 {
@@ -244,19 +294,29 @@ ul.pagination li.link.disabled {
     padding-top: 70px;
   }
 
-  .app-drawer {
-    display: block;
-  }
-
   .app-drawer .drawer-paper {
     height: calc(100vh - 48px);
     margin-top: 48px;
     padding: 5px 10px 10px 10px;
   }
 
+  .app-drawer {
+    display: block;
+  }
+
   .app-drawer,
 .app-drawer .drawer-paper {
     width: calc(320px - ((1440px - 1366px)) / 2);
+  }
+
+  .app-footer-mobile,
+.mobileButton.aether {
+    display: none;
+  }
+
+  .app-container.aether {
+    height: auto;
+    margin-bottom: 0px;
   }
 
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {

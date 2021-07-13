@@ -10,18 +10,19 @@ import HideOnScroll from '../Functions/HideOnScroll';
 import Theme from './Theme';
 
 import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
 class Header extends React.Component {
     render() {
-        const { tab, changeTab } = this.props;
+        const { tab } = this.props;
 
         return (
             <HideOnScroll breakpoint={Theme.breakpoints.values.md}>
-                <AppBar position="fixed">
+                <AppBar position="fixed" className="aether-header">
                     <div style={{ flexGrow: 1 }}>
                         <Tabs
+                            className="tabs"
                             value={tab}
-                            onChange={changeTab}
                             centered={true}
                             indicatorColor="primary"
                             textColor="primary"
@@ -31,6 +32,12 @@ class Header extends React.Component {
                                 value={CONSTANT.LAYOUT.TAB.HOME}
                                 component={Link}
                                 to="/"
+                            />
+                            <Tab
+                                icon={<LibraryBooksIcon />}
+                                value={CONSTANT.LAYOUT.TAB.ADVISORS}
+                                component={Link}
+                                to="/advisors"
                             />
                         </Tabs>
                     </div>
@@ -44,8 +51,4 @@ const mapStateToProps = (state) => ({
     tab: state.layout.tab,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    changeTab: (event, tab) => dispatch(ReduxActionLayoutCurrentTab(tab)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

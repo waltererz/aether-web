@@ -5,14 +5,11 @@ const getTabCode = () => {
     let tab = 0;
 
     switch (true) {
-        case /^\/$/.test(path):
+        case /^\/$/g.test(path):
             tab = CONSTANTS.LAYOUT.TAB.HOME;
             break;
-        case /^\/groups((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-            tab = CONSTANTS.LAYOUT.TAB.GROUP;
-            break;
-        case /^\/users((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-            tab = CONSTANTS.LAYOUT.TAB.USER;
+        case /^\/advisors((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
+            tab = CONSTANTS.LAYOUT.TAB.ADVISORS;
             break;
     }
 

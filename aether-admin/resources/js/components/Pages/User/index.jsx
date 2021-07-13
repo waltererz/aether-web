@@ -72,7 +72,7 @@ class User extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Container content={<Content />} left={<LeftSide />} />
+                <Container content={<Content />} left={<LeftSide />} drawerBackground={true} />
             </React.Fragment>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import MobileNavigation from '../MobileNavigation';
 
 class ContainerOnlyRight extends React.Component {
     render() {
@@ -29,6 +30,7 @@ class ContainerOnlyRight extends React.Component {
                         </Grid>
                     </Grid>
                 </Container>
+                <MobileNavigation />
             </React.Fragment>
         );
     }
