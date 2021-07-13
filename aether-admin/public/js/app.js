@@ -2754,215 +2754,6 @@ var TouchRipple = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(fun
 
 /***/ }),
 
-/***/ "./node_modules/@material-ui/core/esm/ClickAwayListener/ClickAwayListener.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/ClickAwayListener/ClickAwayListener.js ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _utils_ownerDocument__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/ownerDocument */ "./node_modules/@material-ui/core/esm/utils/ownerDocument.js");
-/* harmony import */ var _utils_useForkRef__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/useForkRef */ "./node_modules/@material-ui/core/esm/utils/useForkRef.js");
-/* harmony import */ var _utils_useEventCallback__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/useEventCallback */ "./node_modules/@material-ui/core/esm/utils/useEventCallback.js");
-/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/elementAcceptingRef.js");
-/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/exactProp.js");
-
-
-
-
-
-
-
-
-function mapEventPropToEvent(eventProp) {
-  return eventProp.substring(2).toLowerCase();
-}
-
-function clickedRootScrollbar(event) {
-  return document.documentElement.clientWidth < event.clientX || document.documentElement.clientHeight < event.clientY;
-}
-/**
- * Listen for click events that occur somewhere in the document, outside of the element itself.
- * For instance, if you need to hide a menu when people click anywhere else on your page.
- */
-
-
-function ClickAwayListener(props) {
-  var children = props.children,
-      _props$disableReactTr = props.disableReactTree,
-      disableReactTree = _props$disableReactTr === void 0 ? false : _props$disableReactTr,
-      _props$mouseEvent = props.mouseEvent,
-      mouseEvent = _props$mouseEvent === void 0 ? 'onClick' : _props$mouseEvent,
-      onClickAway = props.onClickAway,
-      _props$touchEvent = props.touchEvent,
-      touchEvent = _props$touchEvent === void 0 ? 'onTouchEnd' : _props$touchEvent;
-  var movedRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  var nodeRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  var activatedRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  var syntheticEventRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    // Ensure that this component is not "activated" synchronously.
-    // https://github.com/facebook/react/issues/20074
-    setTimeout(function () {
-      activatedRef.current = true;
-    }, 0);
-    return function () {
-      activatedRef.current = false;
-    };
-  }, []); // can be removed once we drop support for non ref forwarding class components
-
-  var handleOwnRef = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function (instance) {
-    // #StrictMode ready
-    nodeRef.current = react_dom__WEBPACK_IMPORTED_MODULE_1__.findDOMNode(instance);
-  }, []);
-  var handleRef = (0,_utils_useForkRef__WEBPACK_IMPORTED_MODULE_3__.default)(children.ref, handleOwnRef); // The handler doesn't take event.defaultPrevented into account:
-  //
-  // event.preventDefault() is meant to stop default behaviours like
-  // clicking a checkbox to check it, hitting a button to submit a form,
-  // and hitting left arrow to move the cursor in a text input etc.
-  // Only special HTML elements have these default behaviors.
-
-  var handleClickAway = (0,_utils_useEventCallback__WEBPACK_IMPORTED_MODULE_4__.default)(function (event) {
-    // Given developers can stop the propagation of the synthetic event,
-    // we can only be confident with a positive value.
-    var insideReactTree = syntheticEventRef.current;
-    syntheticEventRef.current = false; // 1. IE 11 support, which trigger the handleClickAway even after the unbind
-    // 2. The child might render null.
-    // 3. Behave like a blur listener.
-
-    if (!activatedRef.current || !nodeRef.current || clickedRootScrollbar(event)) {
-      return;
-    } // Do not act if user performed touchmove
-
-
-    if (movedRef.current) {
-      movedRef.current = false;
-      return;
-    }
-
-    var insideDOM; // If not enough, can use https://github.com/DieterHolvoet/event-propagation-path/blob/master/propagationPath.js
-
-    if (event.composedPath) {
-      insideDOM = event.composedPath().indexOf(nodeRef.current) > -1;
-    } else {
-      // TODO v6 remove dead logic https://caniuse.com/#search=composedPath.
-      var doc = (0,_utils_ownerDocument__WEBPACK_IMPORTED_MODULE_5__.default)(nodeRef.current);
-      insideDOM = !doc.documentElement.contains(event.target) || nodeRef.current.contains(event.target);
-    }
-
-    if (!insideDOM && (disableReactTree || !insideReactTree)) {
-      onClickAway(event);
-    }
-  }); // Keep track of mouse/touch events that bubbled up through the portal.
-
-  var createHandleSynthetic = function createHandleSynthetic(handlerName) {
-    return function (event) {
-      syntheticEventRef.current = true;
-      var childrenPropsHandler = children.props[handlerName];
-
-      if (childrenPropsHandler) {
-        childrenPropsHandler(event);
-      }
-    };
-  };
-
-  var childrenProps = {
-    ref: handleRef
-  };
-
-  if (touchEvent !== false) {
-    childrenProps[touchEvent] = createHandleSynthetic(touchEvent);
-  }
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    if (touchEvent !== false) {
-      var mappedTouchEvent = mapEventPropToEvent(touchEvent);
-      var doc = (0,_utils_ownerDocument__WEBPACK_IMPORTED_MODULE_5__.default)(nodeRef.current);
-
-      var handleTouchMove = function handleTouchMove() {
-        movedRef.current = true;
-      };
-
-      doc.addEventListener(mappedTouchEvent, handleClickAway);
-      doc.addEventListener('touchmove', handleTouchMove);
-      return function () {
-        doc.removeEventListener(mappedTouchEvent, handleClickAway);
-        doc.removeEventListener('touchmove', handleTouchMove);
-      };
-    }
-
-    return undefined;
-  }, [handleClickAway, touchEvent]);
-
-  if (mouseEvent !== false) {
-    childrenProps[mouseEvent] = createHandleSynthetic(mouseEvent);
-  }
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    if (mouseEvent !== false) {
-      var mappedMouseEvent = mapEventPropToEvent(mouseEvent);
-      var doc = (0,_utils_ownerDocument__WEBPACK_IMPORTED_MODULE_5__.default)(nodeRef.current);
-      doc.addEventListener(mappedMouseEvent, handleClickAway);
-      return function () {
-        doc.removeEventListener(mappedMouseEvent, handleClickAway);
-      };
-    }
-
-    return undefined;
-  }, [handleClickAway, mouseEvent]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, childrenProps));
-}
-
- true ? ClickAwayListener.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The wrapped element.
-   */
-  children: _material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default.isRequired,
-
-  /**
-   * If `true`, the React tree is ignored and only the DOM tree is considered.
-   * This prop changes how portaled elements are handled.
-   */
-  disableReactTree: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().bool),
-
-  /**
-   * The mouse event to listen to. You can disable the listener by providing `false`.
-   */
-  mouseEvent: prop_types__WEBPACK_IMPORTED_MODULE_2___default().oneOf(['onClick', 'onMouseDown', 'onMouseUp', false]),
-
-  /**
-   * Callback fired when a "click away" event is detected.
-   */
-  onClickAway: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().func.isRequired),
-
-  /**
-   * The touch event to listen to. You can disable the listener by providing `false`.
-   */
-  touchEvent: prop_types__WEBPACK_IMPORTED_MODULE_2___default().oneOf(['onTouchEnd', 'onTouchStart', false])
-} : 0;
-
-if (true) {
-  // eslint-disable-next-line
-  ClickAwayListener['propTypes' + ''] = (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_7__.default)(ClickAwayListener.propTypes);
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ClickAwayListener);
-
-/***/ }),
-
 /***/ "./node_modules/@material-ui/core/esm/Container/Container.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@material-ui/core/esm/Container/Container.js ***!
@@ -11845,567 +11636,6 @@ var Slide = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function 
   })])
 } : 0;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Slide);
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/core/esm/Snackbar/Snackbar.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/Snackbar/Snackbar.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "styles": () => (/* binding */ styles),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _styles_transitions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../styles/transitions */ "./node_modules/@material-ui/core/esm/styles/transitions.js");
-/* harmony import */ var _ClickAwayListener__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ClickAwayListener */ "./node_modules/@material-ui/core/esm/ClickAwayListener/ClickAwayListener.js");
-/* harmony import */ var _utils_useEventCallback__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../utils/useEventCallback */ "./node_modules/@material-ui/core/esm/utils/useEventCallback.js");
-/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/esm/utils/capitalize.js");
-/* harmony import */ var _utils_createChainedFunction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/createChainedFunction */ "./node_modules/@material-ui/core/esm/utils/createChainedFunction.js");
-/* harmony import */ var _utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils/deprecatedPropType */ "./node_modules/@material-ui/core/esm/utils/deprecatedPropType.js");
-/* harmony import */ var _Grow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Grow */ "./node_modules/@material-ui/core/esm/Grow/Grow.js");
-/* harmony import */ var _SnackbarContent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../SnackbarContent */ "./node_modules/@material-ui/core/esm/SnackbarContent/SnackbarContent.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var styles = function styles(theme) {
-  var top1 = {
-    top: 8
-  };
-  var bottom1 = {
-    bottom: 8
-  };
-  var right = {
-    justifyContent: 'flex-end'
-  };
-  var left = {
-    justifyContent: 'flex-start'
-  };
-  var top3 = {
-    top: 24
-  };
-  var bottom3 = {
-    bottom: 24
-  };
-  var right3 = {
-    right: 24
-  };
-  var left3 = {
-    left: 24
-  };
-  var center = {
-    left: '50%',
-    right: 'auto',
-    transform: 'translateX(-50%)'
-  };
-  return {
-    /* Styles applied to the root element. */
-    root: {
-      zIndex: theme.zIndex.snackbar,
-      position: 'fixed',
-      display: 'flex',
-      left: 8,
-      right: 8,
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'top', 'center' }}`. */
-    anchorOriginTopCenter: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, top1, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, top3, center))),
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'center' }}`. */
-    anchorOriginBottomCenter: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, bottom1, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, bottom3, center))),
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'top', 'right' }}`. */
-    anchorOriginTopRight: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, top1, right, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-      left: 'auto'
-    }, top3, right3))),
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'right' }}`. */
-    anchorOriginBottomRight: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, bottom1, right, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-      left: 'auto'
-    }, bottom3, right3))),
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'top', 'left' }}`. */
-    anchorOriginTopLeft: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, top1, left, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-      right: 'auto'
-    }, top3, left3))),
-
-    /* Styles applied to the root element if `anchorOrigin={{ 'bottom', 'left' }}`. */
-    anchorOriginBottomLeft: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, bottom1, left, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({}, theme.breakpoints.up('sm'), (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-      right: 'auto'
-    }, bottom3, left3)))
-  };
-};
-var Snackbar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(function Snackbar(props, ref) {
-  var action = props.action,
-      _props$anchorOrigin = props.anchorOrigin;
-  _props$anchorOrigin = _props$anchorOrigin === void 0 ? {
-    vertical: 'bottom',
-    horizontal: 'center'
-  } : _props$anchorOrigin;
-
-  var vertical = _props$anchorOrigin.vertical,
-      horizontal = _props$anchorOrigin.horizontal,
-      _props$autoHideDurati = props.autoHideDuration,
-      autoHideDuration = _props$autoHideDurati === void 0 ? null : _props$autoHideDurati,
-      children = props.children,
-      classes = props.classes,
-      className = props.className,
-      ClickAwayListenerProps = props.ClickAwayListenerProps,
-      ContentProps = props.ContentProps,
-      _props$disableWindowB = props.disableWindowBlurListener,
-      disableWindowBlurListener = _props$disableWindowB === void 0 ? false : _props$disableWindowB,
-      message = props.message,
-      onClose = props.onClose,
-      onEnter = props.onEnter,
-      onEntered = props.onEntered,
-      onEntering = props.onEntering,
-      onExit = props.onExit,
-      onExited = props.onExited,
-      onExiting = props.onExiting,
-      onMouseEnter = props.onMouseEnter,
-      onMouseLeave = props.onMouseLeave,
-      open = props.open,
-      resumeHideDuration = props.resumeHideDuration,
-      _props$TransitionComp = props.TransitionComponent,
-      TransitionComponent = _props$TransitionComp === void 0 ? _Grow__WEBPACK_IMPORTED_MODULE_6__.default : _props$TransitionComp,
-      _props$transitionDura = props.transitionDuration,
-      transitionDuration = _props$transitionDura === void 0 ? {
-    enter: _styles_transitions__WEBPACK_IMPORTED_MODULE_7__.duration.enteringScreen,
-    exit: _styles_transitions__WEBPACK_IMPORTED_MODULE_7__.duration.leavingScreen
-  } : _props$transitionDura,
-      TransitionProps = props.TransitionProps,
-      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__.default)(props, ["action", "anchorOrigin", "autoHideDuration", "children", "classes", "className", "ClickAwayListenerProps", "ContentProps", "disableWindowBlurListener", "message", "onClose", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "onMouseEnter", "onMouseLeave", "open", "resumeHideDuration", "TransitionComponent", "transitionDuration", "TransitionProps"]);
-
-  var timerAutoHide = react__WEBPACK_IMPORTED_MODULE_3__.useRef();
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_3__.useState(true),
-      exited = _React$useState[0],
-      setExited = _React$useState[1];
-
-  var handleClose = (0,_utils_useEventCallback__WEBPACK_IMPORTED_MODULE_8__.default)(function () {
-    if (onClose) {
-      onClose.apply(void 0, arguments);
-    }
-  });
-  var setAutoHideTimer = (0,_utils_useEventCallback__WEBPACK_IMPORTED_MODULE_8__.default)(function (autoHideDurationParam) {
-    if (!onClose || autoHideDurationParam == null) {
-      return;
-    }
-
-    clearTimeout(timerAutoHide.current);
-    timerAutoHide.current = setTimeout(function () {
-      handleClose(null, 'timeout');
-    }, autoHideDurationParam);
-  });
-  react__WEBPACK_IMPORTED_MODULE_3__.useEffect(function () {
-    if (open) {
-      setAutoHideTimer(autoHideDuration);
-    }
-
-    return function () {
-      clearTimeout(timerAutoHide.current);
-    };
-  }, [open, autoHideDuration, setAutoHideTimer]); // Pause the timer when the user is interacting with the Snackbar
-  // or when the user hide the window.
-
-  var handlePause = function handlePause() {
-    clearTimeout(timerAutoHide.current);
-  }; // Restart the timer when the user is no longer interacting with the Snackbar
-  // or when the window is shown back.
-
-
-  var handleResume = react__WEBPACK_IMPORTED_MODULE_3__.useCallback(function () {
-    if (autoHideDuration != null) {
-      setAutoHideTimer(resumeHideDuration != null ? resumeHideDuration : autoHideDuration * 0.5);
-    }
-  }, [autoHideDuration, resumeHideDuration, setAutoHideTimer]);
-
-  var handleMouseEnter = function handleMouseEnter(event) {
-    if (onMouseEnter) {
-      onMouseEnter(event);
-    }
-
-    handlePause();
-  };
-
-  var handleMouseLeave = function handleMouseLeave(event) {
-    if (onMouseLeave) {
-      onMouseLeave(event);
-    }
-
-    handleResume();
-  };
-
-  var handleClickAway = function handleClickAway(event) {
-    if (onClose) {
-      onClose(event, 'clickaway');
-    }
-  };
-
-  var handleExited = function handleExited() {
-    setExited(true);
-  };
-
-  var handleEnter = function handleEnter() {
-    setExited(false);
-  };
-
-  react__WEBPACK_IMPORTED_MODULE_3__.useEffect(function () {
-    if (!disableWindowBlurListener && open) {
-      window.addEventListener('focus', handleResume);
-      window.addEventListener('blur', handlePause);
-      return function () {
-        window.removeEventListener('focus', handleResume);
-        window.removeEventListener('blur', handlePause);
-      };
-    }
-
-    return undefined;
-  }, [disableWindowBlurListener, handleResume, open]); // So we only render active snackbars.
-
-  if (!open && exited) {
-    return null;
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_ClickAwayListener__WEBPACK_IMPORTED_MODULE_9__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-    onClickAway: handleClickAway
-  }, ClickAwayListenerProps), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.root, classes["anchorOrigin".concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_10__.default)(vertical)).concat((0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_10__.default)(horizontal))], className),
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    ref: ref
-  }, other), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(TransitionComponent, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-    appear: true,
-    in: open,
-    onEnter: (0,_utils_createChainedFunction__WEBPACK_IMPORTED_MODULE_11__.default)(handleEnter, onEnter),
-    onEntered: onEntered,
-    onEntering: onEntering,
-    onExit: onExit,
-    onExited: (0,_utils_createChainedFunction__WEBPACK_IMPORTED_MODULE_11__.default)(handleExited, onExited),
-    onExiting: onExiting,
-    timeout: transitionDuration,
-    direction: vertical === 'top' ? 'down' : 'up'
-  }, TransitionProps), children || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_SnackbarContent__WEBPACK_IMPORTED_MODULE_12__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-    message: message,
-    action: action
-  }, ContentProps)))));
-});
- true ? Snackbar.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The action to display. It renders after the message, at the end of the snackbar.
-   */
-  action: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().node),
-
-  /**
-   * The anchor of the `Snackbar`.
-   */
-  anchorOrigin: prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({
-    horizontal: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOf(['center', 'left', 'right']).isRequired,
-    vertical: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOf(['bottom', 'top']).isRequired
-  }),
-
-  /**
-   * The number of milliseconds to wait before automatically calling the
-   * `onClose` function. `onClose` should then set the state of the `open`
-   * prop to hide the Snackbar. This behavior is disabled by default with
-   * the `null` value.
-   */
-  autoHideDuration: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number),
-
-  /**
-   * Replace the `SnackbarContent` component.
-   */
-  children: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().element),
-
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css) below for more details.
-   */
-  classes: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object),
-
-  /**
-   * @ignore
-   */
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
-
-  /**
-   * Props applied to the `ClickAwayListener` element.
-   */
-  ClickAwayListenerProps: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object),
-
-  /**
-   * Props applied to the [`SnackbarContent`](/api/snackbar-content/) element.
-   */
-  ContentProps: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object),
-
-  /**
-   * If `true`, the `autoHideDuration` timer will expire even if the window is not focused.
-   */
-  disableWindowBlurListener: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool),
-
-  /**
-   * When displaying multiple consecutive Snackbars from a parent rendering a single
-   * <Snackbar/>, add the key prop to ensure independent treatment of each message.
-   * e.g. <Snackbar key={message} />, otherwise, the message may update-in-place and
-   * features such as autoHideDuration may be canceled.
-   */
-  key: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().any),
-
-  /**
-   * The message to display.
-   */
-  message: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().node),
-
-  /**
-   * Callback fired when the component requests to be closed.
-   * Typically `onClose` is used to set state in the parent component,
-   * which is used to control the `Snackbar` `open` prop.
-   * The `reason` parameter can optionally be used to control the response to `onClose`,
-   * for example ignoring `clickaway`.
-   *
-   * @param {object} event The event source of the callback.
-   * @param {string} reason Can be: `"timeout"` (`autoHideDuration` expired), `"clickaway"`.
-   */
-  onClose: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
-
-  /**
-   * Callback fired before the transition is entering.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onEnter: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * Callback fired when the transition has entered.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onEntered: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * Callback fired when the transition is entering.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onEntering: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * Callback fired before the transition is exiting.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onExit: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * Callback fired when the transition has exited.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onExited: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * Callback fired when the transition is exiting.
-   * @deprecated Use the `TransitionProps` prop instead.
-   */
-  onExiting: (0,_utils_deprecatedPropType__WEBPACK_IMPORTED_MODULE_13__.default)((prop_types__WEBPACK_IMPORTED_MODULE_4___default().func), 'Use the `TransitionProps` prop instead.'),
-
-  /**
-   * @ignore
-   */
-  onMouseEnter: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
-
-  /**
-   * @ignore
-   */
-  onMouseLeave: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().func),
-
-  /**
-   * If `true`, `Snackbar` is open.
-   */
-  open: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().bool),
-
-  /**
-   * The number of milliseconds to wait before dismissing after user interaction.
-   * If `autoHideDuration` prop isn't specified, it does nothing.
-   * If `autoHideDuration` prop is specified but `resumeHideDuration` isn't,
-   * we default to `autoHideDuration / 2` ms.
-   */
-  resumeHideDuration: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number),
-
-  /**
-   * The component used for the transition.
-   * [Follow this guide](/components/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
-   */
-  TransitionComponent: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().elementType),
-
-  /**
-   * The duration for the transition, in milliseconds.
-   * You may specify a single timeout for all transitions, or individually with an object.
-   */
-  transitionDuration: prop_types__WEBPACK_IMPORTED_MODULE_4___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_4___default().number), prop_types__WEBPACK_IMPORTED_MODULE_4___default().shape({
-    appear: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number),
-    enter: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number),
-    exit: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().number)
-  })]),
-
-  /**
-   * Props applied to the [`Transition`](http://reactcommunity.org/react-transition-group/transition#Transition-props) element.
-   */
-  TransitionProps: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object)
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_14__.default)(styles, {
-  flip: false,
-  name: 'MuiSnackbar'
-})(Snackbar));
-
-/***/ }),
-
-/***/ "./node_modules/@material-ui/core/esm/SnackbarContent/SnackbarContent.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/@material-ui/core/esm/SnackbarContent/SnackbarContent.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "styles": () => (/* binding */ styles),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var _styles_withStyles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Paper */ "./node_modules/@material-ui/core/esm/Paper/Paper.js");
-/* harmony import */ var _styles_colorManipulator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../styles/colorManipulator */ "./node_modules/@material-ui/core/esm/styles/colorManipulator.js");
-
-
-
-
-
-
-
-
-
-var styles = function styles(theme) {
-  var emphasis = theme.palette.type === 'light' ? 0.8 : 0.98;
-  var backgroundColor = (0,_styles_colorManipulator__WEBPACK_IMPORTED_MODULE_6__.emphasize)(theme.palette.background.default, emphasis);
-  return {
-    /* Styles applied to the root element. */
-    root: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({}, theme.typography.body2, (0,_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__.default)({
-      color: theme.palette.getContrastText(backgroundColor),
-      backgroundColor: backgroundColor,
-      display: 'flex',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      padding: '6px 16px',
-      borderRadius: theme.shape.borderRadius,
-      flexGrow: 1
-    }, theme.breakpoints.up('sm'), {
-      flexGrow: 'initial',
-      minWidth: 288
-    })),
-
-    /* Styles applied to the message wrapper element. */
-    message: {
-      padding: '8px 0'
-    },
-
-    /* Styles applied to the action wrapper element if `action` is provided. */
-    action: {
-      display: 'flex',
-      alignItems: 'center',
-      marginLeft: 'auto',
-      paddingLeft: 16,
-      marginRight: -8
-    }
-  };
-};
-var SnackbarContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(function SnackbarContent(props, ref) {
-  var action = props.action,
-      classes = props.classes,
-      className = props.className,
-      message = props.message,
-      _props$role = props.role,
-      role = _props$role === void 0 ? 'alert' : _props$role,
-      other = (0,_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__.default)(props, ["action", "classes", "className", "message", "role"]);
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_Paper__WEBPACK_IMPORTED_MODULE_7__.default, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__.default)({
-    role: role,
-    square: true,
-    elevation: 6,
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_5__.default)(classes.root, className),
-    ref: ref
-  }, other), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", {
-    className: classes.message
-  }, message), action ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement("div", {
-    className: classes.action
-  }, action) : null);
-});
- true ? SnackbarContent.propTypes = {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The action to display. It renders after the message, at the end of the snackbar.
-   */
-  action: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().node),
-
-  /**
-   * Override or extend the styles applied to the component.
-   * See [CSS API](#css) below for more details.
-   */
-  classes: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().object),
-
-  /**
-   * @ignore
-   */
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string),
-
-  /**
-   * The message to display.
-   */
-  message: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().node),
-
-  /**
-   * The ARIA role attribute of the element.
-   */
-  role: (prop_types__WEBPACK_IMPORTED_MODULE_4___default().string)
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_styles_withStyles__WEBPACK_IMPORTED_MODULE_8__.default)(styles, {
-  name: 'MuiSnackbarContent'
-})(SnackbarContent));
 
 /***/ }),
 
@@ -22993,54 +22223,49 @@ var AetherPaper = function AetherPaper(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Functions/Snackbars.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/Functions/Snackbars.jsx ***!
-  \*********************************************************/
+/***/ "./resources/js/components/Functions/ValidateEmailAddress.jsx":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Functions/ValidateEmailAddress.jsx ***!
+  \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "WarningSnackbar": () => (/* binding */ WarningSnackbar)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/createTheme.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/styles/esm/ThemeProvider/ThemeProvider.js");
-/* harmony import */ var _material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Snackbar */ "./node_modules/@material-ui/core/esm/Snackbar/Snackbar.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-var theme = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__.default)({
-  overrides: {
-    MuiSnackbarContent: {
-      root: {
-        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-      }
-    }
+var ValidateEmailAddress = function ValidateEmailAddress(email) {
+  if (!/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)) {
+    return false;
+  } else {
+    return true;
   }
-});
-
-var WarningSnackbar = function WarningSnackbar(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default, {
-    theme: theme,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Snackbar__WEBPACK_IMPORTED_MODULE_4__.default, {
-      anchorOrigin: {
-        vertical: 'bottom',
-        horizontal: 'center'
-      },
-      open: props.open,
-      autoHideDuration: 2000,
-      message: props.message,
-      onClose: props.onClose
-    })
-  });
 };
 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ValidateEmailAddress);
 
+/***/ }),
+
+/***/ "./resources/js/components/Functions/ValidatePassword.jsx":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Functions/ValidatePassword.jsx ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var ValidatePassword = function ValidatePassword(password) {
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&\*\(\)])[A-Za-z\d!@#$%^&\*\(\)]{12,}$/g.test(password)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ValidatePassword);
 
 /***/ }),
 
@@ -23576,15 +22801,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/Button.js");
-/* harmony import */ var _Functions_Snackbars__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Functions/Snackbars */ "./resources/js/components/Functions/Snackbars.jsx");
-/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
-/* harmony import */ var _Layout_Theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Layout/Theme */ "./resources/js/components/Layout/Theme.jsx");
-/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Constants */ "./resources/js/components/Constants.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
+/* harmony import */ var _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Layout/Theme */ "./resources/js/components/Layout/Theme.jsx");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Constants */ "./resources/js/components/Constants.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var _grid;
@@ -23622,22 +22846,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 var styles = {
-  grid: (_grid = {}, _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_4__.default.breakpoints.up('xs'), {
+  grid: (_grid = {}, _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__.default.breakpoints.up('xs'), {
     width: '100%'
-  }), _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_4__.default.breakpoints.up('sm'), {
+  }), _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__.default.breakpoints.up('sm'), {
     width: 400
-  }), _grid),
-  item: {
-    marginBottom: 20
-  },
-  form: {
-    marginTop: 30
-  },
-  title: {
-    marginTop: 0
-  }
+  }), _grid)
 };
 
 var Create = /*#__PURE__*/function (_React$Component) {
@@ -23646,41 +22860,14 @@ var Create = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Create);
 
   function Create(props) {
-    var _this;
-
     _classCallCheck(this, Create);
 
-    _this = _super.call(this, props);
-    _this.closeWarning = _this.closeWarning.bind(_assertThisInitialized(_this));
-    _this.state = {
-      warning: false
-    };
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(Create, [{
-    key: "setWarning",
-    value: function setWarning(open) {
-      this.setState(function (state) {
-        return {
-          warning: open
-        };
-      });
-    }
-  }, {
-    key: "closeWarning",
-    value: function closeWarning(event, reason) {
-      if (reason == 'clickaway') {
-        return;
-      }
-
-      this.setWarning(false);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var classes = this.props.classes;
 
       var submit = function submit() {
@@ -23688,12 +22875,11 @@ var Create = /*#__PURE__*/function (_React$Component) {
         var permissions = document.querySelector('#input-group-permissions').value;
 
         if (name.length < 2 || !/^([a-zA-Z가-힣]+)$/g.test(name)) {
-          _this2.setWarning(true);
-
-          return;
+          alert('그룹이름 또는 그룹 권한스트링이 잘못되었습니다.');
+          return null;
         }
 
-        axios__WEBPACK_IMPORTED_MODULE_1___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/groups', {
+        axios__WEBPACK_IMPORTED_MODULE_1___default().post(_Constants__WEBPACK_IMPORTED_MODULE_4__.default.URL.BASE + '/groups', {
           name: name,
           permissions: permissions
         }, {
@@ -23702,69 +22888,63 @@ var Create = /*#__PURE__*/function (_React$Component) {
           }
         }).then(function (response) {
           if (response.data) {
-            window.location.href = '/groups';
-            return;
+            location.href = '/groups';
+            return null;
           } else {
             alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
-            return;
+            return null;
           }
         });
-        return;
+        return null;
       };
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_3__.default, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-            className: classes.title,
-            children: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uB9CC\uB4E4\uAE30"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            className: "message",
-            children: "\uC0C8\uB85C\uC6B4 \uADF8\uB8F9\uC744 \uC0DD\uC131\uD569\uB2C8\uB2E4. \uBAA8\uB4E0 \uC0AC\uC6A9\uC790\uB294 \uADF8\uB8F9\uC5D0 \uC18C\uC18D\uB418\uC5B4 \uC788\uC5B4\uC57C \uD558\uBA70, \uAD00\uB9AC\uC790\uB3C4 \uB9C8\uCC2C\uAC00\uC9C0\uB85C \uADF8\uB8F9\uC5D0 \uC18D\uD558\uAC8C \uB429\uB2C8\uB2E4. \uADF8\uB8F9\uB9C8\uB2E4 \uBD80\uC5EC\uB418\uB294 \uAD8C\uD55C\uC774 \uB2E4\uB974\uB2C8 \uAD8C\uD55C\uBD80\uC5EC \uBC29\uBC95\uC5D0 \uB300\uD574\uC11C\uB294 \uCD5C\uACE0\uAD00\uB9AC\uC790\uC5D0\uAC8C \uBB38\uC758\uBC14\uB78D\uB2C8\uB2E4. \uCD94\uD6C4 \uADF8\uB8F9\uAD8C\uD55C \uD45C\uC900\uD654 \uC608\uC815."
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
-            id: "form-create-group",
-            className: classes.form,
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7__.default, {
-              container: true,
-              direction: "column",
-              className: classes.grid,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7__.default, {
-                item: true,
-                className: classes.item,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__.default, {
-                  id: "input-group-name",
-                  name: "name",
-                  label: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uC774\uB984",
-                  variant: "outlined",
-                  helperText: "\uC601\uC5B4 \uC18C\uBB38\uC790, \uB300\uBB38\uC790, \uD55C\uAE00\uC744 \uD3EC\uD568\uD574 \uC791\uC131\uD574\uC8FC\uC138\uC694.",
-                  fullWidth: true
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7__.default, {
-                item: true,
-                className: classes.item,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_8__.default, {
-                  id: "input-group-permissions",
-                  name: "permissions",
-                  label: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uAD8C\uD55C",
-                  variant: "outlined",
-                  helperText: "\uAD8C\uD55C\uBD80\uC5EC \uC2A4\uD2B8\uB9C1\uC744 \uD65C\uC6A9\uD574 \uC791\uC131\uD558\uC138\uC694. (\uAD00\uB9AC\uC790 \uBB38\uC758)",
-                  fullWidth: true
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7__.default, {
-                item: true,
-                className: classes.item,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__.default, {
-                  variant: "contained",
-                  color: "primary",
-                  onClick: submit,
-                  children: "\uB9CC\uB4E4\uAE30"
-                })
-              })]
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Functions_Snackbars__WEBPACK_IMPORTED_MODULE_2__.WarningSnackbar, {
-          open: this.state.warning,
-          onClose: this.closeWarning,
-          message: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uC774\uB984 \uB610\uB294 \uAD8C\uD55C \uC2A4\uD2B8\uB9C1\uC774 \uC798\uBABB\uB418\uC5C8\uC2B5\uB2C8\uB2E4!"
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_2__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+          className: "mt-0",
+          children: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uB9CC\uB4E4\uAE30"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "message",
+          children: "\uC0C8\uB85C\uC6B4 \uADF8\uB8F9\uC744 \uC0DD\uC131\uD569\uB2C8\uB2E4. \uBAA8\uB4E0 \uC0AC\uC6A9\uC790\uB294 \uADF8\uB8F9\uC5D0 \uC18C\uC18D\uB418\uC5B4 \uC788\uC5B4\uC57C \uD558\uBA70, \uAD00\uB9AC\uC790\uB3C4 \uB9C8\uCC2C\uAC00\uC9C0\uB85C \uADF8\uB8F9\uC5D0 \uC18D\uD558\uAC8C \uB429\uB2C8\uB2E4. \uADF8\uB8F9\uB9C8\uB2E4 \uBD80\uC5EC\uB418\uB294 \uAD8C\uD55C\uC774 \uB2E4\uB974\uB2C8 \uAD8C\uD55C\uBD80\uC5EC \uBC29\uBC95\uC5D0 \uB300\uD574\uC11C\uB294 \uCD5C\uACE0\uAD00\uB9AC\uC790\uC5D0\uAC8C \uBB38\uC758\uBC14\uB78D\uB2C8\uB2E4. \uCD94\uD6C4 \uADF8\uB8F9\uAD8C\uD55C \uD45C\uC900\uD654 \uC608\uC815."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("form", {
+          id: "form-create-group",
+          className: "mt-20",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {
+            container: true,
+            direction: "column",
+            className: classes.grid,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__.default, {
+                id: "input-group-name",
+                name: "name",
+                label: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uC774\uB984",
+                variant: "outlined",
+                helperText: "\uC601\uC5B4 \uC18C\uBB38\uC790, \uB300\uBB38\uC790, \uD55C\uAE00\uC744 \uD3EC\uD568\uD574 \uC791\uC131\uD574\uC8FC\uC138\uC694.",
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__.default, {
+                id: "input-group-permissions",
+                name: "permissions",
+                label: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uAD8C\uD55C",
+                variant: "outlined",
+                helperText: "\uAD8C\uD55C\uBD80\uC5EC \uC2A4\uD2B8\uB9C1\uC744 \uD65C\uC6A9\uD574 \uC791\uC131\uD558\uC138\uC694. (\uAD00\uB9AC\uC790 \uBB38\uC758)",
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_8__.default, {
+                variant: "contained",
+                color: "primary",
+                onClick: submit,
+                children: "\uB9CC\uB4E4\uAE30"
+              })
+            })]
+          })
         })]
       });
     }
@@ -23773,7 +22953,7 @@ var Create = /*#__PURE__*/function (_React$Component) {
   return Create;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__.default)(styles)(Create));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_9__.default)(styles)(Create));
 
 /***/ }),
 
@@ -23847,14 +23027,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 var styles = {
-  title: {
-    marginTop: 0
-  },
   table: {
     minWidth: 300
-  },
-  pagination: {
-    marginTop: 20
   },
   link: {
     cursor: 'pointer'
@@ -23873,7 +23047,6 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this["delete"] = _this["delete"].bind(_assertThisInitialized(_this));
-    _this.page = Number(props.match.params.page);
     _this.state = {
       metadata: [],
       groups: []
@@ -23884,12 +23057,16 @@ var Home = /*#__PURE__*/function (_React$Component) {
   _createClass(Home, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this._get(this.page);
+      var page = this._getPage();
+
+      this._get(page);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      this._get(this.props.match.params.page);
+      var page = this._getPage();
+
+      this._get(page);
     }
   }, {
     key: "fetchGroupList",
@@ -23907,8 +23084,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
             align: "center",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-              className: classes.link,
+              className: "red ".concat(classes.link),
               onClick: _this2["delete"],
+              "data-name": group.name,
               "data-uuid": group.uuid,
               children: "\uC0AD\uC81C"
             })
@@ -23922,22 +23100,38 @@ var Home = /*#__PURE__*/function (_React$Component) {
       var _delete2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(event) {
         var _this3 = this;
 
-        var uuid;
+        var uuid, name;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 uuid = event.target.dataset.uuid;
-                _context.next = 3;
+                name = event.target.dataset.name;
+
+                if (!confirm(name + '그룹을 영구히 삭제하시겠습니까? 한 번 삭제되면 복구는 불가능합니다.')) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _context.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default().delete(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/groups/' + uuid).then(function (response) {
                   if (response.data) {
-                    _this3._get(_this3.page);
+                    var page = _this3._getPage();
+
+                    _this3._get(page, true);
                   } else {
                     alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
                   }
                 });
 
-              case 3:
+              case 5:
+                _context.next = 8;
+                break;
+
+              case 7:
+                return _context.abrupt("return", null);
+
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -23958,22 +23152,23 @@ var Home = /*#__PURE__*/function (_React$Component) {
         var _this4 = this;
 
         var page,
+            refresh,
             _args2 = arguments;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 page = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 1;
-                page = Number(page);
+                refresh = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : false;
 
-                if (!(this.state.metadata.current_page != page)) {
+                if (!(this.state.metadata.current_page != page && !refresh || refresh)) {
                   _context2.next = 8;
                   break;
                 }
 
                 _context2.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/groups/index', {
-                  page: page
+                  pagination: true
                 }, {
                   headers: {
                     'Content-type': 'application/json'
@@ -24012,12 +23207,23 @@ var Home = /*#__PURE__*/function (_React$Component) {
       return _get;
     }()
   }, {
+    key: "_getPage",
+    value: function _getPage() {
+      var page = Number(this.props.match.params.page);
+
+      if (!page) {
+        return 1;
+      } else {
+        return page;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_3__.default, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-          className: classes.title,
+          className: "mt-0",
           children: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 \uBAA9\uB85D"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "message",
@@ -24411,11 +23617,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/esm/FormControl/FormControl.js");
+/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "./node_modules/@material-ui/core/esm/InputLabel/InputLabel.js");
+/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Select */ "./node_modules/@material-ui/core/esm/Select/Select.js");
+/* harmony import */ var _material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/esm/FormHelperText/FormHelperText.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Layout/Theme */ "./resources/js/components/Layout/Theme.jsx");
+/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
+/* harmony import */ var _Functions_ValidateEmailAddress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Functions/ValidateEmailAddress */ "./resources/js/components/Functions/ValidateEmailAddress.jsx");
+/* harmony import */ var _Functions_ValidatePassword__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Functions/ValidatePassword */ "./resources/js/components/Functions/ValidatePassword.jsx");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../Constants */ "./resources/js/components/Constants.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var _grid;
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24437,14 +23666,35 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
 var styles = {
-  title: {
-    marginTop: 0
+  grid: (_grid = {}, _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__.default.breakpoints.up('xs'), {
+    width: '100%'
+  }), _defineProperty(_grid, _Layout_Theme__WEBPACK_IMPORTED_MODULE_3__.default.breakpoints.up('sm'), {
+    width: 500
+  }), _grid),
+  alert: {
+    fontSize: '0.8em',
+    textAlign: 'right',
+    fontWeight: 'bold'
   }
 };
 
@@ -24454,31 +23704,387 @@ var Create = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Create);
 
   function Create(props) {
+    var _this;
+
     _classCallCheck(this, Create);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.validation = {
+      email: false,
+      password: false,
+      password_confirm: false
+    };
+    _this.state = {
+      groups: [],
+      selected_group: ''
+    };
+    return _this;
   }
 
   _createClass(Create, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._get();
+    }
+  }, {
+    key: "fetchGroupList",
+    value: function fetchGroupList() {
+      return this.state.groups.map(function (group, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+          value: group.uuid,
+          children: group.name
+        }, "group_".concat(index));
+      });
+    }
+  }, {
+    key: "_get",
+    value: function () {
+      var _get2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_7__.default.URL.BASE + '/groups/index', {
+                  pagination: false
+                }, {
+                  headers: {
+                    'Content-type': 'application/json'
+                  }
+                }).then(function (response) {
+                  _this2.setState(function () {
+                    return {
+                      groups: response.data
+                    };
+                  });
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function _get() {
+        return _get2.apply(this, arguments);
+      }
+
+      return _get;
+    }()
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var classes = this.props.classes;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_1__.default, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-          className: classes.title,
+
+      var changeAlertMessage = function changeAlertMessage(target, type, message) {
+        if (type == 'clear') {
+          target.innerHTML = '';
+        } else if (type) {
+          target.innerHTML = '<span class="success">' + message + '</span>';
+        } else {
+          target.innerHTML = '<span class="error">' + message + '</span>';
+        }
+      };
+
+      var changeEmail = function changeEmail(event) {
+        var email = event.target.value;
+        var alert = document.querySelector('#alert-email');
+
+        if (email.length > 1) {
+          if ((0,_Functions_ValidateEmailAddress__WEBPACK_IMPORTED_MODULE_5__.default)(email)) {
+            axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_7__.default.URL.BASE + '/users/check/email', {
+              email: email
+            }, {
+              headers: {
+                'Content-type': 'application/json'
+              }
+            }).then(function (response) {
+              if (!response.data) {
+                changeAlertMessage(alert, false, '해당 이메일주소로 가입된 회원정보가 이미 존재합니다.');
+                _this3.validation.email = false;
+              } else {
+                changeAlertMessage(alert, true, '올바른 이메일주소입니다.');
+                _this3.validation.email = true;
+              }
+            });
+          } else {
+            changeAlertMessage(alert, false, '이메일주소가 올바르지 않습니다.');
+            _this3.validation.email = false;
+          }
+        } else {
+          changeAlertMessage(alert, 'clear');
+          _this3.validation.email = false;
+        }
+      };
+
+      var changePassword = function changePassword(event) {
+        var password = event.target.value;
+        var alert = document.querySelector('#alert-password');
+
+        if (password.length > 1) {
+          if ((0,_Functions_ValidatePassword__WEBPACK_IMPORTED_MODULE_6__.default)(password)) {
+            changeAlertMessage(alert, true, '올바른 패스워드입니다.');
+            _this3.validation.password = true;
+          } else {
+            changeAlertMessage(alert, false, '패스워드를 다시 확인해주세요.');
+            _this3.validation.password = false;
+          }
+        } else {
+          changeAlertMessage(alert, 'clear');
+          _this3.validation.password = false;
+        }
+      };
+
+      var changePasswordConfirm = function changePasswordConfirm(event) {
+        var password = document.querySelector('#input-user-password').value;
+        var password_confirm = event.target.value;
+        var alert = document.querySelector('#alert-password-confirm');
+
+        if (password_confirm.length > 1 && _this3.validation.password) {
+          if (password == password_confirm) {
+            changeAlertMessage(alert, true, '입력하신 패스워드가 일치합니다.');
+            _this3.validation.password_confirm = true;
+          } else {
+            changeAlertMessage(alert, false, '입력하신 패스워드가 일치하지 않습니다.');
+            _this3.validation.password_confirm = false;
+          }
+        } else {
+          changeAlertMessage(alert, 'clear');
+          _this3.validation.password_confirm = false;
+        }
+      };
+
+      var changeGroup = function changeGroup(event) {
+        _this3.setState(function () {
+          return {
+            selected_group: event.target.value
+          };
+        });
+      };
+
+      var submit = function submit() {
+        var email = document.querySelector('#input-user-email');
+        var password = document.querySelector('#input-user-password');
+        var password_confirm = document.querySelector('#input-user-password-confirm');
+        var firstname = document.querySelector('#input-user-firstname');
+        var lastname = document.querySelector('#input-user-lastname');
+        var middlename = document.querySelector('#input-user-middlename');
+        var group = document.querySelector('#input-user-group');
+
+        if (!email.value || !_this3.validation.email) {
+          alert('이메일주소를 확인해주세요.');
+          email.focus();
+          return null;
+        }
+
+        if (!password.value || !_this3.validation.password) {
+          alert('패스워드를 확인해주세요.');
+          password.value = '';
+          password.focus();
+          return null;
+        }
+
+        if (!password_confirm.value || !_this3.validation.password_confirm) {
+          alert('입력하신 패스워드가 일치하지 않습니다.');
+          password_confirm.value = '';
+          password_confirm.focus();
+          return null;
+        }
+
+        if (!firstname.value) {
+          alert('사용자 이름을 입력해주세요.');
+          firstname.focus();
+          return null;
+        }
+
+        if (!lastname.value) {
+          alert('사용자의 성을 입력해주세요.');
+          lastname.focus();
+          return null;
+        }
+
+        if (!group.value) {
+          alert('사용자그룹을 선택해주세요.');
+          group.focus();
+          return null;
+        }
+
+        axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_7__.default.URL.BASE + '/users', {
+          email: email.value,
+          password: password.value,
+          firstname: firstname.value,
+          lastname: lastname.value,
+          middlename: middlename.value,
+          group: group.value
+        }, {
+          headers: {
+            'Content-type': 'application/json'
+          }
+        }).then(function (response) {
+          if (response.data) {
+            location.href = '/users';
+            return null;
+          } else {
+            alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
+            return null;
+          }
+        });
+        return null;
+      };
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h3", {
+          className: "mt-0",
           children: "\uC0AC\uC6A9\uC790 \uC0DD\uC131"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "message",
           children: "\uAC1C\uBC1C \uC2DC \uAE30\uB2A5\uC744 \uD14C\uC2A4\uD2B8\uD558\uAE30 \uC704\uD574 \uD544\uC694\uD55C \uC0AC\uC6A9\uC790\uB97C \uC0DD\uC131\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("form", {
+          id: "form-create-group",
+          className: "mt-20",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+            container: true,
+            direction: "column",
+            className: classes.grid,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                id: "input-user-email",
+                name: "email",
+                label: "\uC774\uBA54\uC77C \uC8FC\uC18C *",
+                variant: "outlined",
+                helperText: "\uC774\uBA54\uC77C \uC8FC\uC18C\uB294 \uACC4\uC815 \uC544\uC774\uB514\uB85C \uC0AC\uC6A9\uB429\uB2C8\uB2E4.",
+                type: "email",
+                onChange: changeEmail,
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              id: "alert-email",
+              className: "mt-5 mb-20 ".concat(classes.alert)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                id: "input-user-password",
+                name: "password",
+                label: "\uD328\uC2A4\uC6CC\uB4DC *",
+                variant: "outlined",
+                helperText: "\uC0AC\uC6A9\uD560 \uD328\uC2A4\uC6CC\uB4DC\uB97C \uC815\uD655\uD558\uAC8C \uC785\uB825\uD558\uC138\uC694. (\uC601\uBB38 \uB300\uC18C\uBB38\uC790, \uC22B\uC790, \uD2B9\uC218\uBB38\uC790 \uD3EC\uD568 12\uC790 \uC774\uC0C1)",
+                type: "password",
+                onChange: changePassword,
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              id: "alert-password",
+              className: "mt-5 mb-20 ".concat(classes.alert)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                id: "input-user-password-confirm",
+                name: "password-confirm",
+                label: "\uD328\uC2A4\uC6CC\uB4DC \uD655\uC778 *",
+                variant: "outlined",
+                helperText: "\uC704\uC5D0\uC11C \uC785\uB825\uD55C \uD328\uC2A4\uC6CC\uB4DC\uB97C \uB2E4\uC2DC \uD55C \uBC88 \uC785\uB825\uD574\uC8FC\uC138\uC694.",
+                type: "password",
+                onChange: changePasswordConfirm,
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+              id: "alert-password-confirm",
+              className: "mt-5 mb-20 ".concat(classes.alert)
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              container: true,
+              direction: "row",
+              className: "mb-20",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+                item: true,
+                xs: 6,
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                  id: "input-user-firstname",
+                  name: "firstname",
+                  label: "\uC774\uB984 *",
+                  variant: "outlined",
+                  helperText: "\uBCF8\uC778\uC758 \uC774\uB984\uC744 \uC785\uB825\uD558\uC138\uC694.",
+                  fullWidth: true
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+                item: true,
+                xs: 1
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+                item: true,
+                xs: 5,
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                  id: "input-user-lastname",
+                  name: "lastname",
+                  label: "\uC131 *",
+                  variant: "outlined",
+                  helperText: "\uBCF8\uC778\uC758 \uC131\uC744 \uC785\uB825\uD558\uC138\uC694.",
+                  fullWidth: true
+                })
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_10__.default, {
+                id: "input-user-middlename",
+                name: "middlename",
+                label: "\uC911\uAC04\uC774\uB984 (\uC120\uD0DD)",
+                variant: "outlined",
+                helperText: "\uC911\uAC04\uC774\uB984\uC774 \uC788\uB294 \uACBD\uC6B0 \uC785\uB825\uD558\uC138\uC694.",
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__.default, {
+                variant: "outlined",
+                className: classes.grid,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_12__.default, {
+                  htmlFor: "input-user-group",
+                  children: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 *"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_13__.default, {
+                  "native": true,
+                  fullWidth: true,
+                  value: this.state.selected_group,
+                  onChange: changeGroup,
+                  label: "\uC0AC\uC6A9\uC790\uADF8\uB8F9 *",
+                  inputProps: {
+                    name: 'group',
+                    id: 'input-user-group'
+                  },
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("option", {
+                    "aria-label": "None",
+                    value: ""
+                  }), this.state.groups ? this.fetchGroupList() : '']
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_FormHelperText__WEBPACK_IMPORTED_MODULE_14__.default, {
+                  children: "\uC0AC\uC6A9\uC790\uAC00 \uC18C\uC18D\uB420 \uADF8\uB8F9\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694. (\uD544\uC218\uC120\uD0DD)"
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__.default, {
+                variant: "contained",
+                color: "primary",
+                onClick: submit,
+                children: "\uACC4\uC815\uC0DD\uC131"
+              })
+            })]
+          })
         })]
       });
     }
   }]);
 
   return Create;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default)(styles)(Create));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_16__.default)(styles)(Create));
 
 /***/ }),
 
@@ -24493,11 +24099,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
-/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/withStyles.js");
+/* harmony import */ var _Functions_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Functions/Paper */ "./resources/js/components/Functions/Paper.jsx");
+/* harmony import */ var _material_ui_core_Table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/esm/Table/Table.js");
+/* harmony import */ var _material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/esm/TableBody/TableBody.js");
+/* harmony import */ var _material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/esm/TableCell/TableCell.js");
+/* harmony import */ var _material_ui_core_TableContainer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/TableContainer */ "./node_modules/@material-ui/core/esm/TableContainer/TableContainer.js");
+/* harmony import */ var _material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/esm/TableHead/TableHead.js");
+/* harmony import */ var _material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/esm/TableRow/TableRow.js");
+/* harmony import */ var _Functions_Pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Functions/Pagination */ "./resources/js/components/Functions/Pagination.jsx");
+/* harmony import */ var _Constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Constants */ "./resources/js/components/Constants.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24524,9 +24148,21 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
+
+
+
+
+
+
 var styles = {
-  title: {
-    marginTop: 0
+  table: {
+    minWidth: 300
+  },
+  link: {
+    cursor: 'pointer'
   }
 };
 
@@ -24536,31 +24172,238 @@ var Home = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(Home);
 
   function Home(props) {
+    var _this;
+
     _classCallCheck(this, Home);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this["delete"] = _this["delete"].bind(_assertThisInitialized(_this));
+    _this.state = {
+      metadata: [],
+      users: []
+    };
+    return _this;
   }
 
   _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var page = this._getPage();
+
+      this._get(page);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var page = this._getPage();
+
+      this._get(page);
+    }
+  }, {
+    key: "fetchUserList",
+    value: function fetchUserList() {
+      var _this2 = this;
+
+      var classes = this.props.classes;
+      return this.state.users.map(function (user, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+            children: user.email
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+            children: [user.firstname, " ", user.lastname]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+            align: "center",
+            children: user.group.name
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+            align: "center",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+              className: "red ".concat(classes.link),
+              onClick: _this2["delete"],
+              "data-lastname": user.lastname,
+              "data-email": user.email,
+              "data-uuid": user.uuid,
+              children: "\uC0AD\uC81C"
+            })
+          })]
+        }, "user_".concat(index));
+      });
+    }
+  }, {
+    key: "delete",
+    value: function () {
+      var _delete2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(event) {
+        var _this3 = this;
+
+        var uuid, email, lastname;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                uuid = event.target.dataset.uuid;
+                email = event.target.dataset.email;
+                lastname = event.target.dataset.lastname;
+
+                if (!confirm(lastname + '님의 계정(' + email + ')을 영구히 삭제하시겠습니까? 한 번 삭제되면 복구는 불가능합니다.')) {
+                  _context.next = 8;
+                  break;
+                }
+
+                _context.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default().delete(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/users/' + uuid).then(function (response) {
+                  if (response.data) {
+                    var page = _this3._getPage();
+
+                    _this3._get(page, true);
+                  } else {
+                    alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
+                  }
+                });
+
+              case 6:
+                _context.next = 9;
+                break;
+
+              case 8:
+                return _context.abrupt("return", null);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function _delete(_x) {
+        return _delete2.apply(this, arguments);
+      }
+
+      return _delete;
+    }()
+  }, {
+    key: "_get",
+    value: function () {
+      var _get2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _this4 = this;
+
+        var page,
+            refresh,
+            _args2 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                page = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 1;
+                refresh = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : false;
+
+                if (!(this.state.metadata.current_page != page && !refresh || refresh)) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/users/index', {
+                  pagination: true
+                }, {
+                  headers: {
+                    'Content-type': 'application/json'
+                  }
+                }).then(function (response) {
+                  _this4.setState(function (state) {
+                    if (state.users != response.data.data) {
+                      return {
+                        metadata: response.data,
+                        users: response.data.data
+                      };
+                    } else {
+                      return null;
+                    }
+                  });
+                });
+
+              case 5:
+                return _context2.abrupt("return", _context2.sent);
+
+              case 8:
+                return _context2.abrupt("return", null);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function _get() {
+        return _get2.apply(this, arguments);
+      }
+
+      return _get;
+    }()
+  }, {
+    key: "_getPage",
+    value: function _getPage() {
+      var page = Number(this.props.match.params.page);
+
+      if (!page) {
+        return 1;
+      } else {
+        return page;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_1__.default, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-          className: classes.title,
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Functions_Paper__WEBPACK_IMPORTED_MODULE_3__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+          className: "mt-0",
           children: "\uC0AC\uC6A9\uC790 \uBAA9\uB85D"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "message",
           children: "\uC9C0\uAE08\uAE4C\uC9C0 \uC0DD\uC131\uB41C \uBAA8\uB4E0 \uC0AC\uC6A9\uC790 \uBAA9\uB85D\uC744 \uC774\uACF3\uC5D0\uC11C \uD655\uC778\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-        })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableContainer__WEBPACK_IMPORTED_MODULE_9__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_10__.default, {
+            className: classes.table,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_11__.default, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_7__.default, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+                    children: "\uC774\uBA54\uC77C"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+                    children: "\uC774\uB984"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  align: "center",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+                    children: "\uC0AC\uC6A9\uC790\uADF8\uB8F9"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  align: "center",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+                    children: "\uAD00\uB9AC"
+                  })
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_12__.default, {
+              children: this.state.users ? this.fetchUserList() : ''
+            })]
+          })
+        }), this.state.users ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Functions_Pagination__WEBPACK_IMPORTED_MODULE_4__.default, {
+          metadata: this.state.metadata,
+          baseUrl: "/users"
+        }) : '']
       });
     }
   }]);
 
   return Home;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__.default)(styles)(Home));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_13__.default)(styles)(Home));
 
 /***/ }),
 

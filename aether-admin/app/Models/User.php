@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Group;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,9 @@ class User extends Authenticatable
     ];
 
     public $timestamps = true;
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

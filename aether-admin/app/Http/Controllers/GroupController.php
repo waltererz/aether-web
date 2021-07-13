@@ -16,7 +16,12 @@ class GroupController extends Controller
      */
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $groups = Group::paginate(10);
+        if (!$request->post('pagination')) {
+            $groups = Group::all();
+        } else {
+            $groups = Group::paginate(10);
+        }
+
         return response()->json($groups);
     }
 

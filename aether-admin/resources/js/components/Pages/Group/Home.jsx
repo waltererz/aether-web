@@ -12,14 +12,8 @@ import Pagination from '../../Functions/Pagination';
 import CONSTANTS from '../../Constants';
 
 const styles = {
-    title: {
-        marginTop: 0,
-    },
     table: {
         minWidth: 300,
-    },
-    pagination: {
-        marginTop: 20,
     },
     link: {
         cursor: 'pointer',
@@ -30,7 +24,6 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
-        this.page = Number(props.match.params.page);
         this.state = {
             metadata: [],
             groups: [],
@@ -38,11 +31,13 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        this._get(this.page);
+        const page = this._getPage();
+        this._get(page);
     }
 
     componentDidUpdate() {
-        this._get(this.props.match.params.page);
+        const page = this._getPage();
+        this._get(page);
     }
 
     fetchGroupList() {
@@ -54,7 +49,12 @@ class Home extends React.Component {
                     <TableCell>{group.name}</TableCell>
                     <TableCell align="center">{group.permissions}</TableCell>
                     <TableCell align="center">
-                        <span className={classes.link} onClick={this.delete} data-uuid={group.uuid}>
+                        <span
+                            className={`red ${classes.link}`}
+                            onClick={this.delete}
+                            data-name={group.name}
+                            data-uuid={group.uuid}
+                        >
                             삭제
                         </span>
                     </TableCell>
@@ -65,23 +65,28 @@ class Home extends React.Component {
 
     async delete(event) {
         const uuid = event.target.dataset.uuid;
-        await axios.delete(CONSTANTS.URL.BASE + '/groups/' + uuid).then((response) => {
-            if (response.data) {
-                this._get(this.page);
-            } else {
-                alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
-            }
-        });
+        const name = event.target.dataset.name;
+        if (confirm(name + '그룹을 영구히 삭제하시겠습니까? 한 번 삭제되면 복구는 불가능합니다.')) {
+            await axios.delete(CONSTANTS.URL.BASE + '/groups/' + uuid).then((response) => {
+                if (response.data) {
+                    const page = this._getPage();
+                    this._get(page, true);
+                } else {
+                    alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
+                }
+            });
+        } else {
+            return null;
+        }
     }
 
-    async _get(page = 1) {
-        page = Number(page);
-        if (this.state.metadata.current_page != page) {
+    async _get(page = 1, refresh = false) {
+        if ((this.state.metadata.current_page != page && !refresh) || refresh) {
             return await axios
                 .post(
                     CONSTANTS.URL.BASE + '/groups/index',
                     {
-                        page: page,
+                        pagination: true,
                     },
                     {
                         headers: {
@@ -106,12 +111,21 @@ class Home extends React.Component {
         }
     }
 
+    _getPage() {
+        const page = Number(this.props.match.params.page);
+        if (!page) {
+            return 1;
+        } else {
+            return page;
+        }
+    }
+
     render() {
         const { classes } = this.props;
 
         return (
             <Paper>
-                <h3 className={classes.title}>사용자그룹 목록</h3>
+                <h3 className="mt-0">사용자그룹 목록</h3>
                 <div className="message">
                     지금까지 생성된 모든 사용자그룹 목록을 이곳에서 확인할 수 있습니다.
                 </div>
