@@ -21844,7 +21844,7 @@ try {
 
 (axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.xsrfCookieName) = 'XSRF-TOKEN';
 (axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.xsrfHeaderName) = 'X-XSRF-TOKEN';
-(axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.withCredentials) = false;
+(axios__WEBPACK_IMPORTED_MODULE_3___default().defaults.withCredentials) = true;
 var store = (0,redux__WEBPACK_IMPORTED_MODULE_7__.createStore)(_components_Redux_Reducer__WEBPACK_IMPORTED_MODULE_5__.default);
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
@@ -21991,7 +21991,7 @@ var getTabCode = function getTabCode() {
   var tab = 0;
 
   switch (true) {
-    case /^\/$/.test(path):
+    case /^\/$/g.test(path):
       tab = _Constants__WEBPACK_IMPORTED_MODULE_0__.default.LAYOUT.TAB.HOME;
       break;
 
@@ -22585,9 +22585,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
   _createClass(Header, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          tab = _this$props.tab,
-          changeTab = _this$props.changeTab;
+      var tab = this.props.tab;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Functions_HideOnScroll__WEBPACK_IMPORTED_MODULE_4__.default, {
         breakpoint: _Theme__WEBPACK_IMPORTED_MODULE_5__.default.breakpoints.values.md,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_7__.default, {
@@ -22598,7 +22596,6 @@ var Header = /*#__PURE__*/function (_React$Component) {
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_8__.default, {
               value: tab,
-              onChange: changeTab,
               centered: true,
               indicatorColor: "primary",
               textColor: "primary",
@@ -24294,57 +24291,82 @@ var Home = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_get",
     value: function () {
-      var _get2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _get2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var _this4 = this;
 
         var page,
             refresh,
-            _args2 = arguments;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+            _args3 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                page = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : 1;
-                refresh = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : false;
+                page = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : 1;
+                refresh = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : false;
 
                 if (!(this.state.metadata.current_page != page && !refresh || refresh)) {
-                  _context2.next = 8;
+                  _context3.next = 8;
                   break;
                 }
 
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/users/index', {
-                  page: page,
-                  pagination: true
-                }, {
-                  headers: {
-                    'Content-type': 'application/json'
-                  }
-                }).then(function (response) {
-                  _this4.setState(function (state) {
-                    if (state.users != response.data.data) {
-                      return {
-                        metadata: response.data,
-                        users: response.data.data
-                      };
-                    } else {
-                      return null;
-                    }
-                  });
-                });
+                _context3.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default().get(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/sanctum/csrf-cookie').then( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(response) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _context2.next = 2;
+                            return axios__WEBPACK_IMPORTED_MODULE_2___default().post(_Constants__WEBPACK_IMPORTED_MODULE_5__.default.URL.BASE + '/users/index', {
+                              page: page,
+                              pagination: true
+                            }, {
+                              headers: {
+                                'Content-type': 'application/json'
+                              }
+                            }).then(function (response) {
+                              _this4.setState(function (state) {
+                                if (state.users != response.data.data) {
+                                  return {
+                                    metadata: response.data,
+                                    users: response.data.data
+                                  };
+                                } else {
+                                  return null;
+                                }
+                              });
+                            })["catch"](function (error) {
+                              console.log(error.response);
+                            });
+
+                          case 2:
+                            return _context2.abrupt("return", _context2.sent);
+
+                          case 3:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x2) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
 
               case 5:
-                return _context2.abrupt("return", _context2.sent);
+                return _context3.abrupt("return", _context3.sent);
 
               case 8:
-                return _context2.abrupt("return", null);
+                return _context3.abrupt("return", null);
 
               case 9:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function _get() {

@@ -95,29 +95,36 @@ class Home extends React.Component {
     async _get(page = 1, refresh = false) {
         if ((this.state.metadata.current_page != page && !refresh) || refresh) {
             return await axios
-                .post(
-                    CONSTANTS.URL.BASE + '/users/index',
-                    {
-                        page: page,
-                        pagination: true,
-                    },
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
-                        },
-                    },
-                )
-                .then((response) => {
-                    this.setState((state) => {
-                        if (state.users != response.data.data) {
-                            return {
-                                metadata: response.data,
-                                users: response.data.data,
-                            };
-                        } else {
-                            return null;
-                        }
-                    });
+                .get(CONSTANTS.URL.BASE + '/sanctum/csrf-cookie')
+                .then(async (response) => {
+                    return await axios
+                        .post(
+                            CONSTANTS.URL.BASE + '/users/index',
+                            {
+                                page: page,
+                                pagination: true,
+                            },
+                            {
+                                headers: {
+                                    'Content-type': 'application/json',
+                                },
+                            },
+                        )
+                        .then((response) => {
+                            this.setState((state) => {
+                                if (state.users != response.data.data) {
+                                    return {
+                                        metadata: response.data,
+                                        users: response.data.data,
+                                    };
+                                } else {
+                                    return null;
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            console.log(error.response);
+                        });
                 });
         } else {
             return null;
