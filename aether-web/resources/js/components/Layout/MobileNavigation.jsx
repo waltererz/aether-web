@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
-import AppsIcon from '@material-ui/icons/Apps';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
+import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import CONSTANTS from '../Constants';
 
 class MobileNavigation extends React.Component {
@@ -22,19 +23,28 @@ class MobileNavigation extends React.Component {
             <div className="app-footer-mobile">
                 <BottomNavigation value={nav} className="bottomNavigation">
                     <BottomNavigationAction
-                        icon={<HomeIcon />}
+                        icon={<HomeOutlinedIcon />}
                         className="navButton"
                         value={CONSTANTS.LAYOUT.ROUTE.HOME}
                         component={Link}
                         to="/"
                     />
-                    <BottomNavigationAction icon={<AppsIcon />} className="navButton" value={1} />
                     <BottomNavigationAction
-                        icon={<SupervisorAccountIcon />}
+                        icon={<PieChartOutlinedIcon />}
+                        className="navButton"
+                        value="portfolio"
+                    />
+                    <BottomNavigationAction
+                        icon={<SupervisorAccountOutlinedIcon />}
                         className="navButton"
                         value={CONSTANTS.LAYOUT.ROUTE.ADVISORS}
                         component={Link}
                         to="/advisors"
+                    />
+                    <BottomNavigationAction
+                        icon={<AccountCircleOutlinedIcon />}
+                        className="navButton"
+                        value="account"
                     />
                 </BottomNavigation>
             </div>

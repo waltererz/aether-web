@@ -18,6 +18,7 @@ import {
 import Container from '../../Layout/ContainerStyles/FullContainer';
 import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
+import HeaderIcons from './HeaderIcons';
 
 class Content extends React.Component {
     render() {
@@ -88,7 +89,7 @@ class Home extends React.Component {
     componentDidMount() {
         const { route, changeRoute, changeTitle } = this.props;
         const current_route = getRouteCode();
-        changeTitle('투자정보 소셜 서비스');
+        changeTitle('');
         if (route != current_route) {
             changeRoute(current_route);
         }
@@ -102,6 +103,7 @@ class Home extends React.Component {
                     content={<Content />}
                     left={<Left toggleDrawer={toggleDrawer} />}
                     right={<Right />}
+                    headerIcons={<HeaderIcons />}
                     toggleDrawer={toggleDrawer}
                 />
             </React.Fragment>

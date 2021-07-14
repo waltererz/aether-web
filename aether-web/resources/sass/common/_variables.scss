@@ -34,11 +34,9 @@ $theme-colors: (
     'secondary': $secondary,
 );
 
-$default-margin-top-bp-md: 70px;
-$default-margin-top-bp-xs: 62px;
-
 $header-height: 56px;
-$mobile-bottomNavigation-height: 56px;
+$mobile-header-height: $header-height - 10px;
+$mobile-bottomNavigation-height: 50px;
 $drawer-width: 320px;
 $center-grid-item-width: 720px;
 $right-grid-item-width: 320px;

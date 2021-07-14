@@ -17,6 +17,7 @@ import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
 import Home from './Home';
 import Search from './Search';
+import HeaderIcons from './HeaderIcons';
 
 class Content extends React.Component {
     render() {
@@ -76,6 +77,7 @@ class Advisors extends React.Component {
                     content={<Content />}
                     left={<Left toggleDrawer={toggleDrawer} />}
                     right={<Right />}
+                    headerIcons={<HeaderIcons />}
                 />
             </React.Fragment>
         );

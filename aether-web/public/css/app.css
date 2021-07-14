@@ -75,9 +75,14 @@ a {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.app-drawer .drawer-paper .app-drawer-list .MuiListItem-root,
-.app-mobile-drawer .drawer-body .app-drawer-list .MuiListItem-root {
+.drawer-paper .app-drawer-list .MuiListItem-root {
   border-radius: 5px;
+}
+
+.drawer-paper .app-drawer-list .MuiListItem-root .MuiAvatar-root {
+  background-color: #ffffff;
+  color: #aaaaaa;
+  border: 1px solid #cccccc;
 }
 
 .app-container.aether .grid-container .grid-item-1 {
@@ -103,7 +108,7 @@ a {
 
 .app-container.aether .grid-container .grid-item-1 h3 {
   border-bottom: 1px solid #eeeeee;
-  padding: 5px 10px;
+  padding: 0px 10px 5px 3px;
   font-size: 1.2em;
   font-weight: bold;
 }
@@ -165,38 +170,29 @@ ul.pagination li.link.disabled {
 }
 
 div.app-footer-mobile .bottomNavigation {
-  height: 56px;
+  height: 50px;
   display: flex;
   justify-content: space-evenly;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
   width: 100%;
   position: fixed;
   bottom: 0px;
   right: 0px;
   left: auto;
-  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
   z-index: 1200;
+  border-top: 1px solid #eeeeee;
 }
 
 div.app-footer-mobile .bottomNavigation .navButton {
   padding: 0px;
-  color: #cccccc;
-}
-
-div.app-footer-mobile .bottomNavigation .navButton .MuiSvgIcon-root {
-  transition: font-size 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #aaaaaa;
 }
 
 div.app-footer-mobile .bottomNavigation .navButton.Mui-selected {
-  color: #ffffff;
-}
-
-div.app-footer-mobile .bottomNavigation .navButton.Mui-selected .MuiSvgIcon-root {
-  font-size: 2rem;
+  color: #000000;
 }
 
 .app-mobile-drawer .drawer-header {
-  height: 56px;
   border-bottom: 1px solid #efefef;
 }
 
@@ -212,13 +208,10 @@ div.app-footer-mobile .bottomNavigation .navButton.Mui-selected .MuiSvgIcon-root
 }
 
 header.aether-header {
-  box-shadow: 0px -6px 10px 0px rgba(0, 0, 0, 0.8);
-}
-
-header.aether-header,
-header.aether-header .header-title,
-.header-navigation .tabs {
-  min-height: 56px;
+  background-color: #ffffff;
+  transition: none;
+  box-shadow: none;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .header-navigation {
@@ -232,20 +225,19 @@ header.aether-header .header-title,
 }
 
 header.aether-header .header-title h6 {
+  color: #000000;
   font-family: "Noto Sans KR";
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .header-navigation .tabs {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-height: 56px;
   margin: 0px auto;
 }
 
 .header-navigation .tabs .MuiTab-root {
-  min-height: 56px;
   color: #aaaaaa;
 }
 
@@ -264,13 +256,17 @@ header.aether-header .header-title h6 {
 
 .header-icon-container .icons-desktop,
 .header-icon-container .icons-mobile {
-  display: inline-block;
   cursor: pointer;
-  height: 56px;
-  padding: 16px;
-  background-color: #000000;
   box-sizing: border-box;
-  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.header-icon-container .icons-desktop {
+  height: 56px;
+  background-color: #000000;
+}
+
+.header-icon-container .icons-mobile {
+  height: calc(56px - 10px);
 }
 
 .header-icon-container .icons-desktop .icon,
@@ -280,29 +276,77 @@ header.aether-header .header-title h6 {
   color: #333333;
 }
 
+.header-icon-container .icons-desktop .icon {
+  padding: 16px 8px 16px 8px;
+}
+
+.header-icon-container .icons-desktop .icon:first-child {
+  padding: 16px 8px 16px 16px;
+}
+
+.header-icon-container .icons-desktop .icon:last-child {
+  padding: 16px 16px 16px 8px;
+}
+
+.header-icon-container .icons-desktop .icon:only-child {
+  padding: 16px;
+}
+
+.header-icon-container .icons-mobile .icon {
+  padding: 10px 5px 10px 5px;
+}
+
+.header-icon-container .icons-mobile .icon:first-child {
+  padding: 10px 5px 10px 10px;
+}
+
+.header-icon-container .icons-mobile .icon:last-child {
+  padding: 10px 10px 10px 5px;
+}
+
+.header-icon-container .icons-mobile .icon:only-child {
+  padding: 10px;
+}
+
 .header-icon-container .icons-desktop .icon .MuiSvgIcon-root,
 .header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
   font-size: 1.5rem;
+}
+
+.header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
   color: #ffffff;
+}
+
+.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
+  color: #000000;
 }
 
 @media screen and (min-width: 0px) {
   body {
-    padding-top: 62px;
+    padding-top: calc(46px + 5px);
   }
 
-  header.aether-header .header-title {
-    background-color: #000000;
-  }
-
-  header.aether-header .header-title h6 {
-    color: #ffffff;
+  .container-article-paper {
+    padding: 5px;
+    background-color: #ffffff;
   }
 
   .app-container.aether {
-    height: calc(100% - 56px + 10px);
-    margin-bottom: 56px;
+    height: calc(100% - 50px + 10px);
+    margin-bottom: 50px;
     padding: 0px;
+  }
+
+  .header-navigation .tabs,
+.app-mobile-drawer .drawer-header {
+    height: 46px;
+  }
+
+  header.aether-header,
+header.aether-header .header-title,
+.header-navigation .tabs,
+.header-navigation .tabs .MuiTab-root {
+    min-height: calc(56px - 10px);
   }
 
   .app-drawer,
@@ -312,7 +356,7 @@ header.aether-header .header-title h6 {
   }
 
   .header-icon-container .icons-mobile {
-    display: block;
+    display: inline-flex;
   }
 
   .app-container.aether .grid-container .grid-item-1 {
@@ -324,7 +368,7 @@ header.aether-header .header-title h6 {
   .app-container.aether .grid-container .grid-item-1,
 .app-container.aether .grid-container .grid-item-2,
 .app-container.aether .grid-container .grid-item-trickery {
-    min-height: calc(100vh - 62px);
+    min-height: calc(100vh - 46px);
   }
 
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2,
@@ -380,15 +424,24 @@ header.aether-header .header-title h6 {
 }
 @media screen and (min-width: 1160px) {
   body {
-    padding-top: 70px;
+    padding-top: calc(56px + 18px);
   }
 
-  header.aether-header .header-title {
+  .container-article-paper {
+    padding: 5px;
     background-color: #ffffff;
   }
 
-  header.aether-header .header-title h6 {
-    color: #000000;
+  .header-navigation .tabs,
+.app-mobile-drawer .drawer-header {
+    height: 56px;
+  }
+
+  header.aether-header,
+header.aether-header .header-title,
+.header-navigation .tabs,
+.header-navigation .tabs .MuiTab-root {
+    min-height: 56px;
   }
 
   .app-drawer .drawer-paper {
@@ -400,7 +453,7 @@ header.aether-header .header-title h6 {
   .app-drawer,
 .header-navigation,
 .header-icon-container .icons-desktop {
-    display: block;
+    display: inline-flex;
   }
 
   .header-icon-container .icons-mobile {
@@ -446,7 +499,7 @@ header.aether-header .header-title h6 {
   .app-container.aether .grid-container .grid-item-1,
 .app-container.aether .grid-container .grid-item-2,
 .app-container.aether .grid-container .grid-item-trickery {
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 56px);
   }
 }
 @media screen and (min-width: 1366px) {

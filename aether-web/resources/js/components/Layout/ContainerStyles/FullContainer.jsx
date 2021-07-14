@@ -16,7 +16,7 @@ class FullContainer extends React.Component {
     }
 
     render() {
-        const { route, drawerOpen, toggleDrawer } = this.props;
+        const { route, drawerOpen, toggleDrawer, headerIcons } = this.props;
 
         let { drawerBackground } = this.props;
         let drawer_class_options = '';
@@ -26,7 +26,27 @@ class FullContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <Header toggleDrawer={toggleDrawer} />
+                <Header toggleDrawer={toggleDrawer} headerIcons={headerIcons} />
+                <Container
+                    classes={{ root: 'app-container aether current-tab-' + route }}
+                    maxWidth={false}
+                >
+                    <Grid
+                        container
+                        classes={{ root: 'grid-container' }}
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="flex-start"
+                    >
+                        <Grid item classes={{ root: 'grid-item-trickery' }}></Grid>
+                        <Grid item classes={{ root: 'grid-item-1' }}>
+                            {this.props.content}
+                        </Grid>
+                        <Grid item classes={{ root: 'grid-item-2' }}>
+                            {this.props.right}
+                        </Grid>
+                    </Grid>
+                </Container>
                 <Drawer
                     classes={{
                         root: `app-drawer current-tab-${route}${drawer_class_options}`,
@@ -51,26 +71,6 @@ class FullContainer extends React.Component {
                     <div className="drawer-header"></div>
                     {this.props.left}
                 </Drawer>
-                <Container
-                    classes={{ root: 'app-container aether current-tab-' + route }}
-                    maxWidth={false}
-                >
-                    <Grid
-                        container
-                        classes={{ root: 'grid-container' }}
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="flex-start"
-                    >
-                        <Grid item classes={{ root: 'grid-item-trickery' }}></Grid>
-                        <Grid item classes={{ root: 'grid-item-1' }}>
-                            {this.props.content}
-                        </Grid>
-                        <Grid item classes={{ root: 'grid-item-2' }}>
-                            {this.props.right}
-                        </Grid>
-                    </Grid>
-                </Container>
                 <MobileNavigation />
             </React.Fragment>
         );
