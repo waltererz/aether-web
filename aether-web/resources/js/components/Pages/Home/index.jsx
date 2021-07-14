@@ -6,16 +6,17 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import { ReduxActionAppChangeTitle } from '../../Redux/Actions/App';
 import {
-    ReduxActionLayoutCurrentTab,
+    ReduxActionLayoutChangeRoute,
     ReduxActionLayoutToggleDrawer,
 } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
-import getTabCode from '../../Functions/GetTabCode';
+import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
 
 class Content extends React.Component {
@@ -36,7 +37,7 @@ class Left extends React.Component {
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
-                                <LibraryBooksIcon />
+                                <SupervisorAccountIcon />
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="투자어드바이저" />
@@ -85,20 +86,23 @@ class Right extends React.Component {
 
 class Home extends React.Component {
     componentDidMount() {
-        const { tab, changeTab } = this.props;
-        const current_tab = getTabCode();
-        if (tab != current_tab) {
-            changeTab(current_tab);
+        const { route, changeRoute, changeTitle } = this.props;
+        const current_route = getRouteCode();
+        changeTitle('투자정보 소셜 서비스');
+        if (route != current_route) {
+            changeRoute(current_route);
         }
     }
     render() {
         const { toggleDrawer } = this.props;
+
         return (
             <React.Fragment>
                 <Container
                     content={<Content />}
                     left={<Left toggleDrawer={toggleDrawer} />}
                     right={<Right />}
+                    toggleDrawer={toggleDrawer}
                 />
             </React.Fragment>
         );
@@ -106,11 +110,12 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    tab: state.layout.tab,
+    route: state.layout.route,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeTab: (tab) => dispatch(ReduxActionLayoutCurrentTab(tab)),
+    changeTitle: (title) => dispatch(ReduxActionAppChangeTitle(title)),
+    changeRoute: (route) => dispatch(ReduxActionLayoutChangeRoute(route)),
     toggleDrawer: (open) => dispatch(ReduxActionLayoutToggleDrawer(open)),
 });
 

@@ -59,19 +59,21 @@ class Create extends React.Component {
     }
 
     async _get() {
-        await axios
-            .post(
-                CONSTANTS.URL.BASE + '/groups/index',
-                { pagination: false },
-                { headers: { 'Content-type': 'application/json' } },
-            )
-            .then((response) => {
-                this.setState(() => {
-                    return {
-                        groups: response.data,
-                    };
+        await axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(async () => {
+            await axios
+                .post(
+                    CONSTANTS.URL.API + '/groups/index',
+                    { pagination: false },
+                    { headers: { 'Content-type': 'application/json' } },
+                )
+                .then((response) => {
+                    this.setState(() => {
+                        return {
+                            groups: response.data,
+                        };
+                    });
                 });
-            });
+        });
     }
 
     render() {
@@ -90,31 +92,33 @@ class Create extends React.Component {
             const alert = document.querySelector('#alert-email');
             if (email.length > 1) {
                 if (ValidateEmailAddress(email)) {
-                    axios
-                        .post(
-                            CONSTANTS.URL.BASE + '/users/check/email',
-                            {
-                                email: email,
-                            },
-                            {
-                                headers: {
-                                    'Content-type': 'application/json',
+                    axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(() => {
+                        axios
+                            .post(
+                                CONSTANTS.URL.API + '/users/check/email',
+                                {
+                                    email: email,
                                 },
-                            },
-                        )
-                        .then((response) => {
-                            if (!response.data) {
-                                changeAlertMessage(
-                                    alert,
-                                    false,
-                                    '해당 이메일주소로 가입된 회원정보가 이미 존재합니다.',
-                                );
-                                this.validation.email = false;
-                            } else {
-                                changeAlertMessage(alert, true, '올바른 이메일주소입니다.');
-                                this.validation.email = true;
-                            }
-                        });
+                                {
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                    },
+                                },
+                            )
+                            .then((response) => {
+                                if (!response.data) {
+                                    changeAlertMessage(
+                                        alert,
+                                        false,
+                                        '해당 이메일주소로 가입된 회원정보가 이미 존재합니다.',
+                                    );
+                                    this.validation.email = false;
+                                } else {
+                                    changeAlertMessage(alert, true, '올바른 이메일주소입니다.');
+                                    this.validation.email = true;
+                                }
+                            });
+                    });
                 } else {
                     changeAlertMessage(alert, false, '이메일주소가 올바르지 않습니다.');
                     this.validation.email = false;
@@ -176,63 +180,62 @@ class Create extends React.Component {
             if (!email.value || !this.validation.email) {
                 alert('이메일주소를 확인해주세요.');
                 email.focus();
-                return null;
+                return;
             }
             if (!password.value || !this.validation.password) {
                 alert('패스워드를 확인해주세요.');
                 password.value = '';
                 password.focus();
-                return null;
+                return;
             }
             if (!password_confirm.value || !this.validation.password_confirm) {
                 alert('입력하신 패스워드가 일치하지 않습니다.');
                 password_confirm.value = '';
                 password_confirm.focus();
-                return null;
+                return;
             }
             if (!firstname.value) {
                 alert('사용자 이름을 입력해주세요.');
                 firstname.focus();
-                return null;
+                return;
             }
             if (!lastname.value) {
                 alert('사용자의 성을 입력해주세요.');
                 lastname.focus();
-                return null;
+                return;
             }
             if (!group.value) {
                 alert('사용자그룹을 선택해주세요.');
                 group.focus();
-                return null;
+                return;
             }
 
-            axios
-                .post(
-                    CONSTANTS.URL.BASE + '/users',
-                    {
-                        email: email.value,
-                        password: password.value,
-                        firstname: firstname.value,
-                        lastname: lastname.value,
-                        middlename: middlename.value,
-                        group: group.value,
-                    },
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
+            axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(() => {
+                axios
+                    .post(
+                        CONSTANTS.URL.API + '/users',
+                        {
+                            email: email.value,
+                            password: password.value,
+                            firstname: firstname.value,
+                            lastname: lastname.value,
+                            middlename: middlename.value,
+                            group: group.value,
                         },
-                    },
-                )
-                .then((response) => {
-                    if (response.data) {
-                        location.href = '/users';
-                        return null;
-                    } else {
-                        alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
-                        return null;
-                    }
-                });
-            return null;
+                        {
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        if (response.data) {
+                            location.href = '/users';
+                        } else {
+                            alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
+                        }
+                    });
+            });
         };
         return (
             <Paper>

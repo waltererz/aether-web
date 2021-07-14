@@ -2,19 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Grid from '@material-ui/core/Grid';
-import Fab from '@material-ui/core/Fab';
-import MenuIcon from '@material-ui/icons/Menu';
 import { ReduxActionLayoutToggleDrawer } from '../../Redux/Actions/Layout';
 import MobileNavigation from '../MobileNavigation';
+import Header from '../Header';
 
 class FullContainer extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            loaded: false,
+        };
     }
+
     render() {
-        const { tab, drawerOpen, toggleDrawer } = this.props;
+        const { route, drawerOpen, toggleDrawer } = this.props;
 
         let { drawerBackground } = this.props;
         let drawer_class_options = '';
@@ -24,18 +26,10 @@ class FullContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <Fab
-                    color="primary"
-                    className="mobileButton aether"
-                    onClick={(event) => {
-                        toggleDrawer(true);
-                    }}
-                >
-                    <MenuIcon />
-                </Fab>
+                <Header toggleDrawer={toggleDrawer} />
                 <Drawer
                     classes={{
-                        root: `app-drawer current-tab-${tab}${drawer_class_options}`,
+                        root: `app-drawer current-tab-${route}${drawer_class_options}`,
                         paper: 'drawer-paper',
                     }}
                     variant="permanent"
@@ -43,25 +37,22 @@ class FullContainer extends React.Component {
                 >
                     {this.props.left}
                 </Drawer>
-                <SwipeableDrawer
+                <Drawer
                     classes={{
-                        root: 'app-swipeabledrawer',
+                        root: 'app-mobile-drawer',
                         paper: 'drawer-body',
                     }}
-                    anchor="left"
+                    anchor="right"
                     open={drawerOpen}
                     onClose={(event) => {
                         toggleDrawer(false);
                     }}
-                    onOpen={(event) => {
-                        toggleDrawer(true);
-                    }}
                 >
                     <div className="drawer-header"></div>
                     {this.props.left}
-                </SwipeableDrawer>
+                </Drawer>
                 <Container
-                    classes={{ root: 'app-container aether current-tab-' + tab }}
+                    classes={{ root: 'app-container aether current-tab-' + route }}
                     maxWidth={false}
                 >
                     <Grid
@@ -87,7 +78,7 @@ class FullContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    tab: state.layout.tab,
+    route: state.layout.route,
     drawerOpen: state.layout.drawerOpen,
 });
 

@@ -7,12 +7,13 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
+import { ReduxActionAppChangeTitle } from '../../Redux/Actions/App';
 import {
-    ReduxActionLayoutCurrentTab,
+    ReduxActionLayoutChangeRoute,
     ReduxActionLayoutToggleDrawer,
 } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
-import getTabCode from '../../Functions/GetTabCode';
+import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
 import Home from './Home';
 import Search from './Search';
@@ -43,10 +44,7 @@ class Left extends React.Component {
                                 <FindInPageIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText
-                            primary="찾아보기"
-                            secondary="내 투자성향에 맞는 전문가 찾기"
-                        />
+                        <ListItemText primary="어드바이저 검색" />
                     </ListItem>
                 </Link>
             </List>
@@ -62,10 +60,11 @@ class Right extends React.Component {
 
 class Advisors extends React.Component {
     componentDidMount() {
-        const { tab, changeTab } = this.props;
-        const current_tab = getTabCode();
-        if (tab != current_tab) {
-            changeTab(current_tab);
+        const { route, changeRoute, changeTitle } = this.props;
+        const current_route = getRouteCode();
+        changeTitle('투자어드바이저');
+        if (route != current_route) {
+            changeRoute(current_route);
         }
     }
 
@@ -77,7 +76,6 @@ class Advisors extends React.Component {
                     content={<Content />}
                     left={<Left toggleDrawer={toggleDrawer} />}
                     right={<Right />}
-                    drawerBackground={true}
                 />
             </React.Fragment>
         );
@@ -85,11 +83,12 @@ class Advisors extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    tab: state.layout.tab,
+    route: state.layout.route,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeTab: (tab) => dispatch(ReduxActionLayoutCurrentTab(tab)),
+    changeTitle: (title) => dispatch(ReduxActionAppChangeTitle(title)),
+    changeRoute: (route) => dispatch(ReduxActionLayoutChangeRoute(route)),
     toggleDrawer: (open) => dispatch(ReduxActionLayoutToggleDrawer(open)),
 });
 

@@ -1,19 +1,11 @@
-@import url(https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap);
 body {
   margin: 0px;
   font-family: "Nanum Gothic", sans-serif;
   font-size: 0.9rem;
   line-height: 1.6;
-  background-color: #f0f2f5;
+  background-color: #ffffff;
   color: #333333;
-}
-
-header.aether-header {
-  background-color: #ffffff;
-}
-
-header.aether-header .tabs {
-  background-color: #ffffff;
 }
 
 a {
@@ -73,7 +65,7 @@ a {
 }
 
 .app-drawer .drawer-paper {
-  background-color: #f0f2f5;
+  background-color: #ffffff;
   border: 0px;
 }
 
@@ -84,7 +76,7 @@ a {
 }
 
 .app-drawer .drawer-paper .app-drawer-list .MuiListItem-root,
-.app-swipeabledrawer .drawer-body .app-drawer-list .MuiListItem-root {
+.app-mobile-drawer .drawer-body .app-drawer-list .MuiListItem-root {
   border-radius: 5px;
 }
 
@@ -161,8 +153,8 @@ ul.pagination li.link.next {
 }
 
 ul.pagination li.link.active {
-  background-color: #2d304b;
-  border: 1px solid #2d304b;
+  background-color: #3c007e;
+  border: 1px solid #3c007e;
   opacity: 0.8;
   color: #ffffff;
   font-weight: bold;
@@ -191,29 +183,120 @@ div.app-footer-mobile .bottomNavigation .navButton {
   color: #cccccc;
 }
 
-.mobileButton.aether {
-  position: fixed;
-  z-index: 1200;
-  left: 15px;
-  bottom: calc(56px + 15px);
+div.app-footer-mobile .bottomNavigation .navButton .MuiSvgIcon-root {
+  transition: font-size 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 }
 
-.app-swipeabledrawer .drawer-header {
-  height: 100px;
+div.app-footer-mobile .bottomNavigation .navButton.Mui-selected {
+  color: #ffffff;
+}
+
+div.app-footer-mobile .bottomNavigation .navButton.Mui-selected .MuiSvgIcon-root {
+  font-size: 2rem;
+}
+
+.app-mobile-drawer .drawer-header {
+  height: 56px;
   border-bottom: 1px solid #efefef;
 }
 
-.app-swipeabledrawer .drawer-body {
+.app-mobile-drawer .drawer-body {
   width: 100%;
-  padding: 10px;
   box-sizing: border-box;
   max-width: 320px;
   background-color: #ffffff;
 }
 
+.app-mobile-drawer .drawer-body .app-drawer-list {
+  padding: 10px;
+}
+
+header.aether-header {
+  box-shadow: 0px -6px 10px 0px rgba(0, 0, 0, 0.8);
+}
+
+header.aether-header,
+header.aether-header .header-title,
+.header-navigation .tabs {
+  min-height: 56px;
+}
+
+.header-navigation {
+  position: absolute;
+  width: 100%;
+}
+
+.header-navigation .tabs .MuiTabs-indicator {
+  background-color: #7900ff;
+  height: 5px;
+}
+
+header.aether-header .header-title h6 {
+  font-family: "Noto Sans KR";
+  font-size: 1.2rem;
+}
+
+.header-navigation .tabs {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-height: 56px;
+  margin: 0px auto;
+}
+
+.header-navigation .tabs .MuiTab-root {
+  min-height: 56px;
+  color: #aaaaaa;
+}
+
+.header-navigation .tabs .MuiTab-root.Mui-selected {
+  color: #7900ff;
+}
+
+.header-navigation .tabs .MuiTab-root .MuiSvgIcon-root {
+  font-size: 1.7rem;
+}
+
+.header-icon-container {
+  position: absolute;
+  right: 0px;
+}
+
+.header-icon-container .icons-desktop,
+.header-icon-container .icons-mobile {
+  display: inline-block;
+  cursor: pointer;
+  height: 56px;
+  padding: 16px;
+  background-color: #000000;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.header-icon-container .icons-desktop .icon,
+.header-icon-container .icons-mobile .icon {
+  box-sizing: border-box;
+  background: none;
+  color: #333333;
+}
+
+.header-icon-container .icons-desktop .icon .MuiSvgIcon-root,
+.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
 @media screen and (min-width: 0px) {
   body {
     padding-top: 62px;
+  }
+
+  header.aether-header .header-title {
+    background-color: #000000;
+  }
+
+  header.aether-header .header-title h6 {
+    color: #ffffff;
   }
 
   .app-container.aether {
@@ -222,8 +305,14 @@ div.app-footer-mobile .bottomNavigation .navButton {
     padding: 0px;
   }
 
-  .app-drawer {
+  .app-drawer,
+.header-navigation,
+.header-icon-container .icons-desktop {
     display: none;
+  }
+
+  .header-icon-container .icons-mobile {
+    display: block;
   }
 
   .app-container.aether .grid-container .grid-item-1 {
@@ -294,14 +383,28 @@ div.app-footer-mobile .bottomNavigation .navButton {
     padding-top: 70px;
   }
 
+  header.aether-header .header-title {
+    background-color: #ffffff;
+  }
+
+  header.aether-header .header-title h6 {
+    color: #000000;
+  }
+
   .app-drawer .drawer-paper {
-    height: calc(100vh - 48px);
-    margin-top: 48px;
+    height: calc(100vh - 56px);
+    margin-top: 56px;
     padding: 5px 10px 10px 10px;
   }
 
-  .app-drawer {
+  .app-drawer,
+.header-navigation,
+.header-icon-container .icons-desktop {
     display: block;
+  }
+
+  .header-icon-container .icons-mobile {
+    display: none;
   }
 
   .app-drawer,
@@ -309,8 +412,7 @@ div.app-footer-mobile .bottomNavigation .navButton {
     width: calc(320px - ((1440px - 1366px)) / 2);
   }
 
-  .app-footer-mobile,
-.mobileButton.aether {
+  .app-footer-mobile {
     display: none;
   }
 

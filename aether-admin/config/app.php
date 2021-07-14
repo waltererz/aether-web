@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://52.141.4.213:38591'),
+    'url' => env('APP_URL', 'http://admin.erzsphilos.com:38591'),
 
     'asset_url' => env('ASSET_URL', null),
 

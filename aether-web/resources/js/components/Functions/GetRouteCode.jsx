@@ -1,19 +1,19 @@
 import CONSTANTS from '../Constants';
 
-const getTabCode = () => {
+const getRouteCode = () => {
     const path = location.pathname;
-    let tab = 0;
+    let route = 1;
 
     switch (true) {
         case /^\/$/g.test(path):
-            tab = CONSTANTS.LAYOUT.TAB.HOME;
+            route = CONSTANTS.LAYOUT.ROUTE.HOME;
             break;
         case /^\/advisors((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-            tab = CONSTANTS.LAYOUT.TAB.ADVISORS;
+            route = CONSTANTS.LAYOUT.ROUTE.ADVISORS;
             break;
     }
 
-    return tab;
+    return route;
 };
 
-export default getTabCode;
+export default getRouteCode;

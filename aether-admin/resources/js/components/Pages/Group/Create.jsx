@@ -33,33 +33,31 @@ class Create extends React.Component {
 
             if (name.length < 2 || !/^([a-zA-Z가-힣]+)$/g.test(name)) {
                 alert('그룹이름 또는 그룹 권한스트링이 잘못되었습니다.');
-                return null;
+                return;
             }
 
-            axios
-                .post(
-                    CONSTANTS.URL.BASE + '/groups',
-                    {
-                        name: name,
-                        permissions: permissions,
-                    },
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
+            axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(() => {
+                axios
+                    .post(
+                        CONSTANTS.URL.API + '/groups',
+                        {
+                            name: name,
+                            permissions: permissions,
                         },
-                    },
-                )
-                .then((response) => {
-                    if (response.data) {
-                        location.href = '/groups';
-                        return null;
-                    } else {
-                        alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
-                        return null;
-                    }
-                });
-
-            return null;
+                        {
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        if (response.data) {
+                            location.href = '/groups';
+                        } else {
+                            alert('서버통신에 오류가 발생했습니다. 관리자에게 문의하세요.');
+                        }
+                    });
+            });
         };
 
         return (

@@ -69,48 +69,46 @@ class Home extends React.Component {
         const uuid = event.target.dataset.uuid;
         const name = event.target.dataset.name;
         if (confirm(name + '그룹을 영구히 삭제하시겠습니까? 한 번 삭제되면 복구는 불가능합니다.')) {
-            await axios.delete(CONSTANTS.URL.BASE + '/groups/' + uuid).then((response) => {
-                if (response.data) {
-                    const page = this._getPage();
-                    this._get(page, true);
-                } else {
-                    alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
-                }
+            await axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(async () => {
+                await axios.delete(CONSTANTS.URL.API + '/groups/' + uuid).then((response) => {
+                    if (response.data) {
+                        const page = this._getPage();
+                        this._get(page, true);
+                    } else {
+                        alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
+                    }
+                });
             });
-        } else {
-            return null;
         }
     }
 
     async _get(page = 1, refresh = false) {
         if ((this.state.metadata.current_page != page && !refresh) || refresh) {
-            return await axios
-                .post(
-                    CONSTANTS.URL.BASE + '/groups/index',
-                    {
-                        page: page,
-                        pagination: true,
-                    },
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
+            await axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(async () => {
+                await axios
+                    .post(
+                        CONSTANTS.URL.API + '/groups/index',
+                        {
+                            page: page,
+                            pagination: true,
                         },
-                    },
-                )
-                .then((response) => {
-                    this.setState((state) => {
-                        if (state.groups != response.data.data) {
-                            return {
-                                metadata: response.data,
-                                groups: response.data.data,
-                            };
-                        } else {
-                            return null;
-                        }
+                        {
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        this.setState((state) => {
+                            if (state.groups != response.data.data) {
+                                return {
+                                    metadata: response.data,
+                                    groups: response.data.data,
+                                };
+                            }
+                        });
                     });
-                });
-        } else {
-            return null;
+            });
         }
     }
 

@@ -1,11 +1,12 @@
 const CONSTANTS = {
     URL: {
-        BASE: 'http://52.141.4.213',
+        BACK: 'http://back.erzsphilos.com',
+        API: 'http://back.erzsphilos.com/api',
     },
     LAYOUT: {
-        TAB: {
-            HOME: 1,
-            ADVISORS: 2,
+        ROUTE: {
+            HOME: 2,
+            ADVISORS: 3,
         },
     },
 };

@@ -34,16 +34,6 @@ const Theme = createTheme({
         values: breakpointValue,
     },
     overrides: {
-        MuiAppBar: {
-            root: {
-                boxShadow: '0px -10px 15px 0px rgba(0,0,0,0.35);',
-            },
-        },
-        MuiTabs: {
-            root: {
-                backgroundColor: '#ffffff',
-            },
-        },
         MuiTab: {
             root: {
                 [breakpoints.up('xs')]: {

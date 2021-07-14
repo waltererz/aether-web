@@ -1,9 +1,9 @@
-import { LAYOUT_CURRENT_TAB, LAYOUT_DRAWER } from '../Constants';
+import { LAYOUT_CHANGE_ROUTE, LAYOUT_DRAWER } from '../Constants';
 
-const ReduxActionLayoutCurrentTab = (tab) => {
+const ReduxActionLayoutChangeRoute = (route) => {
     return {
-        type: LAYOUT_CURRENT_TAB,
-        state: tab,
+        type: LAYOUT_CHANGE_ROUTE,
+        state: route,
     };
 };
 
@@ -14,4 +14,4 @@ const ReduxActionLayoutToggleDrawer = (open) => {
     };
 };
 
-export { ReduxActionLayoutCurrentTab, ReduxActionLayoutToggleDrawer };
+export { ReduxActionLayoutChangeRoute, ReduxActionLayoutToggleDrawer };

@@ -79,55 +79,46 @@ class Home extends React.Component {
                     ')을 영구히 삭제하시겠습니까? 한 번 삭제되면 복구는 불가능합니다.',
             )
         ) {
-            await axios.delete(CONSTANTS.URL.BASE + '/users/' + uuid).then((response) => {
-                if (response.data) {
-                    const page = this._getPage();
-                    this._get(page, true);
-                } else {
-                    alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
-                }
+            await axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(async () => {
+                await axios.delete(CONSTANTS.URL.API + '/users/' + uuid).then((response) => {
+                    if (response.data) {
+                        const page = this._getPage();
+                        this._get(page, true);
+                    } else {
+                        alert('서버통신 오류가 발생했습니다. 관리자에게 문의하세요.');
+                    }
+                });
             });
-        } else {
-            return null;
         }
     }
 
     async _get(page = 1, refresh = false) {
         if ((this.state.metadata.current_page != page && !refresh) || refresh) {
-            return await axios
-                .get(CONSTANTS.URL.BASE + '/sanctum/csrf-cookie')
-                .then(async (response) => {
-                    return await axios
-                        .post(
-                            CONSTANTS.URL.BASE + '/users/index',
-                            {
-                                page: page,
-                                pagination: true,
+            await axios.get(CONSTANTS.URL.BACK + '/sanctum/csrf-cookie').then(async () => {
+                await axios
+                    .post(
+                        CONSTANTS.URL.API + '/users/index',
+                        {
+                            page: page,
+                            pagination: true,
+                        },
+                        {
+                            headers: {
+                                'Content-type': 'application/json',
                             },
-                            {
-                                headers: {
-                                    'Content-type': 'application/json',
-                                },
-                            },
-                        )
-                        .then((response) => {
-                            this.setState((state) => {
-                                if (state.users != response.data.data) {
-                                    return {
-                                        metadata: response.data,
-                                        users: response.data.data,
-                                    };
-                                } else {
-                                    return null;
-                                }
-                            });
-                        })
-                        .catch((error) => {
-                            console.log(error.response);
+                        },
+                    )
+                    .then((response) => {
+                        this.setState((state) => {
+                            if (state.users != response.data.data) {
+                                return {
+                                    metadata: response.data,
+                                    users: response.data.data,
+                                };
+                            }
                         });
-                });
-        } else {
-            return null;
+                    });
+            });
         }
     }
 
