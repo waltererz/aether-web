@@ -1,4 +1,4 @@
-import { LAYOUT_CHANGE_ROUTE, LAYOUT_DRAWER } from '../Constants';
+import { LAYOUT_CHANGE_ROUTE } from '../Constants';
 
 const ReduxActionLayoutChangeRoute = (route) => {
     return {
@@ -7,11 +7,4 @@ const ReduxActionLayoutChangeRoute = (route) => {
     };
 };
 
-const ReduxActionLayoutToggleDrawer = (open) => {
-    return {
-        type: LAYOUT_DRAWER,
-        state: open,
-    };
-};
-
-export { ReduxActionLayoutChangeRoute, ReduxActionLayoutToggleDrawer };
+export { ReduxActionLayoutChangeRoute };

@@ -4,14 +4,15 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MobileNavigation from '../MobileNavigation';
 import Header from '../Header';
+import Component from '../../Component';
 
-class ContainerOnlyRight extends React.Component {
+class ContainerOnlyRight extends Component {
     render() {
         const { route } = this.props;
 
         return (
             <React.Fragment>
-                <Header />
+                <Header instance={this.Aether} />
                 <Container
                     classes={{ root: 'app-container aether onlyRight current-tab-' + route }}
                     maxWidth={false}
@@ -32,7 +33,7 @@ class ContainerOnlyRight extends React.Component {
                         </Grid>
                     </Grid>
                 </Container>
-                <MobileNavigation />
+                <MobileNavigation instance={this.Aether} />
             </React.Fragment>
         );
     }

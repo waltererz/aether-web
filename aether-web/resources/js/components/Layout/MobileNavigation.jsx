@@ -7,15 +7,15 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
-import CONSTANTS from '../Constants';
+import Component from '../Component';
 
-class MobileNavigation extends React.Component {
+class MobileNavigation extends Component {
     render() {
         const { route } = this.props;
         let nav = 1;
         switch (route) {
-            case CONSTANTS.LAYOUT.ROUTE.HOME:
-            case CONSTANTS.LAYOUT.ROUTE.ADVISORS:
+            case this.Aether.constants.route.home:
+            case this.Aether.constants.route.advisors:
                 nav = route;
                 break;
         }
@@ -25,7 +25,7 @@ class MobileNavigation extends React.Component {
                     <BottomNavigationAction
                         icon={<HomeOutlinedIcon />}
                         className="navButton"
-                        value={CONSTANTS.LAYOUT.ROUTE.HOME}
+                        value={this.Aether.constants.route.home}
                         component={Link}
                         to="/"
                     />
@@ -37,7 +37,7 @@ class MobileNavigation extends React.Component {
                     <BottomNavigationAction
                         icon={<SupervisorAccountOutlinedIcon />}
                         className="navButton"
-                        value={CONSTANTS.LAYOUT.ROUTE.ADVISORS}
+                        value={this.Aether.constants.route.advisors}
                         component={Link}
                         to="/advisors"
                     />

@@ -8,16 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import { ReduxActionAppChangeTitle } from '../../Redux/Actions/App';
-import {
-    ReduxActionLayoutChangeRoute,
-    ReduxActionLayoutToggleDrawer,
-} from '../../Redux/Actions/Layout';
+import { ReduxActionLayoutChangeRoute } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
-import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
 import Home from './Home';
 import Search from './Search';
 import HeaderIcons from './HeaderIcons';
+import Component from '../../Component';
 
 class Content extends React.Component {
     render() {
@@ -32,13 +29,9 @@ class Content extends React.Component {
 
 class Left extends React.Component {
     render() {
-        const { toggleDrawer } = this.props;
-        const clickLink = (event) => {
-            toggleDrawer(false);
-        };
         return (
             <List component="nav" className="app-drawer-list">
-                <Link to="/advisors/search" onClick={clickLink}>
+                <Link to="/advisors/search">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -59,10 +52,10 @@ class Right extends React.Component {
     }
 }
 
-class Advisors extends React.Component {
+class Advisors extends Component {
     componentDidMount() {
         const { route, changeRoute, changeTitle } = this.props;
-        const current_route = getRouteCode();
+        const current_route = this.Aether.Services.Route.getRouteCode();
         changeTitle('투자어드바이저');
         if (route != current_route) {
             changeRoute(current_route);
@@ -74,6 +67,7 @@ class Advisors extends React.Component {
         return (
             <React.Fragment>
                 <Container
+                    instance={this.Aether}
                     content={<Content />}
                     left={<Left toggleDrawer={toggleDrawer} />}
                     right={<Right />}
@@ -91,7 +85,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     changeTitle: (title) => dispatch(ReduxActionAppChangeTitle(title)),
     changeRoute: (route) => dispatch(ReduxActionLayoutChangeRoute(route)),
-    toggleDrawer: (open) => dispatch(ReduxActionLayoutToggleDrawer(open)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Advisors);

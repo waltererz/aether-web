@@ -11,14 +11,11 @@ import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import { ReduxActionAppChangeTitle } from '../../Redux/Actions/App';
-import {
-    ReduxActionLayoutChangeRoute,
-    ReduxActionLayoutToggleDrawer,
-} from '../../Redux/Actions/Layout';
+import { ReduxActionLayoutChangeRoute } from '../../Redux/Actions/Layout';
 import Container from '../../Layout/ContainerStyles/FullContainer';
-import getRouteCode from '../../Functions/GetRouteCode';
 import Paper from '../../Functions/Paper';
 import HeaderIcons from './HeaderIcons';
+import Component from '../../Component';
 
 class Content extends React.Component {
     render() {
@@ -28,13 +25,9 @@ class Content extends React.Component {
 
 class Left extends React.Component {
     render() {
-        const { toggleDrawer } = this.props;
-        const clickLink = (event) => {
-            toggleDrawer(false);
-        };
         return (
             <List component="nav" className="app-drawer-list">
-                <Link to="/advisors" onClick={clickLink}>
+                <Link to="/advisors">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -44,7 +37,7 @@ class Left extends React.Component {
                         <ListItemText primary="투자어드바이저" />
                     </ListItem>
                 </Link>
-                <Link to="/" onClick={clickLink}>
+                <Link to="/">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -54,7 +47,7 @@ class Left extends React.Component {
                         <ListItemText primary="즐겨찾기" />
                     </ListItem>
                 </Link>
-                <Link to="/" onClick={clickLink}>
+                <Link to="/">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -64,7 +57,7 @@ class Left extends React.Component {
                         <ListItemText primary="저장됨" />
                     </ListItem>
                 </Link>
-                <Link to="/" onClick={clickLink}>
+                <Link to="/">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -85,10 +78,10 @@ class Right extends React.Component {
     }
 }
 
-class Home extends React.Component {
+class Home extends Component {
     componentDidMount() {
         const { route, changeRoute, changeTitle } = this.props;
-        const current_route = getRouteCode();
+        const current_route = this.Aether.Services.Route.getRouteCode();
         changeTitle('');
         if (route != current_route) {
             changeRoute(current_route);
@@ -105,6 +98,7 @@ class Home extends React.Component {
                     right={<Right />}
                     headerIcons={<HeaderIcons />}
                     toggleDrawer={toggleDrawer}
+                    instance={this.Aether}
                 />
             </React.Fragment>
         );
@@ -118,7 +112,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     changeTitle: (title) => dispatch(ReduxActionAppChangeTitle(title)),
     changeRoute: (route) => dispatch(ReduxActionLayoutChangeRoute(route)),
-    toggleDrawer: (open) => dispatch(ReduxActionLayoutToggleDrawer(open)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

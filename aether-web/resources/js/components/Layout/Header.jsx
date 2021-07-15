@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import CONSTANT from '../Constants';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import Component from '../Component';
 
-class Header extends React.Component {
+class Header extends Component {
     render() {
         const { title, route, headerIcons } = this.props;
 
@@ -29,13 +29,13 @@ class Header extends React.Component {
                     >
                         <Tab
                             icon={<HomeIcon />}
-                            value={CONSTANT.LAYOUT.ROUTE.HOME}
+                            value={this.Aether.constants.route.home}
                             component={Link}
                             to="/"
                         />
                         <Tab
                             icon={<SupervisorAccountIcon />}
-                            value={CONSTANT.LAYOUT.ROUTE.ADVISORS}
+                            value={this.Aether.constants.route.advisors}
                             component={Link}
                             to="/advisors"
                         />

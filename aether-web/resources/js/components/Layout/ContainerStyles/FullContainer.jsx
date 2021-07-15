@@ -6,8 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import { ReduxActionLayoutToggleDrawer } from '../../Redux/Actions/Layout';
 import MobileNavigation from '../MobileNavigation';
 import Header from '../Header';
+import Component from '../../Component';
 
-class FullContainer extends React.Component {
+class FullContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +17,7 @@ class FullContainer extends React.Component {
     }
 
     render() {
-        const { route, drawerOpen, toggleDrawer, headerIcons } = this.props;
+        const { route, headerIcons } = this.props;
 
         let { drawerBackground } = this.props;
         let drawer_class_options = '';
@@ -26,7 +27,7 @@ class FullContainer extends React.Component {
 
         return (
             <React.Fragment>
-                <Header toggleDrawer={toggleDrawer} headerIcons={headerIcons} />
+                <Header instance={this.Aether} headerIcons={headerIcons} />
                 <Container
                     classes={{ root: 'app-container aether current-tab-' + route }}
                     maxWidth={false}
@@ -57,21 +58,7 @@ class FullContainer extends React.Component {
                 >
                     {this.props.left}
                 </Drawer>
-                <Drawer
-                    classes={{
-                        root: 'app-mobile-drawer',
-                        paper: 'drawer-body',
-                    }}
-                    anchor="right"
-                    open={drawerOpen}
-                    onClose={(event) => {
-                        toggleDrawer(false);
-                    }}
-                >
-                    <div className="drawer-header"></div>
-                    {this.props.left}
-                </Drawer>
-                <MobileNavigation />
+                <MobileNavigation instance={this.Aether} />
             </React.Fragment>
         );
     }
@@ -79,11 +66,6 @@ class FullContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     route: state.layout.route,
-    drawerOpen: state.layout.drawerOpen,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    toggleDrawer: (open) => dispatch(ReduxActionLayoutToggleDrawer(open)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FullContainer);
+export default connect(mapStateToProps)(FullContainer);

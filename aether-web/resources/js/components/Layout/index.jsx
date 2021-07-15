@@ -1,12 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
-import Theme from './Theme';
+import Component from '../Component';
 
-class Layout extends React.Component {
+class Layout extends Component {
     render() {
         return (
             <React.Fragment>
-                <ThemeProvider theme={Theme}>{this.props.children}</ThemeProvider>
+                <ThemeProvider theme={this.Aether.Theme}>{this.props.children}</ThemeProvider>
             </React.Fragment>
         );
     }

@@ -1,19 +1,17 @@
-import CONSTANTS from '../Constants';
+import constants from '../../constants';
 
-const getRouteCode = () => {
+export const getRouteCode = () => {
     const path = location.pathname;
     let route = 1;
 
     switch (true) {
         case /^\/$/g.test(path):
-            route = CONSTANTS.LAYOUT.ROUTE.HOME;
+            route = constants.route.home;
             break;
         case /^\/advisors((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-            route = CONSTANTS.LAYOUT.ROUTE.ADVISORS;
+            route = constants.route.advisors;
             break;
     }
 
     return route;
 };
-
-export default getRouteCode;
