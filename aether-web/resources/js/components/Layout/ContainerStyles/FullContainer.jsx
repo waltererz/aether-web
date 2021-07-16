@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
-import { ReduxActionLayoutToggleDrawer } from '../../Redux/Actions/Layout';
-import MobileNavigation from '../MobileNavigation';
-import Header from '../Header';
-import Component from '../../Component';
+import MobileNavigation from '../Components/MobileNavigation';
+import Header from '../Components/Header';
+import Component from '../../../component';
 
 class FullContainer extends Component {
     constructor(props) {
@@ -17,8 +16,8 @@ class FullContainer extends Component {
     }
 
     render() {
-        const { route, headerIcons } = this.props;
-
+        const Aether = this.Aether;
+        const { reduxState, headerIcons } = this.props;
         let { drawerBackground } = this.props;
         let drawer_class_options = '';
         if (drawerBackground) {
@@ -27,9 +26,9 @@ class FullContainer extends Component {
 
         return (
             <React.Fragment>
-                <Header instance={this.Aether} headerIcons={headerIcons} />
+                <Header instance={Aether} headerIcons={headerIcons} />
                 <Container
-                    classes={{ root: 'app-container aether current-tab-' + route }}
+                    classes={{ root: 'app-container aether current-tab-' + reduxState.route }}
                     maxWidth={false}
                 >
                     <Grid
@@ -50,7 +49,7 @@ class FullContainer extends Component {
                 </Container>
                 <Drawer
                     classes={{
-                        root: `app-drawer current-tab-${route}${drawer_class_options}`,
+                        root: `app-drawer current-tab-${reduxState.route}${drawer_class_options}`,
                         paper: 'drawer-paper',
                     }}
                     variant="permanent"
@@ -58,14 +57,14 @@ class FullContainer extends Component {
                 >
                     {this.props.left}
                 </Drawer>
-                <MobileNavigation instance={this.Aether} />
+                <MobileNavigation instance={Aether} />
             </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    route: state.layout.route,
+    reduxState: { route: state.app.route },
 });
 
 export default connect(mapStateToProps)(FullContainer);

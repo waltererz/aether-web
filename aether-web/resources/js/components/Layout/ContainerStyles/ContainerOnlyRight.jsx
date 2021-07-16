@@ -2,19 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import MobileNavigation from '../MobileNavigation';
-import Header from '../Header';
-import Component from '../../Component';
+import MobileNavigation from '../Components/MobileNavigation';
+import Header from '../Components/Header';
+import Component from '../../../component';
 
 class ContainerOnlyRight extends Component {
     render() {
-        const { route } = this.props;
-
+        const Aether = this.Aether;
+        const { reduxState } = this.props;
         return (
             <React.Fragment>
-                <Header instance={this.Aether} />
+                <Header instance={Aether} />
                 <Container
-                    classes={{ root: 'app-container aether onlyRight current-tab-' + route }}
+                    classes={{
+                        root: 'app-container aether onlyRight current-tab-' + reduxState.route,
+                    }}
                     maxWidth={false}
                 >
                     <Grid
@@ -33,14 +35,14 @@ class ContainerOnlyRight extends Component {
                         </Grid>
                     </Grid>
                 </Container>
-                <MobileNavigation instance={this.Aether} />
+                <MobileNavigation instance={Aether} />
             </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    route: state.layout.route,
+    reduxState: { route: state.app.route },
 });
 
 export default connect(mapStateToProps)(ContainerOnlyRight);

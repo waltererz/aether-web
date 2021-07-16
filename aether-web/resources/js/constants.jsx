@@ -8,6 +8,9 @@ const constants = {
         home: 2,
         advisors: 3,
     },
+    title: {
+        base: ':: 투자가 시작되는 곳 Aether',
+    },
 };
 
 export default constants;

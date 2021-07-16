@@ -2,29 +2,27 @@ import axios from 'axios';
 
 import App from './components/App';
 
-import Layout from './components/Layout';
-import Theme from './components/Layout/Theme';
+import * as Layout from './components/Layout';
+import * as Route from './routes';
+import * as RouteService from './services/Route';
+import * as ValidationService from './services/Validation';
 
-import Home from './components/Pages/Home';
-import Advisors from './components/Pages/Advisors';
+import * as Components from './components/common';
 
-import * as Route from './services/Route';
-import * as Validation from './services/Validation';
-
+import theme from './components/Theme';
 import constants from './constants';
 
 const Aether = Object.seal({
     App: null,
     Layout: null,
-    Theme: null,
-    Page: {
-        Home: null,
-        Advisors: null,
-    },
+    ContainerStyles: null,
+    Route: null,
+    Components: null,
     Services: {
         Route: null,
         Validation: null,
     },
+    theme: null,
     constants: null,
 });
 
@@ -42,12 +40,13 @@ const bootstrap = () => {
     axios.defaults.withCredentials = true;
 
     Aether.App = App;
-    Aether.Layout = Layout;
-    Aether.Theme = Theme;
-    Aether.Page.Home = Home;
-    Aether.Page.Advisors = Advisors;
-    Aether.Services.Route = Route;
-    Aether.Services.Validation = Validation;
+    Aether.Layout = Layout.Layout;
+    Aether.ContainerStyles = Layout.ContainerStyles;
+    Aether.Route = Route;
+    Aether.Components = Components;
+    Aether.Services.Route = RouteService;
+    Aether.Services.Validation = ValidationService;
+    Aether.theme = theme;
     Aether.constants = constants;
 
     return Aether;

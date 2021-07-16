@@ -267,38 +267,39 @@ header.aether-header .header-title h6 {
     box-sizing: border-box;
     background: none;
     color: #333333;
+    padding: 0px;
 }
 
-.header-icon-container .icons-desktop .icon {
-    padding: 16px 8px 16px 8px;
+.header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
+    padding: 17px 8px 16px 8px;
 }
 
-.header-icon-container .icons-desktop .icon:first-child {
-    padding: 16px 8px 16px 16px;
+.header-icon-container .icons-desktop .icon:first-child .MuiSvgIcon-root {
+    padding: 17px 8px 16px 16px;
 }
 
-.header-icon-container .icons-desktop .icon:last-child {
-    padding: 16px 16px 16px 8px;
+.header-icon-container .icons-desktop .icon:last-child .MuiSvgIcon-root {
+    padding: 17px 16px 16px 8px;
 }
 
-.header-icon-container .icons-desktop .icon:only-child {
-    padding: 16px;
+.header-icon-container .icons-desktop .icon:only-child .MuiSvgIcon-root {
+    padding: 17px 16px 16px 16px;
 }
 
-.header-icon-container .icons-mobile .icon {
-    padding: 10px 5px 10px 5px;
+.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
+    padding: 12px 5px 10px 5px;
 }
 
-.header-icon-container .icons-mobile .icon:first-child {
-    padding: 10px 5px 10px 10px;
+.header-icon-container .icons-mobile .icon:first-child .MuiSvgIcon-root {
+    padding: 12px 5px 10px 10px;
 }
 
-.header-icon-container .icons-mobile .icon:last-child {
-    padding: 10px 10px 10px 5px;
+.header-icon-container .icons-mobile .icon:last-child .MuiSvgIcon-root {
+    padding: 12px 10px 10px 5px;
 }
 
-.header-icon-container .icons-mobile .icon:only-child {
-    padding: 10px;
+.header-icon-container .icons-mobile .icon:only-child .MuiSvgIcon-root {
+    padding: 12px 10px 10px 10px;
 }
 
 .header-icon-container .icons-desktop .icon .MuiSvgIcon-root,
