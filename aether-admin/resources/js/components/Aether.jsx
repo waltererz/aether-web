@@ -4,6 +4,7 @@ import Layout from './Layout';
 import Home from './Pages/Home';
 import Group from './Pages/Group';
 import User from './Pages/User';
+import Advisors from './Pages/Advisors';
 
 class Aether extends React.Component {
     render() {
@@ -13,6 +14,7 @@ class Aether extends React.Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/groups" component={Group} />
                     <Route path="/users" component={User} />
+                    <Route path="/advisors" component={Advisors} />
                 </Switch>
             </Layout>
         );

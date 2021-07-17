@@ -18,9 +18,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
-        $users = User::with('group')->paginate(10);
+        if (!$request->post('pagination')) {
+            $users = User::with('group')->get();
+        } else {
+            $users = User::with('group')->paginate(10);
+        }
+
         return response()->json($users);
     }
 
@@ -57,7 +62,7 @@ class UserController extends Controller
         $password->password = Hash::make($password);
         $password->save();
 
-        if (User::where('uuid', $user_uuid)->first() && Password::where('user_id', $user->id)->first()) {
+        if (User::where('uuid', $user_uuid)->count() && Password::where('user_id', $user->id)->count()) {
             return response()->json(true);
         } else {
             return response()->json(false);

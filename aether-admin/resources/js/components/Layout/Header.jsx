@@ -12,6 +12,7 @@ import Theme from './Theme';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 class Header extends React.Component {
     render() {
@@ -44,6 +45,12 @@ class Header extends React.Component {
                                 value={CONSTANT.LAYOUT.TAB.USER}
                                 component={Link}
                                 to="/users"
+                            />
+                            <Tab
+                                icon={<SupervisedUserCircleIcon />}
+                                value={CONSTANT.LAYOUT.TAB.ADVISORS}
+                                component={Link}
+                                to="/advisors"
                             />
                         </Tabs>
                     </div>

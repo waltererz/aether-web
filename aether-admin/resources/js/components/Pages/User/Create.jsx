@@ -162,8 +162,9 @@ class Create extends React.Component {
             }
         };
         const changeGroup = (event) => {
-            this.setState(() => {
+            this.setState((state) => {
                 return {
+                    ...state,
                     selected_group: event.target.value,
                 };
             });

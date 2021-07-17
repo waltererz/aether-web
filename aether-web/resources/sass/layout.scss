@@ -305,7 +305,7 @@ header.aether-header .header-title h6 {
 
 @media screen and (min-width: $breakpoint-xs) {
     body {
-        padding-top: calc(#{$mobile-header-height} + 5px);
+        padding-top: calc(#{$mobile-header-height} + 10px);
     }
 
     .app-container.aether {

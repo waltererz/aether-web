@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Group;
+use App\Models\Advisor;
 
 class User extends Authenticatable
 {
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function group()
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function advisor()
+    {
+        return $this->hasOne(Advisor::class);
     }
 }

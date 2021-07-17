@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Group;
+use App\Models\InvestmentTheme;
 
-class GroupController extends Controller
+class InvestmentThemeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,12 @@ class GroupController extends Controller
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         if (!$request->post('pagination')) {
-            $groups = Group::get();
+            $themes = InvestmentTheme::get();
         } else {
-            $groups = Group::paginate(10);
+            $themes = InvestmentTheme::paginate(10);
         }
 
-        return response()->json($groups);
+        return response()->json($themes);
     }
 
     /**
@@ -33,13 +33,13 @@ class GroupController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $group = new Group;
-        $group->uuid = Str::uuid();
-        $group->name = $request->post('name');
-        $group->permissions = $request->post('permissions');
-        $group->save();
+        $theme_uuid = Str::uuid();
+        $theme = new InvestmentTheme;
+        $theme->uuid = $theme_uuid;
+        $theme->name = trim($request->post('name'));
+        $theme->save();
 
-        if (Group::where('uuid', $group->uuid)->count()) {
+        if (InvestmentTheme::where('uuid', $theme_uuid)->count()) {
             return response()->json(true);
         } else {
             return response()->json(false);
@@ -88,8 +88,8 @@ class GroupController extends Controller
      */
     public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
-        Group::where('uuid', $uuid)->delete();
-        if (Group::where('uuid', $uuid)->count()) {
+        InvestmentTheme::where('uuid', $uuid)->delete();
+        if (InvestmentTheme::where('uuid', $uuid)->count()) {
             $result = false;
         } else {
             $result = true;

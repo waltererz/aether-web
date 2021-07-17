@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Group;
+use App\Models\Advisor;
+use App\Models\User;
+use App\Models\InvestmentTheme;
 
-class GroupController extends Controller
+class AdvisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +19,12 @@ class GroupController extends Controller
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         if (!$request->post('pagination')) {
-            $groups = Group::get();
+            $advisors = Advisor::with('user')->with('theme')->get();
         } else {
-            $groups = Group::paginate(10);
+            $advisors = Advisor::with('user')->with('theme')->paginate(10);
         }
 
-        return response()->json($groups);
+        return response()->json($advisors);
     }
 
     /**
@@ -33,13 +35,14 @@ class GroupController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        $group = new Group;
-        $group->uuid = Str::uuid();
-        $group->name = $request->post('name');
-        $group->permissions = $request->post('permissions');
-        $group->save();
+        $advisor_uuid = Str::uuid();
+        $advisor = new Advisor;
+        $advisor->uuid = $advisor_uuid;
+        $advisor->user_id = User::where('uuid', $request->post('user'))->first()->id;
+        $advisor->theme_id = InvestmentTheme::where('uuid', $request->post('theme'))->first()->id;
+        $advisor->save();
 
-        if (Group::where('uuid', $group->uuid)->count()) {
+        if (Advisor::where('uuid', $advisor_uuid)->count()) {
             return response()->json(true);
         } else {
             return response()->json(false);
@@ -88,8 +91,8 @@ class GroupController extends Controller
      */
     public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
-        Group::where('uuid', $uuid)->delete();
-        if (Group::where('uuid', $uuid)->count()) {
+        Advisor::where('uuid', $uuid)->delete();
+        if (Advisor::where('uuid', $uuid)->count()) {
             $result = false;
         } else {
             $result = true;

@@ -8,6 +8,7 @@ const CONSTANTS = {
             HOME: 1,
             GROUP: 2,
             USER: 3,
+            ADVISORS: 4,
         },
     },
 };

@@ -312,7 +312,7 @@ header.aether-header .header-title h6 {
 
 @media screen and (min-width: 0px) {
   body {
-    padding-top: calc(46px + 5px);
+    padding-top: calc(46px + 10px);
   }
 
   .app-container.aether {

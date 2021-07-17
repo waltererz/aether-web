@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdvisorController;
+use App\Http\Controllers\InvestmentThemeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,13 @@ Route::prefix('users')->group(function () {
     Route::post('/index', [UserController::class, 'index']);
     Route::post('/check/email', [UserController::class, 'checkEmail']);
     Route::delete('/{user}', [UserController::class, 'destroy'])->where('user', '[0-9a-z\-]+');
+});
+
+Route::prefix('advisors')->group(function () {
+    Route::post('/', [AdvisorController::class, 'store']);
+});
+
+Route::prefix('investment/theme')->group(function () {
+    Route::post('/', [InvestmentThemeController::class, 'store']);
+    Route::post('/index', [InvestmentThemeController::class, 'index']);
 });

@@ -14,6 +14,9 @@ const getTabCode = () => {
         case /^\/users((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
             tab = CONSTANTS.LAYOUT.TAB.USER;
             break;
+        case /^\/advisors((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
+            tab = CONSTANTS.LAYOUT.TAB.ADVISORS;
+            break;
     }
 
     return tab;
