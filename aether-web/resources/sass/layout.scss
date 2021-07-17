@@ -104,22 +104,6 @@ a {
     font-weight: bold;
 }
 
-.app-container.aether .grid-container .grid-item-1 h3 {
-    border-bottom: 1px solid #eeeeee;
-    padding: 0px 10px 5px 3px;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.app-container.aether .grid-container .grid-item-1 div.message {
-    margin: 10px 0px;
-    padding: 10px;
-    border: 1px solid #eeeeee;
-    border-radius: 5px;
-    background-color: #ffffff;
-    font-size: 0.85em;
-}
-
 ul.pagination {
     width: fit-content;
     margin: 0px auto;
@@ -217,6 +201,10 @@ header.aether-header {
 .header-navigation .tabs .MuiTabs-indicator {
     background-color: #7900ff;
     height: 5px;
+}
+
+header.aether-header .header-title {
+    padding-left: 10px;
 }
 
 header.aether-header .header-title h6 {
@@ -320,20 +308,19 @@ header.aether-header .header-title h6 {
         padding-top: calc(#{$mobile-header-height} + 5px);
     }
 
-    .container-article-paper {
-        padding: 5px;
-        background-color: #ffffff;
-    }
-
     .app-container.aether {
         height: calc(100% - #{$mobile-bottomNavigation-height} + 10px);
         margin-bottom: $mobile-bottomNavigation-height;
-        padding: 0px;
+        padding: 0px 10px;
     }
 
     .header-navigation .tabs,
     .app-mobile-drawer .drawer-header {
         height: $mobile-header-height;
+    }
+
+    .header-navigation .tabs .MuiTab-root {
+        min-width: 130px;
     }
 
     header.aether-header,
@@ -373,13 +360,8 @@ header.aether-header .header-title h6 {
 }
 
 @media screen and (min-width: $breakpoint-sm - 120px) {
-    .app-container.aether.onlyRight {
-        padding: 0px 10px;
-    }
-
     .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
         margin: initial;
-        padding-left: 10px;
         max-width: calc(
             #{$breakpoint-sm} - #{$right-grid-item-width} - 40px -
                 ((#{$breakpoint-sm} - 50px) - 100vw)
@@ -388,7 +370,6 @@ header.aether-header .header-title h6 {
 
     .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
         display: block;
-        padding-right: 10px;
         max-width: calc(
             #{$right-grid-item-width} - (#{$breakpoint-sm} - (#{$breakpoint-sm} - 50px))
         );
@@ -433,14 +414,13 @@ header.aether-header .header-title h6 {
         padding-top: calc(#{$header-height} + 18px);
     }
 
-    .container-article-paper {
-        padding: 5px;
-        background-color: #ffffff;
-    }
-
     .header-navigation .tabs,
     .app-mobile-drawer .drawer-header {
         height: $header-height;
+    }
+
+    .header-navigation .tabs .MuiTab-root {
+        min-width: 170px;
     }
 
     header.aether-header,
@@ -480,12 +460,16 @@ header.aether-header .header-title h6 {
         margin-bottom: 0px;
     }
 
+    .app-container.aether:not(.onlyRight) {
+        padding: 0px;
+    }
+
     .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        padding-left: 0px;
         max-width: calc(#{$center-grid-item-width} - (#{$breakpoint-lg} - 100vw));
     }
 
     .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
+        padding-right: 10px;
         max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2);
     }
 

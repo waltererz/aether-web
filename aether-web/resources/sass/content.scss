@@ -1,0 +1,49 @@
+@media screen and (min-width: $breakpoint-xs) {
+    .app-container.aether .grid-container .grid-item-1 .accordion-container {
+        box-shadow: none;
+        border-radius: 0px;
+        border: 1px solid #eeeeee;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(247, 247, 247, 1) 40%,
+            rgba(254, 254, 254, 1) 100%
+        );
+    }
+
+    .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-title {
+        font-weight: bold;
+        font-family: 'Noto Sans KR';
+    }
+
+    .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents {
+        display: block;
+    }
+
+    .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents,
+    .app-container.aether
+        .grid-container
+        .grid-item-1
+        .accordion-container
+        .accordion-contents
+        span {
+        font-size: 0.9rem;
+    }
+
+    .app-container.aether
+        .grid-container
+        .grid-item-1
+        .accordion-container
+        .accordion-contents
+        .subject {
+        display: block;
+        padding-bottom: 5px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+}

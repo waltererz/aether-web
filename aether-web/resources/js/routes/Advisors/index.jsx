@@ -26,7 +26,7 @@ class Advisors extends Component {
                     instance={Aether}
                     content={<Contents instance={Aether} />}
                     left={<LeftSide />}
-                    right={<RightSide instance={Aether} />}
+                    right={<RightSide />}
                     headerIcons={<HeaderIcons />}
                 />
             </React.Fragment>

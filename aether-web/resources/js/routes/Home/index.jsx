@@ -24,7 +24,7 @@ class Home extends Component {
                 <Aether.ContainerStyles.FullContainer
                     content={<Contents instance={Aether} />}
                     left={<LeftSide />}
-                    right={<RightSide instance={Aether} />}
+                    right={<RightSide />}
                     headerIcons={<HeaderIcons />}
                     instance={Aether}
                 />

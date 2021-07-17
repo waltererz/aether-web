@@ -1,10 +1,8 @@
 import React from 'react';
-import Component from '../../../component';
 
-class RightSide extends Component {
+class RightSide extends React.Component {
     render() {
-        const Aether = this.Aether;
-        return <Aether.Components.Paper>오른쪽</Aether.Components.Paper>;
+        return <React.Fragment>오른쪽</React.Fragment>;
     }
 }
 

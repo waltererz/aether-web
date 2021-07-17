@@ -14,7 +14,6 @@ class Header extends Component {
     render() {
         const Aether = this.Aether;
         const { reduxState, headerIcons } = this.props;
-
         return (
             <AppBar position="fixed" className="aether-header">
                 <Toolbar className="header-title">
@@ -29,12 +28,14 @@ class Header extends Component {
                         textColor="primary"
                     >
                         <Tab
+                            className="tab"
                             icon={<HomeIcon />}
                             value={Aether.constants.route.home}
                             component={Link}
                             to="/"
                         />
                         <Tab
+                            className="tab"
                             icon={<SupervisorAccountIcon />}
                             value={Aether.constants.route.advisors}
                             component={Link}

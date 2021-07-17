@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap);
 body {
   margin: 0px;
   font-family: "Nanum Gothic", sans-serif;
@@ -106,22 +106,6 @@ a {
   font-weight: bold;
 }
 
-.app-container.aether .grid-container .grid-item-1 h3 {
-  border-bottom: 1px solid #eeeeee;
-  padding: 0px 10px 5px 3px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.app-container.aether .grid-container .grid-item-1 div.message {
-  margin: 10px 0px;
-  padding: 10px;
-  border: 1px solid #eeeeee;
-  border-radius: 5px;
-  background-color: #ffffff;
-  font-size: 0.85em;
-}
-
 ul.pagination {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -222,6 +206,10 @@ header.aether-header {
 .header-navigation .tabs .MuiTabs-indicator {
   background-color: #7900ff;
   height: 5px;
+}
+
+header.aether-header .header-title {
+  padding-left: 10px;
 }
 
 header.aether-header .header-title h6 {
@@ -327,20 +315,19 @@ header.aether-header .header-title h6 {
     padding-top: calc(46px + 5px);
   }
 
-  .container-article-paper {
-    padding: 5px;
-    background-color: #ffffff;
-  }
-
   .app-container.aether {
     height: calc(100% - 50px + 10px);
     margin-bottom: 50px;
-    padding: 0px;
+    padding: 0px 10px;
   }
 
   .header-navigation .tabs,
 .app-mobile-drawer .drawer-header {
     height: 46px;
+  }
+
+  .header-navigation .tabs .MuiTab-root {
+    min-width: 130px;
   }
 
   header.aether-header,
@@ -379,19 +366,13 @@ header.aether-header .header-title,
   }
 }
 @media screen and (min-width: 904px) {
-  .app-container.aether.onlyRight {
-    padding: 0px 10px;
-  }
-
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
     margin: initial;
-    padding-left: 10px;
     max-width: calc( 1024px - 320px - 40px - ((1024px - 50px) - 100vw) );
   }
 
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
     display: block;
-    padding-right: 10px;
     max-width: calc( 320px - (1024px - (1024px - 50px)) );
   }
 }
@@ -428,14 +409,13 @@ header.aether-header .header-title,
     padding-top: calc(56px + 18px);
   }
 
-  .container-article-paper {
-    padding: 5px;
-    background-color: #ffffff;
-  }
-
   .header-navigation .tabs,
 .app-mobile-drawer .drawer-header {
     height: 56px;
+  }
+
+  .header-navigation .tabs .MuiTab-root {
+    min-width: 170px;
   }
 
   header.aether-header,
@@ -475,12 +455,16 @@ header.aether-header .header-title,
     margin-bottom: 0px;
   }
 
+  .app-container.aether:not(.onlyRight) {
+    padding: 0px;
+  }
+
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-    padding-left: 0px;
     max-width: calc(720px - (1366px - 100vw));
   }
 
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
+    padding-right: 10px;
     max-width: calc(320px - ((1440px - 1366px)) / 2);
   }
 
@@ -546,5 +530,36 @@ header.aether-header .header-title,
 
   .app-container.aether.onlyRight .grid-container .grid-item-1 {
     max-width: calc(1440px - 320px - 27px);
+  }
+}
+@media screen and (min-width: 0px) {
+  .app-container.aether .grid-container .grid-item-1 .accordion-container {
+    box-shadow: none;
+    border-radius: 0px;
+    border: 1px solid #eeeeee;
+    background: white;
+    background: linear-gradient(90deg, white 0%, #f7f7f7 40%, #fefefe 100%);
+  }
+
+  .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-title {
+    font-weight: bold;
+    font-family: "Noto Sans KR";
+  }
+
+  .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents {
+    display: block;
+  }
+
+  .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents,
+.app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents span {
+    font-size: 0.9rem;
+  }
+
+  .app-container.aether .grid-container .grid-item-1 .accordion-container .accordion-contents .subject {
+    display: block;
+    padding-bottom: 5px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 0.9em;
   }
 }

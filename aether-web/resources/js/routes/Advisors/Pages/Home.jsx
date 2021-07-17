@@ -14,9 +14,7 @@ class Home extends Component {
                 <Helmet>
                     <title>{`투자어드바이저 ${Aether.constants.title.base}`}</title>
                 </Helmet>
-                <Aether.Components.Paper>
-                    <div>자신의 투자성향과 비슷한 전문가와 함께 투자하기</div>
-                </Aether.Components.Paper>
+                <div>자신의 투자성향과 비슷한 전문가와 함께 투자하기</div>
             </React.Fragment>
         );
     }

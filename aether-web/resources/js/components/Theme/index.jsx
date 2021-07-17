@@ -24,7 +24,7 @@ const breakpoints = createBreakpoints({
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#2d304b',
+            main: '#3c007e',
         },
         secondary: {
             main: '#9c27b0',
@@ -34,13 +34,13 @@ const theme = createTheme({
         values: breakpointValue,
     },
     overrides: {
-        MuiTab: {
-            root: {
-                [breakpoints.up('xs')]: {
-                    minWidth: 100,
-                },
-                [breakpoints.up('md')]: {
-                    minWidth: 140,
+        MuiToolbar: {
+            gutters: {
+                paddingLeft: 'initial',
+                paddingRight: 'initial',
+                '@media (min-width: 1024px)': {
+                    paddingLeft: 'initial',
+                    paddingRight: 'initial',
                 },
             },
         },

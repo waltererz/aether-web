@@ -10,7 +10,7 @@ class Home extends Component {
                 <Helmet>
                     <title>{`첫 페이지 ${Aether.constants.title.base}`}</title>
                 </Helmet>
-                <Aether.Components.Paper>투자정보를 얻는 가장 좋은 방법</Aether.Components.Paper>
+                투자정보를 얻는 가장 좋은 방법
             </React.Fragment>
         );
     }
