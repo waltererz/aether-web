@@ -1,0 +1,29 @@
+.advisor-list .advisor-item {
+    margin-top: 10px;
+    border: 1px solid #eeeeee;
+}
+
+.advisor-list .advisor-item .advisor-name {
+    padding: 10px;
+    font-weight: bold;
+}
+
+.advisor-list .advisor-item .advisor-theme {
+    padding: 10px;
+}
+
+.advisor-list .advisor-item .advisor-introduction {
+    padding: 10px;
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+    .advisor-item {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+    .advisor-item {
+        font-size: 0.9rem;
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -22,12 +23,71 @@ class Home extends Component {
                 value: true,
                 technology: true,
             },
+            advisors: null,
+            page: 1,
         };
+    }
+
+    componentDidUpdate() {
+        //
+    }
+
+    componentDidMount() {
+        this._get();
+    }
+
+    async _get(updated = false) {
+        if (
+            updated ||
+            (!updated &&
+                this.state.advisors &&
+                this.state.advisors.current_page != this.state.page) ||
+            !this.state.advisors
+        ) {
+            const constants = this.Aether.constants;
+            await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {
+                await axios
+                    .post(
+                        constants.url.api + '/advisors/index',
+                        {
+                            page: this.state.page,
+                            pagination: true,
+                        },
+                        {
+                            headers: {
+                                'Content-type': 'application/json',
+                            },
+                        },
+                    )
+                    .then((response) => {
+                        if (response.data) {
+                            this.setState((state) => {
+                                return {
+                                    ...state,
+                                    advisors: response.data,
+                                };
+                            });
+                        } else {
+                            alert('서버통신 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                        }
+                    });
+            });
+        }
     }
 
     render() {
         const Aether = this.Aether;
         const { classes } = this.props;
+
+        const Checkbox = withStyles({
+            root: {
+                color: '#3f51b5',
+                '&$checked': {
+                    color: '#212f80',
+                },
+            },
+            checked: {},
+        })((props) => <MuiCheckbox color="default" {...props} />);
 
         const changeTheme = (event) => {
             this.setState((state) => {
@@ -41,15 +101,19 @@ class Home extends Component {
             });
         };
 
-        const Checkbox = withStyles({
-            root: {
-                color: '#3f51b5',
-                '&$checked': {
-                    color: '#212f80',
-                },
-            },
-            checked: {},
-        })((props) => <MuiCheckbox color="default" {...props} />);
+        const fetchAdvisorList = () => {
+            return this.state.advisors.data.map((advisor, index) => {
+                return (
+                    <div className="advisor-item" key={`advisor_${index}`}>
+                        <div className="advisor-name">{`${advisor.user.lastname}${advisor.user.firstname}`}</div>
+                        <div className="advisor-theme">{advisor.theme.name}</div>
+                        <div className="advisor-introduction">
+                            이곳에 투자어드바이저 설명이 위치함
+                        </div>
+                    </div>
+                );
+            });
+        };
 
         return (
             <React.Fragment>
@@ -114,6 +178,7 @@ class Home extends Component {
                         </FormGroup>
                     </AccordionDetails>
                 </Accordion>
+                <div className="advisor-list">{this.state.advisors ? fetchAdvisorList() : ''}</div>
             </React.Fragment>
         );
     }

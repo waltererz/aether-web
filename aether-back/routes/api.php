@@ -33,6 +33,7 @@ Route::prefix('users')->group(function () {
 
 Route::prefix('advisors')->group(function () {
     Route::post('/', [AdvisorController::class, 'store']);
+    Route::post('/index', [AdvisorController::class, 'index']);
 });
 
 Route::prefix('investment/theme')->group(function () {

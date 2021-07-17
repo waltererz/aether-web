@@ -12,10 +12,10 @@ class Advisors extends Component {
         const Aether = this.Aether;
         const { redux, reduxState } = this.props;
         const current_route = Aether.Services.Route.getRouteCode();
-        redux.changeTitle('투자어드바이저');
         if (reduxState.route != current_route) {
             redux.changeRoute(current_route);
         }
+        redux.changeTitle('투자어드바이저');
     }
 
     render() {

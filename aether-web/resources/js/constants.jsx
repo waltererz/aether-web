@@ -1,7 +1,7 @@
 const constants = {
     url: {
         backend: 'http://back.erzsphilos.com',
-        api: parent.backend + '/api',
+        api: null,
     },
     route: {
         default: 1,
@@ -12,5 +12,7 @@ const constants = {
         base: ':: 투자가 시작되는 곳 Aether',
     },
 };
+
+constants.url.api = constants.url.backend + '/api';
 
 export default constants;
