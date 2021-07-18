@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import bootstrap from './bootstrap';
-import Reducers from './redux/Reducer';
+import Reducers from './redux/Reducers';
 
 const Aether = bootstrap();
 const store = createStore(Reducers);

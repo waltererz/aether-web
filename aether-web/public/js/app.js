@@ -17732,7 +17732,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.jsx");
-/* harmony import */ var _redux_Reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redux/Reducer */ "./resources/js/redux/Reducer.jsx");
+/* harmony import */ var _redux_Reducers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./redux/Reducers */ "./resources/js/redux/Reducers/index.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -17745,7 +17745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Aether = (0,_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default)();
-var store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(_redux_Reducer__WEBPACK_IMPORTED_MODULE_4__.default);
+var store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(_redux_Reducers__WEBPACK_IMPORTED_MODULE_4__.default);
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
     store: store,
@@ -18760,28 +18760,6 @@ var constants = {
 
 /***/ }),
 
-/***/ "./resources/js/redux/Reducer.jsx":
-/*!****************************************!*\
-  !*** ./resources/js/redux/Reducer.jsx ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _Reducers_App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reducers/App */ "./resources/js/redux/Reducers/App.jsx");
-
-
-var Reducers = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
-  app: _Reducers_App__WEBPACK_IMPORTED_MODULE_0__.default
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Reducers);
-
-/***/ }),
-
 /***/ "./resources/js/redux/Reducers/App.jsx":
 /*!*********************************************!*\
   !*** ./resources/js/redux/Reducers/App.jsx ***!
@@ -18831,6 +18809,28 @@ function app() {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (app);
+
+/***/ }),
+
+/***/ "./resources/js/redux/Reducers/index.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/redux/Reducers/index.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ "./resources/js/redux/Reducers/App.jsx");
+
+
+var Reducers = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
+  app: _App__WEBPACK_IMPORTED_MODULE_0__.default
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Reducers);
 
 /***/ }),
 
