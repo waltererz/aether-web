@@ -20,6 +20,7 @@ class InvestmentTheme extends Model
     protected $fillable = [
         'uuid',
         'name',
+        'slug',
     ];
 
     /**

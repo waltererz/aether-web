@@ -23312,15 +23312,22 @@ var CreateTheme = /*#__PURE__*/function (_React$Component) {
 
       var submit = function submit() {
         var name = document.querySelector('#input-theme-name').value;
+        var slug = document.querySelector('#input-theme-slug').value;
 
-        if (name.length < 2 || !/^([가-힣]+)$/g.test(name)) {
-          alert('투자성향 이름은 한글로 작성해주세요.');
+        if (name.length < 2 || !/^([A-Za-z가-힣]+)$/g.test(name)) {
+          alert('투자성향 이름은 한글 또는 영문 대소문자로 작성해주세요.');
+          return;
+        }
+
+        if (slug.length < 2 || !/^([a-z]+)$/g.test(slug)) {
+          alert('슬러그는 영문 소문자로 구성되어야 합니다.');
           return;
         }
 
         axios__WEBPACK_IMPORTED_MODULE_1___default().get(_Constants__WEBPACK_IMPORTED_MODULE_4__.default.URL.BACK + '/sanctum/csrf-cookie').then(function () {
           axios__WEBPACK_IMPORTED_MODULE_1___default().post(_Constants__WEBPACK_IMPORTED_MODULE_4__.default.URL.API + '/investment/theme', {
-            name: name
+            name: name,
+            slug: slug
           }, {
             headers: {
               'Content-type': 'application/json'
@@ -23357,7 +23364,18 @@ var CreateTheme = /*#__PURE__*/function (_React$Component) {
                 name: "name",
                 label: "\uD22C\uC790\uC131\uD5A5 \uC774\uB984",
                 variant: "outlined",
-                helperText: "\uD55C\uAE00\uB85C \uC791\uC131\uD574\uC8FC\uC138\uC694.",
+                helperText: "\uD22C\uC790\uC131\uD5A5 \uC774\uB984\uC740 \uD55C\uAE00 \uB610\uB294 \uC601\uBB38 \uB300\uC18C\uBB38\uC790\uB85C \uC791\uC131\uD574\uC8FC\uC138\uC694.",
+                fullWidth: true
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {
+              item: true,
+              className: "mb-20",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_7__.default, {
+                id: "input-theme-slug",
+                name: "slug",
+                label: "\uC2AC\uB7EC\uADF8",
+                variant: "outlined",
+                helperText: "\uC2AC\uB7EC\uADF8\uB294 \uC601\uBB38 \uC18C\uBB38\uC790\uB85C \uC791\uC131\uD574\uC8FC\uC138\uC694.",
                 fullWidth: true
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__.default, {

@@ -18,10 +18,30 @@ class AdvisorController extends Controller
      */
     public function index(Request $request): \Illuminate\Http\JsonResponse
     {
+        $advisors = new Advisor;
+        $filters = $request->post('filters');
+        $filtering = [];
+
+        foreach ($request->post('filtering') as $filter => $value) {
+            if ($value) {
+                $filtering[$filter] = true;
+            }
+        }
+
+        foreach ($filtering as $filter => $value1) {
+            if ($filter == 'theme') {
+                foreach ($filters[$filter] as $slug => $value2) {
+                    if ($value2) {
+                        $advisors = $advisors->orWhere('theme_id', InvestmentTheme::where('slug', $slug)->first()->id);
+                    }
+                }
+            }
+        }
+
         if (!$request->post('pagination')) {
-            $advisors = Advisor::with('user')->with('theme')->get();
+            $advisors = $advisors->with('user')->with('theme')->get();
         } else {
-            $advisors = Advisor::with('user')->with('theme')->paginate(10);
+            $advisors = $advisors->with('user')->with('theme')->paginate(10);
         }
 
         return response()->json($advisors);

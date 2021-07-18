@@ -37,6 +37,7 @@ class InvestmentThemeController extends Controller
         $theme = new InvestmentTheme;
         $theme->uuid = $theme_uuid;
         $theme->name = trim($request->post('name'));
+        $theme->slug = trim($request->post('slug'));
         $theme->save();
 
         if (InvestmentTheme::where('uuid', $theme_uuid)->count()) {

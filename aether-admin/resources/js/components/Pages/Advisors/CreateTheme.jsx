@@ -28,9 +28,15 @@ class CreateTheme extends React.Component {
         const { classes } = this.props;
         const submit = () => {
             const name = document.querySelector('#input-theme-name').value;
+            const slug = document.querySelector('#input-theme-slug').value;
 
-            if (name.length < 2 || !/^([가-힣]+)$/g.test(name)) {
-                alert('투자성향 이름은 한글로 작성해주세요.');
+            if (name.length < 2 || !/^([A-Za-z가-힣]+)$/g.test(name)) {
+                alert('투자성향 이름은 한글 또는 영문 대소문자로 작성해주세요.');
+                return;
+            }
+
+            if (slug.length < 2 || !/^([a-z]+)$/g.test(slug)) {
+                alert('슬러그는 영문 소문자로 구성되어야 합니다.');
                 return;
             }
 
@@ -40,6 +46,7 @@ class CreateTheme extends React.Component {
                         CONSTANTS.URL.API + '/investment/theme',
                         {
                             name: name,
+                            slug: slug,
                         },
                         {
                             headers: {
@@ -68,7 +75,17 @@ class CreateTheme extends React.Component {
                                 name="name"
                                 label="투자성향 이름"
                                 variant="outlined"
-                                helperText="한글로 작성해주세요."
+                                helperText="투자성향 이름은 한글 또는 영문 대소문자로 작성해주세요."
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item className="mb-20">
+                            <TextField
+                                id="input-theme-slug"
+                                name="slug"
+                                label="슬러그"
+                                variant="outlined"
+                                helperText="슬러그는 영문 소문자로 작성해주세요."
                                 fullWidth
                             />
                         </Grid>

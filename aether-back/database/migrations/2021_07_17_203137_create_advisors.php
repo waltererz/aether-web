@@ -24,7 +24,7 @@ class CreateAdvisors extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('theme_id')->references('id')->on('investment_theme');
+            $table->foreign('theme_id')->references('id')->on('investment_themes');
         });
     }
 

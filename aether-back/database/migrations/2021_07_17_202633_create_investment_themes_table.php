@@ -17,6 +17,7 @@ class CreateInvestmentThemesTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name', 50);
+            $table->string('slug', 20)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
