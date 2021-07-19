@@ -66,132 +66,61 @@ a {
     color: $success-color !important;
 }
 
-.app-drawer .drawer-paper {
-    z-index: 900;
-    box-sizing: border-box;
+.app-drawer {
+    .drawer-paper {
+        background-color: $body-bg;
+        border: 0px;
+        z-index: 900;
+        box-sizing: border-box;
+
+        .app-drawer-list {
+            .MuiListItem-root {
+                border-radius: 5px;
+
+                .MuiAvatar-root {
+                    background-color: #ffffff;
+                    color: #aaaaaa;
+                    border: 1px solid #cccccc;
+                }
+            }
+        }
+    }
 }
 
-.app-drawer .drawer-paper {
-    background-color: $body-bg;
-    border: 0px;
+.app-container.aether {
+    .grid-container {
+        .grid-item-1,
+        .grid-item-2,
+        .grid-item-trickery {
+            box-sizing: border-box;
+            width: 100%;
+        }
+    }
 }
 
-.app-drawer.is-b .drawer-paper {
-    background-color: #ffffff;
-    border: 0px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-.drawer-paper .app-drawer-list .MuiListItem-root {
-    border-radius: 5px;
-}
+.app-footer-mobile {
+    .bottomNavigation {
+        height: $mobile-bottomNavigation-height;
+        display: flex;
+        justify-content: space-evenly;
+        background-color: #ffffff;
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
+        left: auto;
+        z-index: 1200;
+        border-top: 1px solid #eeeeee;
 
-.drawer-paper .app-drawer-list .MuiListItem-root .MuiAvatar-root {
-    background-color: #ffffff;
-    color: #aaaaaa;
-    border: 1px solid #cccccc;
-}
+        .navButton {
+            padding: 0px;
+            color: #aaaaaa;
 
-.app-container.aether .grid-container .grid-item-1 {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.app-container.aether .grid-container .grid-item-2 {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.app-container.aether .grid-container .grid-item-trickery {
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.app-drawer .app-drawer-title {
-    padding-top: 5px;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-ul.pagination {
-    width: fit-content;
-    margin: 0px auto;
-    padding: 20px 0px;
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    align-items: center;
-}
-
-ul.pagination li.link {
-    box-sizing: border-box;
-    width: 32px;
-    height: 32px;
-    margin-left: 9px;
-    padding-top: 4px;
-    text-align: center;
-    line-height: 1.5;
-    border-radius: 16px;
-    color: $body-color;
-}
-
-ul.pagination:not(a) > li.link:first-child,
-ul.pagination > a:first-child > li.link {
-    margin-left: 0px;
-}
-
-ul.pagination li.link.previous,
-ul.pagination li.link.next {
-    border: 0px;
-    padding-top: 3px;
-}
-
-ul.pagination li.link.active {
-    background-color: $primary;
-    border: 1px solid $primary;
-    opacity: 0.8;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-ul.pagination li.link.disabled {
-    opacity: 0.3;
-}
-
-div.app-footer-mobile .bottomNavigation {
-    height: $mobile-bottomNavigation-height;
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #ffffff;
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    left: auto;
-    z-index: 1200;
-    border-top: 1px solid #eeeeee;
-}
-
-div.app-footer-mobile .bottomNavigation .navButton {
-    padding: 0px;
-    color: #aaaaaa;
-}
-
-div.app-footer-mobile .bottomNavigation .navButton.Mui-selected {
-    color: #000000;
-}
-
-.app-mobile-drawer .drawer-header {
-    border-bottom: 1px solid #efefef;
-}
-.app-mobile-drawer .drawer-body {
-    width: 100%;
-    box-sizing: border-box;
-    max-width: $drawer-width;
-    background-color: #ffffff;
-}
-
-.app-mobile-drawer .drawer-body .app-drawer-list {
-    padding: 10px;
+            &.Mui-selected {
+                color: #000000;
+            }
+        }
+    }
 }
 
 header.aether-header {
@@ -199,116 +128,112 @@ header.aether-header {
     transition: none;
     box-shadow: none;
     border-bottom: 1px solid #eeeeee;
-}
 
-.header-navigation {
-    position: absolute;
-    width: 100%;
-}
+    .header-title {
+        padding-left: 10px;
 
-.header-navigation .tabs .MuiTabs-indicator {
-    background-color: #7900ff;
-    height: 5px;
-}
+        h6 {
+            color: #000000;
+            font-family: 'Noto Sans KR';
+            font-size: 1rem;
+        }
+    }
 
-header.aether-header .header-title {
-    padding-left: 10px;
-}
+    .header-navigation {
+        position: absolute;
+        width: 100%;
 
-header.aether-header .header-title h6 {
-    color: #000000;
-    font-family: 'Noto Sans KR';
-    font-size: 1rem;
-}
+        .tabs {
+            width: fit-content;
+            margin: 0px auto;
 
-.header-navigation .tabs {
-    width: fit-content;
-    margin: 0px auto;
-}
+            .MuiTabs-indicator {
+                background-color: #7900ff;
+                height: 5px;
+            }
 
-.header-navigation .tabs .MuiTab-root {
-    color: #aaaaaa;
-}
+            .MuiTab-root {
+                color: #aaaaaa;
 
-.header-navigation .tabs .MuiTab-root.Mui-selected {
-    color: #7900ff;
-}
+                .MuiSvgIcon-root {
+                    font-size: 1.7rem;
+                }
 
-.header-navigation .tabs .MuiTab-root .MuiSvgIcon-root {
-    font-size: 1.7rem;
-}
+                &.Mui-selected {
+                    color: #7900ff;
+                }
+            }
+        }
+    }
 
-.header-icon-container {
-    position: absolute;
-    right: 0px;
-}
+    .header-icon-container {
+        position: absolute;
+        right: 0px;
 
-.header-icon-container .icons-desktop,
-.header-icon-container .icons-mobile {
-    cursor: pointer;
-    box-sizing: border-box;
-}
+        .icons-desktop,
+        .icons-mobile {
+            cursor: pointer;
+            box-sizing: border-box;
 
-.header-icon-container .icons-desktop {
-    height: $header-height;
-    background-color: #000000;
-}
+            .icon {
+                box-sizing: border-box;
+                background: none;
+                color: #333333;
+                padding: 0px;
 
-.header-icon-container .icons-mobile {
-    height: calc(#{$header-height} - 10px);
-}
+                .MuiSvgIcon-root {
+                    font-size: 1.5rem;
+                }
+            }
+        }
 
-.header-icon-container .icons-desktop .icon,
-.header-icon-container .icons-mobile .icon {
-    box-sizing: border-box;
-    background: none;
-    color: #333333;
-    padding: 0px;
-}
+        .icons-desktop {
+            height: $header-height;
+            background-color: #000000;
 
-.header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
-    padding: 17px 8px 16px 8px;
-}
+            .icon {
+                .MuiSvgIcon-root {
+                    color: #ffffff;
+                    padding: 17px 8px 16px 8px;
+                }
 
-.header-icon-container .icons-desktop .icon:first-child .MuiSvgIcon-root {
-    padding: 17px 8px 16px 16px;
-}
+                &:first-child .MuiSvgIcon-root {
+                    padding: 17px 8px 16px 16px;
+                }
 
-.header-icon-container .icons-desktop .icon:last-child .MuiSvgIcon-root {
-    padding: 17px 16px 16px 8px;
-}
+                &:last-child .MuiSvgIcon-root {
+                    padding: 17px 16px 16px 8px;
+                }
 
-.header-icon-container .icons-desktop .icon:only-child .MuiSvgIcon-root {
-    padding: 17px 16px 16px 16px;
-}
+                &:only-child .MuiSvgIcon-root {
+                    padding: 17px 16px 16px 16px;
+                }
+            }
+        }
 
-.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
-    padding: 12px 5px 10px 5px;
-}
+        .icons-mobile {
+            height: calc(#{$header-height} - 10px);
 
-.header-icon-container .icons-mobile .icon:first-child .MuiSvgIcon-root {
-    padding: 12px 5px 10px 10px;
-}
+            .icon {
+                .MuiSvgIcon-root {
+                    color: #000000;
+                    padding: 12px 5px 10px 5px;
+                }
 
-.header-icon-container .icons-mobile .icon:last-child .MuiSvgIcon-root {
-    padding: 12px 10px 10px 5px;
-}
+                &:first-child .MuiSvgIcon-root {
+                    padding: 12px 5px 10px 10px;
+                }
 
-.header-icon-container .icons-mobile .icon:only-child .MuiSvgIcon-root {
-    padding: 12px 10px 10px 10px;
-}
+                &:last-child .MuiSvgIcon-root {
+                    padding: 12px 10px 10px 5px;
+                }
 
-.header-icon-container .icons-desktop .icon .MuiSvgIcon-root,
-.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
-    font-size: 1.5rem;
-}
-
-.header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
-    color: #ffffff;
-}
-
-.header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
-    color: #000000;
+                &:only-child .MuiSvgIcon-root {
+                    padding: 12px 10px 10px 10px;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: $breakpoint-xs) {
@@ -316,104 +241,138 @@ header.aether-header .header-title h6 {
         padding-top: calc(#{$mobile-header-height} + 10px);
     }
 
+    header.aether-header {
+        min-height: calc(#{$header-height} - 10px);
+
+        .header-title {
+            min-height: calc(#{$header-height} - 10px);
+        }
+
+        .header-navigation {
+            display: none;
+
+            .tabs {
+                height: $mobile-header-height;
+                min-height: calc(#{$header-height} - 10px);
+
+                .MuiTab-root {
+                    min-width: 130px;
+                    min-height: calc(#{$header-height} - 10px);
+                }
+            }
+        }
+
+        .header-icon-container {
+            .icons-desktop {
+                display: none;
+            }
+
+            .icons-mobile {
+                display: inline-flex;
+            }
+        }
+    }
+
     .app-container.aether {
         height: calc(100% - #{$mobile-bottomNavigation-height} + 10px);
-        margin-bottom: $mobile-bottomNavigation-height;
+        margin-bottom: calc(#{$mobile-bottomNavigation-height} + 20px);
         padding: 0px 10px;
+
+        .grid-container {
+            .grid-item-1 {
+                width: 100%;
+                max-width: 700px;
+                margin: 0px auto;
+            }
+
+            .grid-item-2,
+            .grid-item-trickery {
+                display: none;
+            }
+
+            .grid-item-1,
+            .grid-item-2,
+            .grid-item-trickery {
+                min-height: calc(100vh - #{$mobile-header-height});
+            }
+        }
     }
 
-    .header-navigation .tabs,
-    .app-mobile-drawer .drawer-header {
-        height: $mobile-header-height;
-    }
-
-    .header-navigation .tabs .MuiTab-root {
-        min-width: 130px;
-    }
-
-    header.aether-header,
-    header.aether-header .header-title,
-    .header-navigation .tabs,
-    .header-navigation .tabs .MuiTab-root {
-        min-height: calc(#{$header-height} - 10px);
-    }
-
-    .app-drawer,
-    .header-navigation,
-    .header-icon-container .icons-desktop {
-        display: none;
-    }
-
-    .header-icon-container .icons-mobile {
-        display: inline-flex;
-    }
-
-    .app-container.aether .grid-container .grid-item-1 {
-        width: 100%;
-        max-width: 700px;
-        margin: 0px auto;
-    }
-
-    .app-container.aether .grid-container .grid-item-1,
-    .app-container.aether .grid-container .grid-item-2,
-    .app-container.aether .grid-container .grid-item-trickery {
-        min-height: calc(100vh - #{$mobile-header-height});
-    }
-
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2,
-    .app-container.aether.onlyRight .grid-container .grid-item-2,
-    .app-container.aether .grid-container .grid-item-trickery {
+    .app-drawer {
         display: none;
     }
 }
 
 @media screen and (min-width: $breakpoint-sm - 120px) {
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        margin: initial;
-        max-width: calc(
-            #{$breakpoint-sm} - #{$right-grid-item-width} - 40px -
-                ((#{$breakpoint-sm} - 50px) - 100vw)
-        );
-    }
+    .app-container.aether {
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-1 {
+                    margin: initial;
+                    max-width: calc(
+                        #{$breakpoint-sm} - #{$right-grid-item-width} - 40px -
+                            ((#{$breakpoint-sm} - 50px) - 100vw)
+                    );
+                }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        display: block;
-        max-width: calc(
-            #{$right-grid-item-width} - (#{$breakpoint-sm} - (#{$breakpoint-sm} - 50px))
-        );
+                .grid-item-2 {
+                    display: block;
+                    max-width: calc(
+                        #{$right-grid-item-width} - (#{$breakpoint-sm} - (#{$breakpoint-sm} - 50px))
+                    );
+                }
+            }
+        }
     }
 }
 
 @media screen and (min-width: $breakpoint-sm - 50px) {
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        max-width: calc(#{$breakpoint-sm} - #{$right-grid-item-width} - 40px);
-    }
+    .app-container.aether {
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: calc(#{$breakpoint-sm} - #{$right-grid-item-width} - 40px);
+                }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        max-width: calc(#{$right-grid-item-width} - (#{$breakpoint-sm} - 100vw));
+                .grid-item-2 {
+                    max-width: calc(#{$right-grid-item-width} - (#{$breakpoint-sm} - 100vw));
+                }
+            }
+        }
     }
 }
 
 @media screen and (min-width: $breakpoint-sm) {
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        max-width: calc(100vw - #{$right-grid-item-width} - 40px);
-    }
+    .app-container.aether {
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: calc(100vw - #{$right-grid-item-width} - 40px);
+                }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        max-width: $right-grid-item-width;
-    }
+                .grid-item-2 {
+                    max-width: $right-grid-item-width;
+                }
+            }
+        }
 
-    .app-container.aether.onlyRight .grid-container .grid-item-1 {
-        margin: initial;
-        max-width: calc(
-            (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
-                (#{$breakpoint-xl} - #{$breakpoint-md}) - ((#{$breakpoint-md} - 100vw) / 2)
-        );
-    }
+        &.onlyRight {
+            .grid-container {
+                .grid-item-1 {
+                    margin: initial;
+                    max-width: calc(
+                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
+                            (#{$breakpoint-xl} - #{$breakpoint-md}) -
+                            ((#{$breakpoint-md} - 100vw) / 2)
+                    );
+                }
 
-    .app-container.aether.onlyRight .grid-container .grid-item-2 {
-        display: block;
-        max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-md} - 100vw) / 2));
+                .grid-item-2 {
+                    display: block;
+                    max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-md} - 100vw) / 2));
+                }
+            }
+        }
     }
 }
 
@@ -422,134 +381,179 @@ header.aether-header .header-title h6 {
         padding-top: calc(#{$header-height} + 18px);
     }
 
-    .header-navigation .tabs,
-    .app-mobile-drawer .drawer-header {
-        height: $header-height;
-    }
-
-    .header-navigation .tabs .MuiTab-root {
-        min-width: 170px;
-    }
-
-    header.aether-header,
-    header.aether-header .header-title,
-    .header-navigation .tabs,
-    .header-navigation .tabs .MuiTab-root {
+    header.aether-header {
         min-height: $header-height;
+
+        .header-title {
+            min-height: $header-height;
+        }
+
+        .header-navigation {
+            display: inline-flex;
+
+            .tabs {
+                min-height: $header-height;
+                height: $header-height;
+
+                .MuiTab-root {
+                    min-width: 170px;
+                    min-height: $header-height;
+                }
+            }
+        }
+
+        .header-icon-container {
+            .icons-desktop {
+                display: inline-flex;
+            }
+
+            .icons-mobile {
+                display: none;
+            }
+        }
     }
 
-    .app-drawer .drawer-paper {
-        height: calc(100vh - #{$header-height});
-        margin-top: $header-height;
-        padding: 5px 10px 10px 10px;
+    .app-container.aether {
+        height: auto;
+        margin-bottom: 20px;
+
+        .grid-container {
+            .grid-item-1,
+            .grid-item-2,
+            .grid-item-trickery {
+                min-height: calc(100vh - #{$header-height});
+            }
+        }
+
+        &.onlyRight {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: calc(
+                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
+                            (#{$breakpoint-xl} - 100vw)
+                    );
+                }
+
+                .grid-item-2 {
+                    max-width: $right-grid-item-width;
+                }
+            }
+        }
+
+        &:not(.onlyRight) {
+            padding: 0px;
+
+            .grid-container {
+                .grid-item-1 {
+                    max-width: calc(#{$center-grid-item-width} - (#{$breakpoint-lg} - 100vw));
+                }
+
+                .grid-item-2 {
+                    padding-right: 10px;
+                    max-width: calc(
+                        #{$right-grid-item-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2
+                    );
+                }
+
+                .grid-item-trickery {
+                    display: block;
+                    max-width: calc(
+                        #{$drawer-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2
+                    );
+                }
+            }
+        }
     }
 
-    .app-drawer,
-    .header-navigation,
-    .header-icon-container .icons-desktop {
+    .app-drawer {
         display: inline-flex;
-    }
-
-    .header-icon-container .icons-mobile {
-        display: none;
-    }
-
-    .app-drawer,
-    .app-drawer .drawer-paper {
         width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2);
+
+        .drawer-paper {
+            width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2);
+            height: calc(100vh - #{$header-height});
+            margin-top: $header-height;
+            padding: 5px 10px 10px 10px;
+        }
     }
 
     .app-footer-mobile {
         display: none;
     }
-
-    .app-container.aether {
-        height: auto;
-        margin-bottom: 0px;
-    }
-
-    .app-container.aether:not(.onlyRight) {
-        padding: 0px;
-    }
-
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        max-width: calc(#{$center-grid-item-width} - (#{$breakpoint-lg} - 100vw));
-    }
-
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        padding-right: 10px;
-        max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2);
-    }
-
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-trickery {
-        display: block;
-        max-width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2);
-    }
-
-    .app-container.aether.onlyRight .grid-container .grid-item-1 {
-        max-width: calc(
-            (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) - (#{$breakpoint-xl} - 100vw)
-        );
-    }
-
-    .app-container.aether.onlyRight .grid-container .grid-item-2 {
-        max-width: $right-grid-item-width;
-    }
-
-    .app-container.aether .grid-container .grid-item-1,
-    .app-container.aether .grid-container .grid-item-2,
-    .app-container.aether .grid-container .grid-item-trickery {
-        min-height: calc(100vh - #{$header-height});
-    }
 }
 
 @media screen and (min-width: $breakpoint-lg) {
-    .app-drawer,
-    .app-drawer .drawer-paper {
+    .app-drawer {
         width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - 100vw) / 2));
+
+        .drawer-paper {
+            width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - 100vw) / 2));
+        }
     }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
-        max-width: $center-grid-item-width;
-    }
+    .app-container.aether {
+        &.onlyRight {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: calc(
+                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
+                            (#{$breakpoint-xl} - 100vw)
+                    );
+                }
+            }
+        }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
-    }
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: $center-grid-item-width;
+                }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-trickery {
-        max-width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
-    }
+                .grid-item-2 {
+                    max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
+                }
 
-    .app-container.aether.onlyRight .grid-container .grid-item-1 {
-        max-width: calc(
-            (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) - (#{$breakpoint-xl} - 100vw)
-        );
+                .grid-item-trickery {
+                    max-width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
+                }
+            }
+        }
     }
 }
 
 @media screen and (min-width: $breakpoint-xl) {
-    .app-drawer,
-    .app-drawer .drawer-paper {
+    .app-drawer {
         width: $drawer-width;
+
+        .drawer-paper {
+            width: $drawer-width;
+        }
     }
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
-        max-width: $right-grid-item-width;
-    }
+    .app-container.aether {
+        &.onlyRight {
+            .grid-container {
+                max-width: calc(
+                    (#{$breakpoint-xl} - #{$right-grid-item-width}) + #{$right-grid-item-width} + 27px
+                );
+                margin: 0px auto;
 
-    .app-container.aether:not(.onlyRight) .grid-container .grid-item-trickery {
-        max-width: $drawer-width;
-    }
+                .grid-item-1 {
+                    max-width: calc(#{$breakpoint-xl} - #{$right-grid-item-width} - 27px);
+                }
+            }
+        }
 
-    .app-container.aether.onlyRight .grid-container {
-        max-width: calc(
-            (#{$breakpoint-xl} - #{$right-grid-item-width}) + #{$right-grid-item-width} + 27px
-        );
-        margin: 0px auto;
-    }
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-2 {
+                    max-width: $right-grid-item-width;
+                }
 
-    .app-container.aether.onlyRight .grid-container .grid-item-1 {
-        max-width: calc(#{$breakpoint-xl} - #{$right-grid-item-width} - 27px);
+                .grid-item-trickery {
+                    max-width: $drawer-width;
+                }
+            }
+        }
     }
 }

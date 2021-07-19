@@ -1,0 +1,44 @@
+ul.pagination {
+    width: fit-content;
+    margin: 0px auto;
+    padding: 20px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    align-items: center;
+
+    li.link {
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        margin-left: 9px;
+        padding-top: 4px;
+        text-align: center;
+        line-height: 1.5;
+        border-radius: 16px;
+        color: $body-color;
+
+        &.previous,
+        &.next {
+            border: 0px;
+            padding-top: 3px;
+        }
+
+        &.active {
+            background-color: $primary;
+            border: 1px solid $primary;
+            opacity: 0.8;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        &.disabled {
+            opacity: 0.3;
+        }
+    }
+
+    &:not(a) li.link:first-child,
+    a:first-child > li.link {
+        margin-left: 0px;
+    }
+}

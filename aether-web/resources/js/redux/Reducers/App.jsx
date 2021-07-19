@@ -1,4 +1,4 @@
-import constants from '../Constants';
+import constants from '../../constants';
 import { getRouteCode } from '../../services/Route';
 
 const initialStates = {
@@ -6,14 +6,12 @@ const initialStates = {
     route: getRouteCode(),
 };
 
-const { APP } = constants;
-
 function app(state = initialStates, action) {
     switch (action.type) {
-        case APP.CHANGE_TITLE:
+        case constants.redux.app.title:
             return { ...state, title: action.state };
             break;
-        case APP.CHANGE_ROUTE:
+        case constants.redux.app.route:
             return { ...state, route: action.state };
             break;
     }

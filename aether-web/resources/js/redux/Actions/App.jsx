@@ -1,17 +1,15 @@
-import constants from '../Constants';
-
-const { APP } = constants;
+import constants from '../../constants';
 
 export const changeTitle = (title) => {
     return {
-        type: APP.CHANGE_TITLE,
+        type: constants.redux.app.title,
         state: title,
     };
 };
 
 export const changeRoute = (route) => {
     return {
-        type: APP.CHANGE_ROUTE,
+        type: constants.redux.app.route,
         state: route,
     };
 };

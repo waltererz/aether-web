@@ -8,11 +8,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import Component from '../../../component';
 
-class Header extends Component {
+import constants from '../../constants';
+
+class HeaderNavigation extends React.Component {
     render() {
-        const Aether = this.Aether;
         const { reduxState, headerIcons } = this.props;
         return (
             <AppBar position="fixed" className="aether-header">
@@ -30,14 +30,14 @@ class Header extends Component {
                         <Tab
                             className="tab"
                             icon={<HomeIcon />}
-                            value={Aether.constants.route.home}
+                            value={constants.route.home}
                             component={Link}
                             to="/"
                         />
                         <Tab
                             className="tab"
                             icon={<SupervisorAccountIcon />}
-                            value={Aether.constants.route.advisors}
+                            value={constants.route.advisors}
                             component={Link}
                             to="/advisors"
                         />
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => ({
     },
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(HeaderNavigation);

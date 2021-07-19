@@ -11,11 +11,12 @@ import Rating from '@material-ui/lab/Rating';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Component from '../../../component';
+
+import constants from '../../../constants';
 
 const styles = {};
 
-class Home extends Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +46,6 @@ class Home extends Component {
                 this.state.advisors.current_page != this.state.page) ||
             !this.state.advisors
         ) {
-            const constants = this.Aether.constants;
             await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {
                 await axios
                     .post(
@@ -80,7 +80,6 @@ class Home extends Component {
     }
 
     async _getThemes() {
-        const constants = this.Aether.constants;
         await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {
             await axios
                 .post(
@@ -116,7 +115,6 @@ class Home extends Component {
     }
 
     render() {
-        const Aether = this.Aether;
         const { classes } = this.props;
 
         const Checkbox = withStyles({
@@ -237,7 +235,7 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <Helmet>
-                    <title>{`투자어드바이저 검색 ${Aether.constants.title.base}`}</title>
+                    <title>{`투자어드바이저 검색 ${constants.title.base}`}</title>
                 </Helmet>
                 <Accordion className="filter-box" id="search-filters">
                     <AccordionSummary className="title" expandIcon={<ExpandMoreIcon />}>

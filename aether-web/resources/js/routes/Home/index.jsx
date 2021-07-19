@@ -1,32 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as RouteService from '../../services/Route';
 import * as ReduxApp from '../../redux/Actions/App';
-import Contents from './Components/Contents';
-import LeftSide from './Components/LeftSide';
-import RightSide from './Components/RightSide';
-import HeaderIcons from './Components/HeaderIcons';
-import Component from '../../component';
+import Contents from './components/Contents';
+import LeftSide from './components/LeftSide';
+import RightSide from './components/RightSide';
+import HeaderIcons from './components/HeaderIcons';
+import { FullContainer } from '../../system/Container';
 
-class Home extends Component {
+class Home extends React.Component {
     componentDidMount() {
-        const Aether = this.Aether;
         const { redux, reduxState } = this.props;
-        const current_route = Aether.Services.Route.getRouteCode();
+        const current_route = RouteService.getRouteCode();
         if (reduxState.route != current_route) {
             redux.changeRoute(current_route);
         }
         redux.changeTitle('');
     }
     render() {
-        const Aether = this.Aether;
         return (
             <React.Fragment>
-                <Aether.ContainerStyles.FullContainer
-                    content={<Contents instance={Aether} />}
+                <FullContainer
+                    content={<Contents />}
                     left={<LeftSide />}
                     right={<RightSide />}
                     headerIcons={<HeaderIcons />}
-                    instance={Aether}
                 />
             </React.Fragment>
         );
