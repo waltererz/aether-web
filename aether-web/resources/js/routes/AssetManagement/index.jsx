@@ -9,7 +9,7 @@ import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import HeaderIcons from './components/HeaderIcons';
 
-class Home extends React.Component {
+class AssetManagement extends React.Component {
     componentDidMount() {
         const { redux, reduxState } = this.props;
         const current_route = getRouteCode();
@@ -44,4 +44,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(AssetManagement);

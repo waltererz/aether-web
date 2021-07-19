@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as RouteService from '../../services/Route';
-import * as ReduxApp from '../../redux/Actions/App';
+import { getRouteCode } from '../../services/Route';
+import { setRoute } from '../../redux/Actions/App';
 import { FullContainer } from '../../system/Container';
+import { scrollTop } from '../../services/Browser';
 import HeaderIcons from './components/HeaderIcons';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
@@ -11,14 +12,15 @@ import Contents from './components/Contents';
 class Advisors extends React.Component {
     componentDidMount() {
         const { redux, reduxState } = this.props;
-        const current_route = RouteService.getRouteCode();
+        const current_route = getRouteCode();
         if (reduxState.route != current_route) {
-            redux.changeRoute(current_route);
+            redux.setRoute(current_route);
         }
-        redux.changeTitle('투자어드바이저');
     }
 
     render() {
+        scrollTop();
+
         return (
             <React.Fragment>
                 <FullContainer
@@ -40,8 +42,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     redux: {
-        changeTitle: (title) => dispatch(ReduxApp.changeTitle(title)),
-        changeRoute: (route) => dispatch(ReduxApp.changeRoute(route)),
+        setRoute: (route) => dispatch(setRoute(route)),
     },
 });
 

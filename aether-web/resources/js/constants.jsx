@@ -7,19 +7,18 @@ const constants = {
     route: {
         default: 1,
         home: 2,
-        advisors: 3,
-    },
-
-    title: {
-        base: ':: 투자가 시작되는 곳 Aether',
+        asset: 3,
+        advisors: 4,
     },
 
     redux: {
         app: {
-            title: 'APP_CHANGE_TITLE',
-            route: 'APP_CHANGE_ROUTE',
+            header: 'APP_HEADER',
+            route: 'APP_ROUTE',
         },
     },
+
+    title: '투자가 시작되는 곳, AETHER',
 };
 
 constants.url.api = constants.url.backend + '/api';

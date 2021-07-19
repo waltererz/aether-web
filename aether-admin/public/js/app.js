@@ -22138,120 +22138,162 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/ChevronLeft */ "./node_modules/@material-ui/icons/ChevronLeft.js");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/ChevronLeft */ "./node_modules/@material-ui/icons/ChevronLeft.js");
+/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "./node_modules/@material-ui/icons/ChevronRight.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
 
 
-var _fetchLinks = function _fetchLinks(links, baseUrl) {
-  return links.map(function (link, index) {
-    if (link.label != 'pagination.previous' && link.label != 'pagination.next') {
-      if (link.label != '...') {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-          to: "".concat(baseUrl, "/page/").concat(link.label),
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-            className: link.active ? 'link active' : 'link',
-            children: link.label
-          })
-        }, "pagination_".concat(index));
-      } else {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          className: "link",
-          children: "..."
-        }, "pagination_".concat(index));
-      }
-    } else {
-      return '';
-    }
-  });
-};
 
-var Pagination = function Pagination(_ref) {
-  var metadata = _ref.metadata,
-      baseUrl = _ref.baseUrl;
 
-  if (metadata.current_page) {
-    var limit = 2;
-    var prevUrl,
-        nextUrl = null;
+var Pagination = /*#__PURE__*/function (_React$Component) {
+  _inherits(Pagination, _React$Component);
 
-    if (metadata.prev_page_url) {
-      prevUrl = baseUrl + '/page/' + (metadata.current_page - 1);
-    }
+  var _super = _createSuper(Pagination);
 
-    if (metadata.next_page_url) {
-      nextUrl = baseUrl + '/page/' + (metadata.current_page + 1);
-    }
+  function Pagination() {
+    _classCallCheck(this, Pagination);
 
-    var links = [];
-    var linkCount = 0;
-    metadata.links.map(function (link) {
-      var label = Number(link.label);
+    return _super.apply(this, arguments);
+  }
 
-      if (metadata.current_page - limit <= label && metadata.current_page + limit >= label || metadata.current_page - limit < 1 && metadata.current_page + limit - (metadata.current_page - limit - 1) >= label || metadata.current_page + limit > metadata.last_page && metadata.current_page - limit - (metadata.current_page + limit - metadata.last_page) <= label) {
-        if (!linkCount) {
-          linkCount = linkCount + 2;
-        } else {
-          linkCount++;
+  _createClass(Pagination, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          metadata = _this$props.metadata,
+          baseUrl = _this$props.baseUrl;
+
+      var fetchLinks = function fetchLinks(links, baseUrl) {
+        return links.map(function (link, index) {
+          if (link.label != 'pagination.previous' && link.label != 'pagination.next') {
+            if (link.label != '...') {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+                to: "".concat(baseUrl, "/page/").concat(link.label),
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: link.active ? 'link active' : 'link',
+                  children: link.label
+                })
+              }, "pagination_".concat(index));
+            } else {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                className: "link",
+                children: "..."
+              }, "pagination_".concat(index));
+            }
+          } else {
+            return '';
+          }
+        });
+      };
+
+      if (metadata.current_page) {
+        var limit = 2;
+        var prevUrl,
+            nextUrl = null;
+
+        if (metadata.prev_page_url) {
+          prevUrl = baseUrl + '/page/' + (metadata.current_page - 1);
         }
 
-        links[linkCount] = link;
+        if (metadata.next_page_url) {
+          nextUrl = baseUrl + '/page/' + (metadata.current_page + 1);
+        }
+
+        var links = [];
+        var linkCount = 0;
+        metadata.links.map(function (link) {
+          var label = Number(link.label);
+
+          if (metadata.current_page - limit <= label && metadata.current_page + limit >= label || metadata.current_page - limit < 1 && metadata.current_page + limit - (metadata.current_page - limit - 1) >= label || metadata.current_page + limit > metadata.last_page && metadata.current_page - limit - (metadata.current_page + limit - metadata.last_page) <= label) {
+            if (!linkCount) {
+              linkCount = linkCount + 2;
+            } else {
+              linkCount++;
+            }
+
+            links[linkCount] = link;
+          }
+        });
+
+        if (metadata.current_page > 1 + limit) {
+          links[0] = {
+            active: false,
+            label: '1'
+          };
+          links[1] = {
+            active: false,
+            label: '...'
+          };
+        }
+
+        if (metadata.current_page < metadata.last_page - limit) {
+          links[linkCount + 1] = {
+            active: false,
+            label: '...'
+          };
+          links[linkCount + 2] = {
+            active: false,
+            label: metadata.last_page
+          };
+        }
+
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+          className: "pagination",
+          children: [prevUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+            to: prevUrl,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+              className: "link previous",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_3__.default, {})
+            })
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            className: "link previous disabled",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_3__.default, {})
+          }), links ? fetchLinks(links, baseUrl) : '', nextUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+            to: nextUrl,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+              className: "link next",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_4__.default, {})
+            })
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            className: "link previous disabled",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_4__.default, {})
+          })]
+        });
+      } else {
+        return null;
       }
-    });
-
-    if (metadata.current_page > 1 + limit) {
-      links[0] = {
-        active: false,
-        label: '1'
-      };
-      links[1] = {
-        active: false,
-        label: '...'
-      };
     }
+  }]);
 
-    if (metadata.current_page < metadata.last_page - limit) {
-      links[linkCount + 1] = {
-        active: false,
-        label: '...'
-      };
-      links[linkCount + 2] = {
-        active: false,
-        label: metadata.last_page
-      };
-    }
-
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
-      className: "pagination",
-      children: [prevUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: prevUrl,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          className: "link previous",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2__.default, {})
-        })
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        className: "link previous disabled",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_2__.default, {})
-      }), links ? _fetchLinks(links, baseUrl) : '', nextUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: nextUrl,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-          className: "link next",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__.default, {})
-        })
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
-        className: "link previous disabled",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_3__.default, {})
-      })]
-    });
-  } else {
-    return null;
-  }
-};
+  return Pagination;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pagination);
 

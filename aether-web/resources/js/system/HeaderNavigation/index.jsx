@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
+import PieChartIcon from '@material-ui/icons/PieChart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import constants from '../../constants';
@@ -17,7 +18,7 @@ class HeaderNavigation extends React.Component {
         return (
             <AppBar position="fixed" className="aether-header">
                 <Toolbar className="header-title">
-                    <Typography variant="h6">{reduxState.title}</Typography>
+                    <Typography variant="h6">{reduxState.header}</Typography>
                 </Toolbar>
                 <div className="header-navigation">
                     <Tabs
@@ -36,6 +37,13 @@ class HeaderNavigation extends React.Component {
                         />
                         <Tab
                             className="tab"
+                            icon={<PieChartIcon />}
+                            value={constants.route.asset}
+                            component={Link}
+                            to="/asset"
+                        />
+                        <Tab
+                            className="tab"
                             icon={<SupervisorAccountIcon />}
                             value={constants.route.advisors}
                             component={Link}
@@ -51,7 +59,7 @@ class HeaderNavigation extends React.Component {
 
 const mapStateToProps = (state) => ({
     reduxState: {
-        title: state.app.title,
+        header: state.app.header,
         route: state.app.route,
     },
 });

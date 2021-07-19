@@ -1,6 +1,6 @@
 import React from 'react';
-import Helmet from 'react-helmet';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -11,16 +11,17 @@ import Rating from '@material-ui/lab/Rating';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import { setHeader } from '../../../redux/Actions/App';
+import DocumentTitle from '../../../components/DocumentTitle';
 import constants from '../../../constants';
 
 const styles = {};
 
-class Home extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loaded: false,
+            complate: false,
             filters: {},
             filtering: {},
             themes: null,
@@ -34,13 +35,15 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        const { redux } = this.props;
+        redux.setHeader('검색');
         this._getThemes();
         this._getAdvisors();
     }
 
     async _getAdvisors(updated = false) {
         if (
-            (updated && !this.state.loaded) ||
+            (updated && !this.state.complete) ||
             (!updated &&
                 this.state.advisors &&
                 this.state.advisors.current_page != this.state.page) ||
@@ -67,7 +70,7 @@ class Home extends React.Component {
                             this.setState((state) => {
                                 return {
                                     ...state,
-                                    loaded: true,
+                                    complete: true,
                                     advisors: response.data,
                                 };
                             });
@@ -144,7 +147,7 @@ class Home extends React.Component {
             this.setState((state) => {
                 return {
                     ...state,
-                    loaded: false,
+                    complete: false,
                     filtering: {
                         ...state.filtering,
                         theme: filtering,
@@ -234,9 +237,7 @@ class Home extends React.Component {
 
         return (
             <React.Fragment>
-                <Helmet>
-                    <title>{`투자어드바이저 검색 ${constants.title.base}`}</title>
-                </Helmet>
+                <DocumentTitle>투자어드바이저 검색</DocumentTitle>
                 <Accordion className="filter-box" id="search-filters">
                     <AccordionSummary className="title" expandIcon={<ExpandMoreIcon />}>
                         검색필터
@@ -254,4 +255,10 @@ class Home extends React.Component {
     }
 }
 
-export default withStyles(styles)(Home);
+const mapDispatchToProps = (dispatch) => ({
+    redux: {
+        setHeader: (header) => dispatch(setHeader(header)),
+    },
+});
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Search));

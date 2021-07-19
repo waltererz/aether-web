@@ -173,10 +173,10 @@ header.aether-header .header-icon-container .icons-desktop {
 }
 header.aether-header .header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
   color: #ffffff;
-  padding: 17px 8px 16px 8px;
+  padding: 17px 12px 16px 8px;
 }
 header.aether-header .header-icon-container .icons-desktop .icon:first-child .MuiSvgIcon-root {
-  padding: 17px 8px 16px 16px;
+  padding: 17px 12px 16px 16px;
 }
 header.aether-header .header-icon-container .icons-desktop .icon:last-child .MuiSvgIcon-root {
   padding: 17px 16px 16px 8px;
@@ -189,10 +189,10 @@ header.aether-header .header-icon-container .icons-mobile {
 }
 header.aether-header .header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
   color: #000000;
-  padding: 12px 5px 10px 5px;
+  padding: 12px 10px 10px 5px;
 }
 header.aether-header .header-icon-container .icons-mobile .icon:first-child .MuiSvgIcon-root {
-  padding: 12px 5px 10px 10px;
+  padding: 12px 10px 10px 10px;
 }
 header.aether-header .header-icon-container .icons-mobile .icon:last-child .MuiSvgIcon-root {
   padding: 12px 10px 10px 5px;

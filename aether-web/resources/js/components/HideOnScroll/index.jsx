@@ -1,6 +1,6 @@
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Slide from '@material-ui/core/Slide';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Slide from '@material-ui/core/Slide';
 
 const HideOnScroll = (props) => {
     const { children, window, breakpoint } = props;
