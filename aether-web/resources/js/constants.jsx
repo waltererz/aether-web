@@ -9,6 +9,7 @@ const constants = {
         home: 2,
         asset: 3,
         advisors: 4,
+        devforum: 5,
     },
 
     redux: {

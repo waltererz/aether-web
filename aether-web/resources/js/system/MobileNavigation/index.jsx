@@ -7,6 +7,7 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
+import SpeakerNotesOutlinedIcon from '@material-ui/icons/SpeakerNotesOutlined';
 import constants from '../../constants';
 
 class MobileNavigation extends React.Component {
@@ -17,6 +18,7 @@ class MobileNavigation extends React.Component {
             case constants.route.home:
             case constants.route.asset:
             case constants.route.advisors:
+            case constants.route.devforum:
                 nav = reduxState.route;
                 break;
         }
@@ -36,6 +38,13 @@ class MobileNavigation extends React.Component {
                         value={constants.route.asset}
                         component={Link}
                         to="/asset"
+                    />
+                    <BottomNavigationAction
+                        icon={<SpeakerNotesOutlinedIcon />}
+                        className="navButton"
+                        value={constants.route.devforum}
+                        component={Link}
+                        to="/dev/forum"
                     />
                     <BottomNavigationAction
                         icon={<SupervisorAccountOutlinedIcon />}

@@ -6,6 +6,7 @@ body {
   line-height: 1.6;
   background-color: #ffffff;
   color: #333333;
+  overflow-x: hidden;
 }
 
 a {
@@ -235,19 +236,34 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
     margin-bottom: calc(50px + 20px);
     padding: 0px 10px;
   }
-  .app-container.aether .grid-container .grid-item-1 {
-    width: 100%;
-    max-width: 700px;
-    margin: 0px auto;
+  .app-container.aether .grid-container .grid-item-1,
+.app-container.aether .grid-container .grid-item-2,
+.app-container.aether .grid-container .grid-item-trickery {
+    min-height: calc(100vh - 46px);
   }
   .app-container.aether .grid-container .grid-item-2,
 .app-container.aether .grid-container .grid-item-trickery {
     display: none;
   }
-  .app-container.aether .grid-container .grid-item-1,
-.app-container.aether .grid-container .grid-item-2,
-.app-container.aether .grid-container .grid-item-trickery {
-    min-height: calc(100vh - 46px);
+  .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
+    width: 100%;
+    max-width: 700px;
+    margin: 0px auto;
+  }
+  .app-container.aether.onlyRight .grid-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .app-container.aether.onlyRight .grid-container .grid-item-1 {
+    width: 100%;
+    max-width: 700px;
+  }
+  .app-container.aether.onlyRight .grid-container .grid-item-2 {
+    width: 100%;
+    max-width: 300px;
+    padding-left: 20px;
   }
 
   .app-drawer {
@@ -261,7 +277,16 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
   }
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
     display: block;
+    padding-left: 10px;
     max-width: calc( 320px - (1024px - (1024px - 50px)) );
+  }
+  .app-container.aether.onlyRight .grid-container .grid-item-1 {
+    max-width: 1000px;
+    width: calc(100% - 300px);
+  }
+  .app-container.aether.onlyRight .grid-container .grid-item-2 {
+    display: block;
+    width: 300px;
   }
 }
 @media screen and (min-width: 974px) {
@@ -278,14 +303,6 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
   }
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
     max-width: 320px;
-  }
-  .app-container.aether.onlyRight .grid-container .grid-item-1 {
-    margin: initial;
-    max-width: calc( (1440px - 320px - 27px) - (1440px - 1160px) - ((1160px - 100vw) / 2) );
-  }
-  .app-container.aether.onlyRight .grid-container .grid-item-2 {
-    display: block;
-    max-width: calc(320px - ((1160px - 100vw) / 2));
   }
 }
 @media screen and (min-width: 1160px) {
@@ -326,12 +343,6 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
 .app-container.aether .grid-container .grid-item-trickery {
     min-height: calc(100vh - 56px);
   }
-  .app-container.aether.onlyRight .grid-container .grid-item-1 {
-    max-width: calc( (1440px - 320px - 27px) - (1440px - 100vw) );
-  }
-  .app-container.aether.onlyRight .grid-container .grid-item-2 {
-    max-width: 320px;
-  }
   .app-container.aether:not(.onlyRight) {
     padding: 0px;
   }
@@ -339,6 +350,7 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
     max-width: calc(720px - (1366px - 100vw));
   }
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
+    padding-left: 0px;
     padding-right: 10px;
     max-width: calc( 320px - ((1440px - 1366px)) / 2 );
   }
@@ -370,9 +382,6 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
     width: calc(320px - ((1440px - 100vw) / 2));
   }
 
-  .app-container.aether.onlyRight .grid-container .grid-item-1 {
-    max-width: calc( (1440px - 320px - 27px) - (1440px - 100vw) );
-  }
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-1 {
     max-width: 720px;
   }
@@ -391,13 +400,6 @@ header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiS
     width: 320px;
   }
 
-  .app-container.aether.onlyRight .grid-container {
-    max-width: calc( (1440px - 320px) + 320px + 27px );
-    margin: 0px auto;
-  }
-  .app-container.aether.onlyRight .grid-container .grid-item-1 {
-    max-width: calc(1440px - 320px - 27px);
-  }
   .app-container.aether:not(.onlyRight) .grid-container .grid-item-2 {
     max-width: 320px;
   }

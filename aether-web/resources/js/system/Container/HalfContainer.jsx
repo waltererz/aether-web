@@ -12,7 +12,7 @@ class HalfContainer extends React.Component {
                 <Container className="app-container aether onlyRight" maxWidth={false}>
                     <Grid
                         container
-                        classes="grid-container"
+                        className="grid-container"
                         direction="row"
                         justifyContent="space-between"
                         alignItems="flex-start"

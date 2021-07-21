@@ -6,13 +6,13 @@ import DocumentTitle from '../../../components/DocumentTitle';
 class Home extends React.Component {
     componentDidMount() {
         const { redux } = this.props;
-        redux.setHeader('');
+        redux.setHeader('개발자게시판');
     }
 
     render() {
         return (
             <React.Fragment>
-                <DocumentTitle>첫 페이지</DocumentTitle>
+                <DocumentTitle>개발자게시판</DocumentTitle>
             </React.Fragment>
         );
     }

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 
 import constants from '../../constants';
 
@@ -34,6 +35,13 @@ class HeaderNavigation extends React.Component {
                             value={constants.route.home}
                             component={Link}
                             to="/"
+                        />
+                        <Tab
+                            className="tab"
+                            icon={<SpeakerNotesIcon />}
+                            value={constants.route.devforum}
+                            component={Link}
+                            to="/dev/forum"
                         />
                         <Tab
                             className="tab"

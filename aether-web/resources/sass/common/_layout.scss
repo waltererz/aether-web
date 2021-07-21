@@ -5,6 +5,7 @@ body {
     line-height: $line-height-base;
     background-color: $body-bg;
     color: $body-color;
+    overflow-x: hidden;
 }
 
 a {
@@ -279,21 +280,45 @@ header.aether-header {
         padding: 0px 10px;
 
         .grid-container {
-            .grid-item-1 {
-                width: 100%;
-                max-width: 700px;
-                margin: 0px auto;
+            .grid-item-1,
+            .grid-item-2,
+            .grid-item-trickery {
+                min-height: calc(100vh - #{$mobile-header-height});
             }
 
             .grid-item-2,
             .grid-item-trickery {
                 display: none;
             }
+        }
 
-            .grid-item-1,
-            .grid-item-2,
-            .grid-item-trickery {
-                min-height: calc(100vh - #{$mobile-header-height});
+        &:not(.onlyRight) {
+            .grid-container {
+                .grid-item-1 {
+                    width: 100%;
+                    max-width: 700px;
+                    margin: 0px auto;
+                }
+            }
+        }
+
+        &.onlyRight {
+            .grid-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                .grid-item-1 {
+                    width: 100%;
+                    max-width: 700px;
+                }
+
+                .grid-item-2 {
+                    width: 100%;
+                    max-width: 300px;
+                    padding-left: 20px;
+                }
             }
         }
     }
@@ -317,9 +342,24 @@ header.aether-header {
 
                 .grid-item-2 {
                     display: block;
+                    padding-left: 10px;
                     max-width: calc(
                         #{$right-grid-item-width} - (#{$breakpoint-sm} - (#{$breakpoint-sm} - 50px))
                     );
+                }
+            }
+        }
+
+        &.onlyRight {
+            .grid-container {
+                .grid-item-1 {
+                    max-width: 1000px;
+                    width: calc(100% - 300px);
+                }
+
+                .grid-item-2 {
+                    display: block;
+                    width: 300px;
                 }
             }
         }
@@ -352,24 +392,6 @@ header.aether-header {
 
                 .grid-item-2 {
                     max-width: $right-grid-item-width;
-                }
-            }
-        }
-
-        &.onlyRight {
-            .grid-container {
-                .grid-item-1 {
-                    margin: initial;
-                    max-width: calc(
-                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
-                            (#{$breakpoint-xl} - #{$breakpoint-md}) -
-                            ((#{$breakpoint-md} - 100vw) / 2)
-                    );
-                }
-
-                .grid-item-2 {
-                    display: block;
-                    max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-md} - 100vw) / 2));
                 }
             }
         }
@@ -425,21 +447,6 @@ header.aether-header {
             }
         }
 
-        &.onlyRight {
-            .grid-container {
-                .grid-item-1 {
-                    max-width: calc(
-                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
-                            (#{$breakpoint-xl} - 100vw)
-                    );
-                }
-
-                .grid-item-2 {
-                    max-width: $right-grid-item-width;
-                }
-            }
-        }
-
         &:not(.onlyRight) {
             padding: 0px;
 
@@ -449,6 +456,7 @@ header.aether-header {
                 }
 
                 .grid-item-2 {
+                    padding-left: 0px;
                     padding-right: 10px;
                     max-width: calc(
                         #{$right-grid-item-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2
@@ -492,17 +500,6 @@ header.aether-header {
     }
 
     .app-container.aether {
-        &.onlyRight {
-            .grid-container {
-                .grid-item-1 {
-                    max-width: calc(
-                        (#{$breakpoint-xl} - #{$right-grid-item-width} - 27px) -
-                            (#{$breakpoint-xl} - 100vw)
-                    );
-                }
-            }
-        }
-
         &:not(.onlyRight) {
             .grid-container {
                 .grid-item-1 {
@@ -531,19 +528,6 @@ header.aether-header {
     }
 
     .app-container.aether {
-        &.onlyRight {
-            .grid-container {
-                max-width: calc(
-                    (#{$breakpoint-xl} - #{$right-grid-item-width}) + #{$right-grid-item-width} + 27px
-                );
-                margin: 0px auto;
-
-                .grid-item-1 {
-                    max-width: calc(#{$breakpoint-xl} - #{$right-grid-item-width} - 27px);
-                }
-            }
-        }
-
         &:not(.onlyRight) {
             .grid-container {
                 .grid-item-2 {
