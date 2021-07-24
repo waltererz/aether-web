@@ -17,7 +17,7 @@ class MobileNavigation extends React.Component {
         switch (reduxState.route) {
             case constants.route.home:
             case constants.route.asset:
-            case constants.route.advisors:
+            case constants.route.advisor:
             case constants.route.devforum:
                 nav = reduxState.route;
                 break;
@@ -37,7 +37,7 @@ class MobileNavigation extends React.Component {
                         className="navButton"
                         value={constants.route.asset}
                         component={Link}
-                        to="/asset"
+                        to="/assets"
                     />
                     <BottomNavigationAction
                         icon={<SpeakerNotesOutlinedIcon />}
@@ -49,7 +49,7 @@ class MobileNavigation extends React.Component {
                     <BottomNavigationAction
                         icon={<SupervisorAccountOutlinedIcon />}
                         className="navButton"
-                        value={constants.route.advisors}
+                        value={constants.route.advisor}
                         component={Link}
                         to="/advisors"
                     />

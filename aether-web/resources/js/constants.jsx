@@ -1,5 +1,11 @@
 const constants = {
+    app: {
+        name: '투자가 시작되는 곳, AETHER',
+        description: '누구나 쉽고 재미있게 친구들과 함께 하는 투자의 세계에 빠질 수 있는 곳',
+    },
+
     url: {
+        app: 'http://www.erzsphilos.com',
         backend: 'http://back.erzsphilos.com',
         api: null,
     },
@@ -8,7 +14,7 @@ const constants = {
         default: 1,
         home: 2,
         asset: 3,
-        advisors: 4,
+        advisor: 4,
         devforum: 5,
     },
 
@@ -18,8 +24,6 @@ const constants = {
             route: 'APP_ROUTE',
         },
     },
-
-    title: '투자가 시작되는 곳, AETHER',
 };
 
 constants.url.api = constants.url.backend + '/api';

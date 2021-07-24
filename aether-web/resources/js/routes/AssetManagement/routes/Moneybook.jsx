@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 import { setHeader } from '../../../redux/Actions/App';
 import DocumentTitle from '../../../components/DocumentTitle';
 
-class Home extends React.Component {
+class Moneybook extends React.Component {
     componentDidMount() {
         const { redux } = this.props;
-        redux.setHeader('');
+        redux.setHeader('가계부');
     }
 
     render() {
         return (
             <React.Fragment>
-                <DocumentTitle />
+                <DocumentTitle>가계부</DocumentTitle>
+                <div>가계부 첫 페이지</div>
             </React.Fragment>
         );
     }
@@ -24,4 +25,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Moneybook);

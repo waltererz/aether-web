@@ -14,7 +14,7 @@ class LeftSide extends React.Component {
     render() {
         return (
             <List component="nav" className="app-drawer-list">
-                <Link to="/asset">
+                <Link to="/assets">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -24,7 +24,7 @@ class LeftSide extends React.Component {
                         <ListItemText primary="자산관리 대시보드" />
                     </ListItem>
                 </Link>
-                <Link to="/asset">
+                <Link to="/assets">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -34,7 +34,7 @@ class LeftSide extends React.Component {
                         <ListItemText primary="투자자산관리" />
                     </ListItem>
                 </Link>
-                <Link to="/asset/portfolio">
+                <Link to="/assets/portfolio">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>
@@ -44,7 +44,7 @@ class LeftSide extends React.Component {
                         <ListItemText primary="포트폴리오관리" />
                     </ListItem>
                 </Link>
-                <Link to="/asset/moneybook">
+                <Link to="/assets/moneybook">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>

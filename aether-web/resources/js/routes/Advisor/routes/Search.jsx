@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -13,7 +12,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { setHeader } from '../../../redux/Actions/App';
 import DocumentTitle from '../../../components/DocumentTitle';
-import constants from '../../../constants';
+import * as API from '../../../services/API';
 
 const styles = {};
 
@@ -49,71 +48,47 @@ class Search extends React.Component {
                 this.state.advisors.current_page != this.state.page) ||
             !this.state.advisors
         ) {
-            await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {
-                await axios
-                    .post(
-                        constants.url.api + '/advisors/index',
-                        {
-                            page: this.state.page,
-                            pagination: true,
-                            filtering: this.state.filtering,
-                            filters: this.state.filters,
-                        },
-                        {
-                            headers: {
-                                'Content-type': 'application/json',
-                            },
-                        },
-                    )
-                    .then((response) => {
-                        if (response.data) {
-                            this.setState((state) => {
-                                return {
-                                    ...state,
-                                    complete: true,
-                                    advisors: response.data,
-                                };
-                            });
-                        } else {
-                            alert('서버통신 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                        }
+            await API.post('advisors/index', {
+                page: this.state.page,
+                pagination: true,
+                filtering: this.state.filtering,
+                filters: this.state.filters,
+            }).then((response) => {
+                if (response.data) {
+                    this.setState((state) => {
+                        return {
+                            ...state,
+                            complete: true,
+                            advisors: response.data,
+                        };
                     });
+                } else {
+                    alert('서버통신 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                }
             });
         }
     }
 
     async _getThemes() {
-        await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {
-            await axios
-                .post(
-                    constants.url.api + '/investment/theme/index',
-                    {},
-                    {
-                        headers: {
-                            'Content-type': 'application/json',
+        await API.post('investment/theme/index').then((response) => {
+            if (response.data) {
+                this.setState((state) => {
+                    const theme_filters = {};
+                    response.data.map((theme) => {
+                        theme_filters[theme.slug] = false;
+                    });
+                    return {
+                        ...state,
+                        themes: response.data,
+                        filters: {
+                            ...state.filters,
+                            theme: theme_filters,
                         },
-                    },
-                )
-                .then((response) => {
-                    if (response.data) {
-                        this.setState((state) => {
-                            const theme_filters = {};
-                            response.data.map((theme) => {
-                                theme_filters[theme.slug] = false;
-                            });
-                            return {
-                                ...state,
-                                themes: response.data,
-                                filters: {
-                                    ...state.filters,
-                                    theme: theme_filters,
-                                },
-                            };
-                        });
-                    } else {
-                        alert('서버통신 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                    }
+                    };
                 });
+            } else {
+                alert('서버통신 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
         });
     }
 

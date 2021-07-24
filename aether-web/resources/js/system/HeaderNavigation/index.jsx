@@ -48,12 +48,12 @@ class HeaderNavigation extends React.Component {
                             icon={<PieChartIcon />}
                             value={constants.route.asset}
                             component={Link}
-                            to="/asset"
+                            to="/assets"
                         />
                         <Tab
                             className="tab"
                             icon={<SupervisorAccountIcon />}
-                            value={constants.route.advisors}
+                            value={constants.route.advisor}
                             component={Link}
                             to="/advisors"
                         />

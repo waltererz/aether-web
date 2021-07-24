@@ -9,8 +9,8 @@ class Aether extends React.Component {
             <Layout>
                 <Switch>
                     <Route exact path="/" component={RoutePage.Home} />
-                    <Route path="/asset" component={RoutePage.AssetManagement} />
-                    <Route path="/advisors" component={RoutePage.Advisors} />
+                    <Route path="/assets" component={RoutePage.AssetManagement} />
+                    <Route path="/advisors" component={RoutePage.Advisor} />
                     <Route path="/dev/forum" component={RoutePage.DevForum} />
                 </Switch>
             </Layout>

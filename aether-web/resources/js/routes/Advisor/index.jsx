@@ -8,8 +8,9 @@ import HeaderIcons from './components/HeaderIcons';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import Contents from './components/Contents';
+import '../../../sass/routes/advisors.scss';
 
-class Advisors extends React.Component {
+class Advisor extends React.Component {
     componentDidMount() {
         const { redux, reduxState } = this.props;
         const current_route = getRouteCode();
@@ -46,4 +47,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Advisors);
+export default connect(mapStateToProps, mapDispatchToProps)(Advisor);

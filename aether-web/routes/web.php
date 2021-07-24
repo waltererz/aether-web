@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReactController;
+use App\Http\Controllers\AdvisorController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,21 @@ use App\Http\Controllers\ReactController;
 |
 */
 
+Route::prefix('')->group(function () {
+    Route::get('/', [HomeController::class, 'index']);
+});
 
-// 지정되지 않은 모든 페이지는 리액트에서 처리함
-Route::get('/{path}', [ReactController::class, 'index'])->where('path', '.*');
+Route::prefix('assets')->group(function () {
+    Route::get('/', [AssetController::class, 'index']);
+    Route::get('/moneybook', [AssetController::class, 'moneybook']);
+    Route::get('/portfolio', [AssetController::class, 'portfolio']);
+});
+
+Route::prefix('advisors')->group(function () {
+    Route::get('/', [AdvisorController::class, 'index']);
+    Route::get('/search', [AdvisorController::class, 'search']);
+});
+
+Route::prefix('dev/forum')->group(function () {
+    Route::get('/', [DeveloperController::class, 'index']);
+});
