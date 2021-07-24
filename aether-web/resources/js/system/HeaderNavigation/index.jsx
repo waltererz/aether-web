@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import CodeIcon from '@material-ui/icons/Code';
 
 import constants from '../../constants';
 
@@ -31,17 +31,20 @@ class HeaderNavigation extends React.Component {
                     >
                         <Tab
                             className="tab"
+                            value={constants.route.default}
+                            style={{ display: 'none' }}
+                        />
+                        <Tab
+                            className="tab"
+                            value={constants.route.user}
+                            style={{ display: 'none' }}
+                        />
+                        <Tab
+                            className="tab"
                             icon={<HomeIcon />}
                             value={constants.route.home}
                             component={Link}
                             to="/"
-                        />
-                        <Tab
-                            className="tab"
-                            icon={<SpeakerNotesIcon />}
-                            value={constants.route.devforum}
-                            component={Link}
-                            to="/dev/forum"
                         />
                         <Tab
                             className="tab"
@@ -56,6 +59,13 @@ class HeaderNavigation extends React.Component {
                             value={constants.route.advisor}
                             component={Link}
                             to="/advisors"
+                        />
+                        <Tab
+                            className="tab"
+                            icon={<CodeIcon />}
+                            value={constants.route.developer}
+                            component={Link}
+                            to="/developer"
                         />
                     </Tabs>
                 </div>

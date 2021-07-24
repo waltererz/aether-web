@@ -15,7 +15,7 @@ class LeftSide extends React.Component {
     render() {
         return (
             <List component="nav" className="app-drawer-list">
-                <Link to="/asset">
+                <Link to="/assets">
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>

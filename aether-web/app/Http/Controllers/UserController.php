@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 
-class AssetController extends Controller
+class UserController extends Controller
 {
     public function index(): View
     {

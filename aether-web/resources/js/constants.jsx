@@ -1,7 +1,7 @@
 const constants = {
     app: {
-        name: '투자가 시작되는 곳, AETHER',
-        description: '누구나 쉽고 재미있게 친구들과 함께 하는 투자의 세계에 빠질 수 있는 곳',
+        name: window._aether.title,
+        description: window._aether.description,
     },
 
     url: {
@@ -15,11 +15,13 @@ const constants = {
         home: 2,
         asset: 3,
         advisor: 4,
-        devforum: 5,
+        developer: 5,
+        user: 6,
     },
 
     redux: {
         app: {
+            title: 'APP_DOCUMENT_TITLE',
             header: 'APP_HEADER',
             route: 'APP_ROUTE',
         },

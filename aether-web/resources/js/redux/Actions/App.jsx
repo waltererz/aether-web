@@ -13,3 +13,10 @@ export const setRoute = (route) => {
         state: route,
     };
 };
+
+export const setTitle = (title) => {
+    return {
+        type: constants.redux.app.title,
+        state: title,
+    };
+};

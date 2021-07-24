@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://www.erzsphilos.com'),
 
+    'api_url' => env('API_URL', 'http://back.erzsphilos.com/api'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

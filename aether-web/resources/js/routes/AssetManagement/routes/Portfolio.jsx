@@ -1,18 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setHeader } from '../../../redux/Actions/App';
-import DocumentTitle from '../../../components/DocumentTitle';
+import { setHeader, setTitle } from '../../../redux/Actions/App';
+import { getDocumentTitle } from '../../../services/Data';
 
 class Portfolio extends React.Component {
     componentDidMount() {
         const { redux } = this.props;
-        redux.setHeader('포트폴리오');
+
+        (async function () {
+            const documentTitle = await getDocumentTitle(location.pathname);
+            redux.setHeader(documentTitle);
+            redux.setTitle(documentTitle);
+        })();
     }
 
     render() {
         return (
             <React.Fragment>
-                <DocumentTitle>포트폴리오</DocumentTitle>
                 <div>포트폴리오 첫 페이지</div>
             </React.Fragment>
         );
@@ -22,6 +26,7 @@ class Portfolio extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     redux: {
         setHeader: (header) => dispatch(setHeader(header)),
+        setTitle: (title) => dispatch(setTitle(title)),
     },
 });
 

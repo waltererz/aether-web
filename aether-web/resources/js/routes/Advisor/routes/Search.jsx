@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MuiCheckbox from '@material-ui/core/Checkbox';
@@ -10,11 +10,9 @@ import Rating from '@material-ui/lab/Rating';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { setHeader } from '../../../redux/Actions/App';
-import DocumentTitle from '../../../components/DocumentTitle';
+import { setHeader, setTitle } from '../../../redux/Actions/App';
 import * as API from '../../../services/API';
-
-const styles = {};
+import { getDocumentTitle } from '../../../services/Data';
 
 class Search extends React.Component {
     constructor(props) {
@@ -35,7 +33,13 @@ class Search extends React.Component {
 
     componentDidMount() {
         const { redux } = this.props;
-        redux.setHeader('검색');
+
+        (async function () {
+            const documentTitle = await getDocumentTitle(location.pathname);
+            redux.setHeader(documentTitle);
+            redux.setTitle(documentTitle);
+        })();
+
         this._getThemes();
         this._getAdvisors();
     }
@@ -70,7 +74,7 @@ class Search extends React.Component {
     }
 
     async _getThemes() {
-        await API.post('investment/theme/index').then((response) => {
+        await API.post('investment/themes/index').then((response) => {
             if (response.data) {
                 this.setState((state) => {
                     const theme_filters = {};
@@ -212,7 +216,6 @@ class Search extends React.Component {
 
         return (
             <React.Fragment>
-                <DocumentTitle>투자어드바이저 검색</DocumentTitle>
                 <Accordion className="filter-box" id="search-filters">
                     <AccordionSummary className="title" expandIcon={<ExpandMoreIcon />}>
                         검색필터
@@ -233,7 +236,8 @@ class Search extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     redux: {
         setHeader: (header) => dispatch(setHeader(header)),
+        setTitle: (title) => dispatch(setTitle(title)),
     },
 });
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Search));
+export default connect(null, mapDispatchToProps)(Search);

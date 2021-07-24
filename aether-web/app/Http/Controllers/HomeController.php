@@ -8,6 +8,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('index');
+        return view('index')->with([
+            'title' => $this->_getDocumentTitle(),
+            'description' => $this->_getDocumentDescription(),
+        ]);
     }
 }

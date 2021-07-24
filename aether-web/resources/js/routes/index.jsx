@@ -1,6 +1,7 @@
 import Home from './Home';
+import User from './User';
 import Advisor from './Advisor';
 import AssetManagement from './AssetManagement';
-import DevForum from './DevForum';
+import Developer from './Developer';
 
-export { Home, AssetManagement, Advisor, DevForum };
+export { Home, User, AssetManagement, Advisor, Developer };

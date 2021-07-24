@@ -168,38 +168,44 @@ header.aether-header .header-icon-container .icons-desktop .icon .MuiSvgIcon-roo
 header.aether-header .header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
   font-size: 1.5rem;
 }
+header.aether-header .header-icon-container .icons-desktop,
+header.aether-header .header-icon-container .icons-mobile {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+header.aether-header .header-icon-container .icons-desktop .icon .MuiButtonBase-root .MuiIconButton-label a,
+header.aether-header .header-icon-container .icons-mobile .icon .MuiButtonBase-root .MuiIconButton-label a {
+  display: flex;
+}
+header.aether-header .header-icon-container .icons-desktop .icon .MuiButtonBase-root .MuiIconButton-label .MuiSvgIcon-root,
+header.aether-header .header-icon-container .icons-mobile .icon .MuiButtonBase-root .MuiIconButton-label .MuiSvgIcon-root {
+  color: #000000;
+}
+header.aether-header .header-icon-container .icons-desktop .icon:last-child,
+header.aether-header .header-icon-container .icons-mobile .icon:last-child {
+  margin-right: 10px;
+}
 header.aether-header .header-icon-container .icons-desktop {
   height: 56px;
-  background-color: #000000;
+  background-color: #ffffff;
 }
-header.aether-header .header-icon-container .icons-desktop .icon .MuiSvgIcon-root {
-  color: #ffffff;
-  padding: 17px 12px 16px 8px;
-}
-header.aether-header .header-icon-container .icons-desktop .icon:first-child .MuiSvgIcon-root {
-  padding: 17px 12px 16px 16px;
-}
-header.aether-header .header-icon-container .icons-desktop .icon:last-child .MuiSvgIcon-root {
-  padding: 17px 16px 16px 8px;
-}
-header.aether-header .header-icon-container .icons-desktop .icon:only-child .MuiSvgIcon-root {
-  padding: 17px 16px 16px 16px;
+header.aether-header .header-icon-container .icons-desktop .icon {
+  margin-top: 4px;
+  margin-right: 5px;
 }
 header.aether-header .header-icon-container .icons-mobile {
   height: calc(56px - 10px);
 }
-header.aether-header .header-icon-container .icons-mobile .icon .MuiSvgIcon-root {
-  color: #000000;
-  padding: 12px 10px 10px 5px;
+header.aether-header .header-icon-container .icons-mobile .icon {
+  margin-top: 4px;
+  margin-right: 5px;
 }
-header.aether-header .header-icon-container .icons-mobile .icon:first-child .MuiSvgIcon-root {
-  padding: 12px 10px 10px 10px;
-}
-header.aether-header .header-icon-container .icons-mobile .icon:last-child .MuiSvgIcon-root {
-  padding: 12px 10px 10px 5px;
-}
-header.aether-header .header-icon-container .icons-mobile .icon:only-child .MuiSvgIcon-root {
-  padding: 12px 10px 10px 10px;
+header.aether-header .header-icon-container .icons-mobile .icon .MuiButtonBase-root {
+  width: 40px;
+  height: 40px;
 }
 
 @media screen and (min-width: 0px) {

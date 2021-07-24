@@ -188,27 +188,37 @@ header.aether-header {
             }
         }
 
-        .icons-desktop {
-            height: $header-height;
-            background-color: #000000;
+        .icons-desktop,
+        .icons-mobile {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
 
             .icon {
-                .MuiSvgIcon-root {
-                    color: #ffffff;
-                    padding: 17px 12px 16px 8px;
+                .MuiButtonBase-root {
+                    .MuiIconButton-label {
+                        a {
+                            display: flex;
+                        }
+
+                        .MuiSvgIcon-root {
+                            color: #000000;
+                        }
+                    }
                 }
 
-                &:first-child .MuiSvgIcon-root {
-                    padding: 17px 12px 16px 16px;
+                &:last-child {
+                    margin-right: 10px;
                 }
+            }
+        }
 
-                &:last-child .MuiSvgIcon-root {
-                    padding: 17px 16px 16px 8px;
-                }
+        .icons-desktop {
+            height: $header-height;
+            background-color: #ffffff;
 
-                &:only-child .MuiSvgIcon-root {
-                    padding: 17px 16px 16px 16px;
-                }
+            .icon {
+                margin-top: 4px;
+                margin-right: 5px;
             }
         }
 
@@ -216,21 +226,12 @@ header.aether-header {
             height: calc(#{$header-height} - 10px);
 
             .icon {
-                .MuiSvgIcon-root {
-                    color: #000000;
-                    padding: 12px 10px 10px 5px;
-                }
+                margin-top: 4px;
+                margin-right: 5px;
 
-                &:first-child .MuiSvgIcon-root {
-                    padding: 12px 10px 10px 10px;
-                }
-
-                &:last-child .MuiSvgIcon-root {
-                    padding: 12px 10px 10px 5px;
-                }
-
-                &:only-child .MuiSvgIcon-root {
-                    padding: 12px 10px 10px 10px;
+                .MuiButtonBase-root {
+                    width: 40px;
+                    height: 40px;
                 }
             }
         }

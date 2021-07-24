@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
-import { setHeader } from '../../../redux/Actions/App';
-import DocumentTitle from '../../../components/DocumentTitle';
-
-const styles = {};
+import { setHeader, setTitle } from '../../../redux/Actions/App';
+import { getDocumentTitle } from '../../../services/Data';
 
 class Home extends React.Component {
     componentDidMount() {
-        const { redux } = this.props;
-        redux.setHeader('투자어드바이저');
+        const { redux, location } = this.props;
+
+        (async function () {
+            const documentTitle = await getDocumentTitle(location.pathname);
+            redux.setHeader(documentTitle);
+            redux.setTitle(documentTitle);
+        })();
     }
 
     render() {
-        const { classes } = this.props;
         return (
             <React.Fragment>
-                <DocumentTitle>투자어드바이저</DocumentTitle>
                 <div>자신의 투자성향과 비슷한 전문가와 함께 투자하기</div>
             </React.Fragment>
         );
@@ -26,7 +26,8 @@ class Home extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     redux: {
         setHeader: (header) => dispatch(setHeader(header)),
+        setTitle: (title) => dispatch(setTitle(title)),
     },
 });
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Home));
+export default connect(null, mapDispatchToProps)(Home);

@@ -5,6 +5,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\InvestmentThemeController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,13 @@ Route::prefix('advisors')->group(function () {
     Route::post('/index', [AdvisorController::class, 'index']);
 });
 
-Route::prefix('investment/theme')->group(function () {
+Route::prefix('investment/themes')->group(function () {
     Route::post('/', [InvestmentThemeController::class, 'store']);
     Route::post('/index', [InvestmentThemeController::class, 'index']);
+});
+
+// DataController
+Route::prefix('data')->group(function () {
+    Route::post('/document/title', [DataController::class, 'documentTitle']);
+    Route::post('/document/description', [DataController::class, 'documentDescription']);
 });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { setHeader, setTitle } from '../../../redux/Actions/App';
 import { getDocumentTitle } from '../../../services/Data';
 
-class Moneybook extends React.Component {
+class Forum extends React.Component {
     componentDidMount() {
         const { redux } = this.props;
 
@@ -15,11 +15,7 @@ class Moneybook extends React.Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <div>가계부 첫 페이지</div>
-            </React.Fragment>
-        );
+        return <React.Fragment></React.Fragment>;
     }
 }
 
@@ -30,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(null, mapDispatchToProps)(Moneybook);
+export default connect(null, mapDispatchToProps)(Forum);

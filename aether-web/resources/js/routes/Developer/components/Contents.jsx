@@ -6,7 +6,8 @@ class Contents extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/dev/forum" component={RoutePage.Home} />
+                <Route exact path="/developer" component={RoutePage.Home} />
+                <Route exact path="/developer/forum" component={RoutePage.Forum} />
             </Switch>
         );
     }

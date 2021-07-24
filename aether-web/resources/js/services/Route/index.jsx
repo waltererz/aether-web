@@ -14,8 +14,11 @@ export const getRouteCode = () => {
         case /^\/advisors((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
             route = constants.route.advisor;
             break;
-        case /^\/dev\/forum((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
-            route = constants.route.devforum;
+        case /^\/developer((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
+            route = constants.route.developer;
+            break;
+        case /^\/user((\/[A-Za-z0-9\-\._~:\/\?#\[\]@!$&'\(\)\*\+,;\=]+)*)$/g.test(path):
+            route = constants.route.user;
             break;
     }
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 
 class HeaderIcons extends React.Component {
     render() {
@@ -29,6 +30,13 @@ class HeaderIcons extends React.Component {
                         <IconButton>
                             <Link to="/advisors/search">
                                 <SearchOutlinedIcon />
+                            </Link>
+                        </IconButton>
+                    </div>
+                    <div className="icon">
+                        <IconButton>
+                            <Link to="/developer/forum">
+                                <SpeakerNotesIcon />
                             </Link>
                         </IconButton>
                     </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,24 @@ Route::prefix('')->group(function () {
     Route::get('/', [HomeController::class, 'index']);
 });
 
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/signup', [UserController::class, 'index']);
+    Route::get('/login', [UserController::class, 'index']);
+});
+
 Route::prefix('assets')->group(function () {
     Route::get('/', [AssetController::class, 'index']);
-    Route::get('/moneybook', [AssetController::class, 'moneybook']);
-    Route::get('/portfolio', [AssetController::class, 'portfolio']);
+    Route::get('/moneybook', [AssetController::class, 'index']);
+    Route::get('/portfolio', [AssetController::class, 'index']);
 });
 
 Route::prefix('advisors')->group(function () {
     Route::get('/', [AdvisorController::class, 'index']);
-    Route::get('/search', [AdvisorController::class, 'search']);
+    Route::get('/search', [AdvisorController::class, 'index']);
 });
 
-Route::prefix('dev/forum')->group(function () {
+Route::prefix('developer')->group(function () {
     Route::get('/', [DeveloperController::class, 'index']);
+    Route::get('/forum', [DeveloperController::class, 'index']);
 });
