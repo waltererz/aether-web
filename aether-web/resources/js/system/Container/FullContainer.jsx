@@ -2,19 +2,44 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
+import ScrollTrigger from '@terwanerik/scrolltrigger';
 import MobileNavigation from '../MobileNavigation';
 import HeaderNavigation from '../HeaderNavigation';
 
-class FullContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loaded: false,
-        };
+export default class FullContainer extends React.Component {
+    componentDidMount() {
+        const scrollTrigger = new ScrollTrigger({
+            trigger: {
+                toggle: {
+                    class: {
+                        in: 'in',
+                        out: 'out',
+                    },
+                },
+            },
+            scroll: {
+                callback: () => {
+                    const headerNavigationDOM = document.querySelector('.header-navigation');
+                    const appDrawerPaperDOM = document.querySelector('.app-drawer .drawer-paper');
+
+                    if (
+                        headerNavigationDOM.style.transform &&
+                        headerNavigationDOM.style.transform !== 'none'
+                    ) {
+                        appDrawerPaperDOM.style.transform = 'translateY(-40px)';
+                        appDrawerPaperDOM.classList.add('in');
+                    } else {
+                        appDrawerPaperDOM.style.transform = 'none';
+                        appDrawerPaperDOM.classList.remove('in');
+                    }
+                },
+            },
+        });
     }
 
     render() {
         const { headerIcons } = this.props;
+
         return (
             <React.Fragment>
                 <HeaderNavigation headerIcons={headerIcons} />
@@ -50,5 +75,3 @@ class FullContainer extends React.Component {
         );
     }
 }
-
-export default FullContainer;

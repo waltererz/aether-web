@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import MobileNavigation from '../MobileNavigation';
 import HeaderNavigation from '../HeaderNavigation';
 
-class HalfContainer extends React.Component {
+export default class HalfContainer extends React.Component {
     render() {
         return (
             <React.Fragment>
@@ -31,5 +31,3 @@ class HalfContainer extends React.Component {
         );
     }
 }
-
-export default HalfContainer;

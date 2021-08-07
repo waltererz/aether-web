@@ -1,16 +1,9 @@
-import constants from '../../constants';
+import constants from '../../variables/constants';
 
-export const setHeader = (header) => {
+export const setTab = (tab) => {
     return {
-        type: constants.redux.app.header,
-        state: header,
-    };
-};
-
-export const setRoute = (route) => {
-    return {
-        type: constants.redux.app.route,
-        state: route,
+        type: constants.redux.app.tab,
+        state: tab,
     };
 };
 

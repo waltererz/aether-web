@@ -7,7 +7,7 @@ const constants = {
     url: {
         app: 'http://www.erzsphilos.com',
         backend: 'http://back.erzsphilos.com',
-        api: null,
+        api: 'http://back.erzsphilos.com/api',
     },
 
     route: {
@@ -22,12 +22,9 @@ const constants = {
     redux: {
         app: {
             title: 'APP_DOCUMENT_TITLE',
-            header: 'APP_HEADER',
-            route: 'APP_ROUTE',
+            tab: 'APP_TAB',
         },
     },
 };
-
-constants.url.api = constants.url.backend + '/api';
 
 export default constants;

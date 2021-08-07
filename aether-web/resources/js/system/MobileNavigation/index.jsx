@@ -3,63 +3,54 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
-import CodeOutlinedIcon from '@material-ui/icons/CodeOutlined';
-import constants from '../../constants';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
+import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
+import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
+import CodeRoundedIcon from '@material-ui/icons/CodeRounded';
+import constants from '../../variables/constants';
 
 class MobileNavigation extends React.Component {
     render() {
         const { reduxState } = this.props;
-        let nav = constants.route.default;
-        switch (reduxState.route) {
-            case constants.route.home:
-            case constants.route.user:
-            case constants.route.asset:
-            case constants.route.advisor:
-            case constants.route.developer:
-                nav = reduxState.route;
-                break;
-        }
+
         return (
             <div className="app-footer-mobile">
-                <BottomNavigation value={nav} className="bottomNavigation">
+                <BottomNavigation value={reduxState.tab} className="bottomNavigation">
                     <BottomNavigationAction
-                        icon={<HomeOutlinedIcon />}
+                        icon={<HomeRoundedIcon />}
                         className="navButton"
                         value={constants.route.home}
                         component={Link}
                         to="/"
                     />
                     <BottomNavigationAction
-                        icon={<PieChartOutlinedIcon />}
+                        icon={<PieChartRoundedIcon />}
                         className="navButton"
                         value={constants.route.asset}
                         component={Link}
                         to="/assets"
                     />
                     <BottomNavigationAction
-                        icon={<SupervisorAccountOutlinedIcon />}
+                        icon={<SupervisedUserCircleRoundedIcon />}
                         className="navButton"
                         value={constants.route.advisor}
                         component={Link}
                         to="/advisors"
                     />
                     <BottomNavigationAction
-                        icon={<AccountCircleOutlinedIcon />}
-                        className="navButton"
-                        value={constants.route.user}
-                        component={Link}
-                        to="/user"
-                    />
-                    <BottomNavigationAction
-                        icon={<CodeOutlinedIcon />}
+                        icon={<CodeRoundedIcon />}
                         className="navButton"
                         value={constants.route.developer}
                         component={Link}
                         to="/developer"
+                    />
+                    <BottomNavigationAction
+                        icon={<AccountBoxRoundedIcon />}
+                        className="navButton"
+                        value={constants.route.user}
+                        component={Link}
+                        to="/user"
                     />
                 </BottomNavigation>
             </div>
@@ -69,7 +60,7 @@ class MobileNavigation extends React.Component {
 
 const mapStateToProps = (state) => ({
     reduxState: {
-        route: state.app.route,
+        tab: state.app.tab,
     },
 });
 

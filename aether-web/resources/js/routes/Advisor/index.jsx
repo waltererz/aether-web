@@ -1,25 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getRouteCode } from '../../services/Route';
-import { setRoute } from '../../redux/Actions/App';
+import { setTab } from '../../redux/Actions/App';
 import { FullContainer } from '../../system/Container';
-import { scrollTop } from '../../services/Browser';
+import { getMetaData } from '../../services/Document';
+import { scrollTop, changeTitle } from '../../services/Browser';
 import HeaderIcons from './components/HeaderIcons';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import Contents from './components/Contents';
+import constants from '../../variables/constants';
 import '../../../sass/routes/advisors.scss';
 
 class Advisor extends React.Component {
     componentDidMount() {
+        this.setMetaData();
+    }
+
+    componentDidUpdate() {
+        this.setMetaData();
+    }
+
+    setMetaData() {
         const { redux, reduxState } = this.props;
-        const current_route = getRouteCode();
-        if (reduxState.route != current_route) {
-            redux.setRoute(current_route);
+
+        // 현재 페이지의 메타데이터를 가져옴
+        const metaData = getMetaData();
+
+        // 페이지 제목 변경
+        changeTitle(metaData['title']);
+
+        // 리덕스 컨테이너에 저장된 값과 현재 페이지의 메타데이터가 다른 경우 리덕스 컨테이너 및 웹브라우저 타이틀 업데이트
+        if (constants.route[metaData['tabName']] != reduxState.tab) {
+            // 메타데이터에 저장된 탭정보를 리덕스에 전달
+            redux.setTab(constants.route[metaData['tabName']]);
         }
     }
 
     render() {
+        // 화면이 새로고침되는 경우 스크롤바를 가장 위쪽으로 이동시킴
         scrollTop();
 
         return (
@@ -37,13 +55,13 @@ class Advisor extends React.Component {
 
 const mapStateToProps = (state) => ({
     reduxState: {
-        route: state.app.route,
+        tab: state.app.tab,
     },
 });
 
 const mapDispatchToProps = (dispatch) => ({
     redux: {
-        setRoute: (route) => dispatch(setRoute(route)),
+        setTab: (tab) => dispatch(setTab(tab)),
     },
 });
 

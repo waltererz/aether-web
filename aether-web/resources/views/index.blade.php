@@ -19,6 +19,7 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
             title: "{{ $name }}",
             description: "{{ $description }}",
             auth: null,
+            currentTabName: null,
         }
     </script>
 @endsection

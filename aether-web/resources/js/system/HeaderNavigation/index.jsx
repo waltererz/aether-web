@@ -1,85 +1,65 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import HomeIcon from '@material-ui/icons/Home';
-import PieChartIcon from '@material-ui/icons/PieChart';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import CodeIcon from '@material-ui/icons/Code';
+import HideOnScroll from '../../components/HideOnScroll';
 
-import constants from '../../constants';
-
-class HeaderNavigation extends React.Component {
+export default class HeaderNavigation extends React.Component {
     render() {
-        const { reduxState, headerIcons } = this.props;
+        const { headerIcons } = this.props;
         return (
-            <AppBar position="fixed" className="aether-header">
-                <Toolbar className="header-title">
-                    <Typography variant="h6">{reduxState.header}</Typography>
-                </Toolbar>
-                <div className="header-navigation">
-                    <Tabs
-                        className="tabs"
-                        value={reduxState.route}
-                        centered={true}
-                        indicatorColor="primary"
-                        textColor="primary"
-                    >
-                        <Tab
-                            className="tab"
-                            value={constants.route.default}
-                            style={{ display: 'none' }}
-                        />
-                        <Tab
-                            className="tab"
-                            value={constants.route.user}
-                            style={{ display: 'none' }}
-                        />
-                        <Tab
-                            className="tab"
-                            icon={<HomeIcon />}
-                            value={constants.route.home}
-                            component={Link}
-                            to="/"
-                        />
-                        <Tab
-                            className="tab"
-                            icon={<PieChartIcon />}
-                            value={constants.route.asset}
-                            component={Link}
-                            to="/assets"
-                        />
-                        <Tab
-                            className="tab"
-                            icon={<SupervisorAccountIcon />}
-                            value={constants.route.advisor}
-                            component={Link}
-                            to="/advisors"
-                        />
-                        <Tab
-                            className="tab"
-                            icon={<CodeIcon />}
-                            value={constants.route.developer}
-                            component={Link}
-                            to="/developer"
-                        />
-                    </Tabs>
-                </div>
-                <div className="header-icon-container">{headerIcons}</div>
-            </AppBar>
+            <React.Fragment>
+                <AppBar position="fixed" className="aether-header">
+                    <Toolbar className="header-toolbar" disableGutters={true}>
+                        <div className="header-title">
+                            <MuiLink href="/">Aether</MuiLink>
+                        </div>
+                        <div className="header-icon-container">{headerIcons}</div>
+                    </Toolbar>
+                </AppBar>
+                <HideOnScroll timeout={500}>
+                    <div className="header-navigation">
+                        <div className="header-navigation-box">
+                            <ul
+                                onScroll={(event) => {
+                                    const navBox = document.querySelector('.header-navigation-box');
+                                    const containerBoxWidth = event.target.offsetWidth;
+                                    const itemsWidth =
+                                        event.target.querySelector('.items').clientWidth;
+                                    const offsetScroll = event.target.scrollLeft;
+
+                                    if (offsetScroll <= 0) {
+                                        navBox.classList.add('start');
+                                        navBox.classList.remove('end');
+                                        navBox.classList.remove('scrolling');
+                                    } else if (
+                                        offsetScroll >=
+                                        itemsWidth - containerBoxWidth - 10
+                                    ) {
+                                        navBox.classList.remove('start');
+                                        navBox.classList.add('end');
+                                        navBox.classList.remove('scrolling');
+                                    } else {
+                                        navBox.classList.remove('start');
+                                        navBox.classList.remove('end');
+                                        navBox.classList.add('scrolling');
+                                    }
+                                }}
+                            >
+                                <div className="items">
+                                    <li>
+                                        <Link to="/assets">종합자산관리</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/advisors">투자어드바이저</Link>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </HideOnScroll>
+            </React.Fragment>
         );
     }
 }
-
-const mapStateToProps = (state) => ({
-    reduxState: {
-        header: state.app.header,
-        route: state.app.route,
-    },
-});
-
-export default connect(mapStateToProps)(HeaderNavigation);

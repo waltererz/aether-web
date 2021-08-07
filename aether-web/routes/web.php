@@ -25,7 +25,7 @@ Route::prefix('')->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/signup', [UserController::class, 'index']);
-    Route::get('/login', [UserController::class, 'index']);
+    Route::get('/signin', [UserController::class, 'index']);
 });
 
 Route::prefix('assets')->group(function () {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import constants from '../../constants';
+import constants from '../../variables/constants';
 
 export const post = async (path, params = {}) => {
     return await axios.get(constants.url.backend + '/sanctum/csrf-cookie').then(async () => {

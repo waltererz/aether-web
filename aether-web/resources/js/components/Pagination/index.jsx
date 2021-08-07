@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-class Pagination extends React.Component {
+export default class Pagination extends React.Component {
     render() {
         const { metadata, baseUrl } = this.props;
 
@@ -111,5 +111,3 @@ class Pagination extends React.Component {
         }
     }
 }
-
-export default Pagination;

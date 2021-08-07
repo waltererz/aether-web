@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Layout from '../Layout';
 import * as RoutePage from '../../routes';
 
-class Aether extends React.Component {
+export default class Aether extends React.Component {
     render() {
         return (
             <Layout>
@@ -18,5 +18,3 @@ class Aether extends React.Component {
         );
     }
 }
-
-export default Aether;

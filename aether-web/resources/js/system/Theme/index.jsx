@@ -21,19 +21,6 @@ const theme = createTheme({
     breakpoints: {
         values: breakpointValue,
     },
-
-    overrides: {
-        MuiToolbar: {
-            gutters: {
-                paddingLeft: 'initial',
-                paddingRight: 'initial',
-                '@media (min-width: 1024px)': {
-                    paddingLeft: 'initial',
-                    paddingRight: 'initial',
-                },
-            },
-        },
-    },
 });
 
 export default theme;

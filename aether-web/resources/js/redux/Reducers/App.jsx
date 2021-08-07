@@ -1,19 +1,14 @@
-import constants from '../../constants';
-import { getRouteCode } from '../../services/Route';
+import constants from '../../variables/constants';
 
 const initialStates = {
-    title: '',
-    header: '',
-    route: getRouteCode(),
+    title: null,
+    tab: null,
 };
 
 function app(state = initialStates, action) {
     switch (action.type) {
-        case constants.redux.app.header:
-            return { ...state, header: action.state };
-            break;
-        case constants.redux.app.route:
-            return { ...state, route: action.state };
+        case constants.redux.app.tab:
+            return { ...state, tab: action.state };
             break;
         case constants.redux.app.title:
             return { ...state, title: action.state };

@@ -1,20 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MuiCheckbox from '@material-ui/core/Checkbox';
 import Accordion from '@material-ui/core/Accordion';
 import Button from '@material-ui/core/Button';
-import Rating from '@material-ui/lab/Rating';
+import Rating from '@material-ui/core/Rating';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { setHeader, setTitle } from '../../../redux/Actions/App';
 import * as API from '../../../services/API';
-import { getDocumentTitle } from '../../../services/Data';
 
-class Search extends React.Component {
+export default class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,14 +29,6 @@ class Search extends React.Component {
     }
 
     componentDidMount() {
-        const { redux } = this.props;
-
-        (async function () {
-            const documentTitle = await getDocumentTitle(location.pathname);
-            redux.setHeader(documentTitle);
-            redux.setTitle(documentTitle);
-        })();
-
         this._getThemes();
         this._getAdvisors();
     }
@@ -232,12 +221,3 @@ class Search extends React.Component {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => ({
-    redux: {
-        setHeader: (header) => dispatch(setHeader(header)),
-        setTitle: (title) => dispatch(setTitle(title)),
-    },
-});
-
-export default connect(null, mapDispatchToProps)(Search);

@@ -8,7 +8,7 @@ class Contents extends React.Component {
             <Switch>
                 <Route exact path="/user" component={RoutePage.Home} />
                 <Route exact path="/user/signup" component={RoutePage.SignUp} />
-                <Route exact path="/user/login" component={RoutePage.Login} />
+                <Route exact path="/user/signin" component={RoutePage.SignIn} />
             </Switch>
         );
     }
