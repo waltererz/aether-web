@@ -13,66 +13,12 @@ a {
     text-decoration: none;
 }
 
-.mt-0 {
-    margin-top: 0px !important;
-}
-
-.mt-5 {
-    margin-top: 5px !important;
-}
-
-.mt-10 {
-    margin-top: 10px !important;
-}
-
-.mt-20 {
-    margin-top: 20px !important;
-}
-
-.mb-0 {
-    margin-bottom: 0px !important;
-}
-
-.mb-5 {
-    margin-bottom: 5px !important;
-}
-
-.mb-10 {
-    margin-bottom: 10px !important;
-}
-
-.mb-20 {
-    margin-bottom: 20px !important;
-}
-
-.left {
-    text-align: left !important;
-}
-
-.center {
-    text-align: center !important;
-}
-
-.right {
-    text-align: right !important;
-}
-
-.red,
-.error {
-    color: $error-color !important;
-}
-
-.green,
-.success {
-    color: $success-color !important;
-}
-
 .app-drawer {
     .drawer-paper {
         display: flex;
         background-color: $body-bg;
         border: 0px;
-        z-index: 900;
+        z-index: $zIndex-drawer;
         box-sizing: border-box;
         transition: transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms,
             height 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;
@@ -103,14 +49,23 @@ a {
 }
 
 .app-container.aether {
-    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 0px;
 
     .grid-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
         .grid-item-1,
         .grid-item-2,
         .grid-item-trickery {
+            flex-grow: 0;
+            flex-shrink: 0;
             box-sizing: border-box;
-            width: 100%;
             height: 3000px;
         }
     }
@@ -127,7 +82,7 @@ a {
         bottom: 0px;
         right: 0px;
         left: auto;
-        z-index: 1200;
+        z-index: $zIndex-bottomNavigation;
         border-top: 1px solid #eeeeee;
 
         .navButton {
@@ -146,6 +101,7 @@ header.aether-header {
     transition: none;
     box-shadow: none;
     border-bottom: 1px solid #eeeeee;
+    z-index: $zIndex-header;
 
     .header-toolbar {
         display: flex;
@@ -156,6 +112,8 @@ header.aether-header {
                 color: rgb(26, 0, 64);
                 font-weight: bold;
                 text-decoration: none;
+                -webkit-tap-highlight-color: transparent;
+                user-select: none;
             }
         }
 
@@ -214,10 +172,10 @@ header.aether-header {
     justify-content: center;
     position: fixed;
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px;
     box-sizing: border-box;
     background: rgb(26, 0, 64);
-    z-index: 999;
+    z-index: $zIndex-headerNavigation;
 
     .header-navigation-box {
         display: flex;
@@ -231,26 +189,22 @@ header.aether-header {
         &::before,
         &::after {
             content: '';
-            display: none;
+            display: block;
             position: absolute;
             width: 50px;
             height: 100%;
             opacity: 0;
-            transition: opacity 0.2s linear;
-        }
-
-        &::after {
-            display: block;
-            opacity: 1;
+            transition: opacity 0.4s linear, visibility 0.4s linear;
         }
 
         &.start {
             &::after {
-                display: block;
+                visibility: visible;
                 opacity: 1;
             }
 
             &::before {
+                visibility: hidden;
                 opacity: 0;
             }
         }
@@ -258,18 +212,19 @@ header.aether-header {
         &.scrolling {
             &::after,
             &::before {
-                display: block;
+                visibility: visible;
                 opacity: 1;
             }
         }
 
         &.end {
             &::before {
-                display: block;
+                visibility: visible;
                 opacity: 1;
             }
 
             &::after {
+                visibility: hidden;
                 opacity: 0;
             }
         }
@@ -331,6 +286,8 @@ header.aether-header {
                 a {
                     color: #ffffff;
                     text-decoration: none;
+                    -webkit-tap-highlight-color: transparent;
+                    user-select: none;
                 }
             }
         }
@@ -348,8 +305,8 @@ header.aether-header {
         .header-toolbar {
             min-height: $mobile-header-height;
             height: $mobile-header-height;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: $mobile-margin-both-side;
+            padding-right: $mobile-margin-both-side;
 
             .header-title {
                 font-size: 1.2rem;
@@ -369,14 +326,35 @@ header.aether-header {
 
     .header-navigation {
         height: $mobile-header-navigation-height;
+        padding-left: $mobile-margin-both-side;
+        padding-right: $mobile-margin-both-side;
+
+        .header-navigation-box {
+            ul {
+                li {
+                    a {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+        }
     }
 
     .app-container.aether {
-        height: calc(100% - #{$mobile-bottomNavigation-height} + 10px);
+        height: calc(100% - #{$mobile-bottomNavigation-height} + #{$mobile-margin-both-side});
         margin-bottom: calc(#{$mobile-bottomNavigation-height} + 20px);
-        padding-top: calc(#{$mobile-header-navigation-height} + 10px);
+        padding-top: calc(#{$mobile-header-navigation-height} + #{$mobile-margin-both-side});
+        padding-left: $mobile-margin-both-side;
+        padding-right: $mobile-margin-both-side;
 
         .grid-container {
+            justify-content: center;
+
+            .grid-item-1 {
+                width: 100%;
+                max-width: $center-grid-item-width;
+            }
+
             .grid-item-1,
             .grid-item-2,
             .grid-item-trickery {
@@ -388,97 +366,10 @@ header.aether-header {
                 display: none;
             }
         }
-
-        &:not(.onlyRight) {
-            .grid-container {
-                .grid-item-1 {
-                    width: 100%;
-                    max-width: 700px;
-                    margin: 0px auto;
-                }
-            }
-        }
-
-        &.onlyRight {
-            .grid-container {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-
-                .grid-item-1 {
-                    width: 100%;
-                    max-width: 700px;
-                }
-
-                .grid-item-2 {
-                    width: 100%;
-                    max-width: 300px;
-                    padding-left: 20px;
-                }
-            }
-        }
     }
 
     .app-drawer {
         display: none;
-    }
-}
-
-@media screen and (min-width: $breakpoint-sm - 120px) {
-    .app-container.aether {
-        &:not(.onlyRight) {
-            .grid-container {
-                .grid-item-1 {
-                    margin: initial;
-                    max-width: calc(
-                        #{$breakpoint-sm} - #{$right-grid-item-width} - 40px -
-                            ((#{$breakpoint-sm} - 50px) - 100vw)
-                    );
-                }
-
-                .grid-item-2 {
-                    display: block;
-                    padding-left: 10px;
-                    max-width: calc(
-                        (#{$right-grid-item-width} - 30px) -
-                            (#{$breakpoint-sm} - (#{$breakpoint-sm} - 50px))
-                    );
-                }
-            }
-        }
-
-        &.onlyRight {
-            .grid-container {
-                .grid-item-1 {
-                    max-width: 1000px;
-                    width: calc(100% - 300px);
-                }
-
-                .grid-item-2 {
-                    display: block;
-                    width: 300px;
-                }
-            }
-        }
-    }
-}
-
-@media screen and (min-width: $breakpoint-sm - 50px) {
-    .app-container.aether {
-        &:not(.onlyRight) {
-            .grid-container {
-                .grid-item-1 {
-                    max-width: calc(#{$breakpoint-sm} - #{$right-grid-item-width} - 40px);
-                }
-
-                .grid-item-2 {
-                    max-width: calc(
-                        (#{$right-grid-item-width} - 30px) - (#{$breakpoint-sm} - 100vw)
-                    );
-                }
-            }
-        }
     }
 }
 
@@ -493,15 +384,25 @@ header.aether-header {
     }
 
     .app-container.aether {
-        &:not(.onlyRight) {
+        &:not(.half-container) {
             .grid-container {
-                .grid-item-1 {
-                    max-width: calc(100vw - #{$right-grid-item-width} - 40px);
-                }
+                justify-content: space-between;
+            }
+        }
 
-                .grid-item-2 {
-                    max-width: calc(#{$right-grid-item-width} - 30px);
-                }
+        .grid-container {
+            .grid-item-1 {
+                margin: initial;
+                flex-shrink: 1;
+                width: $center-grid-item-width;
+                max-width: none;
+            }
+
+            .grid-item-2 {
+                display: block;
+                flex-shrink: 1;
+                margin-left: $mobile-margin-both-side;
+                width: $right-grid-item-width;
             }
         }
     }
@@ -514,6 +415,18 @@ header.aether-header {
 
     .header-navigation {
         height: $header-navigation-height;
+        padding-left: $margin-both-side;
+        padding-right: $margin-both-side;
+
+        .header-navigation-box {
+            ul {
+                li {
+                    a {
+                        font-size: 0.85em;
+                    }
+                }
+            }
+        }
     }
 
     header.aether-header {
@@ -522,8 +435,8 @@ header.aether-header {
         .header-toolbar {
             min-height: $header-height;
             height: $header-height;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: $margin-both-side;
+            padding-right: $margin-both-side;
 
             .header-title {
                 font-size: 1.5rem;
@@ -544,7 +457,9 @@ header.aether-header {
     .app-container.aether {
         height: auto;
         margin-bottom: 20px;
-        padding-top: calc(#{$header-navigation-height} + 20px);
+        padding-top: calc(#{$header-navigation-height} + #{$margin-both-side});
+        padding-left: $margin-both-side;
+        padding-right: $margin-both-side;
 
         .grid-container {
             .grid-item-1,
@@ -552,23 +467,17 @@ header.aether-header {
             .grid-item-trickery {
                 min-height: calc(100vh - #{$header-height});
             }
+
+            .grid-item-2 {
+                margin-left: $margin-both-side;
+            }
         }
 
-        &:not(.onlyRight) {
+        &:not(.half-container) {
             .grid-container {
-                .grid-item-1 {
-                    max-width: calc(#{$center-grid-item-width} - (#{$breakpoint-lg} - 100vw));
-                }
-
-                .grid-item-2 {
-                    padding-left: 0px;
-                    max-width: calc(
-                        #{$right-grid-item-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2
-                    );
-                }
-
                 .grid-item-trickery {
                     display: block;
+                    width: 100%;
                     max-width: calc(
                         #{$drawer-width} - ((#{$breakpoint-xl} - #{$breakpoint-lg})) / 2
                     );
@@ -613,16 +522,8 @@ header.aether-header {
     }
 
     .app-container.aether {
-        &:not(.onlyRight) {
+        &:not(.half-container) {
             .grid-container {
-                .grid-item-1 {
-                    max-width: $center-grid-item-width;
-                }
-
-                .grid-item-2 {
-                    max-width: calc(#{$right-grid-item-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
-                }
-
                 .grid-item-trickery {
                     max-width: calc(#{$drawer-width} - ((#{$breakpoint-xl} - 100vw)) / 2);
                 }
@@ -641,12 +542,8 @@ header.aether-header {
     }
 
     .app-container.aether {
-        &:not(.onlyRight) {
+        &:not(.half-container) {
             .grid-container {
-                .grid-item-2 {
-                    max-width: $right-grid-item-width;
-                }
-
                 .grid-item-trickery {
                     max-width: $drawer-width;
                 }

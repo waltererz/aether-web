@@ -31,7 +31,11 @@ Route::prefix('user')->group(function () {
 Route::prefix('assets')->group(function () {
     Route::get('/', [AssetController::class, 'index']);
     Route::get('/moneybook', [AssetController::class, 'index']);
-    Route::get('/portfolio', [AssetController::class, 'index']);
+
+    Route::prefix('investment')->group(function () {
+        Route::get('/', [AssetController::class, 'index']);
+        Route::get('/portfolio', [AssetController::class, 'index']);
+    });
 });
 
 Route::prefix('advisors')->group(function () {

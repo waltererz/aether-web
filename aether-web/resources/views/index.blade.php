@@ -1,8 +1,8 @@
 <?php
-$name = env('APP_TITLE');
-$title = isset($title) && strlen($title) > 0 ? $title . ' :: ' . env('APP_TITLE') : env('APP_TITLE');
+$name = config('app.name');
+$title = isset($title) && strlen($title) > 0 ? $title . ' | ' . $name : $name;
 $type = isset($type) && strlen($type) > 0 ?? 'website';
-$description = isset($description) && strlen($description) > 0 ? $description : env('APP_DESCRIPTION');
+$description = isset($description) && strlen($description) > 0 ? $description : config('app.description');
 ?>
 
 @extends('layout.react')
@@ -16,8 +16,8 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
     <meta property="og:locale" content="ko_KR" />
     <script type="text/javascript">
         window._aether = {
-            title: "{{ $name }}",
-            description: "{{ $description }}",
+            name: "{{ $name }}",
+            baseUrl: "{{ config('app.url') }}",
             auth: null,
             currentTabName: null,
         }

@@ -1,7 +1,7 @@
 const constants = {
     app: {
-        name: window._aether.title,
-        description: window._aether.description,
+        name: window._aether.name,
+        baseUrl: window._aether.baseUrl,
     },
 
     url: {

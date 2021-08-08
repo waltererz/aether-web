@@ -25643,7 +25643,11 @@ var Contents = /*#__PURE__*/function (_React$Component) {
           component: _routes__WEBPACK_IMPORTED_MODULE_1__.Moneybook
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
           exact: true,
-          path: "/assets/portfolio",
+          path: "/assets/investment",
+          component: _routes__WEBPACK_IMPORTED_MODULE_1__.Investment
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
+          exact: true,
+          path: "/assets/investment/portfolio",
           component: _routes__WEBPACK_IMPORTED_MODULE_1__.Portfolio
         })]
       });
@@ -25731,7 +25735,7 @@ var HeaderIcons = /*#__PURE__*/function (_React$Component) {
           to: '/advisors/search',
           icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_SearchOutlined__WEBPACK_IMPORTED_MODULE_4__.default, {})
         }, {
-          to: '/assets/portfolio',
+          to: '/assets/investment/portfolio',
           icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_PieChartOutlined__WEBPACK_IMPORTED_MODULE_5__.default, {})
         }, {
           to: '/assets/moneybook',
@@ -25820,7 +25824,7 @@ var LeftSide = /*#__PURE__*/function (_React$Component) {
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_MonetizationOn__WEBPACK_IMPORTED_MODULE_4__.default, {})
       }, {
         text: '포트폴리오관리',
-        to: '/assets/portfolio',
+        to: '/assets/investment/portfolio',
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_PieChart__WEBPACK_IMPORTED_MODULE_5__.default, {})
       }, {
         text: '가계부',
@@ -26107,6 +26111,73 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./resources/js/routes/AssetManagement/routes/Investment.jsx":
+/*!*******************************************************************!*\
+  !*** ./resources/js/routes/AssetManagement/routes/Investment.jsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Investment)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Investment = /*#__PURE__*/function (_React$Component) {
+  _inherits(Investment, _React$Component);
+
+  var _super = _createSuper(Investment);
+
+  function Investment() {
+    _classCallCheck(this, Investment);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(Investment, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: "\uD22C\uC790\uC790\uC0B0\uAD00\uB9AC \uCCAB \uD398\uC774\uC9C0"
+        })
+      });
+    }
+  }]);
+
+  return Investment;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/routes/AssetManagement/routes/Moneybook.jsx":
 /*!******************************************************************!*\
   !*** ./resources/js/routes/AssetManagement/routes/Moneybook.jsx ***!
@@ -26252,11 +26323,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Home": () => (/* reexport safe */ _Home__WEBPACK_IMPORTED_MODULE_0__.default),
 /* harmony export */   "Moneybook": () => (/* reexport safe */ _Moneybook__WEBPACK_IMPORTED_MODULE_1__.default),
-/* harmony export */   "Portfolio": () => (/* reexport safe */ _Portfolio__WEBPACK_IMPORTED_MODULE_2__.default)
+/* harmony export */   "Investment": () => (/* reexport safe */ _Investment__WEBPACK_IMPORTED_MODULE_2__.default),
+/* harmony export */   "Portfolio": () => (/* reexport safe */ _Portfolio__WEBPACK_IMPORTED_MODULE_3__.default)
 /* harmony export */ });
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home */ "./resources/js/routes/AssetManagement/routes/Home.jsx");
 /* harmony import */ var _Moneybook__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Moneybook */ "./resources/js/routes/AssetManagement/routes/Moneybook.jsx");
-/* harmony import */ var _Portfolio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Portfolio */ "./resources/js/routes/AssetManagement/routes/Portfolio.jsx");
+/* harmony import */ var _Investment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Investment */ "./resources/js/routes/AssetManagement/routes/Investment.jsx");
+/* harmony import */ var _Portfolio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Portfolio */ "./resources/js/routes/AssetManagement/routes/Portfolio.jsx");
+
 
 
 
@@ -28574,7 +28648,7 @@ var HalfContainer = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_HeaderNavigation__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_4__.default, {
-          className: "app-container aether onlyRight",
+          className: "app-container aether half-container",
           maxWidth: false,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__.default, {
             container: true,
@@ -28688,8 +28762,40 @@ var HeaderNavigation = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(HeaderNavigation, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.toggleHeaderNavigationShadow();
+    }
+  }, {
+    key: "toggleHeaderNavigationShadow",
+    value: function toggleHeaderNavigationShadow() {
+      var navBox = document.querySelector('.header-navigation-box');
+      var containerBox = navBox.querySelector('ul');
+      var containerBoxWidth = containerBox.offsetWidth;
+      var itemsWidth = containerBox.querySelector('.items').clientWidth;
+      var offsetScroll = containerBox.scrollLeft;
+
+      if (offsetScroll <= 0) {
+        if (itemsWidth > containerBoxWidth) {
+          navBox.classList.add('start');
+          navBox.classList.remove('end');
+          navBox.classList.remove('scrolling');
+        }
+      } else if (offsetScroll >= itemsWidth - containerBoxWidth - 10) {
+        navBox.classList.remove('start');
+        navBox.classList.add('end');
+        navBox.classList.remove('scrolling');
+      } else {
+        navBox.classList.remove('start');
+        navBox.classList.remove('end');
+        navBox.classList.add('scrolling');
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var headerIcons = this.props.headerIcons;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_3__.default, {
@@ -28717,24 +28823,7 @@ var HeaderNavigation = /*#__PURE__*/function (_React$Component) {
               className: "header-navigation-box",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
                 onScroll: function onScroll(event) {
-                  var navBox = document.querySelector('.header-navigation-box');
-                  var containerBoxWidth = event.target.offsetWidth;
-                  var itemsWidth = event.target.querySelector('.items').clientWidth;
-                  var offsetScroll = event.target.scrollLeft;
-
-                  if (offsetScroll <= 0) {
-                    navBox.classList.add('start');
-                    navBox.classList.remove('end');
-                    navBox.classList.remove('scrolling');
-                  } else if (offsetScroll >= itemsWidth - containerBoxWidth - 10) {
-                    navBox.classList.remove('start');
-                    navBox.classList.add('end');
-                    navBox.classList.remove('scrolling');
-                  } else {
-                    navBox.classList.remove('start');
-                    navBox.classList.remove('end');
-                    navBox.classList.add('scrolling');
-                  }
+                  return _this.toggleHeaderNavigationShadow();
                 },
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "items",
@@ -28747,6 +28836,16 @@ var HeaderNavigation = /*#__PURE__*/function (_React$Component) {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
                       to: "/advisors",
                       children: "\uD22C\uC790\uC5B4\uB4DC\uBC14\uC774\uC800"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+                      to: "/assets/moneybook",
+                      children: "\uAC00\uACC4\uBD80"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+                      to: "/developer",
+                      children: "\uAC1C\uBC1C\uC790\uD398\uC774\uC9C0"
                     })
                   })]
                 })
@@ -29212,8 +29311,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var constants = {
   app: {
-    name: window._aether.title,
-    description: window._aether.description
+    name: window._aether.name,
+    baseUrl: window._aether.baseUrl
   },
   url: {
     app: 'http://www.erzsphilos.com',

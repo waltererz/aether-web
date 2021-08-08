@@ -8,9 +8,6 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        return view('index')->with([
-            'title' => $this->_getDocumentTitle(),
-            'description' => $this->_getDocumentDescription(),
-        ]);
+        return view('index');
     }
 }

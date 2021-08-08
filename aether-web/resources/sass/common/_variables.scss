@@ -40,5 +40,12 @@ $mobile-header-height: 48px;
 $mobile-header-navigation-height: 40px;
 $mobile-bottomNavigation-height: 50px;
 $drawer-width: 320px;
-$center-grid-item-width: 720px;
+$center-grid-item-width: 1024px;
 $right-grid-item-width: 300px;
+$margin-both-side: 20px;
+$mobile-margin-both-side: 10px;
+
+$zIndex-drawer: 900;
+$zIndex-header: 1300;
+$zIndex-bottomNavigation: 1200;
+$zIndex-headerNavigation: 1200;

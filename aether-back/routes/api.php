@@ -40,9 +40,3 @@ Route::prefix('investment/themes')->group(function () {
     Route::post('/', [InvestmentThemeController::class, 'store']);
     Route::post('/index', [InvestmentThemeController::class, 'index']);
 });
-
-// DataController
-Route::prefix('data')->group(function () {
-    Route::post('/document/title', [DataController::class, 'documentTitle']);
-    Route::post('/document/description', [DataController::class, 'documentDescription']);
-});

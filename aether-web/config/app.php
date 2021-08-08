@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'AETHER'),
+    'name' => env('APP_NAME', '투자가 시작되는 곳, AETHER'),
+    'description' => env('APP_DESCRIPTION', '누구나 쉽고 재미있게 친구들과 함께하는 주식투자'),
 
     /*
     |--------------------------------------------------------------------------

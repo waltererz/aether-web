@@ -9,7 +9,7 @@ export default class HalfContainer extends React.Component {
         return (
             <React.Fragment>
                 <HeaderNavigation />
-                <Container className="app-container aether onlyRight" maxWidth={false}>
+                <Container className="app-container aether half-container" maxWidth={false}>
                     <Grid
                         container
                         className="grid-container"

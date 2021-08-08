@@ -8,7 +8,8 @@ class Contents extends React.Component {
             <Switch>
                 <Route exact path="/assets" component={RoutePage.Home} />
                 <Route exact path="/assets/moneybook" component={RoutePage.Moneybook} />
-                <Route exact path="/assets/portfolio" component={RoutePage.Portfolio} />
+                <Route exact path="/assets/investment" component={RoutePage.Investment} />
+                <Route exact path="/assets/investment/portfolio" component={RoutePage.Portfolio} />
             </Switch>
         );
     }

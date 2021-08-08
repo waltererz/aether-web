@@ -15,7 +15,7 @@ export default class HeaderIcons extends React.Component {
                 ]}
                 mobile={[
                     { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                    { to: '/assets/portfolio', icon: <PieChartOutlinedIcon /> },
+                    { to: '/assets/investment/portfolio', icon: <PieChartOutlinedIcon /> },
                     { to: '/assets/moneybook', icon: <CreditCardOutlinedIcon /> },
                 ]}
             />
