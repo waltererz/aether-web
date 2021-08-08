@@ -170,6 +170,7 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
 .header-navigation .header-navigation-box::before, .header-navigation .header-navigation-box::after {
   content: "";
   display: block;
+  visibility: hidden;
   position: absolute;
   width: 50px;
   height: 100%;

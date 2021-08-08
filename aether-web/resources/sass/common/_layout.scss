@@ -190,6 +190,7 @@ header.aether-header {
         &::after {
             content: '';
             display: block;
+            visibility: hidden;
             position: absolute;
             width: 50px;
             height: 100%;
