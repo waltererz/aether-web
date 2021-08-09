@@ -6,6 +6,8 @@ export const getMetaData = () => {
 
     // 현재 디렉토리에 해당하는 탭 이름을 문자열로 저장
     let currentTabName = 'default';
+
+    // 현재 디렉토리에 해당하는 타이틀을 문자열로 저장
     let currentDocumentTitle = '';
 
     // 현재 경로가 어떤 탭 이름과 일치하는지 확인

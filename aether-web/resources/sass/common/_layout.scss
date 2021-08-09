@@ -97,10 +97,9 @@ a {
 }
 
 header.aether-header {
-    background-color: #ffffff;
+    background-color: #282828;
     transition: none;
     box-shadow: none;
-    border-bottom: 1px solid #eeeeee;
     z-index: $zIndex-header;
 
     .header-toolbar {
@@ -109,7 +108,7 @@ header.aether-header {
 
         .header-title {
             a {
-                color: rgb(26, 0, 64);
+                color: #ffffff;
                 font-weight: bold;
                 text-decoration: none;
                 -webkit-tap-highlight-color: transparent;
@@ -133,11 +132,21 @@ header.aether-header {
 
                     a {
                         display: flex;
-                        color: #222222;
+                        color: #c5c5c5;
                         text-decoration: none;
+                        transition: color 0.1s linear;
 
                         .MuiSvgIcon-root {
                             font-size: 1.5rem;
+                            transition: transform 0.1s linear;
+                        }
+
+                        &:hover {
+                            color: #ffffff;
+
+                            .MuiSvgIcon-root {
+                                transform: scale(1.2, 1.2);
+                            }
                         }
                     }
 
@@ -174,7 +183,7 @@ header.aether-header {
     width: 100%;
     padding: 0px;
     box-sizing: border-box;
-    background: rgb(26, 0, 64);
+    background-color: #282828;
     z-index: $zIndex-headerNavigation;
 
     .header-navigation-box {
@@ -233,9 +242,9 @@ header.aether-header {
         &::before {
             background: linear-gradient(
                 90deg,
-                rgba(26, 0, 64, 1) 0%,
-                rgba(26, 0, 64, 0.5) 50%,
-                rgba(26, 0, 64, 0) 100%
+                rgba(40, 40, 40, 1) 0%,
+                rgba(40, 40, 40, 0.5) 50%,
+                rgba(40, 40, 40, 0) 100%
             );
             left: 0px;
         }
@@ -243,9 +252,9 @@ header.aether-header {
         &::after {
             background: linear-gradient(
                 90deg,
-                rgba(26, 0, 64, 0) 0%,
-                rgba(26, 0, 64, 0.5) 50%,
-                rgba(26, 0, 64, 1) 100%
+                rgba(40, 40, 40, 0) 0%,
+                rgba(40, 40, 40, 0.5) 50%,
+                rgba(40, 40, 40, 1) 100%
             );
             right: 0px;
         }
@@ -270,25 +279,85 @@ header.aether-header {
             .items {
                 display: flex;
                 align-items: center;
-            }
 
-            li {
-                display: inline-flex;
-                margin: 0px 15px;
+                li {
+                    display: inline-flex;
 
-                &:first-child {
-                    margin-left: 0px;
-                }
+                    &:first-child {
+                        a {
+                            padding-left: 0px;
+                        }
+                    }
 
-                &:last-child {
-                    margin-right: 0px;
-                }
+                    &:last-child {
+                        a {
+                            padding-right: 0px;
+                        }
+                    }
 
-                a {
-                    color: #ffffff;
-                    text-decoration: none;
-                    -webkit-tap-highlight-color: transparent;
-                    user-select: none;
+                    a {
+                        color: #bbbbbb;
+                        text-decoration: none;
+                        transition: color 0.2s linear;
+                        -webkit-tap-highlight-color: transparent;
+                        user-select: none;
+
+                        &.highlight {
+                            color: #ffffff;
+                        }
+
+                        &.externel {
+                            color: #888888;
+                        }
+
+                        &.selected {
+                            color: #ffffff;
+                        }
+                    }
+
+                    .sublinksBox {
+                        background-color: #ffffff;
+                        width: 200px;
+                        overflow-x: hidden;
+                        box-shadow: 0px 3px 10px 0px rgba(148, 137, 137, 0.2);
+
+                        h5.sublinksTitle {
+                            font-size: 1em;
+                            font-weight: bold;
+                            margin: 0px;
+                            padding: 10px;
+                            border-bottom: 1px solid #dddddd;
+                        }
+
+                        ol.sublinks {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            list-style: none;
+                            margin: 0px;
+                            padding: 10px;
+
+                            li.sublinkItem {
+                                display: block;
+                                width: 100%;
+                                padding: 2px;
+                                box-sizing: border-box;
+
+                                a {
+                                    color: #444444;
+                                    font-size: 0.9em;
+                                }
+
+                                &:first-child {
+                                    padding-top: 0px;
+                                }
+
+                                &:last-child {
+                                    padding-bottom: 0px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -332,9 +401,12 @@ header.aether-header {
 
         .header-navigation-box {
             ul {
-                li {
-                    a {
-                        font-size: 0.9em;
+                .items {
+                    li {
+                        a {
+                            padding: 0px 10px;
+                            font-size: 0.8em;
+                        }
                     }
                 }
             }
@@ -421,9 +493,12 @@ header.aether-header {
 
         .header-navigation-box {
             ul {
-                li {
-                    a {
-                        font-size: 0.85em;
+                .items {
+                    li {
+                        a {
+                            padding: 0px 15px;
+                            font-size: 0.85em;
+                        }
                     }
                 }
             }
