@@ -14,6 +14,46 @@ a {
   text-decoration: none;
 }
 
+#mobile-drawer .MuiPaper-root {
+  width: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+#mobile-drawer .MuiPaper-root .userInformation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+#mobile-drawer .MuiPaper-root .userInformation .avatar {
+  margin-right: 20px;
+}
+#mobile-drawer .MuiPaper-root .userInformation .avatar .MuiAvatar-root {
+  width: 56px;
+  height: 56px;
+}
+#mobile-drawer .MuiPaper-root .userInformation .avatar svg {
+  width: 32px;
+  height: 32px;
+}
+#mobile-drawer .MuiPaper-root .userInformation .content {
+  font-size: 1.2em;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li .submenus {
+  margin-left: 33px;
+}
+
 .app-drawer .drawer-paper {
   display: flex;
   background-color: #ffffff;
@@ -72,7 +112,7 @@ a {
   bottom: 0px;
   right: 0px;
   left: auto;
-  z-index: 1200;
+  z-index: 1190;
   border-top: 1px solid #eeeeee;
 }
 .app-footer-mobile .bottomNavigation .navButton {
@@ -87,16 +127,30 @@ header.aether-header {
   background-color: #282828;
   transition: none;
   box-shadow: none;
-  z-index: 1300;
+  z-index: 1190;
 }
 header.aether-header .header-toolbar {
   display: flex;
   justify-content: space-between;
 }
+header.aether-header .header-toolbar .header-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 header.aether-header .header-toolbar .header-title a {
+  display: block;
   color: #ffffff;
   font-weight: bold;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+header.aether-header .header-toolbar .header-title .mobile-menuButton {
+  display: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -124,22 +178,11 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
 header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a,
 header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon a {
   display: flex;
-  color: #c5c5c5;
   text-decoration: none;
-  transition: color 0.1s linear;
 }
 header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a .MuiSvgIcon-root,
 header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon a .MuiSvgIcon-root {
   font-size: 1.5rem;
-  transition: transform 0.1s linear;
-}
-header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a:hover,
-header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon a:hover {
-  color: #ffffff;
-}
-header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a:hover .MuiSvgIcon-root,
-header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon a:hover .MuiSvgIcon-root {
-  transform: scale(1.2, 1.2);
 }
 header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon:first-child,
 header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon:first-child {
@@ -152,8 +195,24 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon:
 header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon {
   margin: 0px 10px;
 }
+header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a {
+  color: #dddddd;
+  transition: color 0.1s linear;
+}
+header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a .MuiSvgIcon-root {
+  transition: transform 0.1s linear;
+}
+header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a:hover {
+  color: #ffffff;
+}
+header.aether-header .header-toolbar .header-icon-container .icons-desktop .icon a:hover .MuiSvgIcon-root {
+  transform: scale(1.2, 1.2);
+}
 header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon {
   margin: 0px 8px;
+}
+header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon a {
+  color: #ffffff;
 }
 
 .header-navigation {
@@ -165,7 +224,7 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
   padding: 0px;
   box-sizing: border-box;
   background-color: #282828;
-  z-index: 1200;
+  z-index: 1180;
 }
 .header-navigation .header-navigation-box {
   display: flex;
@@ -217,6 +276,7 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
 .header-navigation .header-navigation-box ul {
   display: flex;
   list-style: none;
+  width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
@@ -242,7 +302,17 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
 .header-navigation .header-navigation-box ul .items li:last-child a {
   padding-right: 0px;
 }
+.header-navigation .header-navigation-box ul .items li .linkItem.selected a {
+  color: #ffffff;
+}
+.header-navigation .header-navigation-box ul .items li .linkItem.highlight a {
+  color: #ffffff;
+}
+.header-navigation .header-navigation-box ul .items li .linkItem.externel a {
+  color: #777777;
+}
 .header-navigation .header-navigation-box ul .items li a {
+  display: inline-block;
   color: #bbbbbb;
   text-decoration: none;
   transition: color 0.2s linear;
@@ -251,15 +321,6 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-}
-.header-navigation .header-navigation-box ul .items li a.highlight {
-  color: #ffffff;
-}
-.header-navigation .header-navigation-box ul .items li a.externel {
-  color: #888888;
-}
-.header-navigation .header-navigation-box ul .items li a.selected {
-  color: #ffffff;
 }
 .header-navigation .header-navigation-box ul .items li .sublinksBox {
   background-color: #ffffff;
@@ -315,6 +376,12 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
   }
   header.aether-header .header-toolbar .header-title {
     font-size: 1.2rem;
+  }
+  header.aether-header .header-toolbar .header-title .mobile-menuButton {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
   }
   header.aether-header .header-toolbar .header-icon-container .icons-desktop {
     display: none;
@@ -412,6 +479,9 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
   }
   header.aether-header .header-toolbar .header-title {
     font-size: 1.5rem;
+  }
+  header.aether-header .header-toolbar .header-title .mobile-menuButton {
+    display: none;
   }
   header.aether-header .header-toolbar .header-icon-container .icons-desktop {
     display: inline-flex;

@@ -14,6 +14,7 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
     <meta property="og:url" content="{{ config('app.url') . $_SERVER['REQUEST_URI'] }}" />
     <meta property="og:description" content="{{ $description }}" />
     <meta property="og:locale" content="ko_KR" />
+    <meta name="theme-color" content="#282828" />
     <script type="text/javascript">
         window._aether = {
             name: "{{ $name }}",

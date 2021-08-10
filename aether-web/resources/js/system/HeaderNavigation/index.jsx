@@ -4,10 +4,16 @@ import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Popper from '@material-ui/core/Popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Paper from '@material-ui/core/Paper';
 import Grow from '@material-ui/core/Grow';
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemButton from '@material-ui/core/ListItemButton';
+import ListItemText from '@material-ui/core/ListItemText';
+import PersonIcon from '@material-ui/icons/Person';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import HideOnScroll from '../../components/HideOnScroll';
 
 export default class HeaderNavigation extends React.Component {
@@ -19,21 +25,27 @@ export default class HeaderNavigation extends React.Component {
                 advisor: null,
                 developer: null,
             },
+            mobileDrawer: false,
+            drawerSubMenus: {
+                test1: false,
+            },
         };
+        this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
     }
 
     componentDidMount() {
         const navBox = document.querySelector('.header-navigation-box');
         const containerBox = navBox.querySelector('ul');
-        const headerNavigationLinks = Array.from(containerBox.querySelectorAll('li a'));
+        const headerNavigationLinks = Array.from(containerBox.querySelectorAll('.items li'));
         const currentPathArray = window.location.pathname.split('/');
 
         headerNavigationLinks.map((link) => {
             const linkPathArray = link.dataset['path'].split('/');
+
             for (let i = 1; i < linkPathArray.length; i++) {
                 if (i in currentPathArray) {
                     if (linkPathArray[i] == currentPathArray[i]) {
-                        link.classList.add('selected');
+                        link.querySelector('.linkItem').classList.add('selected');
                         break;
                     } else {
                         break;
@@ -43,13 +55,17 @@ export default class HeaderNavigation extends React.Component {
                 }
             }
 
-            link.addEventListener('mouseover', (event) => {
+            link.querySelector('.linkItem').addEventListener('mouseenter', (event) => {
                 this.toggleHeaderNavigationLink(event, headerNavigationLinks);
             });
 
-            link.addEventListener('mouseout', (event) => {
+            link.querySelector('.linkItem').addEventListener('mouseleave', (event) => {
                 this.toggleHeaderNavigationLink(event, headerNavigationLinks);
             });
+        });
+
+        containerBox.addEventListener('scroll', (event) => {
+            this.toggleHeaderNavigationShadow(navBox, containerBox);
         });
 
         this.toggleHeaderNavigationShadow(navBox, containerBox);
@@ -78,20 +94,31 @@ export default class HeaderNavigation extends React.Component {
     }
 
     toggleHeaderNavigationLink(event, headerNavigationLinks) {
-        if (event.type === 'mouseover') {
+        if (event.type === 'mouseenter') {
             headerNavigationLinks.map((link) => {
-                if (link.dataset['key'] === event.target.dataset['key']) {
-                    event.target.classList.add('highlight');
+                const linkItem = link.querySelector('.linkItem');
+                if (linkItem.dataset['key'] === event.target.dataset['key']) {
+                    linkItem.classList.add('highlight');
                 } else {
-                    link.classList.add('externel');
+                    linkItem.classList.add('externel');
                 }
             });
-        } else if (event.type === 'mouseout') {
+        } else if (event.type === 'mouseleave') {
             headerNavigationLinks.map((link) => {
-                link.classList.remove('highlight');
-                link.classList.remove('externel');
+                const linkItem = link.querySelector('.linkItem');
+                linkItem.classList.remove('highlight');
+                linkItem.classList.remove('externel');
             });
         }
+    }
+
+    toggleMobileDrawer() {
+        this.setState((state) => {
+            return {
+                ...state,
+                mobileDrawer: !this.state.mobileDrawer,
+            };
+        });
     }
 
     render() {
@@ -103,6 +130,7 @@ export default class HeaderNavigation extends React.Component {
                     return (
                         <li
                             key={index}
+                            data-path={link.to}
                             onMouseOver={
                                 'children' in link
                                     ? (event) => {
@@ -135,13 +163,12 @@ export default class HeaderNavigation extends React.Component {
                                     : null
                             }
                         >
-                            <div className="linkItem">
+                            <div className="linkItem" data-key={index}>
                                 <Link
                                     id={`header-navigation-link-${link.slug}`}
                                     to={link.to}
                                     data-slug={link.slug}
                                     data-key={index}
-                                    data-path={link.to}
                                 >
                                     {link.name}
                                 </Link>
@@ -158,14 +185,9 @@ export default class HeaderNavigation extends React.Component {
                                         transition={true}
                                         disablePortal
                                     >
-                                        {({ TransitionProps, placement }) => (
-                                            <Grow
-                                                {...TransitionProps}
-                                                style={{
-                                                    transformOrigin: 'left bottom',
-                                                }}
-                                            >
-                                                <div className="sublinksBox">
+                                        {({ TransitionProps }) => (
+                                            <Grow timeout={0} {...TransitionProps}>
+                                                <div className={`sublinksBox parent${index}`}>
                                                     <h5 className="sublinksTitle">{link.name}</h5>
                                                     <ol className="sublinks">
                                                         {fetchHeaderNavigationSubLinks(
@@ -199,9 +221,73 @@ export default class HeaderNavigation extends React.Component {
 
         return (
             <React.Fragment>
+                <Drawer
+                    id="mobile-drawer"
+                    anchor="left"
+                    open={this.state.mobileDrawer}
+                    onClose={this.toggleMobileDrawer}
+                    transitionDuration={300}
+                >
+                    <div className="userInformation">
+                        <div className="avatar">
+                            <Avatar>
+                                <PersonIcon />
+                            </Avatar>
+                        </div>
+                        <div className="content">로그인을 해주세요.</div>
+                    </div>
+                    <div className="drawer-menus">
+                        <List>
+                            <ListItem dense={true} disablePadding={true}>
+                                <ListItemButton disableGutters={true} disableTouchRipple={true}>
+                                    <KeyboardArrowDown
+                                        sx={{
+                                            marginRight: '10px',
+                                            transition: '0.2s',
+                                            transform: this.state.drawerSubMenus.test1
+                                                ? 'rotate(-180deg)'
+                                                : 'rotate(0)',
+                                        }}
+                                        onClick={(event) => {
+                                            this.setState((state) => {
+                                                return {
+                                                    ...state,
+                                                    drawerSubMenus: {
+                                                        ...state.drawerSubMenus,
+                                                        test1: !this.state.drawerSubMenus.test1,
+                                                    },
+                                                };
+                                            });
+                                        }}
+                                    />
+                                    <ListItemText primary="메뉴1" />
+                                </ListItemButton>
+                                {this.state.drawerSubMenus.test1 && (
+                                    <div className="submenus">
+                                        <ListItemButton
+                                            disableGutters={true}
+                                            disableTouchRipple={true}
+                                        >
+                                            <ListItemText primary="서브메뉴1" />
+                                        </ListItemButton>
+                                        <ListItemButton
+                                            disableGutters={true}
+                                            disableTouchRipple={true}
+                                        >
+                                            <ListItemText primary="서브메뉴2" />
+                                        </ListItemButton>
+                                    </div>
+                                )}
+                            </ListItem>
+                        </List>
+                    </div>
+                </Drawer>
                 <AppBar position="fixed" className="aether-header">
                     <Toolbar className="header-toolbar" disableGutters={true}>
                         <div className="header-title">
+                            <div className="mobile-menuButton" onClick={this.toggleMobileDrawer}>
+                                <MenuIcon />
+                            </div>
                             <MuiLink href="/">Aether</MuiLink>
                         </div>
                         <div className="header-icon-container">{headerIcons}</div>
@@ -210,7 +296,7 @@ export default class HeaderNavigation extends React.Component {
                 <HideOnScroll timeout={500}>
                     <div className="header-navigation">
                         <div className="header-navigation-box">
-                            <ul onScroll={(event) => this.toggleHeaderNavigationShadow()}>
+                            <ul>
                                 <div className="items">
                                     {fetchHeaderNavigationLinks([
                                         {
