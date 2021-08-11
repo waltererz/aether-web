@@ -10,6 +10,7 @@ export default function App() {
                 <Route exact path="/" component={Page.Home} />
                 <Route path="/user" component={Page.User} />
                 <Route path="/assets" component={Page.Asset} />
+                <Route path="/investment" component={Page.Investment} />
                 <Route path="/advisors" component={Page.Advisor} />
                 <Route path="/developer" component={Page.Developer} />
             </Switch>

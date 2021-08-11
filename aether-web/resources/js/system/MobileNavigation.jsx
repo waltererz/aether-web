@@ -7,7 +7,7 @@ import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
 import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
-import CodeRoundedIcon from '@material-ui/icons/CodeRounded';
+import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import constants from '../constants';
 
 export default function MobileNavigation() {
@@ -38,11 +38,11 @@ export default function MobileNavigation() {
                     to="/advisors"
                 />
                 <BottomNavigationAction
-                    icon={<CodeRoundedIcon />}
+                    icon={<TrendingUpRoundedIcon />}
                     className="navButton"
-                    value={constants.route.developer}
+                    value={constants.route.investment}
                     component={Link}
-                    to="/developer"
+                    to="/investment"
                 />
                 <BottomNavigationAction
                     icon={<AccountBoxRoundedIcon />}

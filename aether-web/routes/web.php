@@ -6,6 +6,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvestmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +32,11 @@ Route::prefix('user')->group(function () {
 Route::prefix('assets')->group(function () {
     Route::get('/', [AssetController::class, 'index']);
     Route::get('/moneybook', [AssetController::class, 'index']);
+});
 
-    Route::prefix('investment')->group(function () {
-        Route::get('/', [AssetController::class, 'index']);
-        Route::get('/portfolio', [AssetController::class, 'index']);
-    });
+Route::prefix('investment')->group(function () {
+    Route::get('/', [InvestmentController::class, 'index']);
+    Route::get('/portfolio', [InvestmentController::class, 'index']);
 });
 
 Route::prefix('advisors')->group(function () {

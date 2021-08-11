@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,18 +16,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PersonIcon from '@material-ui/icons/Person';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import HideOnScroll from '../components/HideOnScroll';
+import headerNavigationLinks from './headerNavigation/headerNavigationLinks';
 
 export default function HeaderNavigation(props) {
-    const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({
-        asset: null,
-        advisor: null,
-        developer: null,
-    });
-
+    const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
     const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
-    const [mobileDrawerSubMenuOpen, setMobileDrawerSubMenuOpen] = React.useState({
-        test1: false,
-    });
+    const [mobileDrawerSubMenuOpen, setMobileDrawerSubMenuOpen] = React.useState({});
+    const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
     const toggleHeaderNavigationShadow = (navBox, containerBox) => {
         const containerBoxWidth = containerBox.offsetWidth;
@@ -77,7 +73,7 @@ export default function HeaderNavigation(props) {
         if (typeof links == 'object') {
             return links.map((link, index) => {
                 return (
-                    <li className="sublinkItem" key={index}>
+                    <li className="sublinkItem" key={`headerNavigationLink-${slug}-sub-${index}`}>
                         <Link to={link.to}>{link.name}</Link>
                     </li>
                 );
@@ -85,73 +81,134 @@ export default function HeaderNavigation(props) {
         }
     };
 
-    const fetchHeaderNavigationLinks = (links) => {
-        if (typeof links == 'object') {
-            return links.map((link, index) => {
-                return (
-                    <li
-                        key={index}
-                        data-path={link.to}
-                        onMouseOver={
-                            'children' in link
-                                ? (event) => {
-                                      const currentTarget = event.currentTarget;
-                                      setSubLinkBoxAnchor({
-                                          ...subLinkBoxAnchor,
-                                          [link.slug]: currentTarget,
-                                      });
-                                  }
-                                : null
-                        }
-                        onMouseOut={
-                            'children' in link
-                                ? (event) => {
-                                      setSubLinkBoxAnchor({
-                                          ...subLinkBoxAnchor,
-                                          [link.slug]: null,
-                                      });
-                                  }
-                                : null
-                        }
-                    >
-                        <div className="linkItem" data-key={index}>
-                            <Link
-                                id={`header-navigation-link-${link.slug}`}
-                                to={link.to}
-                                data-slug={link.slug}
-                                data-key={index}
+    const fetchHeaderNavigationLinks = () => {
+        return headerNavigationLinks.map((link, index) => {
+            return (
+                <li
+                    key={`headerNavigationLink-${index}`}
+                    data-path={link.to}
+                    onMouseOver={
+                        'children' in link && isDesktop
+                            ? (event) => {
+                                  const currentTarget = event.currentTarget;
+                                  setSubLinkBoxAnchor({
+                                      ...subLinkBoxAnchor,
+                                      [link.slug]: currentTarget,
+                                  });
+                              }
+                            : null
+                    }
+                    onMouseOut={
+                        'children' in link && isDesktop
+                            ? (event) => {
+                                  setSubLinkBoxAnchor({
+                                      ...subLinkBoxAnchor,
+                                      [link.slug]: null,
+                                  });
+                              }
+                            : null
+                    }
+                >
+                    <div className="linkItem" data-key={index}>
+                        <Link
+                            id={`header-navigation-link-${link.slug}`}
+                            to={link.to}
+                            data-slug={link.slug}
+                            data-key={index}
+                        >
+                            {link.name}
+                        </Link>
+                        {'children' in link ? (
+                            <Popper
+                                anchorEl={subLinkBoxAnchor[link.slug]}
+                                open={Boolean(subLinkBoxAnchor[link.slug])}
+                                role={undefined}
+                                placement="bottom-start"
+                                transition={true}
+                                disablePortal
                             >
-                                {link.name}
-                            </Link>
-                            {'children' in link ? (
-                                <Popper
-                                    anchorEl={subLinkBoxAnchor[link.slug]}
-                                    open={Boolean(subLinkBoxAnchor[link.slug])}
-                                    role={undefined}
-                                    placement="bottom-start"
-                                    transition={true}
-                                    disablePortal
-                                >
-                                    {({ TransitionProps }) => (
-                                        <Grow timeout={0} {...TransitionProps}>
-                                            <div className={`sublinksBox parent${index}`}>
-                                                <h5 className="sublinksTitle">{link.name}</h5>
-                                                <ol className="sublinks">
-                                                    {fetchHeaderNavigationSubLinks(
-                                                        link.children,
-                                                        link.slug,
-                                                    )}
-                                                </ol>
-                                            </div>
-                                        </Grow>
-                                    )}
-                                </Popper>
-                            ) : null}
+                                {({ TransitionProps }) => (
+                                    <Grow timeout={0} {...TransitionProps}>
+                                        <div className={`sublinksBox parent${index}`}>
+                                            <ol className="sublinks">
+                                                {fetchHeaderNavigationSubLinks(
+                                                    link.children,
+                                                    link.slug,
+                                                )}
+                                            </ol>
+                                        </div>
+                                    </Grow>
+                                )}
+                            </Popper>
+                        ) : null}
+                    </div>
+                </li>
+            );
+        });
+    };
+
+    const fetchDrawerMenuLinks = () => {
+        return headerNavigationLinks.map((link) => {
+            if (!(link.slug in mobileDrawerSubMenuOpen)) {
+                setMobileDrawerSubMenuOpen({
+                    ...mobileDrawerSubMenuOpen,
+                    [link.slug]: false,
+                });
+            }
+
+            return (
+                <ListItem
+                    dense={true}
+                    disablePadding={true}
+                    className={
+                        'children' in link && mobileDrawerSubMenuOpen[link.slug]
+                            ? 'has-children'
+                            : ''
+                    }
+                    key={`mobileDrawerLink-${link.slug}`}
+                >
+                    <ListItemButton disableGutters={true} disableTouchRipple={true}>
+                        {'children' in link && (
+                            <KeyboardArrowDown
+                                sx={{
+                                    marginRight: '10px',
+                                    transition: '0.2s',
+                                    transform: mobileDrawerSubMenuOpen[link.slug]
+                                        ? 'rotate(-180deg)'
+                                        : 'rotate(0)',
+                                }}
+                                onClick={() => {
+                                    setMobileDrawerSubMenuOpen({
+                                        ...mobileDrawerSubMenuOpen,
+                                        [link.slug]: !mobileDrawerSubMenuOpen[link.slug],
+                                    });
+                                }}
+                            />
+                        )}
+                        <Link to={link.to} onClick={toggleMobileDrawer}>
+                            <ListItemText className="text" primary={link.name} />
+                        </Link>
+                    </ListItemButton>
+                    {mobileDrawerSubMenuOpen[link.slug] && (
+                        <div className="submenus">
+                            {link.children.map((sublink) => {
+                                return (
+                                    <ListItemButton
+                                        disableGutters={true}
+                                        disableTouchRipple={true}
+                                        key={`mobileDrawerSubLink-${sublink.slug}`}
+                                    >
+                                        <Link to={sublink.to} onClick={toggleMobileDrawer}>
+                                            <ListItemText className="text" primary={sublink.name} />
+                                        </Link>
+                                    </ListItemButton>
+                                );
+                            })}
                         </div>
-                    </li>
-                );
-            });
-        }
+                    )}
+                </ListItem>
+            );
+        });
     };
 
     React.useEffect(() => {
@@ -210,38 +267,7 @@ export default function HeaderNavigation(props) {
                     <div className="content">로그인을 해주세요.</div>
                 </div>
                 <div className="drawer-menus">
-                    <List>
-                        <ListItem dense={true} disablePadding={true}>
-                            <ListItemButton disableGutters={true} disableTouchRipple={true}>
-                                <KeyboardArrowDown
-                                    sx={{
-                                        marginRight: '10px',
-                                        transition: '0.2s',
-                                        transform: mobileDrawerSubMenuOpen.test1
-                                            ? 'rotate(-180deg)'
-                                            : 'rotate(0)',
-                                    }}
-                                    onClick={(event) => {
-                                        setMobileDrawerSubMenuOpen({
-                                            ...mobileDrawerSubMenuOpen,
-                                            test1: !mobileDrawerSubMenuOpen.test1,
-                                        });
-                                    }}
-                                />
-                                <ListItemText primary="메뉴1" />
-                            </ListItemButton>
-                            {mobileDrawerSubMenuOpen.test1 && (
-                                <div className="submenus">
-                                    <ListItemButton disableGutters={true} disableTouchRipple={true}>
-                                        <ListItemText primary="서브메뉴1" />
-                                    </ListItemButton>
-                                    <ListItemButton disableGutters={true} disableTouchRipple={true}>
-                                        <ListItemText primary="서브메뉴2" />
-                                    </ListItemButton>
-                                </div>
-                            )}
-                        </ListItem>
-                    </List>
+                    <List>{fetchDrawerMenuLinks()}</List>
                 </div>
             </Drawer>
             <AppBar position="fixed" className="aether-header">
@@ -259,37 +285,7 @@ export default function HeaderNavigation(props) {
                 <div className="header-navigation">
                     <div className="header-navigation-box">
                         <ul>
-                            <div className="items">
-                                {fetchHeaderNavigationLinks([
-                                    {
-                                        name: '종합자산관리',
-                                        slug: 'asset',
-                                        to: '/assets',
-                                        children: [
-                                            { name: '가계부', to: '/assets/moneybook' },
-                                            { name: '투자자산관리', to: '/assets/investment' },
-                                            {
-                                                name: '포트폴리오',
-                                                to: '/assets/investment/portfolio',
-                                            },
-                                        ],
-                                    },
-                                    {
-                                        name: '투자어드바이저',
-                                        slug: 'advisor',
-                                        to: '/advisors',
-                                        children: [{ name: '전문가 검색', to: '/advisors/search' }],
-                                    },
-                                    {
-                                        name: '개발자페이지',
-                                        slug: 'developer',
-                                        to: '/developer',
-                                        children: [
-                                            { name: '개발자게시판', to: '/developer/forum' },
-                                        ],
-                                    },
-                                ])}
-                            </div>
+                            <div className="items">{fetchHeaderNavigationLinks()}</div>
                         </ul>
                     </div>
                 </div>

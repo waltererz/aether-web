@@ -49,9 +49,30 @@ a {
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
+  margin-bottom: 5px;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li.has-children {
+  margin-bottom: 10px;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li.has-children .MuiListItemButton-root {
+  padding-bottom: 0px;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li a .text span {
+  font-size: 1.2em;
 }
 #mobile-drawer .MuiPaper-root .drawer-menus ul li .submenus {
-  margin-left: 33px;
+  margin-left: 40px;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li .submenus a {
+  color: #ffffff;
+  text-decoration: none;
+}
+#mobile-drawer .MuiPaper-root .drawer-menus ul li .submenus a .text span {
+  font-size: 1em;
 }
 
 .app-drawer .drawer-paper {
@@ -325,16 +346,9 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
 .header-navigation .header-navigation-box ul .items li .sublinksBox {
   position: absolute;
   background-color: #ffffff;
-  width: 200px;
+  width: 250px;
   overflow-x: hidden;
   box-shadow: 0px 3px 10px 0px rgba(148, 137, 137, 0.2);
-}
-.header-navigation .header-navigation-box ul .items li .sublinksBox h5.sublinksTitle {
-  font-size: 1em;
-  font-weight: bold;
-  margin: 0px;
-  padding: 10px;
-  border-bottom: 1px solid #dddddd;
 }
 .header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks {
   display: flex;
@@ -342,23 +356,24 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
   flex-wrap: nowrap;
   list-style: none;
   margin: 0px;
-  padding: 10px;
+  padding: 10px 0px;
 }
 .header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks li.sublinkItem {
   display: block;
   width: 100%;
-  padding: 2px;
   box-sizing: border-box;
 }
 .header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks li.sublinkItem a {
-  color: #444444;
+  display: block;
+  padding: 8px 20px;
   font-size: 0.9em;
+  background-color: #ffffff;
+  color: #000000;
+  transition: none;
 }
-.header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks li.sublinkItem:first-child {
-  padding-top: 0px;
-}
-.header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks li.sublinkItem:last-child {
-  padding-bottom: 0px;
+.header-navigation .header-navigation-box ul .items li .sublinksBox ol.sublinks li.sublinkItem a:hover {
+  background-color: #555555;
+  color: #ffffff;
 }
 
 @media screen and (min-width: 0px) {

@@ -24,13 +24,21 @@ const routes = {
         component: 'Asset',
         title: '자산관리',
         children: {
-            portfolio: {
-                title: '포트폴리오',
-            },
             moneybook: {
                 title: '가계부',
             },
         },
+    },
+
+    investment: {
+        tabName: 'investment',
+        component: 'Investment',
+        title: '투자자산관리',
+        children: {
+            portfolio: {
+                title: '포트폴리오',
+            },
+        }
     },
 
     advisors: {

@@ -14,9 +14,10 @@ const constants = {
         default: 1,
         home: 2,
         asset: 3,
-        advisor: 4,
-        developer: 5,
-        user: 6,
+        investment: 4,
+        advisor: 5,
+        developer: 6,
+        user: 7,
     },
 };
 

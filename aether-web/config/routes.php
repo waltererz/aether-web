@@ -11,7 +11,7 @@ return [
             'signup' => [
                 'name' => '회원가입',
             ],
-            'login' => [
+            'signin' => [
                 'name' => '회원 로그인',
             ],
         ],
@@ -32,15 +32,22 @@ return [
         'name' => '자산관리',
         'description' => 'AETHER에서 자신의 모든 자산을 종합적으로 관리하세요.',
         'routes' => [
-            'portfolio' => [
-                'name' => '포트폴리오',
-                'description' => '현재 투자하고 있는 주식자산을 종합적으로 관리하세요.',
-            ],
             'moneybook' => [
                 'name' => '가계부',
                 'description' => 'AETHER에서 자신의 모든 자산을 종합적으로 관리하세요.',
             ],
         ],
+    ],
+
+    'investment' => [
+        'name' => '투자자산관리',
+        'description' => '경제적 자유를 위해 체계적으로 투자자산을 관리하세요.',
+        'routes' => [
+            'portfolio' => [
+                'name' => '포트폴리오',
+                'description' => '포트폴리오를 직접 만들어 재미있게 투자하세요.',
+            ]
+        ]
     ],
 
     'advisors' => [
