@@ -6,7 +6,7 @@ import RightSide from './advisor/RightSide';
 import HeaderIcons from './advisor/HeaderIcons';
 import * as common from '../services/common';
 import * as Page from './advisor/pages';
-import '../../sass/routes/advisors.scss';
+import '../../sass/routes/_advisors.scss';
 
 export default function Advisor() {
     common.init();

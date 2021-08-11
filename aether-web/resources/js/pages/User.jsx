@@ -6,6 +6,7 @@ import RightSide from './user/RightSide';
 import HeaderIcons from './user/HeaderIcons';
 import * as Page from './user/pages';
 import * as common from '../services/common';
+import '../../sass/routes/_user.scss';
 
 export default function User() {
     common.init();
