@@ -391,7 +391,7 @@ header.aether-header {
                     }
 
                     a {
-                        display: inline-block;
+                        display: block;
                         color: #bbbbbb;
                         text-decoration: none;
                         transition: color 0.2s linear;
@@ -400,6 +400,7 @@ header.aether-header {
                     }
 
                     .sublinksBox {
+                        position: absolute;
                         background-color: #ffffff;
                         width: 200px;
                         overflow-x: hidden;

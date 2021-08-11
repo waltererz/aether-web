@@ -312,7 +312,7 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
   color: #777777;
 }
 .header-navigation .header-navigation-box ul .items li a {
-  display: inline-block;
+  display: block;
   color: #bbbbbb;
   text-decoration: none;
   transition: color 0.2s linear;
@@ -323,6 +323,7 @@ header.aether-header .header-toolbar .header-icon-container .icons-mobile .icon 
           user-select: none;
 }
 .header-navigation .header-navigation-box ul .items li .sublinksBox {
+  position: absolute;
   background-color: #ffffff;
   width: 200px;
   overflow-x: hidden;

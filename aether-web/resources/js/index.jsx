@@ -4,8 +4,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
-import Aether from './system/Aether';
-import Reducers from './redux/Reducers';
+import App from './system/App';
+import Reducers from './redux/reducers';
 
 axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
 axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
@@ -17,7 +17,7 @@ ReactDOM.render(
     <React.Fragment>
         <Provider store={store}>
             <Router>
-                <Aether />
+                <App />
             </Router>
         </Provider>
     </React.Fragment>,

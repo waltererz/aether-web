@@ -1,0 +1,23 @@
+const constants = {
+    app: {
+        name: window._aether.name,
+        baseUrl: window._aether.baseUrl,
+    },
+
+    url: {
+        app: 'http://www.erzsphilos.com',
+        backend: 'http://back.erzsphilos.com',
+        api: 'http://back.erzsphilos.com/api',
+    },
+
+    route: {
+        default: 1,
+        home: 2,
+        asset: 3,
+        advisor: 4,
+        developer: 5,
+        user: 6,
+    },
+};
+
+export default constants;
