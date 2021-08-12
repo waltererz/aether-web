@@ -3,6 +3,8 @@ import reduxConstants from '../constants';
 const initialStates = {
     title: null,
     tab: null,
+    headerIcons: null,
+    uri: '/',
 };
 
 function app(state = initialStates, action) {
@@ -13,6 +15,12 @@ function app(state = initialStates, action) {
         case reduxConstants.app.title:
             return { ...state, title: action.state };
             break;
+        case reduxConstants.app.headerIcons:
+            return { ...state, headerIcons: action.state }
+            break;
+        case reduxConstants.app.uri:
+            return { ...state, uri: action.state }
+            break;    
     }
 
     return state;

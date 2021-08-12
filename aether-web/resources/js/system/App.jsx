@@ -1,11 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Layout from './Layout';
+import { ThemeProvider } from '@material-ui/core/styles';
+import HeaderNavigation from './HeaderNavigation';
 import * as Page from '../pages';
+import theme from '../theme';
 
 export default function App() {
     return (
-        <Layout>
+        <ThemeProvider theme={theme}>
+            <HeaderNavigation />
             <Switch>
                 <Route exact path="/" component={Page.Home} />
                 <Route path="/user" component={Page.User} />
@@ -14,6 +17,6 @@ export default function App() {
                 <Route path="/advisors" component={Page.Advisor} />
                 <Route path="/developer" component={Page.Developer} />
             </Switch>
-        </Layout>
+        </ThemeProvider>
     );
 }

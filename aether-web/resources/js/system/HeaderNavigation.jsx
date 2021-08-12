@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,13 +17,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PersonIcon from '@material-ui/icons/Person';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import HideOnScroll from '../components/HideOnScroll';
+import ScrollTrigger from '@terwanerik/scrolltrigger';
 import headerNavigationLinks from './headerNavigation/headerNavigationLinks';
+import XHeaderIcons from './XHeaderIcons';
 
 export default function HeaderNavigation(props) {
     const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
     const [mobileDrawerOpen, setMobileDrawerOpen] = React.useState(false);
     const [mobileDrawerSubMenuOpen, setMobileDrawerSubMenuOpen] = React.useState({});
     const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
+    const currentURI = useSelector((state) => state.app.uri);
+    const headerNavigationBoxRef = React.useRef(null);
 
     const toggleHeaderNavigationShadow = (navBox, containerBox) => {
         const containerBoxWidth = containerBox.offsetWidth;
@@ -65,6 +70,14 @@ export default function HeaderNavigation(props) {
         }
     };
 
+    const initHeaderNavigationLinks = () => {
+        setSubLinkBoxAnchor({});
+        Array.from(headerNavigationBoxRef.current.children).map((link) => {
+            link.querySelector('.linkItem').classList.remove('highlight');
+            link.querySelector('.linkItem').classList.remove('externel');
+        });
+    };
+
     const toggleMobileDrawer = () => {
         setMobileDrawerOpen(!mobileDrawerOpen);
     };
@@ -74,7 +87,9 @@ export default function HeaderNavigation(props) {
             return links.map((link, index) => {
                 return (
                     <li className="sublinkItem" key={`headerNavigationLink-${slug}-sub-${index}`}>
-                        <Link to={link.to}>{link.name}</Link>
+                        <Link to={link.to} onClick={initHeaderNavigationLinks}>
+                            {link.name}
+                        </Link>
                     </li>
                 );
             });
@@ -113,6 +128,7 @@ export default function HeaderNavigation(props) {
                         <Link
                             id={`header-navigation-link-${link.slug}`}
                             to={link.to}
+                            onClick={initHeaderNavigationLinks}
                             data-slug={link.slug}
                             data-key={index}
                         >
@@ -129,13 +145,15 @@ export default function HeaderNavigation(props) {
                             >
                                 {({ TransitionProps }) => (
                                     <Grow timeout={0} {...TransitionProps}>
-                                        <div className={`sublinksBox parent${index}`}>
-                                            <ol className="sublinks">
-                                                {fetchHeaderNavigationSubLinks(
-                                                    link.children,
-                                                    link.slug,
-                                                )}
-                                            </ol>
+                                        <div className="sublinksParent">
+                                            <div className={`sublinksBox parent${index}`}>
+                                                <ol className="sublinks">
+                                                    {fetchHeaderNavigationSubLinks(
+                                                        link.children,
+                                                        link.slug,
+                                                    )}
+                                                </ol>
+                                            </div>
                                         </div>
                                     </Grow>
                                 )}
@@ -214,25 +232,37 @@ export default function HeaderNavigation(props) {
     React.useEffect(() => {
         const navBox = document.querySelector('.header-navigation-box');
         const containerBox = navBox.querySelector('ul');
-        const headerNavigationLinks = Array.from(containerBox.querySelectorAll('.items li'));
-        const currentPathArray = window.location.pathname.split('/');
+        const headerNavigationLinks = Array.from(headerNavigationBoxRef.current.children);
+
+        new ScrollTrigger({
+            trigger: {
+                toggle: {
+                    class: {
+                        in: 'in',
+                        out: 'out',
+                    },
+                },
+            },
+            scroll: {
+                callback: () => {
+                    const headerNavigationDOM = document.querySelector('.header-navigation');
+                    const appDrawerPaperDOM = document.querySelector('.app-drawer .drawer-paper');
+
+                    if (
+                        headerNavigationDOM.style.transform &&
+                        headerNavigationDOM.style.transform !== 'none'
+                    ) {
+                        appDrawerPaperDOM.style.transform = 'translateY(-40px)';
+                        appDrawerPaperDOM.classList.add('in');
+                    } else {
+                        appDrawerPaperDOM.style.transform = 'none';
+                        appDrawerPaperDOM.classList.remove('in');
+                    }
+                },
+            },
+        });
 
         headerNavigationLinks.map((link) => {
-            const linkPathArray = link.dataset['path'].split('/');
-
-            for (let i = 1; i < linkPathArray.length; i++) {
-                if (i in currentPathArray) {
-                    if (linkPathArray[i] == currentPathArray[i]) {
-                        link.querySelector('.linkItem').classList.add('selected');
-                        break;
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-
             link.querySelector('.linkItem').addEventListener('mouseenter', (event) => {
                 toggleHeaderNavigationLink(event, headerNavigationLinks);
             });
@@ -248,6 +278,27 @@ export default function HeaderNavigation(props) {
 
         toggleHeaderNavigationShadow(navBox, containerBox);
     }, []);
+
+    React.useEffect(() => {
+        const currentPathArray = window.location.pathname.split('/');
+        const headerNavigationLinks = Array.from(headerNavigationBoxRef.current.children);
+
+        headerNavigationLinks.map((link) => {
+            const linkPathArray = link.dataset['path'].split('/');
+
+            for (let i = 1; i < linkPathArray.length; i++) {
+                if (i in currentPathArray) {
+                    if (linkPathArray[i] == currentPathArray[i]) {
+                        link.querySelector('.linkItem').classList.add('selected');
+                    } else {
+                        link.querySelector('.linkItem').classList.remove('selected');
+                    }
+                } else {
+                    break;
+                }
+            }
+        });
+    }, [currentURI]);
 
     return (
         <React.Fragment>
@@ -278,14 +329,18 @@ export default function HeaderNavigation(props) {
                         </div>
                         <MuiLink href="/">Aether</MuiLink>
                     </div>
-                    <div className="header-icon-container">{props.headerIcons}</div>
+                    <div className="header-icon-container">
+                        <XHeaderIcons />
+                    </div>
                 </Toolbar>
             </AppBar>
             <HideOnScroll timeout={500}>
                 <div className="header-navigation">
                     <div className="header-navigation-box">
                         <ul>
-                            <div className="items">{fetchHeaderNavigationLinks()}</div>
+                            <div className="items" ref={headerNavigationBoxRef}>
+                                {fetchHeaderNavigationLinks()}
+                            </div>
                         </ul>
                     </div>
                 </div>

@@ -13,3 +13,17 @@ export const setTitle = (title) => {
         state: title,
     };
 };
+
+export const setHeaderIcons = (headerIcons) => {
+    return {
+        type: reduxConstants.app.headerIcons,
+        state: headerIcons,
+    }
+}
+
+export const setURI = (uri) => {
+    return {
+        type: reduxConstants.app.uri,
+        state: uri,
+    }
+}

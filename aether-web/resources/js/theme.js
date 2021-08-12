@@ -1,14 +1,12 @@
-import React from 'react';
-import { ThemeProvider } from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core/styles';
 
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#3c007e',
+            main: '#282828',
         },
         secondary: {
-            main: '#9c27b0',
+            main: '#46437a',
         },
     },
 
@@ -23,10 +21,4 @@ const theme = createTheme({
     },
 });
 
-export default function Layout(props) {
-    return (
-        <React.Fragment>
-            <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
-        </React.Fragment>
-    );
-}
+export default theme;

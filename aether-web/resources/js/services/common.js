@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as browser from './browser';
-import { setTab } from '../redux/actions/app';
+import { setTab, setHeaderIcons, setURI } from '../redux/actions/app';
 import constants from '../constants';
 import routes from '../routes';
 
-export function init() {
+export function init({ headerIcons }) {
     const currentTab = useSelector((state) => state.app.tab);
     const dispatch = useDispatch();
 
@@ -27,8 +27,17 @@ export function init() {
         // 페이지 제목 변경
         browser.changeTitle(metaData['title']);
 
+        // 헤더에 추가되는 아이콘 리스트를 리덕스 컨테이너에 저장
+        if (headerIcons) {
+            dispatch(setHeaderIcons(headerIcons));
+        }
+
         // 웹브라우저 스크롤를 최상단으로 이동시킴
         browser.scrollTop();
+    }, []);
+
+    useEffect(() => {
+        dispatch(setURI(window.location.pathname));
     })
 }
 
