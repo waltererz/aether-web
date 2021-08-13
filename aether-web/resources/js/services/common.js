@@ -5,7 +5,7 @@ import { setTab, setHeaderIcons, setURI } from '../redux/actions/app';
 import constants from '../constants';
 import routes from '../routes';
 
-export function init({ headerIcons }) {
+export function init(props = {}) {
     const currentTab = useSelector((state) => state.app.tab);
     const dispatch = useDispatch();
 
@@ -28,8 +28,8 @@ export function init({ headerIcons }) {
         browser.changeTitle(metaData['title']);
 
         // 헤더에 추가되는 아이콘 리스트를 리덕스 컨테이너에 저장
-        if (headerIcons) {
-            dispatch(setHeaderIcons(headerIcons));
+        if ('headerIcons' in props) {
+            dispatch(setHeaderIcons(props.headerIcons));
         }
 
         // 웹브라우저 스크롤를 최상단으로 이동시킴

@@ -1,13 +1,10 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import MobileNavigation from '../MobileNavigation';
-import HeaderNavigation from '../HeaderNavigation';
 
 export default function SimpleContainer(props) {
     return (
         <React.Fragment>
-            <HeaderNavigation />
             <Container className="app-container aether half-container" maxWidth={false}>
                 <Grid
                     container
@@ -25,7 +22,6 @@ export default function SimpleContainer(props) {
                     </Grid>
                 </Grid>
             </Container>
-            <MobileNavigation />
         </React.Fragment>
     );
 }

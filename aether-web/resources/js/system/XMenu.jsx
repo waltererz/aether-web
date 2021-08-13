@@ -6,11 +6,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 
-export default function XMenu(props) {
+export default function XMenu({ items }) {
     const MenuItems = () => {
-        return props.items.map((item, index) => {
+        return items.map((item, index) => {
             return (
-                <Link to={item.to} key={index}>
+                <Link to={item.path} key={`XMenu-submenus-${item.path}-${index}`}>
                     <ListItem button>
                         <ListItemAvatar>
                             <Avatar>{item.icon}</Avatar>

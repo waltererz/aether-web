@@ -11,7 +11,14 @@ import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import constants from '../constants';
 
 export default function MobileNavigation() {
-    const currentTab = useSelector((state) => state.app.tab);
+    const [currentTab, setCurrentTab] = React.useState(null);
+    const newTab = useSelector((state) => state.app.tab);
+
+    React.useEffect(() => {
+        if (currentTab != newTab) {
+            setCurrentTab(newTab);
+        }
+    }, [newTab]);
 
     return (
         <div className="app-footer-mobile">

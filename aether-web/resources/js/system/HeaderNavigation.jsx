@@ -17,7 +17,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PersonIcon from '@material-ui/icons/Person';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import HideOnScroll from '../components/HideOnScroll';
-import ScrollTrigger from '@terwanerik/scrolltrigger';
 import headerNavigationLinks from './headerNavigation/headerNavigationLinks';
 import XHeaderIcons from './XHeaderIcons';
 
@@ -234,34 +233,6 @@ export default function HeaderNavigation(props) {
         const containerBox = navBox.querySelector('ul');
         const headerNavigationLinks = Array.from(headerNavigationBoxRef.current.children);
 
-        new ScrollTrigger({
-            trigger: {
-                toggle: {
-                    class: {
-                        in: 'in',
-                        out: 'out',
-                    },
-                },
-            },
-            scroll: {
-                callback: () => {
-                    const headerNavigationDOM = document.querySelector('.header-navigation');
-                    const appDrawerPaperDOM = document.querySelector('.app-drawer .drawer-paper');
-
-                    if (
-                        headerNavigationDOM.style.transform &&
-                        headerNavigationDOM.style.transform !== 'none'
-                    ) {
-                        appDrawerPaperDOM.style.transform = 'translateY(-40px)';
-                        appDrawerPaperDOM.classList.add('in');
-                    } else {
-                        appDrawerPaperDOM.style.transform = 'none';
-                        appDrawerPaperDOM.classList.remove('in');
-                    }
-                },
-            },
-        });
-
         headerNavigationLinks.map((link) => {
             link.querySelector('.linkItem').addEventListener('mouseenter', (event) => {
                 toggleHeaderNavigationLink(event, headerNavigationLinks);
@@ -270,6 +241,22 @@ export default function HeaderNavigation(props) {
             link.querySelector('.linkItem').addEventListener('mouseleave', (event) => {
                 toggleHeaderNavigationLink(event, headerNavigationLinks);
             });
+        });
+
+        window.addEventListener('scroll', (event) => {
+            const headerNavigationDOM = document.querySelector('.header-navigation');
+            const appDrawerPaperDOM = document.querySelector('.app-drawer .drawer-paper');
+
+            if (
+                headerNavigationDOM.style.transform &&
+                headerNavigationDOM.style.transform !== 'none'
+            ) {
+                appDrawerPaperDOM.style.transform = 'translateY(-40px)';
+                appDrawerPaperDOM.classList.add('in');
+            } else {
+                appDrawerPaperDOM.style.transform = 'none';
+                appDrawerPaperDOM.classList.remove('in');
+            }
         });
 
         containerBox.addEventListener('scroll', (event) => {

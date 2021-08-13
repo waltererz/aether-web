@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import { BasicContainer as Container } from '../system/Container';
-import LeftSide from './asset/LeftSide';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import Container from '../system/Container';
 import RightSide from './asset/RightSide';
 import * as Page from './asset/pages';
 import * as common from '../services/common';
@@ -26,13 +26,16 @@ export default function Asset() {
     });
 
     return (
-        <React.Fragment>
-            <Container left={<LeftSide />} right={<RightSide />}>
-                <Switch>
-                    <Route exact path="/assets" component={Page.Home} />
-                    <Route exact path="/assets/moneybook" component={Page.Moneybook} />
-                </Switch>
-            </Container>
-        </React.Fragment>
+        <Container
+            pages={[
+                { path: '/assets', component: Page.Home, exact: true },
+                { path: '/assets/moneybook', component: Page.Moneybook, exact: true },
+            ]}
+            secondary={<RightSide />}
+            submenus={[
+                { path: '/assets', text: '자산관리 대시보드', icon: <DashboardIcon /> },
+                { path: '/assets/moneybook', text: '가계부', icon: <CreditCardIcon /> },
+            ]}
+        />
     );
 }

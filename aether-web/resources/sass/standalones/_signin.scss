@@ -1,0 +1,69 @@
+@import '../common/variables';
+
+.user-signin-container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-top: 40px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    border-radius: 6px;
+    border: 0px;
+
+    .container-header {
+        background: $secondary;
+        background: linear-gradient(
+            0deg,
+            rgba(70, 67, 122, 1) 0%,
+            rgba(73, 70, 128, 1) 35%,
+            rgba(73, 70, 128, 1) 65%,
+            rgba(70, 67, 122, 1) 100%
+        );
+        border: 0px;
+        border-radius: 6px;
+        margin: -20px 20px 0px 20px;
+        box-shadow: 0 1px 4px 0 rgba(73, 70, 128, 0.3);
+        padding: 13px;
+        box-sizing: border-box;
+
+        h4 {
+            margin: 0px;
+            padding: 0px 10px 5px 10px;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2em;
+        }
+
+        .secondary {
+            margin: 0px;
+            padding: 0px 10px;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8em;
+        }
+    }
+
+    .container-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        font-size: 0.9em;
+
+        .input-item {
+            width: 100%;
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &.button-box {
+                max-width: none;
+            }
+        }
+    }
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import { BasicContainer as Container } from '../system/Container';
-import LeftSide from './user/LeftSide';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import Container from '../system/Container';
 import RightSide from './user/RightSide';
 import * as Page from './user/pages';
 import * as common from '../services/common';
-import '../../sass/routes/_user.scss';
+import '../../sass/pages/_user.scss';
 
 export default function User() {
     common.init({
@@ -21,14 +21,16 @@ export default function User() {
     });
 
     return (
-        <React.Fragment>
-            <Container left={<LeftSide />} right={<RightSide />}>
-                <Switch>
-                    <Route exact path="/user" component={Page.Home} />
-                    <Route exact path="/user/signup" component={Page.SignUp} />
-                    <Route exact path="/user/signin" component={Page.SignIn} />
-                </Switch>
-            </Container>
-        </React.Fragment>
+        <Container
+            pages={[
+                { path: '/user', component: Page.Home, exact: true },
+                { path: '/user/signup', component: Page.SignUp, exact: true },
+            ]}
+            secondary={<RightSide />}
+            submenus={[
+                { path: '/user/signup', text: '회원가입', icon: <AssignmentIcon /> },
+                { path: '/user/signin', text: '로그인', icon: <VpnKeyIcon /> },
+            ]}
+        />
     );
 }

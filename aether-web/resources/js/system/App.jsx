@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import HeaderNavigation from './HeaderNavigation';
+import MobileNavigation from './MobileNavigation';
 import * as Page from '../pages';
 import theme from '../theme';
 
@@ -17,6 +18,7 @@ export default function App() {
                 <Route path="/advisors" component={Page.Advisor} />
                 <Route path="/developer" component={Page.Developer} />
             </Switch>
+            <MobileNavigation />
         </ThemeProvider>
     );
 }
