@@ -1,7 +1,6 @@
 import React from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import Container from '../system/Container';
@@ -12,13 +11,10 @@ import * as common from '../services/common';
 export default function Investment() {
     common.init({
         headerIcons: {
-            desktop: [
-                { to: '/user', icon: <AccountCircleIcon /> },
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-            ],
+            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
             mobile: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
                 { to: '/investment/portfolio', icon: <PieChartOutlinedIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon /> },
             ],
         },
     });

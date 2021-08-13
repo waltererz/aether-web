@@ -2,7 +2,6 @@ import React from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import Container from '../system/Container';
@@ -13,14 +12,11 @@ import * as common from '../services/common';
 export default function Asset() {
     common.init({
         headerIcons: {
-            desktop: [
-                { to: '/user', icon: <AccountCircleIcon /> },
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-            ],
+            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
             mobile: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
                 { to: '/assets/investment/portfolio', icon: <PieChartOutlinedIcon /> },
                 { to: '/assets/moneybook', icon: <CreditCardOutlinedIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon /> },
             ],
         },
     });

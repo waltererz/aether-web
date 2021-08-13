@@ -1,6 +1,5 @@
 import React from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import Container from '../system/Container';
 import RightSide from './developer/RightSide';
@@ -10,13 +9,10 @@ import * as common from '../services/common';
 export default function Developer() {
     common.init({
         headerIcons: {
-            desktop: [
-                { to: '/user', icon: <AccountCircleIcon /> },
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-            ],
+            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
             mobile: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
                 { to: '/developer/forum', icon: <SpeakerNotesIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon /> },
             ],
         },
     });

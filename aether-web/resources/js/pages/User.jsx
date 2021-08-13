@@ -12,11 +12,8 @@ import '../../sass/pages/_user.scss';
 export default function User() {
     common.init({
         headerIcons: {
-            desktop: [
-                { to: '/user', icon: <AccountCircleIcon /> },
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-            ],
-            mobile: [{ to: '/advisors/search', icon: <SearchOutlinedIcon /> }],
+            desktop: [],
+            mobile: [],
         },
     });
 

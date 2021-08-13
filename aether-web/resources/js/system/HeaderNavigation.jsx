@@ -302,7 +302,9 @@ export default function HeaderNavigation(props) {
                             <PersonIcon />
                         </Avatar>
                     </div>
-                    <div className="content">로그인을 해주세요.</div>
+                    <div className="content">
+                        <Link to="/user/signin">로그인을 해주세요.</Link>
+                    </div>
                 </div>
                 <div className="drawer-menus">
                     <List>{fetchDrawerMenuLinks()}</List>

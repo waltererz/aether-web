@@ -26,6 +26,21 @@ a {
 .flex-container.align-center {
   align-items: center;
 }
+.flex-container.justify-center {
+  justify-content: center;
+}
+.flex-container .grow {
+  flex-grow: 1;
+}
+.flex-container .not-grow {
+  flex-grow: 0;
+}
+.flex-container .shrink {
+  flex-shrink: 1;
+}
+.flex-container .not-shrink {
+  flex-shrink: 0;
+}
 
 #mobile-drawer .MuiPaper-root {
   width: 300px;
@@ -55,7 +70,12 @@ a {
   height: 32px;
 }
 #mobile-drawer .MuiPaper-root .userInformation .content {
+  flex-grow: 1;
   font-size: 1.2em;
+  text-align: center;
+}
+#mobile-drawer .MuiPaper-root .userInformation .content a {
+  color: #dddddd;
 }
 #mobile-drawer .MuiPaper-root .drawer-menus ul li {
   display: flex;

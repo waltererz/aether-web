@@ -8,6 +8,18 @@ const theme = createTheme({
         secondary: {
             main: '#46437a',
         },
+        kakao: {
+            main: '#fee500',
+        },
+        naver: {
+            main: '#03c75a'
+        },
+        google: {
+            main: '#ea4335',
+        },
+        facebook: {
+            main: '#1877f2',
+        }
     },
 
     breakpoints: {

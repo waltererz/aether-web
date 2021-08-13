@@ -99,12 +99,8 @@ export default function Search() {
         if ('theme' in filters) {
             const Checkbox = withStyles({
                 root: {
-                    color: '#3f51b5',
-                    '&$checked': {
-                        color: '#212f80',
-                    },
+                    color: '#46437a',
                 },
-                checked: {},
             })((props) => <MuiCheckbox color="default" {...props} />);
 
             if (themes) {

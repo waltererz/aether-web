@@ -13,10 +13,13 @@ export default function Home() {
     common.init({
         headerIcons: {
             desktop: [
-                { to: '/user', icon: <AccountCircleIcon /> },
                 { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon /> },
             ],
-            mobile: [{ to: '/advisors/search', icon: <SearchOutlinedIcon /> }],
+            mobile: [
+                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon /> },
+            ],
         },
     });
 

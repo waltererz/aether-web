@@ -27,4 +27,24 @@ a {
     &.align-center {
         align-items: center;
     }
+
+    &.justify-center {
+        justify-content: center;
+    }
+
+    .grow {
+        flex-grow: 1;
+    }
+
+    .not-grow {
+        flex-grow: 0;
+    }
+
+    .shrink {
+        flex-shrink: 1;
+    }
+
+    .not-shrink {
+        flex-shrink: 0;
+    }
 }
