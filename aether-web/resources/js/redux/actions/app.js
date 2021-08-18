@@ -27,3 +27,10 @@ export const setURI = (uri) => {
         state: uri,
     }
 }
+
+export const setMobileDrawerOpen = (open) => {
+    return {
+        type: reduxConstants.app.mobileDrawerOpen,
+        state: open,
+    }
+}

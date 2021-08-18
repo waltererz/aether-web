@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 export default function SimpleContainer(props) {
     return (
         <React.Fragment>
-            <Container className="app-container aether half-container" maxWidth={false}>
+            <Container className="app-container aether simple-container" maxWidth={false}>
                 <Grid
                     container
                     className="grid-container"

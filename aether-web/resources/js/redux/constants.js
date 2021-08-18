@@ -4,6 +4,7 @@ const reduxConstants = {
         tab: 'APP_TAB',
         uri: 'APP_URI',
         headerIcons: 'APP_HEADER_ICONS',
+        mobileDrawerOpen: 'APP_MOBILE_DRAWER',
     },
 }
 

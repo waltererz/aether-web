@@ -1,14 +1,23 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import HeaderFixed from './HeaderFixed';
+import MobileDrawer from './MobileDrawer';
 import HeaderNavigation from './HeaderNavigation';
 import MobileNavigation from './MobileNavigation';
 import * as Page from '../pages';
-import theme from '../theme';
+import config from '../config';
 
 export default function App() {
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider
+            theme={createTheme({
+                palette: config('templete.palette'),
+                breakpoints: config('templete.breakpoints'),
+            })}
+        >
+            <MobileDrawer />
+            <HeaderFixed />
             <HeaderNavigation />
             <Switch>
                 <Route exact path="/" component={Page.Home} />

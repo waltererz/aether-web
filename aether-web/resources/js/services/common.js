@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as browser from './browser';
 import { setTab, setHeaderIcons, setURI } from '../redux/actions/app';
-import constants from '../constants';
+import config from '../config';
 import routes from '../routes';
 
 export function init(props = {}) {
@@ -14,9 +14,9 @@ export function init(props = {}) {
         const metaData = getMetaData();
 
         // 리덕스 컨테이너에 저장된 값과 현재 페이지의 메타데이터가 다른 경우 리덕스 컨테이너 및 웹브라우저 타이틀 업데이트
-        if (constants.route[metaData['tabName']] != currentTab) {
+        if (config('app.route')[metaData['tabName']] != currentTab) {
             // 메타데이터에 저장된 탭정보를 리덕스에 전달
-            dispatch(setTab(constants.route[metaData['tabName']]));
+            dispatch(setTab(config('app.route')[metaData['tabName']]));
         }
     }, [currentTab]);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -9,16 +9,21 @@ import MuiCheckbox from '@material-ui/core/Checkbox';
 import GoogleIcon from '@material-ui/icons/Google';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import theme from '../theme';
+import config from '../config';
 import * as common from '../services/common';
 import '../../sass/standalones/_signin.scss';
 
 export default function SignIn() {
+    const theme = createTheme({
+        palette: config('templete.palette'),
+        breakpoints: config('templete.breakpoints'),
+    });
+
     let history = useHistory();
 
     const Checkbox = withStyles({
         root: {
-            color: '#46437a',
+            color: config('templete.palette.secondary.main'),
         },
     })((props) => <MuiCheckbox color="default" {...props} />);
 

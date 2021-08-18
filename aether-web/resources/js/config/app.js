@@ -1,15 +1,10 @@
-const constants = {
-    app: {
-        name: window._aether.name,
-        baseUrl: window._aether.baseUrl,
-    },
-
+const _config = {
+    name: window._aether.name,
     url: {
-        app: 'http://www.erzsphilos.com',
+        app: window._aether.baseUrl,
         backend: 'http://back.erzsphilos.com',
         api: 'http://back.erzsphilos.com/api',
     },
-
     route: {
         default: 1,
         home: 2,
@@ -19,6 +14,6 @@ const constants = {
         developer: 6,
         user: 7,
     },
-};
+}
 
-export default constants;
+export default _config;
