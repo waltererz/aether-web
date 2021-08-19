@@ -47,22 +47,22 @@ class UserController extends Controller
         $group = Group::where('uuid', $group_uuid)->first();
         $group_id = $group->id;
 
-        $user = new User;
-        $user->uuid = $user_uuid;
-        $user->unique_code = md5($this->_encrypt(time() . $request->post('email') . $_SERVER['REMOTE_ADDR']));
-        $user->firstname = $firstname;
-        $user->lastname = $lastname;
-        $user->middlename = $middlename;
-        $user->email = $email;
-        $user->group_id = $group_id;
-        $user->save();
+        $userModel = new User;
+        $userModel->uuid = $user_uuid;
+        $userModel->unique_code = md5($this->_encrypt(time() . $request->post('email') . $_SERVER['REMOTE_ADDR']));
+        $userModel->firstname = $firstname;
+        $userModel->lastname = $lastname;
+        $userModel->middlename = $middlename;
+        $userModel->email = $email;
+        $userModel->group_id = $group_id;
+        $userModel->save();
 
-        $password = new Password;
-        $password->user_id = $user->id;
-        $password->password = Hash::make($password);
-        $password->save();
+        $passwordModel = new Password;
+        $passwordModel->user_id = $userModel->id;
+        $passwordModel->password = Hash::make($password);
+        $passwordModel->save();
 
-        if (User::where('uuid', $user_uuid)->count() && Password::where('user_id', $user->id)->count()) {
+        if (User::where('uuid', $user_uuid)->count() && Password::where('user_id', $userModel->id)->count()) {
             return response()->json(true);
         } else {
             return response()->json(false);

@@ -88,7 +88,6 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                             flexGrow: 0,
                             flexShrink: 0,
                             boxSizing: 'border-box',
-                            height: '3000px',
 
                             minHeight: {
                                 xs:

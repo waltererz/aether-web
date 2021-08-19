@@ -11,3 +11,8 @@ export const changeTitle = (title) => {
         document.title = config('app.name');
     }
 };
+
+export const getCookie = (name) => {
+    const value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? decodeURIComponent(value[2]) : null;
+}

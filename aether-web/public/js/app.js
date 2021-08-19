@@ -6141,6 +6141,589 @@ const checkboxClasses = (0,_material_ui_unstyled__WEBPACK_IMPORTED_MODULE_1__.de
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/Chip/Chip.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/core/Chip/Chip.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
+/* harmony import */ var _material_ui_unstyled__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/unstyled */ "./node_modules/@material-ui/unstyled/composeClasses/composeClasses.js");
+/* harmony import */ var _material_ui_system__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/system */ "./node_modules/@material-ui/core/node_modules/@material-ui/system/esm/colorManipulator.js");
+/* harmony import */ var _internal_svg_icons_Cancel__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../internal/svg-icons/Cancel */ "./node_modules/@material-ui/core/internal/svg-icons/Cancel.js");
+/* harmony import */ var _utils_useForkRef__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/useForkRef */ "./node_modules/@material-ui/core/utils/useForkRef.js");
+/* harmony import */ var _utils_unsupportedProp__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../utils/unsupportedProp */ "./node_modules/@material-ui/core/utils/unsupportedProp.js");
+/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@material-ui/core/utils/capitalize.js");
+/* harmony import */ var _ButtonBase__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../ButtonBase */ "./node_modules/@material-ui/core/ButtonBase/ButtonBase.js");
+/* harmony import */ var _styles_useThemeProps__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../styles/useThemeProps */ "./node_modules/@material-ui/core/styles/useThemeProps.js");
+/* harmony import */ var _styles_styled__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../styles/styled */ "./node_modules/@material-ui/core/styles/styled.js");
+/* harmony import */ var _chipClasses__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./chipClasses */ "./node_modules/@material-ui/core/Chip/chipClasses.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+const _excluded = ["avatar", "className", "clickable", "color", "component", "deleteIcon", "disabled", "icon", "label", "onClick", "onDelete", "onKeyDown", "onKeyUp", "size", "variant"];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const useUtilityClasses = styleProps => {
+  const {
+    classes,
+    disabled,
+    size,
+    color,
+    onDelete,
+    clickable,
+    variant
+  } = styleProps;
+  const slots = {
+    root: ['root', variant, disabled && 'disabled', `size${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`, `color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`, clickable && 'clickable', clickable && `clickableColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`, onDelete && 'deletable', onDelete && `deletableColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`, `${variant}${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`],
+    label: ['label', `label${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`],
+    avatar: ['avatar', `avatar${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`, `avatarColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`],
+    icon: ['icon', `icon${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`, `iconColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`],
+    deleteIcon: ['deleteIcon', `deleteIcon${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`, `deleteIconColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`, `deleteIconOutlinedColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]
+  };
+  return (0,_material_ui_unstyled__WEBPACK_IMPORTED_MODULE_7__.default)(slots, _chipClasses__WEBPACK_IMPORTED_MODULE_8__.getChipUtilityClass, classes);
+};
+
+const ChipRoot = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_9__.default)('div', {
+  name: 'MuiChip',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      styleProps
+    } = props;
+    const {
+      color,
+      clickable,
+      onDelete,
+      size,
+      variant
+    } = styleProps;
+    return [{
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatar}`]: styles.avatar
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatar}`]: styles[`avatar${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatar}`]: styles[`avatarColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.icon}`]: styles.icon
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.icon}`]: styles[`icon${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.icon}`]: styles[`iconColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: styles.deleteIcon
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: styles[`deleteIcon${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: styles[`deleteIconColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]
+    }, {
+      [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: styles[`deleteIconOutlinedColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]
+    }, styles.root, styles[`size${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`], styles[`color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`], clickable && styles.clickable, clickable && color !== 'default' && styles[`clickableColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)})`], onDelete && styles.deletable, onDelete && color !== 'default' && styles[`deletableColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`], styles[variant], variant === 'outlined' && styles[`outlined${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]];
+  }
+})(({
+  theme,
+  styleProps
+}) => {
+  const deleteIconColor = (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette.text.primary, 0.26);
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+    /* Styles applied to the root element. */
+    fontFamily: theme.typography.fontFamily,
+    fontSize: theme.typography.pxToRem(13),
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 32,
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.action.selected,
+    borderRadius: 32 / 2,
+    whiteSpace: 'nowrap',
+    transition: theme.transitions.create(['background-color', 'box-shadow']),
+    // label will inherit this from root, then `clickable` class overrides this for both
+    cursor: 'default',
+    // We disable the focus ring for mouse, touch and keyboard users.
+    outline: 0,
+    textDecoration: 'none',
+    border: 0,
+    // Remove `button` border
+    padding: 0,
+    // Remove `button` padding
+    verticalAlign: 'middle',
+    boxSizing: 'border-box',
+    [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.disabled}`]: {
+      opacity: theme.palette.action.disabledOpacity,
+      pointerEvents: 'none'
+    },
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatar}`]: {
+      marginLeft: 5,
+      marginRight: -6,
+      width: 24,
+      height: 24,
+      color: theme.palette.mode === 'light' ? theme.palette.grey[700] : theme.palette.grey[300],
+      fontSize: theme.typography.pxToRem(12)
+    },
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatarColorPrimary}`]: {
+      color: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.primary.dark
+    },
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatarColorSecondary}`]: {
+      color: theme.palette.secondary.contrastText,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatarSmall}`]: {
+      marginLeft: 4,
+      marginRight: -4,
+      width: 18,
+      height: 18,
+      fontSize: theme.typography.pxToRem(10)
+    },
+
+    /* Styles applied to the icon element. */
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.icon}`]: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+      color: theme.palette.mode === 'light' ? theme.palette.grey[700] : theme.palette.grey[300],
+      marginLeft: 5,
+      marginRight: -6
+    }, styleProps.size === 'small' && {
+      fontSize: 18,
+      marginLeft: 4,
+      marginRight: -4
+    }, styleProps.color !== 'default' && {
+      color: 'inherit'
+    }),
+
+    /* Styles applied to the deleteIcon element. */
+    [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+      WebkitTapHighlightColor: 'transparent',
+      color: deleteIconColor,
+      fontSize: 22,
+      cursor: 'pointer',
+      margin: '0 5px 0 -6px',
+      '&:hover': {
+        color: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(deleteIconColor, 0.4)
+      }
+    }, styleProps.size === 'small' && {
+      fontSize: 16,
+      marginRight: 4,
+      marginLeft: -4
+    }, styleProps.color !== 'default' && {
+      color: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[styleProps.color].contrastText, 0.7),
+      '&:hover, &:active': {
+        color: theme.palette[styleProps.color].contrastText
+      }
+    })
+  }, styleProps.size === 'small' && {
+    height: 24
+  }, styleProps.color !== 'default' && {
+    backgroundColor: theme.palette[styleProps.color].main,
+    color: theme.palette[styleProps.color].contrastText
+  }, styleProps.onDelete && {
+    [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+      backgroundColor: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+    }
+  }, styleProps.onDelete && styleProps.color !== 'default' && {
+    [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+      backgroundColor: theme.palette[styleProps.color].dark
+    }
+  });
+}, ({
+  theme,
+  styleProps
+}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, styleProps.clickable && {
+  userSelect: 'none',
+  WebkitTapHighlightColor: 'transparent',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
+  },
+  [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+    backgroundColor: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+  },
+  '&:active': {
+    boxShadow: theme.shadows[1]
+  }
+}, styleProps.clickable && styleProps.color !== 'default' && {
+  [`&:hover, &.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+    backgroundColor: theme.palette[styleProps.color].dark
+  }
+}), ({
+  theme,
+  styleProps
+}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, styleProps.variant === 'outlined' && {
+  backgroundColor: 'transparent',
+  border: `1px solid ${theme.palette.mode === 'light' ? theme.palette.grey[400] : theme.palette.grey[700]}`,
+  [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.clickable}:hover`]: {
+    backgroundColor: theme.palette.action.hover
+  },
+  [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+    backgroundColor: theme.palette.action.focus
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatar}`]: {
+    marginLeft: 4
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.avatarSmall}`]: {
+    marginLeft: 2
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.icon}`]: {
+    marginLeft: 4
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.iconSmall}`]: {
+    marginLeft: 2
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: {
+    marginRight: 5
+  },
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIconSmall}`]: {
+    marginRight: 3
+  }
+}, styleProps.variant === 'outlined' && styleProps.color !== 'default' && {
+  color: theme.palette[styleProps.color].main,
+  border: `1px solid ${(0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[styleProps.color].main, 0.7)}`,
+  [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.clickable}:hover`]: {
+    backgroundColor: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[styleProps.color].main, theme.palette.action.hoverOpacity)
+  },
+  [`&.${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.focusVisible}`]: {
+    backgroundColor: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[styleProps.color].main, theme.palette.action.focusOpacity)
+  },
+
+  /* Styles applied to the deleteIcon element if `color="primary"` and `variant="outlined"`. */
+  [`& .${_chipClasses__WEBPACK_IMPORTED_MODULE_8__.default.deleteIcon}`]: {
+    color: (0,_material_ui_system__WEBPACK_IMPORTED_MODULE_10__.alpha)(theme.palette[styleProps.color].main, 0.7),
+    '&:hover, &:active': {
+      color: theme.palette[styleProps.color].main
+    }
+  }
+}));
+const ChipLabel = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_9__.default)('span', {
+  name: 'MuiChip',
+  slot: 'Label',
+  overridesResolver: (props, styles) => {
+    const {
+      styleProps
+    } = props;
+    const {
+      size
+    } = styleProps;
+    return [styles.label, styles[`label${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(size)}`]];
+  }
+})(({
+  styleProps
+}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+  /* Styles applied to the label `span` element. */
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  paddingLeft: 12,
+  paddingRight: 12,
+  whiteSpace: 'nowrap'
+}, styleProps.size === 'small' && {
+  paddingLeft: 8,
+  paddingRight: 8
+}));
+
+function isDeleteKeyboardEvent(keyboardEvent) {
+  return keyboardEvent.key === 'Backspace' || keyboardEvent.key === 'Delete';
+}
+/**
+ * Chips represent complex entities in small blocks, such as a contact.
+ */
+
+
+const Chip = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function Chip(inProps, ref) {
+  const props = (0,_styles_useThemeProps__WEBPACK_IMPORTED_MODULE_11__.default)({
+    props: inProps,
+    name: 'MuiChip'
+  });
+
+  const {
+    avatar: avatarProp,
+    className,
+    clickable: clickableProp,
+    color = 'default',
+    component: ComponentProp,
+    deleteIcon: deleteIconProp,
+    disabled = false,
+    icon: iconProp,
+    label,
+    onClick,
+    onDelete,
+    onKeyDown,
+    onKeyUp,
+    size = 'medium',
+    variant = 'filled'
+  } = props,
+        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__.default)(props, _excluded);
+
+  const chipRef = react__WEBPACK_IMPORTED_MODULE_2__.useRef(null);
+  const handleRef = (0,_utils_useForkRef__WEBPACK_IMPORTED_MODULE_12__.default)(chipRef, ref);
+
+  const handleDeleteIconClick = event => {
+    // Stop the event from bubbling up to the `Chip`
+    event.stopPropagation();
+
+    if (onDelete) {
+      onDelete(event);
+    }
+  };
+
+  const handleKeyDown = event => {
+    // Ignore events from children of `Chip`.
+    if (event.currentTarget === event.target && isDeleteKeyboardEvent(event)) {
+      // Will be handled in keyUp, otherwise some browsers
+      // might init navigation
+      event.preventDefault();
+    }
+
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
+  };
+
+  const handleKeyUp = event => {
+    // Ignore events from children of `Chip`.
+    if (event.currentTarget === event.target) {
+      if (onDelete && isDeleteKeyboardEvent(event)) {
+        onDelete(event);
+      } else if (event.key === 'Escape' && chipRef.current) {
+        chipRef.current.blur();
+      }
+    }
+
+    if (onKeyUp) {
+      onKeyUp(event);
+    }
+  };
+
+  const clickable = clickableProp !== false && onClick ? true : clickableProp;
+  const small = size === 'small';
+  const component = clickable || onDelete ? _ButtonBase__WEBPACK_IMPORTED_MODULE_13__.default : ComponentProp || 'div';
+
+  const styleProps = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({}, props, {
+    component,
+    disabled,
+    size,
+    color,
+    onDelete: !!onDelete,
+    clickable,
+    variant
+  });
+
+  const classes = useUtilityClasses(styleProps);
+  const moreProps = component === _ButtonBase__WEBPACK_IMPORTED_MODULE_13__.default ? {
+    component: ComponentProp || 'div',
+    focusVisibleClassName: classes.focusVisible,
+    disableRipple: Boolean(onDelete)
+  } : {};
+  let deleteIcon = null;
+
+  if (onDelete) {
+    const customClasses = (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(color !== 'default' && (variant === 'outlined' ? classes[`deleteIconOutlinedColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`] : classes[`deleteIconColor${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__.default)(color)}`]), small && classes.deleteIconSmall);
+    deleteIcon = deleteIconProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(deleteIconProp) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(deleteIconProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(deleteIconProp.props.className, classes.deleteIcon, customClasses),
+      onClick: handleDeleteIconClick
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_internal_svg_icons_Cancel__WEBPACK_IMPORTED_MODULE_14__.default, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.deleteIcon, customClasses),
+      onClick: handleDeleteIconClick
+    });
+  }
+
+  let avatar = null;
+
+  if (avatarProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(avatarProp)) {
+    avatar = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(avatarProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.avatar, avatarProp.props.className)
+    });
+  }
+
+  let icon = null;
+
+  if (iconProp && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.isValidElement(iconProp)) {
+    icon = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.cloneElement(iconProp, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.icon, iconProp.props.className)
+    });
+  }
+
+  if (true) {
+    if (avatar && icon) {
+      console.error('Material-UI: The Chip component can not handle the avatar ' + 'and the icon prop at the same time. Pick one.');
+    }
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(ChipRoot, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__.default)({
+    as: component,
+    className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.root, className),
+    disabled: clickable && disabled ? true : undefined,
+    onClick: onClick,
+    onKeyDown: handleKeyDown,
+    onKeyUp: handleKeyUp,
+    ref: handleRef,
+    styleProps: styleProps
+  }, moreProps, other, {
+    children: [avatar || icon, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(ChipLabel, {
+      className: (0,clsx__WEBPACK_IMPORTED_MODULE_4__.default)(classes.label),
+      styleProps: styleProps,
+      children: label
+    }), deleteIcon]
+  }));
+});
+ true ? Chip.propTypes
+/* remove-proptypes */
+= {
+  // ----------------------------- Warning --------------------------------
+  // | These PropTypes are generated from the TypeScript type definitions |
+  // |     To update them edit the d.ts file and run "yarn proptypes"     |
+  // ----------------------------------------------------------------------
+
+  /**
+   * The Avatar element to display.
+   */
+  avatar: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * This prop isn't supported.
+   * Use the `component` prop if you need to change the children structure.
+   */
+  children: _utils_unsupportedProp__WEBPACK_IMPORTED_MODULE_15__.default,
+
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * @ignore
+   */
+  className: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string),
+
+  /**
+   * If `true`, the chip will appear clickable, and will raise when pressed,
+   * even if the onClick prop is not defined.
+   * If `false`, the chip will not appear clickable, even if onClick prop is defined.
+   * This can be used, for example,
+   * along with the component prop to indicate an anchor Chip is clickable.
+   * Note: this controls the UI and does not affect the onClick event.
+   */
+  clickable: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * The color of the component. It supports those theme colors that make sense for this component.
+   * @default 'default'
+   */
+  color: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['default', 'primary', 'secondary', 'error', 'info', 'success', 'warning']), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string)]),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().elementType),
+
+  /**
+   * Override the default delete icon element. Shown only if `onDelete` is set.
+   */
+  deleteIcon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * If `true`, the component is disabled.
+   * @default false
+   */
+  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().bool),
+
+  /**
+   * Icon element.
+   */
+  icon: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().element),
+
+  /**
+   * The content of the component.
+   */
+  label: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().node),
+
+  /**
+   * @ignore
+   */
+  onClick: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * Callback fired when the delete icon is clicked.
+   * If set, the delete icon will be shown.
+   */
+  onDelete: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * @ignore
+   */
+  onKeyDown: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * @ignore
+   */
+  onKeyUp: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().func),
+
+  /**
+   * The size of the component.
+   * @default 'medium'
+   */
+  size: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['medium', 'small']), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string)]),
+
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
+
+  /**
+   * The variant to use.
+   * @default 'filled'
+   */
+  variant: prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default().oneOf(['filled', 'outlined']), (prop_types__WEBPACK_IMPORTED_MODULE_3___default().string)])
+} : 0;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Chip);
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Chip/chipClasses.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/core/Chip/chipClasses.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getChipUtilityClass": () => (/* binding */ getChipUtilityClass),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _material_ui_unstyled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/unstyled */ "./node_modules/@material-ui/unstyled/generateUtilityClass/generateUtilityClass.js");
+/* harmony import */ var _material_ui_unstyled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/unstyled */ "./node_modules/@material-ui/unstyled/generateUtilityClasses/generateUtilityClasses.js");
+
+function getChipUtilityClass(slot) {
+  return (0,_material_ui_unstyled__WEBPACK_IMPORTED_MODULE_0__.default)('MuiChip', slot);
+}
+const chipClasses = (0,_material_ui_unstyled__WEBPACK_IMPORTED_MODULE_1__.default)('MuiChip', ['root', 'sizeSmall', 'sizeMedium', 'colorPrimary', 'colorSecondary', 'disabled', 'clickable', 'clickableColorPrimary', 'clickableColorSecondary', 'deletable', 'deletableColorPrimary', 'deletableColorSecondary', 'outlined', 'filled', 'outlinedPrimary', 'outlinedSecondary', 'avatar', 'avatarSmall', 'avatarMedium', 'avatarColorPrimary', 'avatarColorSecondary', 'icon', 'iconSmall', 'iconMedium', 'iconColorPrimary', 'iconColorSecondary', 'label', 'labelSmall', 'labelMedium', 'deleteIcon', 'deleteIconSmall', 'deleteIconMedium', 'deleteIconColorPrimary', 'deleteIconColorSecondary', 'deleteIconOutlinedColorPrimary', 'deleteIconOutlinedColorSecondary', 'focusVisible']);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (chipClasses);
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/Collapse/Collapse.js":
 /*!*************************************************************!*\
   !*** ./node_modules/@material-ui/core/Collapse/Collapse.js ***!
@@ -20816,6 +21399,33 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/internal/svg-icons/Cancel.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@material-ui/core/internal/svg-icons/Cancel.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/createSvgIcon */ "./node_modules/@material-ui/core/utils/createSvgIcon.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+/**
+ * @ignore - internal component.
+ */
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_utils_createSvgIcon__WEBPACK_IMPORTED_MODULE_2__.default)( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+  d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+}), 'Cancel'));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/internal/svg-icons/CheckBox.js":
 /*!***********************************************************************!*\
   !*** ./node_modules/@material-ui/core/internal/svg-icons/CheckBox.js ***!
@@ -25195,6 +25805,34 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/AddchartRounded.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/icons/AddchartRounded.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "M11 10c0-.55.45-1 1-1s1 .45 1 1v7h-2v-7zm9 3c-.55 0-1 .45-1 1v5H5V5h5c.55 0 1-.45 1-1s-.45-1-1-1H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5c0-.55-.45-1-1-1zm1-8h-2V3c0-.55-.45-1-1-1s-1 .45-1 1v2h-2c-.55 0-1 .45-1 1s.45 1 1 1h2v2c0 .55.45 1 1 1s1-.45 1-1V7h2c.55 0 1-.45 1-1s-.45-1-1-1zm-5 8c-.55 0-1 .45-1 1v3h2v-3c0-.55-.45-1-1-1zm-9-1v5h2v-5c0-.55-.45-1-1-1s-1 .45-1 1z"
+}), 'AddchartRounded');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/ArrowBack.js":
 /*!******************************************************!*\
   !*** ./node_modules/@material-ui/icons/ArrowBack.js ***!
@@ -25566,6 +26204,34 @@ var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/r
 var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
   d: "M20 12c0-1.1.9-2 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2zm-4.42 4.8L12 14.5l-3.58 2.3 1.08-4.12-3.29-2.69 4.24-.25L12 5.8l1.54 3.95 4.24.25-3.29 2.69 1.09 4.11z"
 }), 'LocalActivity');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Logout.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Logout.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.default = void 0;
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+  d: "m17 7-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
+}), 'Logout');
 
 exports.default = _default;
 
@@ -34617,6 +35283,35 @@ function HideOnScroll(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Paper.jsx":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Paper.jsx ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Paper)
+/* harmony export */ });
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/Paper/Paper.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function Paper(_ref) {
+  var children = _ref.children;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_1__.default, {
+    elevation: 0,
+    sx: {
+      padding: '15px',
+      backgroundColor: '#ffffff'
+    },
+    children: children
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/config/app.js":
 /*!************************************!*\
   !*** ./resources/js/config/app.js ***!
@@ -34630,6 +35325,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var _config = {
   name: window._aether.name,
+  client: window._aether.client,
+  auth: window._aether.auth,
   url: {
     app: window._aether.baseUrl,
     backend: 'http://back.erzsphilos.com',
@@ -34715,7 +35412,7 @@ var _config = {
       main: '#46437a'
     },
     bgColor: {
-      main: '#fefefe'
+      main: '#fafafa'
     },
     kakao: {
       main: '#fee500'
@@ -34844,6 +35541,10 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime
           exact: true,
           path: "/user/signin",
           component: _standalones__WEBPACK_IMPORTED_MODULE_6__.SignIn
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          exact: true,
+          path: "/user/signout",
+          component: _standalones__WEBPACK_IMPORTED_MODULE_6__.SignOut
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "*",
           component: _system_App__WEBPACK_IMPORTED_MODULE_4__.default
@@ -35074,14 +35775,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/AccountCircle */ "./node_modules/@material-ui/icons/AccountCircle.js");
 /* harmony import */ var _material_ui_icons_SearchOutlined__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/icons/SearchOutlined */ "./node_modules/@material-ui/icons/SearchOutlined.js");
-/* harmony import */ var _material_ui_icons_FolderSpecial__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/FolderSpecial */ "./node_modules/@material-ui/icons/FolderSpecial.js");
-/* harmony import */ var _material_ui_icons_LocalActivity__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/LocalActivity */ "./node_modules/@material-ui/icons/LocalActivity.js");
-/* harmony import */ var _material_ui_icons_QuestionAnswer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/icons/QuestionAnswer */ "./node_modules/@material-ui/icons/QuestionAnswer.js");
+/* harmony import */ var _material_ui_icons_FolderSpecial__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/FolderSpecial */ "./node_modules/@material-ui/icons/FolderSpecial.js");
+/* harmony import */ var _material_ui_icons_LocalActivity__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/icons/LocalActivity */ "./node_modules/@material-ui/icons/LocalActivity.js");
+/* harmony import */ var _material_ui_icons_QuestionAnswer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/icons/QuestionAnswer */ "./node_modules/@material-ui/icons/QuestionAnswer.js");
+/* harmony import */ var _material_ui_icons_Logout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/Logout */ "./node_modules/@material-ui/icons/Logout.js");
 /* harmony import */ var _system_Container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../system/Container */ "./resources/js/system/Container.jsx");
 /* harmony import */ var _home_RightSide__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/RightSide */ "./resources/js/pages/home/RightSide.jsx");
 /* harmony import */ var _home_pages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home/pages */ "./resources/js/pages/home/pages/index.js");
 /* harmony import */ var _services_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/common */ "./resources/js/services/common.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -35101,14 +35804,24 @@ function Home() {
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_SearchOutlined__WEBPACK_IMPORTED_MODULE_6__.default, {})
       }, {
         to: '/user/signin',
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_7__.default, {})
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_7__.default, {}),
+        auth: false
+      }, {
+        to: '/user/signout',
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_Logout__WEBPACK_IMPORTED_MODULE_8__.default, {}),
+        auth: true
       }],
       mobile: [{
         to: '/advisors/search',
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_SearchOutlined__WEBPACK_IMPORTED_MODULE_6__.default, {})
       }, {
         to: '/user/signin',
-        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_7__.default, {})
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_AccountCircle__WEBPACK_IMPORTED_MODULE_7__.default, {}),
+        auth: false
+      }, {
+        to: '/user/signout',
+        icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_Logout__WEBPACK_IMPORTED_MODULE_8__.default, {}),
+        auth: true
       }]
     }
   });
@@ -35122,15 +35835,15 @@ function Home() {
     submenus: [{
       path: '#',
       text: '즐겨찾기',
-      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_FolderSpecial__WEBPACK_IMPORTED_MODULE_8__.default, {})
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_FolderSpecial__WEBPACK_IMPORTED_MODULE_9__.default, {})
     }, {
       path: '#',
       text: '저장됨',
-      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_LocalActivity__WEBPACK_IMPORTED_MODULE_9__.default, {})
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_LocalActivity__WEBPACK_IMPORTED_MODULE_10__.default, {})
     }, {
       path: '#',
       text: '다이렉트메시지',
-      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_QuestionAnswer__WEBPACK_IMPORTED_MODULE_10__.default, {})
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_QuestionAnswer__WEBPACK_IMPORTED_MODULE_11__.default, {})
     }]
   });
 }
@@ -36191,13 +36904,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ RightSide)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Paper */ "./resources/js/components/Paper.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function RightSide() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: "\uD22C\uC790\uC790\uC0B0\uAD00\uB9AC \uC624\uB978\uCABD"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__.default, {
+    children: "\uD3EC\uD2B8\uD3F4\uB9AC\uC624 \uC624\uB978\uCABD \uCF58\uD150\uCE20"
   });
 }
 
@@ -36214,13 +36927,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _material_ui_core_Chip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Chip */ "./node_modules/@material-ui/core/Chip/Chip.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var _material_ui_icons_AddchartRounded__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/AddchartRounded */ "./node_modules/@material-ui/icons/AddchartRounded.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
+
+
+
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "\uD22C\uC790\uC790\uC0B0\uAD00\uB9AC \uCCAB \uD398\uC774\uC9C0"
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useHistory)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__.default, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Chip__WEBPACK_IMPORTED_MODULE_3__.default, {
+      label: "\uD3EC\uD2B8\uD3F4\uB9AC\uC624 \uB9CC\uB4E4\uAE30",
+      variant: "outlined",
+      color: "secondary",
+      icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_icons_AddchartRounded__WEBPACK_IMPORTED_MODULE_4__.default, {}),
+      onClick: function onClick() {
+        history.push('/investment/portfolio/create');
+      }
+    })
   });
 }
 
@@ -36235,14 +36963,14 @@ function Home() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Home)
+/* harmony export */   "default": () => (/* binding */ Portfolio)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+function Portfolio() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__.default, {
     children: "\uD3EC\uD2B8\uD3F4\uB9AC\uC624 \uCCAB \uD398\uC774\uC9C0"
   });
 }
@@ -36549,6 +37277,9 @@ var routes = {
       },
       signin: {
         title: '회원로그인'
+      },
+      signout: {
+        title: '로그아웃'
       }
     }
   },
@@ -36568,7 +37299,12 @@ var routes = {
     title: '투자자산관리',
     children: {
       portfolio: {
-        title: '포트폴리오'
+        title: '포트폴리오',
+        children: {
+          create: {
+            title: '포트폴리오 만들기'
+          }
+        }
       }
     }
   },
@@ -36624,23 +37360,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var post = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(path) {
     var params,
+        token,
         _args3 = arguments;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
             params = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : {};
-            _context3.next = 3;
+            token = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : null;
+            _context3.next = 4;
             return axios__WEBPACK_IMPORTED_MODULE_1___default().get((0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.url.backend') + '/sanctum/csrf-cookie').then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+              var headers;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      _context2.next = 2;
+                      headers = {};
+                      headers['Content-type'] = 'application/json';
+
+                      if (token) {
+                        headers['Authorization'] = 'Bearer ' + token;
+                      }
+
+                      _context2.next = 5;
                       return axios__WEBPACK_IMPORTED_MODULE_1___default().post((0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.url.api') + '/' + path, params, {
-                        headers: {
-                          'Content-type': 'application/json'
-                        }
+                        headers: headers
                       }).then( /*#__PURE__*/function () {
                         var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(response) {
                           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -36670,10 +37414,10 @@ var post = /*#__PURE__*/function () {
                         };
                       }());
 
-                    case 2:
+                    case 5:
                       return _context2.abrupt("return", _context2.sent);
 
-                    case 3:
+                    case 6:
                     case "end":
                       return _context2.stop();
                   }
@@ -36681,10 +37425,10 @@ var post = /*#__PURE__*/function () {
               }, _callee2);
             })));
 
-          case 3:
+          case 4:
             return _context3.abrupt("return", _context3.sent);
 
-          case 4:
+          case 5:
           case "end":
             return _context3.stop();
         }
@@ -36709,7 +37453,8 @@ var post = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "scrollTop": () => (/* binding */ scrollTop),
-/* harmony export */   "changeTitle": () => (/* binding */ changeTitle)
+/* harmony export */   "changeTitle": () => (/* binding */ changeTitle),
+/* harmony export */   "getCookie": () => (/* binding */ getCookie)
 /* harmony export */ });
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config */ "./resources/js/config/index.js");
 
@@ -36722,6 +37467,10 @@ var changeTitle = function changeTitle(title) {
   } else {
     document.title = (0,_config__WEBPACK_IMPORTED_MODULE_0__.default)('app.name');
   }
+};
+var getCookie = function getCookie(name) {
+  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return value ? decodeURIComponent(value[2]) : null;
 };
 
 /***/ }),
@@ -36811,47 +37560,36 @@ var getMetaData = function getMetaData() {
         routeItem = _Object$entries$_i[1];
 
     if (path.replace('/', '') == currentPathArray[1]) {
-      // routes 오브젝트에 지정되어 있는 해당 경로의 탭 이름을 변수에 저장
-      // 탭 이름이 지정되지 않은 경우에는 그대로 'default' 저장
       if ('tabName' in routeItem) {
         currentTabName = routeItem['tabName'];
-      } // 페이지 타이틀이 지정되어 있는 경우 변수에 저장
-
+      }
 
       if ('title' in routeItem) {
         currentDocumentTitle = routeItem['title'];
-      } // 하위 경로가 지정되어 있는 경우 모든 경우의 수를 판단 (무한루프)
-
-
-      var pointer = 2;
+      }
 
       if ('children' in routeItem) {
-        var childRouteItem = null;
+        var depth = 2;
+        var childItem = routeItem['children'];
 
         while (true) {
-          if (!childRouteItem) {
-            childRouteItem = routeItem['children'];
-          } else {
-            if ('children' in childRouteItem) {
-              childRouteItem = childRouteItem['children'];
-            }
-          } // 현재 웹브라우저에 입력된 경로의 깊이 만큼만 루프를 수행
+          if (currentPathArray[depth] in childItem) {
+            childItem = childItem[currentPathArray[depth]];
 
-
-          if (pointer in currentPathArray) {
-            if (currentPathArray[pointer] in childRouteItem) {
-              // 탭 이름이 지정되어 있는 경우 현재 탭 이름으로 저장
-              if ('tabName' in childRouteItem[currentPathArray[pointer]]) {
-                currentTabName = childRouteItem[currentPathArray[pointer]]['tabName'];
-              } // 페이지 타이틀이 지정되어 있는 경우 변수에 저장
-
-
-              if ('title' in routeItem) {
-                currentDocumentTitle = childRouteItem[currentPathArray[pointer]]['title'];
-              }
+            if ('tabName' in childItem) {
+              currentTabName = childItem['tabName'];
             }
 
-            pointer++;
+            if ('title' in childItem) {
+              currentDocumentTitle = childItem['title'];
+            }
+
+            if ('children' in childItem) {
+              childItem = childItem['children'];
+              depth++;
+            } else {
+              break;
+            }
           } else {
             break;
           }
@@ -36881,21 +37619,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ SignIn)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/createTheme.js");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/node_modules/@material-ui/system/esm/ThemeProvider/ThemeProvider.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/withStyles/withStyles.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/TextField/TextField.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/Button.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js");
-/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/Checkbox.js");
-/* harmony import */ var _material_ui_icons_Google__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/icons/Google */ "./node_modules/@material-ui/icons/Google.js");
-/* harmony import */ var _material_ui_icons_Facebook__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/icons/Facebook */ "./node_modules/@material-ui/icons/Facebook.js");
-/* harmony import */ var _material_ui_icons_ArrowBack__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/icons/ArrowBack */ "./node_modules/@material-ui/icons/ArrowBack.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config */ "./resources/js/config/index.js");
-/* harmony import */ var _services_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/common */ "./resources/js/services/common.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/main.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/createTheme.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/node_modules/@material-ui/system/esm/ThemeProvider/ThemeProvider.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/withStyles/withStyles.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/TextField/TextField.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/Button.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/Checkbox.js");
+/* harmony import */ var _material_ui_icons_Google__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/icons/Google */ "./node_modules/@material-ui/icons/Google.js");
+/* harmony import */ var _material_ui_icons_Facebook__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/icons/Facebook */ "./node_modules/@material-ui/icons/Facebook.js");
+/* harmony import */ var _material_ui_icons_ArrowBack__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/icons/ArrowBack */ "./node_modules/@material-ui/icons/ArrowBack.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../config */ "./resources/js/config/index.js");
+/* harmony import */ var _services_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/common */ "./resources/js/services/common.js");
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/api */ "./resources/js/services/api.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -36918,25 +37658,66 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 function SignIn() {
-  var theme = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__.default)({
-    palette: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette'),
-    breakpoints: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.breakpoints')
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var deviceName = react_device_detect__WEBPACK_IMPORTED_MODULE_1__.osName + ' ' + react_device_detect__WEBPACK_IMPORTED_MODULE_1__.osVersion + ' ' + react_device_detect__WEBPACK_IMPORTED_MODULE_1__.browserName + ' ' + react_device_detect__WEBPACK_IMPORTED_MODULE_1__.fullBrowserVersion + ' - ' + (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.client');
+  var ref = {
+    email: react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
+    password: react__WEBPACK_IMPORTED_MODULE_0__.useRef(null)
+  };
+  var theme = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_7__.default)({
+    palette: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette'),
+    breakpoints: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.breakpoints')
   });
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
-  var Checkbox = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_6__.default)({
+  var Checkbox = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_8__.default)({
     root: {
-      color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.secondary.main')
+      color: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.secondary.main')
     }
   })(function (props) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_7__.default, _objectSpread({
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_9__.default, _objectSpread({
       color: "default"
     }, props));
   });
-  _services_common__WEBPACK_IMPORTED_MODULE_2__.init();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_8__.default, {
+
+  var process = function process() {
+    var email = ref.email.current.querySelector('input').value;
+    var password = ref.password.current.querySelector('input').value;
+    _services_api__WEBPACK_IMPORTED_MODULE_4__.post('auth/signin', {
+      email: email,
+      password: password,
+      device_name: deviceName
+    }).then(function (response) {
+      if (response.data) {
+        window.location.href = '/';
+      } else {
+        ref.email.current.querySelector('input').value = '';
+        ref.password.current.querySelector('input').value = '';
+        ref.email.current.querySelector('input').focus();
+        alert('로그인 정보가 잘못되었습니다.');
+      }
+    });
+  };
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    var keyEvent = function keyEvent(event) {
+      if (event.keyCode == 13) {
+        process();
+      }
+    };
+
+    ref.email.current.querySelector('input').addEventListener('keyup', function (event) {
+      keyEvent(event);
+    });
+    ref.password.current.querySelector('input').addEventListener('keyup', function (event) {
+      keyEvent(event);
+    });
+  }, []);
+  _services_common__WEBPACK_IMPORTED_MODULE_3__.init();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__.default, {
     theme: theme,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
       sx: {
         display: 'flex',
         flexDirection: 'column',
@@ -36945,7 +37726,7 @@ function SignIn() {
         padding: '0 10px',
         height: '100vh'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
         sx: {
           width: '100%',
           maxWidth: '450px',
@@ -36954,21 +37735,21 @@ function SignIn() {
           flexWrap: 'nowrap',
           marginTop: '40px',
           backgroundColor: '#ffffff',
-          boxShadow: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.boxShadow.1'),
-          borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.borderRadius.2'),
+          boxShadow: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.boxShadow.1'),
+          borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.borderRadius.2'),
           border: '0px'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
           sx: {
-            background: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.gradient.secondary'),
+            background: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.gradient.secondary'),
             border: '0px',
-            borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.borderRadius.2'),
+            borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.borderRadius.2'),
             margin: '-20px 20px 10px 20px',
             boxShadow: '0 1px 4px 0 rgba(73, 70, 128, 0.3)',
             padding: '13px',
             boxSizing: 'border-box'
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             component: "h4",
             sx: {
               margin: '0px',
@@ -36978,7 +37759,7 @@ function SignIn() {
               fontSize: '1.2em'
             },
             children: "SIGN IN"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             sx: {
               margin: '0px',
               padding: '0px 10px',
@@ -36988,7 +37769,7 @@ function SignIn() {
             },
             children: "\uD68C\uC6D0\uC73C\uB85C \uB85C\uADF8\uC778\uD558\uBA74 \uBAA8\uB4E0 \uAE30\uB2A5\uC744 \uC774\uC6A9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
           sx: {
             display: 'flex',
             flexDirection: 'column',
@@ -37012,7 +37793,7 @@ function SignIn() {
               }
             }
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             sx: {
               width: '300px',
               display: 'flex',
@@ -37039,38 +37820,38 @@ function SignIn() {
                 },
                 '&:hover': {
                   '&.kakao': {
-                    color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.kakao.main'),
-                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.kakao.main')
+                    color: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.kakao.main'),
+                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.kakao.main')
                   },
                   '&.naver': {
-                    color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.naver.main'),
-                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.naver.main')
+                    color: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.naver.main'),
+                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.naver.main')
                   },
                   '&.google': {
-                    color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.google.main'),
-                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.google.main')
+                    color: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.google.main'),
+                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.google.main')
                   },
                   '&.facebook': {
-                    color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.facebook.main'),
-                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.facebook.main')
+                    color: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.facebook.main'),
+                    borderColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.facebook.main')
                   }
                 }
               }
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               className: "social-button kakao",
               children: "K"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               className: "social-button naver",
               children: "N"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               className: "social-button google",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_icons_Google__WEBPACK_IMPORTED_MODULE_10__.default, {})
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_Google__WEBPACK_IMPORTED_MODULE_12__.default, {})
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               className: "social-button facebook",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_icons_Facebook__WEBPACK_IMPORTED_MODULE_11__.default, {})
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_Facebook__WEBPACK_IMPORTED_MODULE_13__.default, {})
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             sx: {
               display: 'flex',
               flexDirection: 'row',
@@ -37085,7 +37866,7 @@ function SignIn() {
                 borderTop: '1px solid #efefef'
               }
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               sx: {
                 width: '100px',
                 textAlign: 'center',
@@ -37094,32 +37875,32 @@ function SignIn() {
               },
               children: "OR"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             className: "input-item",
             sx: {
               marginBottom: '25px'
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_12__.default, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__.default, {
               fullWidth: true,
+              ref: ref.email,
               label: "\uC774\uBA54\uC77C\uC8FC\uC18C",
-              id: "input-user-email",
               variant: "outlined",
               color: "secondary"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             className: "input-item",
             sx: {
               marginBottom: '10px'
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_12__.default, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__.default, {
               fullWidth: true,
+              ref: ref.password,
               type: "password",
               label: "\uD328\uC2A4\uC6CC\uB4DC",
-              id: "input-user-password",
               variant: "outlined",
               color: "secondary"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             className: "input-item",
             sx: {
               display: 'flex',
@@ -37127,36 +37908,36 @@ function SignIn() {
               alignItems: 'center',
               marginBottom: '10px'
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
               sx: {
                 flexGrow: 1
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__.default, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_15__.default, {
                 className: "checkbox-container",
-                control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Checkbox, {
-                  name: "remember",
-                  id: "input-remember"
+                control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Checkbox, {
+                  name: "remember"
                 }),
                 label: "\uB85C\uADF8\uC778 \uC0C1\uD0DC \uC720\uC9C0\uD558\uAE30"
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               href: "#",
               children: "\uD328\uC2A4\uC6CC\uB4DC \uCD08\uAE30\uD654"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             className: "input-item button-box",
             sx: {
               marginBottom: '10px'
             },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_14__.default, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_16__.default, {
               fullWidth: true,
               variant: "contained",
               color: "secondary",
               size: "large",
               disableElevation: true,
+              onClick: process,
               children: "\uB85C\uADF8\uC778"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             sx: {
               display: 'flex',
               flexDirection: 'row',
@@ -37171,17 +37952,17 @@ function SignIn() {
                 borderTop: '1px solid #efefef'
               }
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
             sx: {
               textAlign: 'center'
             },
-            children: ["\uC544\uC9C1 \uD68C\uC6D0\uC774 \uC544\uB2C8\uC2E0\uAC00\uC694? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+            children: ["\uC544\uC9C1 \uD68C\uC6D0\uC774 \uC544\uB2C8\uC2E0\uAC00\uC694? ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               href: "#",
               children: "\uD68C\uC6D0\uAC00\uC785"
             })]
           })]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__.default, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_11__.default, {
         className: "back-button",
         onClick: function onClick() {
           history.goBack();
@@ -37196,7 +37977,7 @@ function SignIn() {
           WebkitTapHighlightColor: 'transparent',
           userSelect: 'none'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_icons_ArrowBack__WEBPACK_IMPORTED_MODULE_15__.default, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_ArrowBack__WEBPACK_IMPORTED_MODULE_17__.default, {
           sx: {
             marginRight: '10px'
           }
@@ -37204,6 +37985,41 @@ function SignIn() {
       })]
     })
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/standalones/SignOut.jsx":
+/*!**********************************************!*\
+  !*** ./resources/js/standalones/SignOut.jsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SignOut)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _services_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/common */ "./resources/js/services/common.js");
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api */ "./resources/js/services/api.js");
+/* harmony import */ var _services_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/browser */ "./resources/js/services/browser.js");
+
+
+
+
+function SignOut() {
+  _services_common__WEBPACK_IMPORTED_MODULE_1__.init();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    _services_api__WEBPACK_IMPORTED_MODULE_2__.post('auth/signout', {}, _services_browser__WEBPACK_IMPORTED_MODULE_3__.getCookie('personal_access_token')).then(function (response) {
+      if (response.data) {
+        window.location.href = '/';
+      } else {
+        console.log('알 수 없는 오류 발생');
+      }
+    });
+  }, []);
+  return '로그아웃';
 }
 
 /***/ }),
@@ -37217,9 +38033,12 @@ function SignIn() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SignIn": () => (/* reexport safe */ _SignIn__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */   "SignIn": () => (/* reexport safe */ _SignIn__WEBPACK_IMPORTED_MODULE_0__.default),
+/* harmony export */   "SignOut": () => (/* reexport safe */ _SignOut__WEBPACK_IMPORTED_MODULE_1__.default)
 /* harmony export */ });
 /* harmony import */ var _SignIn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SignIn */ "./resources/js/standalones/SignIn.jsx");
+/* harmony import */ var _SignOut__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SignOut */ "./resources/js/standalones/SignOut.jsx");
+
 
 
 
@@ -37757,10 +38576,8 @@ function HeaderNavigation() {
       if (desktopSubmenuDOM) {
         if (container.style.transform && container.style.transform !== 'none') {
           desktopSubmenuDOM.style.transform = 'translateY(-40px)';
-          desktopSubmenuDOM.classList.add('in');
         } else {
           desktopSubmenuDOM.style.transform = 'none';
-          desktopSubmenuDOM.classList.remove('in');
         }
       }
     });
@@ -38261,10 +39078,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ XHeaderIcons)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../config */ "./resources/js/config/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -38317,32 +39136,58 @@ function XHeaderIcons() {
       }
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: [headerIcons && 'desktop' in headerIcons && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__.default, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    children: [headerIcons && 'desktop' in headerIcons && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
       className: "icons-desktop",
       sx: styles.box,
       children: headerIcons.desktop.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__.default, {
-          className: "icon",
-          sx: styles.item,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-            to: item.to,
-            children: item.icon
-          })
-        }, index);
+        if ('auth' in item) {
+          if (item.auth === true && (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.auth').length > 0 || item.auth === false && (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.auth').length === 0) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
+              className: "icon",
+              sx: styles.item,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+                to: item.to,
+                children: item.icon
+              })
+            }, index);
+          }
+        } else {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
+            className: "icon",
+            sx: styles.item,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              to: item.to,
+              children: item.icon
+            })
+          }, index);
+        }
       })
-    }), headerIcons && 'mobile' in headerIcons && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__.default, {
+    }), headerIcons && 'mobile' in headerIcons && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
       className: "icons-mobile",
       sx: styles.box,
       children: headerIcons.mobile.map(function (item, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__.default, {
-          className: "icon",
-          sx: styles.item,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-            to: item.to,
-            children: item.icon
-          })
-        }, index);
+        if ('auth' in item) {
+          if (item.auth === true && (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.auth').length > 0 || item.auth === false && (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('app.auth').length === 0) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
+              className: "icon",
+              sx: styles.item,
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+                to: item.to,
+                children: item.icon
+              })
+            }, index);
+          }
+        } else {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_4__.default, {
+            className: "icon",
+            sx: styles.item,
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              to: item.to,
+              children: item.icon
+            })
+          }, index);
+        }
       })
     })]
   });
@@ -38459,7 +39304,6 @@ function BasicContainer(_ref) {
             flexGrow: 0,
             flexShrink: 0,
             boxSizing: 'border-box',
-            height: '3000px',
             minHeight: {
               xs: 'calc(100vh - ' + (0,_config__WEBPACK_IMPORTED_MODULE_3__.default)('templete.height.headerFixed.mobile') + ')',
               md: 'calc(100vh - ' + (0,_config__WEBPACK_IMPORTED_MODULE_3__.default)('templete.height.headerFixed.desktop') + ')'
@@ -38581,7 +39425,7 @@ function DesktopDrawer(props) {
       },
       '& .MuiPaper-root': {
         display: 'flex',
-        backgroundColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.bgColor'),
+        backgroundColor: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.palette.bgColor.main'),
         border: '0px',
         zIndex: (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.zIndex.drawer'),
         boxSizing: 'border-box',
@@ -38596,11 +39440,6 @@ function DesktopDrawer(props) {
         },
         marginTop: {
           md: 'calc(' + (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.height.headerFixed.desktop') + ' + ' + (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.height.headerNavigation.desktop') + ')'
-        },
-        '&.in': {
-          height: {
-            md: 'calc(100vh - ' + (0,_config__WEBPACK_IMPORTED_MODULE_2__.default)('templete.height.headerFixed.desktop') + ')'
-          }
         }
       }
     },
@@ -38755,7 +39594,7 @@ function XMenu(_ref) {
         sx: {
           '&:hover': {
             '& .MuiListItem-root': {
-              backgroundColor: '#f9f9f9'
+              backgroundColor: '#f5f5f5'
             }
           },
           '&.selected': {
@@ -45938,6 +46777,899 @@ exports.typeOf = typeOf;
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/react-device-detect/main.js":
+/*!**************************************************!*\
+  !*** ./node_modules/react-device-detect/main.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var React__default = _interopDefault(React);
+
+var UAParser = __webpack_require__(/*! ua-parser-js/dist/ua-parser.min */ "./node_modules/ua-parser-js/dist/ua-parser.min.js");
+
+var UA = new UAParser();
+var browser = UA.getBrowser();
+var cpu = UA.getCPU();
+var device = UA.getDevice();
+var engine = UA.getEngine();
+var os = UA.getOS();
+var ua = UA.getUA();
+
+var setDefaults = function setDefaults(p) {
+  var d = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
+  return p ? p : d;
+};
+var getNavigatorInstance = function getNavigatorInstance() {
+  if (typeof window !== 'undefined') {
+    if (window.navigator || navigator) {
+      return window.navigator || navigator;
+    }
+  }
+
+  return false;
+};
+var isIOS13Check = function isIOS13Check(type) {
+  var nav = getNavigatorInstance();
+  return nav && nav.platform && (nav.platform.indexOf(type) !== -1 || nav.platform === 'MacIntel' && nav.maxTouchPoints > 1 && !window.MSStream);
+};
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(source, true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(source).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+var DeviceTypes = {
+  Mobile: 'mobile',
+  Tablet: 'tablet',
+  SmartTv: 'smarttv',
+  Console: 'console',
+  Wearable: 'wearable',
+  Browser: undefined
+};
+var BrowserTypes = {
+  Chrome: 'Chrome',
+  Firefox: "Firefox",
+  Opera: "Opera",
+  Yandex: "Yandex",
+  Safari: "Safari",
+  InternetExplorer: "Internet Explorer",
+  Edge: "Edge",
+  Chromium: "Chromium",
+  Ie: 'IE',
+  MobileSafari: "Mobile Safari",
+  EdgeChromium: "Edge Chromium",
+  MIUI: "MIUI Browser",
+  SamsungBrowser: 'Samsung Browser'
+};
+var OsTypes = {
+  IOS: 'iOS',
+  Android: "Android",
+  WindowsPhone: "Windows Phone",
+  Windows: 'Windows',
+  MAC_OS: 'Mac OS'
+};
+var initialData = {
+  isMobile: false,
+  isTablet: false,
+  isBrowser: false,
+  isSmartTV: false,
+  isConsole: false,
+  isWearable: false
+};
+var checkType = function checkType(type) {
+  switch (type) {
+    case DeviceTypes.Mobile:
+      return {
+        isMobile: true
+      };
+
+    case DeviceTypes.Tablet:
+      return {
+        isTablet: true
+      };
+
+    case DeviceTypes.SmartTv:
+      return {
+        isSmartTV: true
+      };
+
+    case DeviceTypes.Console:
+      return {
+        isConsole: true
+      };
+
+    case DeviceTypes.Wearable:
+      return {
+        isWearable: true
+      };
+
+    case DeviceTypes.Browser:
+      return {
+        isBrowser: true
+      };
+
+    default:
+      return initialData;
+  }
+};
+var broPayload = function broPayload(isBrowser, browser, engine, os, ua) {
+  return {
+    isBrowser: isBrowser,
+    browserMajorVersion: setDefaults(browser.major),
+    browserFullVersion: setDefaults(browser.version),
+    browserName: setDefaults(browser.name),
+    engineName: setDefaults(engine.name),
+    engineVersion: setDefaults(engine.version),
+    osName: setDefaults(os.name),
+    osVersion: setDefaults(os.version),
+    userAgent: setDefaults(ua)
+  };
+};
+var mobilePayload = function mobilePayload(type, device, os, ua) {
+  return _objectSpread2({}, type, {
+    vendor: setDefaults(device.vendor),
+    model: setDefaults(device.model),
+    os: setDefaults(os.name),
+    osVersion: setDefaults(os.version),
+    ua: setDefaults(ua)
+  });
+};
+var stvPayload = function stvPayload(isSmartTV, engine, os, ua) {
+  return {
+    isSmartTV: isSmartTV,
+    engineName: setDefaults(engine.name),
+    engineVersion: setDefaults(engine.version),
+    osName: setDefaults(os.name),
+    osVersion: setDefaults(os.version),
+    userAgent: setDefaults(ua)
+  };
+};
+var consolePayload = function consolePayload(isConsole, engine, os, ua) {
+  return {
+    isConsole: isConsole,
+    engineName: setDefaults(engine.name),
+    engineVersion: setDefaults(engine.version),
+    osName: setDefaults(os.name),
+    osVersion: setDefaults(os.version),
+    userAgent: setDefaults(ua)
+  };
+};
+var wearPayload = function wearPayload(isWearable, engine, os, ua) {
+  return {
+    isWearable: isWearable,
+    engineName: setDefaults(engine.name),
+    engineVersion: setDefaults(engine.version),
+    osName: setDefaults(os.name),
+    osVersion: setDefaults(os.version),
+    userAgent: setDefaults(ua)
+  };
+};
+
+var type = checkType(device.type);
+
+function deviceDetect() {
+  var isBrowser = type.isBrowser,
+      isMobile = type.isMobile,
+      isTablet = type.isTablet,
+      isSmartTV = type.isSmartTV,
+      isConsole = type.isConsole,
+      isWearable = type.isWearable;
+
+  if (isBrowser) {
+    return broPayload(isBrowser, browser, engine, os, ua);
+  }
+
+  if (isSmartTV) {
+    return stvPayload(isSmartTV, engine, os, ua);
+  }
+
+  if (isConsole) {
+    return consolePayload(isConsole, engine, os, ua);
+  }
+
+  if (isMobile) {
+    return mobilePayload(type, device, os, ua);
+  }
+
+  if (isTablet) {
+    return mobilePayload(type, device, os, ua);
+  }
+
+  if (isWearable) {
+    return wearPayload(isWearable, engine, os, ua);
+  }
+}
+
+var isMobileType = function isMobileType() {
+  return device.type === DeviceTypes.Mobile;
+};
+
+var isTabletType = function isTabletType() {
+  return device.type === DeviceTypes.Tablet;
+};
+
+var isMobileAndTabletType = function isMobileAndTabletType() {
+  switch (device.type) {
+    case DeviceTypes.Mobile:
+    case DeviceTypes.Tablet:
+      return true;
+
+    default:
+      return false;
+  }
+};
+
+var isEdgeChromiumType = function isEdgeChromiumType() {
+  return typeof ua === 'string' && ua.indexOf('Edg/') !== -1;
+};
+
+var isSmartTVType = function isSmartTVType() {
+  return device.type === DeviceTypes.SmartTv;
+};
+
+var isBrowserType = function isBrowserType() {
+  return device.type === DeviceTypes.Browser;
+};
+
+var isWearableType = function isWearableType() {
+  return device.type === DeviceTypes.Wearable;
+};
+
+var isConsoleType = function isConsoleType() {
+  return device.type === DeviceTypes.Console;
+};
+
+var isAndroidType = function isAndroidType() {
+  return os.name === OsTypes.Android;
+};
+
+var isWindowsType = function isWindowsType() {
+  return os.name === OsTypes.Windows;
+};
+
+var isMacOsType = function isMacOsType() {
+  return os.name === OsTypes.MAC_OS;
+};
+
+var isWinPhoneType = function isWinPhoneType() {
+  return os.name === OsTypes.WindowsPhone;
+};
+
+var isIOSType = function isIOSType() {
+  return os.name === OsTypes.IOS;
+};
+
+var isChromeType = function isChromeType() {
+  return browser.name === BrowserTypes.Chrome;
+};
+
+var isFirefoxType = function isFirefoxType() {
+  return browser.name === BrowserTypes.Firefox;
+};
+
+var isChromiumType = function isChromiumType() {
+  return browser.name === BrowserTypes.Chromium;
+};
+
+var isEdgeType = function isEdgeType() {
+  return browser.name === BrowserTypes.Edge;
+};
+
+var isYandexType = function isYandexType() {
+  return browser.name === BrowserTypes.Yandex;
+};
+
+var isSafariType = function isSafariType() {
+  return browser.name === BrowserTypes.Safari || browser.name === BrowserTypes.MobileSafari;
+};
+
+var isMobileSafariType = function isMobileSafariType() {
+  return browser.name === BrowserTypes.MobileSafari;
+};
+
+var isOperaType = function isOperaType() {
+  return browser.name === BrowserTypes.Opera;
+};
+
+var isIEType = function isIEType() {
+  return browser.name === BrowserTypes.InternetExplorer || browser.name === BrowserTypes.Ie;
+};
+
+var isMIUIType = function isMIUIType() {
+  return browser.name === BrowserTypes.MIUI;
+};
+
+var isSamsungBrowserType = function isSamsungBrowserType() {
+  return browser.name === BrowserTypes.SamsungBrowser;
+};
+
+var isElectronType = function isElectronType() {
+  var nav = getNavigatorInstance();
+  var ua = nav && nav.userAgent && nav.userAgent.toLowerCase();
+  return typeof ua === 'string' ? /electron/.test(ua) : false;
+};
+
+var getIOS13 = function getIOS13() {
+  var nav = getNavigatorInstance();
+  return nav && (/iPad|iPhone|iPod/.test(nav.platform) || nav.platform === 'MacIntel' && nav.maxTouchPoints > 1) && !window.MSStream;
+};
+
+var getIPad13 = function getIPad13() {
+  return isIOS13Check('iPad');
+};
+
+var getIphone13 = function getIphone13() {
+  return isIOS13Check('iPhone');
+};
+
+var getIPod13 = function getIPod13() {
+  return isIOS13Check('iPod');
+};
+
+var getBrowserFullVersion = function getBrowserFullVersion() {
+  return setDefaults(browser.version);
+};
+
+var getBrowserVersion = function getBrowserVersion() {
+  return setDefaults(browser.major);
+};
+
+var getOsVersion = function getOsVersion() {
+  return setDefaults(os.version);
+};
+
+var getOsName = function getOsName() {
+  return setDefaults(os.name);
+};
+
+var getBrowserName = function getBrowserName() {
+  return setDefaults(browser.name);
+};
+
+var getMobileVendor = function getMobileVendor() {
+  return setDefaults(device.vendor);
+};
+
+var getMobileModel = function getMobileModel() {
+  return setDefaults(device.model);
+};
+
+var getEngineName = function getEngineName() {
+  return setDefaults(engine.name);
+};
+
+var getEngineVersion = function getEngineVersion() {
+  return setDefaults(engine.version);
+};
+
+var getUseragent = function getUseragent() {
+  return setDefaults(ua);
+};
+
+var getDeviceType = function getDeviceType() {
+  return setDefaults(device.type, 'browser');
+};
+
+var isSmartTV = isSmartTVType();
+var isConsole = isConsoleType();
+var isWearable = isWearableType();
+var isMobileSafari = isMobileSafariType() || getIPad13();
+var isChromium = isChromiumType();
+var isMobile = isMobileAndTabletType() || getIPad13();
+var isMobileOnly = isMobileType();
+var isTablet = isTabletType() || getIPad13();
+var isBrowser = isBrowserType();
+var isDesktop = isBrowserType();
+var isAndroid = isAndroidType();
+var isWinPhone = isWinPhoneType();
+var isIOS = isIOSType() || getIPad13();
+var isChrome = isChromeType();
+var isFirefox = isFirefoxType();
+var isSafari = isSafariType();
+var isOpera = isOperaType();
+var isIE = isIEType();
+var osVersion = getOsVersion();
+var osName = getOsName();
+var fullBrowserVersion = getBrowserFullVersion();
+var browserVersion = getBrowserVersion();
+var browserName = getBrowserName();
+var mobileVendor = getMobileVendor();
+var mobileModel = getMobileModel();
+var engineName = getEngineName();
+var engineVersion = getEngineVersion();
+var getUA = getUseragent();
+var isEdge = isEdgeType() || isEdgeChromiumType();
+var isYandex = isYandexType();
+var deviceType = getDeviceType();
+var isIOS13 = getIOS13();
+var isIPad13 = getIPad13();
+var isIPhone13 = getIphone13();
+var isIPod13 = getIPod13();
+var isElectron = isElectronType();
+var isEdgeChromium = isEdgeChromiumType();
+var isLegacyEdge = isEdgeType() && !isEdgeChromiumType();
+var isWindows = isWindowsType();
+var isMacOs = isMacOsType();
+var isMIUI = isMIUIType();
+var isSamsungBrowser = isSamsungBrowserType();
+
+var AndroidView = function AndroidView(_ref) {
+  var renderWithFragment = _ref.renderWithFragment,
+      children = _ref.children,
+      viewClassName = _ref.viewClassName,
+      style = _ref.style,
+      props = _objectWithoutProperties(_ref, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isAndroid ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var BrowserView = function BrowserView(_ref2) {
+  var renderWithFragment = _ref2.renderWithFragment,
+      children = _ref2.children,
+      viewClassName = _ref2.viewClassName,
+      style = _ref2.style,
+      props = _objectWithoutProperties(_ref2, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isBrowser ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var IEView = function IEView(_ref3) {
+  var renderWithFragment = _ref3.renderWithFragment,
+      children = _ref3.children,
+      viewClassName = _ref3.viewClassName,
+      style = _ref3.style,
+      props = _objectWithoutProperties(_ref3, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isIE ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var IOSView = function IOSView(_ref4) {
+  var renderWithFragment = _ref4.renderWithFragment,
+      children = _ref4.children,
+      viewClassName = _ref4.viewClassName,
+      style = _ref4.style,
+      props = _objectWithoutProperties(_ref4, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isIOS ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var MobileView = function MobileView(_ref5) {
+  var renderWithFragment = _ref5.renderWithFragment,
+      children = _ref5.children,
+      viewClassName = _ref5.viewClassName,
+      style = _ref5.style,
+      props = _objectWithoutProperties(_ref5, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isMobile ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var TabletView = function TabletView(_ref6) {
+  var renderWithFragment = _ref6.renderWithFragment,
+      children = _ref6.children,
+      viewClassName = _ref6.viewClassName,
+      style = _ref6.style,
+      props = _objectWithoutProperties(_ref6, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isTablet ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var WinPhoneView = function WinPhoneView(_ref7) {
+  var renderWithFragment = _ref7.renderWithFragment,
+      children = _ref7.children,
+      viewClassName = _ref7.viewClassName,
+      style = _ref7.style,
+      props = _objectWithoutProperties(_ref7, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isWinPhone ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var MobileOnlyView = function MobileOnlyView(_ref8) {
+  var renderWithFragment = _ref8.renderWithFragment,
+      children = _ref8.children,
+      viewClassName = _ref8.viewClassName,
+      style = _ref8.style,
+      props = _objectWithoutProperties(_ref8, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isMobileOnly ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var SmartTVView = function SmartTVView(_ref9) {
+  var renderWithFragment = _ref9.renderWithFragment,
+      children = _ref9.children,
+      viewClassName = _ref9.viewClassName,
+      style = _ref9.style,
+      props = _objectWithoutProperties(_ref9, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isSmartTV ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var ConsoleView = function ConsoleView(_ref10) {
+  var renderWithFragment = _ref10.renderWithFragment,
+      children = _ref10.children,
+      viewClassName = _ref10.viewClassName,
+      style = _ref10.style,
+      props = _objectWithoutProperties(_ref10, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isConsole ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var WearableView = function WearableView(_ref11) {
+  var renderWithFragment = _ref11.renderWithFragment,
+      children = _ref11.children,
+      viewClassName = _ref11.viewClassName,
+      style = _ref11.style,
+      props = _objectWithoutProperties(_ref11, ["renderWithFragment", "children", "viewClassName", "style"]);
+
+  return isWearable ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+var CustomView = function CustomView(_ref12) {
+  var renderWithFragment = _ref12.renderWithFragment,
+      children = _ref12.children,
+      viewClassName = _ref12.viewClassName,
+      style = _ref12.style,
+      condition = _ref12.condition,
+      props = _objectWithoutProperties(_ref12, ["renderWithFragment", "children", "viewClassName", "style", "condition"]);
+
+  return condition ? renderWithFragment ? React__default.createElement(React.Fragment, null, children) : React__default.createElement("div", _extends({
+    className: viewClassName,
+    style: style
+  }, props), children) : null;
+};
+
+function withOrientationChange(WrappedComponent) {
+  return (
+    /*#__PURE__*/
+    function (_React$Component) {
+      _inherits(_class, _React$Component);
+
+      function _class(props) {
+        var _this;
+
+        _classCallCheck(this, _class);
+
+        _this = _possibleConstructorReturn(this, _getPrototypeOf(_class).call(this, props));
+        _this.isEventListenerAdded = false;
+        _this.handleOrientationChange = _this.handleOrientationChange.bind(_assertThisInitialized(_this));
+        _this.onOrientationChange = _this.onOrientationChange.bind(_assertThisInitialized(_this));
+        _this.onPageLoad = _this.onPageLoad.bind(_assertThisInitialized(_this));
+        _this.state = {
+          isLandscape: false,
+          isPortrait: false
+        };
+        return _this;
+      }
+
+      _createClass(_class, [{
+        key: "handleOrientationChange",
+        value: function handleOrientationChange() {
+          if (!this.isEventListenerAdded) {
+            this.isEventListenerAdded = true;
+          }
+
+          var orientation = window.innerWidth > window.innerHeight ? 90 : 0;
+          this.setState({
+            isPortrait: orientation === 0,
+            isLandscape: orientation === 90
+          });
+        }
+      }, {
+        key: "onOrientationChange",
+        value: function onOrientationChange() {
+          this.handleOrientationChange();
+        }
+      }, {
+        key: "onPageLoad",
+        value: function onPageLoad() {
+          this.handleOrientationChange();
+        }
+      }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {
+          if ((typeof window === "undefined" ? "undefined" : _typeof(window)) !== undefined && isMobile) {
+            if (!this.isEventListenerAdded) {
+              this.handleOrientationChange();
+              window.addEventListener("load", this.onPageLoad, false);
+            } else {
+              window.removeEventListener("load", this.onPageLoad, false);
+            }
+
+            window.addEventListener("resize", this.onOrientationChange, false);
+          }
+        }
+      }, {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+          window.removeEventListener("resize", this.onOrientationChange, false);
+        }
+      }, {
+        key: "render",
+        value: function render() {
+          return React__default.createElement(WrappedComponent, _extends({}, this.props, {
+            isLandscape: this.state.isLandscape,
+            isPortrait: this.state.isPortrait
+          }));
+        }
+      }]);
+
+      return _class;
+    }(React__default.Component)
+  );
+}
+
+exports.AndroidView = AndroidView;
+exports.BrowserTypes = BrowserTypes;
+exports.BrowserView = BrowserView;
+exports.ConsoleView = ConsoleView;
+exports.CustomView = CustomView;
+exports.IEView = IEView;
+exports.IOSView = IOSView;
+exports.MobileOnlyView = MobileOnlyView;
+exports.MobileView = MobileView;
+exports.OsTypes = OsTypes;
+exports.SmartTVView = SmartTVView;
+exports.TabletView = TabletView;
+exports.WearableView = WearableView;
+exports.WinPhoneView = WinPhoneView;
+exports.browserName = browserName;
+exports.browserVersion = browserVersion;
+exports.deviceDetect = deviceDetect;
+exports.deviceType = deviceType;
+exports.engineName = engineName;
+exports.engineVersion = engineVersion;
+exports.fullBrowserVersion = fullBrowserVersion;
+exports.getUA = getUA;
+exports.isAndroid = isAndroid;
+exports.isBrowser = isBrowser;
+exports.isChrome = isChrome;
+exports.isChromium = isChromium;
+exports.isConsole = isConsole;
+exports.isDesktop = isDesktop;
+exports.isEdge = isEdge;
+exports.isEdgeChromium = isEdgeChromium;
+exports.isElectron = isElectron;
+exports.isFirefox = isFirefox;
+exports.isIE = isIE;
+exports.isIOS = isIOS;
+exports.isIOS13 = isIOS13;
+exports.isIPad13 = isIPad13;
+exports.isIPhone13 = isIPhone13;
+exports.isIPod13 = isIPod13;
+exports.isLegacyEdge = isLegacyEdge;
+exports.isMIUI = isMIUI;
+exports.isMacOs = isMacOs;
+exports.isMobile = isMobile;
+exports.isMobileOnly = isMobileOnly;
+exports.isMobileSafari = isMobileSafari;
+exports.isOpera = isOpera;
+exports.isSafari = isSafari;
+exports.isSamsungBrowser = isSamsungBrowser;
+exports.isSmartTV = isSmartTV;
+exports.isTablet = isTablet;
+exports.isWearable = isWearable;
+exports.isWinPhone = isWinPhone;
+exports.isWindows = isWindows;
+exports.isYandex = isYandex;
+exports.mobileModel = mobileModel;
+exports.mobileVendor = mobileVendor;
+exports.osName = osName;
+exports.osVersion = osVersion;
+exports.withOrientationChange = withOrientationChange;
 
 
 /***/ }),
@@ -84159,6 +85891,25 @@ function warning(condition, message) {
 
 /***/ }),
 
+/***/ "./node_modules/ua-parser-js/dist/ua-parser.min.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/ua-parser-js/dist/ua-parser.min.js ***!
+  \*********************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*!@license
+ * UAParser.js v0.7.28
+ * Lightweight JavaScript-based User-Agent string parser
+ * https://github.com/faisalman/ua-parser-js
+ *
+ * Copyright © 2012-2021 Faisal Salman <f@faisalman.com>
+ * Licensed under MIT License
+ */
+(function(window,undefined){"use strict";var LIBVERSION="0.7.28",EMPTY="",UNKNOWN="?",FUNC_TYPE="function",UNDEF_TYPE="undefined",OBJ_TYPE="object",STR_TYPE="string",MAJOR="major",MODEL="model",NAME="name",TYPE="type",VENDOR="vendor",VERSION="version",ARCHITECTURE="architecture",CONSOLE="console",MOBILE="mobile",TABLET="tablet",SMARTTV="smarttv",WEARABLE="wearable",EMBEDDED="embedded",UA_MAX_LENGTH=255;var util={extend:function(regexes,extensions){var mergedRegexes={};for(var i in regexes){if(extensions[i]&&extensions[i].length%2===0){mergedRegexes[i]=extensions[i].concat(regexes[i])}else{mergedRegexes[i]=regexes[i]}}return mergedRegexes},has:function(str1,str2){return typeof str1===STR_TYPE?str2.toLowerCase().indexOf(str1.toLowerCase())!==-1:false},lowerize:function(str){return str.toLowerCase()},major:function(version){return typeof version===STR_TYPE?version.replace(/[^\d\.]/g,"").split(".")[0]:undefined},trim:function(str,len){str=str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,"");return typeof len===UNDEF_TYPE?str:str.substring(0,UA_MAX_LENGTH)}};var mapper={rgx:function(ua,arrays){var i=0,j,k,p,q,matches,match;while(i<arrays.length&&!matches){var regex=arrays[i],props=arrays[i+1];j=k=0;while(j<regex.length&&!matches){matches=regex[j++].exec(ua);if(!!matches){for(p=0;p<props.length;p++){match=matches[++k];q=props[p];if(typeof q===OBJ_TYPE&&q.length>0){if(q.length==2){if(typeof q[1]==FUNC_TYPE){this[q[0]]=q[1].call(this,match)}else{this[q[0]]=q[1]}}else if(q.length==3){if(typeof q[1]===FUNC_TYPE&&!(q[1].exec&&q[1].test)){this[q[0]]=match?q[1].call(this,match,q[2]):undefined}else{this[q[0]]=match?match.replace(q[1],q[2]):undefined}}else if(q.length==4){this[q[0]]=match?q[3].call(this,match.replace(q[1],q[2])):undefined}}else{this[q]=match?match:undefined}}}}i+=2}},str:function(str,map){for(var i in map){if(typeof map[i]===OBJ_TYPE&&map[i].length>0){for(var j=0;j<map[i].length;j++){if(util.has(map[i][j],str)){return i===UNKNOWN?undefined:i}}}else if(util.has(map[i],str)){return i===UNKNOWN?undefined:i}}return str}};var maps={browser:{oldSafari:{version:{"1.0":"/8",1.2:"/1",1.3:"/3","2.0":"/412","2.0.2":"/416","2.0.3":"/417","2.0.4":"/419","?":"/"}},oldEdge:{version:{.1:"12.",21:"13.",31:"14.",39:"15.",41:"16.",42:"17.",44:"18."}}},os:{windows:{version:{ME:"4.90","NT 3.11":"NT3.51","NT 4.0":"NT4.0",2e3:"NT 5.0",XP:["NT 5.1","NT 5.2"],Vista:"NT 6.0",7:"NT 6.1",8:"NT 6.2",8.1:"NT 6.3",10:["NT 6.4","NT 10.0"],RT:"ARM"}}}};var regexes={browser:[[/\b(?:crmo|crios)\/([\w\.]+)/i],[VERSION,[NAME,"Chrome"]],[/(?:edge|edgios|edga|edg)\/([\w\.]+)/i],[VERSION,[NAME,"Edge"]],[/(opera\smini)\/([\w\.-]+)/i,/(opera\s[mobiletab]{3,6})\b.+version\/([\w\.-]+)/i,/(opera)(?:.+version\/|[\/\s]+)([\w\.]+)/i],[NAME,VERSION],[/opios[\/\s]+([\w\.]+)/i],[VERSION,[NAME,"Opera Mini"]],[/\sopr\/([\w\.]+)/i],[VERSION,[NAME,"Opera"]],[/(kindle)\/([\w\.]+)/i,/(lunascape|maxthon|netfront|jasmine|blazer)[\/\s]?([\w\.]*)/i,/(avant\s|iemobile|slim)(?:browser)?[\/\s]?([\w\.]*)/i,/(ba?idubrowser)[\/\s]?([\w\.]+)/i,/(?:ms|\()(ie)\s([\w\.]+)/i,/(flock|rockmelt|midori|epiphany|silk|skyfire|ovibrowser|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon)\/([\w\.-]+)/i,/(rekonq|puffin|brave|whale|qqbrowserlite|qq)\/([\w\.]+)/i,/(weibo)__([\d\.]+)/i],[NAME,VERSION],[/(?:[\s\/]uc?\s?browser|(?:juc.+)ucweb)[\/\s]?([\w\.]+)/i],[VERSION,[NAME,"UCBrowser"]],[/(?:windowswechat)?\sqbcore\/([\w\.]+)\b.*(?:windowswechat)?/i],[VERSION,[NAME,"WeChat(Win) Desktop"]],[/micromessenger\/([\w\.]+)/i],[VERSION,[NAME,"WeChat"]],[/konqueror\/([\w\.]+)/i],[VERSION,[NAME,"Konqueror"]],[/trident.+rv[:\s]([\w\.]{1,9})\b.+like\sgecko/i],[VERSION,[NAME,"IE"]],[/yabrowser\/([\w\.]+)/i],[VERSION,[NAME,"Yandex"]],[/(avast|avg)\/([\w\.]+)/i],[[NAME,/(.+)/,"$1 Secure Browser"],VERSION],[/focus\/([\w\.]+)/i],[VERSION,[NAME,"Firefox Focus"]],[/opt\/([\w\.]+)/i],[VERSION,[NAME,"Opera Touch"]],[/coc_coc_browser\/([\w\.]+)/i],[VERSION,[NAME,"Coc Coc"]],[/dolfin\/([\w\.]+)/i],[VERSION,[NAME,"Dolphin"]],[/coast\/([\w\.]+)/i],[VERSION,[NAME,"Opera Coast"]],[/xiaomi\/miuibrowser\/([\w\.]+)/i],[VERSION,[NAME,"MIUI Browser"]],[/fxios\/([\w\.-]+)/i],[VERSION,[NAME,"Firefox"]],[/(qihu|qhbrowser|qihoobrowser|360browser)/i],[[NAME,"360 Browser"]],[/(oculus|samsung|sailfish)browser\/([\w\.]+)/i],[[NAME,/(.+)/,"$1 Browser"],VERSION],[/(comodo_dragon)\/([\w\.]+)/i],[[NAME,/_/g," "],VERSION],[/\s(electron)\/([\w\.]+)\ssafari/i,/(tesla)(?:\sqtcarbrowser|\/(20[12]\d\.[\w\.-]+))/i,/m?(qqbrowser|baiduboxapp|2345Explorer)[\/\s]?([\w\.]+)/i],[NAME,VERSION],[/(MetaSr)[\/\s]?([\w\.]+)/i,/(LBBROWSER)/i],[NAME],[/;fbav\/([\w\.]+);/i],[VERSION,[NAME,"Facebook"]],[/FBAN\/FBIOS|FB_IAB\/FB4A/i],[[NAME,"Facebook"]],[/safari\s(line)\/([\w\.]+)/i,/\b(line)\/([\w\.]+)\/iab/i,/(chromium|instagram)[\/\s]([\w\.-]+)/i],[NAME,VERSION],[/\bgsa\/([\w\.]+)\s.*safari\//i],[VERSION,[NAME,"GSA"]],[/headlesschrome(?:\/([\w\.]+)|\s)/i],[VERSION,[NAME,"Chrome Headless"]],[/\swv\).+(chrome)\/([\w\.]+)/i],[[NAME,"Chrome WebView"],VERSION],[/droid.+\sversion\/([\w\.]+)\b.+(?:mobile\ssafari|safari)/i],[VERSION,[NAME,"Android Browser"]],[/(chrome|omniweb|arora|[tizenoka]{5}\s?browser)\/v?([\w\.]+)/i],[NAME,VERSION],[/version\/([\w\.]+)\s.*mobile\/\w+\s(safari)/i],[VERSION,[NAME,"Mobile Safari"]],[/version\/([\w\.]+)\s.*(mobile\s?safari|safari)/i],[VERSION,NAME],[/webkit.+?(mobile\s?safari|safari)(\/[\w\.]+)/i],[NAME,[VERSION,mapper.str,maps.browser.oldSafari.version]],[/(webkit|khtml)\/([\w\.]+)/i],[NAME,VERSION],[/(navigator|netscape)\/([\w\.-]+)/i],[[NAME,"Netscape"],VERSION],[/ile\svr;\srv:([\w\.]+)\).+firefox/i],[VERSION,[NAME,"Firefox Reality"]],[/ekiohf.+(flow)\/([\w\.]+)/i,/(swiftfox)/i,/(icedragon|iceweasel|camino|chimera|fennec|maemo\sbrowser|minimo|conkeror)[\/\s]?([\w\.\+]+)/i,/(firefox|seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([\w\.-]+)$/i,/(firefox)\/([\w\.]+)\s[\w\s\-]+\/[\w\.]+$/i,/(mozilla)\/([\w\.]+)\s.+rv\:.+gecko\/\d+/i,/(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir)[\/\s]?([\w\.]+)/i,/(links)\s\(([\w\.]+)/i,/(gobrowser)\/?([\w\.]*)/i,/(ice\s?browser)\/v?([\w\._]+)/i,/(mosaic)[\/\s]([\w\.]+)/i],[NAME,VERSION]],cpu:[[/(?:(amd|x(?:(?:86|64)[_-])?|wow|win)64)[;\)]/i],[[ARCHITECTURE,"amd64"]],[/(ia32(?=;))/i],[[ARCHITECTURE,util.lowerize]],[/((?:i[346]|x)86)[;\)]/i],[[ARCHITECTURE,"ia32"]],[/\b(aarch64|armv?8e?l?)\b/i],[[ARCHITECTURE,"arm64"]],[/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i],[[ARCHITECTURE,"armhf"]],[/windows\s(ce|mobile);\sppc;/i],[[ARCHITECTURE,"arm"]],[/((?:ppc|powerpc)(?:64)?)(?:\smac|;|\))/i],[[ARCHITECTURE,/ower/,"",util.lowerize]],[/(sun4\w)[;\)]/i],[[ARCHITECTURE,"sparc"]],[/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?:64|(?=v(?:[1-7]|[5-7]1)l?|;|eabi))|(?=atmel\s)avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i],[[ARCHITECTURE,util.lowerize]]],device:[[/\b(sch-i[89]0\d|shw-m380s|sm-[pt]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus\s10)/i],[MODEL,[VENDOR,"Samsung"],[TYPE,TABLET]],[/\b((?:s[cgp]h|gt|sm)-\w+|galaxy\snexus)/i,/\ssamsung[\s-]([\w-]+)/i,/sec-(sgh\w+)/i],[MODEL,[VENDOR,"Samsung"],[TYPE,MOBILE]],[/\((ip(?:hone|od)[\s\w]*);/i],[MODEL,[VENDOR,"Apple"],[TYPE,MOBILE]],[/\((ipad);[\w\s\),;-]+apple/i,/applecoremedia\/[\w\.]+\s\((ipad)/i,/\b(ipad)\d\d?,\d\d?[;\]].+ios/i],[MODEL,[VENDOR,"Apple"],[TYPE,TABLET]],[/\b((?:agr|ags[23]|bah2?|sht?)-a?[lw]\d{2})/i],[MODEL,[VENDOR,"Huawei"],[TYPE,TABLET]],[/d\/huawei([\w\s-]+)[;\)]/i,/\b(nexus\s6p|vog-[at]?l\d\d|ane-[at]?l[x\d]\d|eml-a?l\d\da?|lya-[at]?l\d[\dc]|clt-a?l\d\di?|ele-l\d\d)/i,/\b(\w{2,4}-[atu][ln][01259][019])[;\)\s]/i],[MODEL,[VENDOR,"Huawei"],[TYPE,MOBILE]],[/\b(poco[\s\w]+)(?:\sbuild|\))/i,/\b;\s(\w+)\sbuild\/hm\1/i,/\b(hm[\s\-_]?note?[\s_]?(?:\d\w)?)\sbuild/i,/\b(redmi[\s\-_]?(?:note|k)?[\w\s_]+)(?:\sbuild|\))/i,/\b(mi[\s\-_]?(?:a\d|one|one[\s_]plus|note lte)?[\s_]?(?:\d?\w?)[\s_]?(?:plus)?)\sbuild/i],[[MODEL,/_/g," "],[VENDOR,"Xiaomi"],[TYPE,MOBILE]],[/\b(mi[\s\-_]?(?:pad)(?:[\w\s_]+))(?:\sbuild|\))/i],[[MODEL,/_/g," "],[VENDOR,"Xiaomi"],[TYPE,TABLET]],[/;\s(\w+)\sbuild.+\soppo/i,/\s(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007)\b/i],[MODEL,[VENDOR,"OPPO"],[TYPE,MOBILE]],[/\svivo\s(\w+)(?:\sbuild|\))/i,/\s(v[12]\d{3}\w?[at])(?:\sbuild|;)/i],[MODEL,[VENDOR,"Vivo"],[TYPE,MOBILE]],[/\s(rmx[12]\d{3})(?:\sbuild|;)/i],[MODEL,[VENDOR,"Realme"],[TYPE,MOBILE]],[/\s(milestone|droid(?:[2-4x]|\s(?:bionic|x2|pro|razr))?:?(\s4g)?)\b[\w\s]+build\//i,/\smot(?:orola)?[\s-](\w*)/i,/((?:moto[\s\w\(\)]+|xt\d{3,4}|nexus\s6)(?=\sbuild|\)))/i],[MODEL,[VENDOR,"Motorola"],[TYPE,MOBILE]],[/\s(mz60\d|xoom[\s2]{0,2})\sbuild\//i],[MODEL,[VENDOR,"Motorola"],[TYPE,TABLET]],[/((?=lg)?[vl]k\-?\d{3})\sbuild|\s3\.[\s\w;-]{10}lg?-([06cv9]{3,4})/i],[MODEL,[VENDOR,"LG"],[TYPE,TABLET]],[/(lm-?f100[nv]?|nexus\s[45])/i,/lg[e;\s\/-]+((?!browser|netcast)\w+)/i,/\blg(\-?[\d\w]+)\sbuild/i],[MODEL,[VENDOR,"LG"],[TYPE,MOBILE]],[/(ideatab[\w\-\s]+)/i,/lenovo\s?(s(?:5000|6000)(?:[\w-]+)|tab(?:[\s\w]+)|yt[\d\w-]{6}|tb[\d\w-]{6})/i],[MODEL,[VENDOR,"Lenovo"],[TYPE,TABLET]],[/(?:maemo|nokia).*(n900|lumia\s\d+)/i,/nokia[\s_-]?([\w\.-]*)/i],[[MODEL,/_/g," "],[VENDOR,"Nokia"],[TYPE,MOBILE]],[/droid.+;\s(pixel\sc)[\s)]/i],[MODEL,[VENDOR,"Google"],[TYPE,TABLET]],[/droid.+;\s(pixel[\s\daxl]{0,6})(?:\sbuild|\))/i],[MODEL,[VENDOR,"Google"],[TYPE,MOBILE]],[/droid.+\s([c-g]\d{4}|so[-l]\w+|xq-a\w[4-7][12])(?=\sbuild\/|\).+chrome\/(?![1-6]{0,1}\d\.))/i],[MODEL,[VENDOR,"Sony"],[TYPE,MOBILE]],[/sony\stablet\s[ps]\sbuild\//i,/(?:sony)?sgp\w+(?:\sbuild\/|\))/i],[[MODEL,"Xperia Tablet"],[VENDOR,"Sony"],[TYPE,TABLET]],[/\s(kb2005|in20[12]5|be20[12][59])\b/i,/\ba000(1)\sbuild/i,/\boneplus\s(a\d{4})[\s)]/i],[MODEL,[VENDOR,"OnePlus"],[TYPE,MOBILE]],[/(alexa)webm/i,/(kf[a-z]{2}wi)(\sbuild\/|\))/i,/(kf[a-z]+)(\sbuild\/|\)).+silk\//i],[MODEL,[VENDOR,"Amazon"],[TYPE,TABLET]],[/(sd|kf)[0349hijorstuw]+(\sbuild\/|\)).+silk\//i],[[MODEL,"Fire Phone"],[VENDOR,"Amazon"],[TYPE,MOBILE]],[/\((playbook);[\w\s\),;-]+(rim)/i],[MODEL,VENDOR,[TYPE,TABLET]],[/((?:bb[a-f]|st[hv])100-\d)/i,/\(bb10;\s(\w+)/i],[MODEL,[VENDOR,"BlackBerry"],[TYPE,MOBILE]],[/(?:\b|asus_)(transfo[prime\s]{4,10}\s\w+|eeepc|slider\s\w+|nexus\s7|padfone|p00[cj])/i],[MODEL,[VENDOR,"ASUS"],[TYPE,TABLET]],[/\s(z[es]6[027][01][km][ls]|zenfone\s\d\w?)\b/i],[MODEL,[VENDOR,"ASUS"],[TYPE,MOBILE]],[/(nexus\s9)/i],[MODEL,[VENDOR,"HTC"],[TYPE,TABLET]],[/(htc)[;_\s-]{1,2}([\w\s]+(?=\)|\sbuild)|\w+)/i,/(zte)-(\w*)/i,/(alcatel|geeksphone|nexian|panasonic|(?=;\s)sony)[_\s-]?([\w-]*)/i],[VENDOR,[MODEL,/_/g," "],[TYPE,MOBILE]],[/droid[x\d\.\s;]+\s([ab][1-7]\-?[0178a]\d\d?)/i],[MODEL,[VENDOR,"Acer"],[TYPE,TABLET]],[/droid.+;\s(m[1-5]\snote)\sbuild/i,/\bmz-([\w-]{2,})/i],[MODEL,[VENDOR,"Meizu"],[TYPE,MOBILE]],[/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron)[\s_-]?([\w-]*)/i,/(hp)\s([\w\s]+\w)/i,/(asus)-?(\w+)/i,/(microsoft);\s(lumia[\s\w]+)/i,/(lenovo)[_\s-]?([\w-]+)/i,/linux;.+(jolla);/i,/droid.+;\s(oppo)\s?([\w\s]+)\sbuild/i],[VENDOR,MODEL,[TYPE,MOBILE]],[/(archos)\s(gamepad2?)/i,/(hp).+(touchpad(?!.+tablet)|tablet)/i,/(kindle)\/([\w\.]+)/i,/\s(nook)[\w\s]+build\/(\w+)/i,/(dell)\s(strea[kpr\s\d]*[\dko])/i,/[;\/]\s?(le[\s\-]+pan)[\s\-]+(\w{1,9})\sbuild/i,/[;\/]\s?(trinity)[\-\s]*(t\d{3})\sbuild/i,/\b(gigaset)[\s\-]+(q\w{1,9})\sbuild/i,/\b(vodafone)\s([\w\s]+)(?:\)|\sbuild)/i],[VENDOR,MODEL,[TYPE,TABLET]],[/\s(surface\sduo)\s/i],[MODEL,[VENDOR,"Microsoft"],[TYPE,TABLET]],[/droid\s[\d\.]+;\s(fp\du?)\sbuild/i],[MODEL,[VENDOR,"Fairphone"],[TYPE,MOBILE]],[/\s(u304aa)\sbuild/i],[MODEL,[VENDOR,"AT&T"],[TYPE,MOBILE]],[/sie-(\w*)/i],[MODEL,[VENDOR,"Siemens"],[TYPE,MOBILE]],[/[;\/]\s?(rct\w+)\sbuild/i],[MODEL,[VENDOR,"RCA"],[TYPE,TABLET]],[/[;\/\s](venue[\d\s]{2,7})\sbuild/i],[MODEL,[VENDOR,"Dell"],[TYPE,TABLET]],[/[;\/]\s?(q(?:mv|ta)\w+)\sbuild/i],[MODEL,[VENDOR,"Verizon"],[TYPE,TABLET]],[/[;\/]\s(?:barnes[&\s]+noble\s|bn[rt])([\w\s\+]*)\sbuild/i],[MODEL,[VENDOR,"Barnes & Noble"],[TYPE,TABLET]],[/[;\/]\s(tm\d{3}\w+)\sbuild/i],[MODEL,[VENDOR,"NuVision"],[TYPE,TABLET]],[/;\s(k88)\sbuild/i],[MODEL,[VENDOR,"ZTE"],[TYPE,TABLET]],[/;\s(nx\d{3}j)\sbuild/i],[MODEL,[VENDOR,"ZTE"],[TYPE,MOBILE]],[/[;\/]\s?(gen\d{3})\sbuild.*49h/i],[MODEL,[VENDOR,"Swiss"],[TYPE,MOBILE]],[/[;\/]\s?(zur\d{3})\sbuild/i],[MODEL,[VENDOR,"Swiss"],[TYPE,TABLET]],[/[;\/]\s?((zeki)?tb.*\b)\sbuild/i],[MODEL,[VENDOR,"Zeki"],[TYPE,TABLET]],[/[;\/]\s([yr]\d{2})\sbuild/i,/[;\/]\s(dragon[\-\s]+touch\s|dt)(\w{5})\sbuild/i],[[VENDOR,"Dragon Touch"],MODEL,[TYPE,TABLET]],[/[;\/]\s?(ns-?\w{0,9})\sbuild/i],[MODEL,[VENDOR,"Insignia"],[TYPE,TABLET]],[/[;\/]\s?((nxa|Next)-?\w{0,9})\sbuild/i],[MODEL,[VENDOR,"NextBook"],[TYPE,TABLET]],[/[;\/]\s?(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05]))\sbuild/i],[[VENDOR,"Voice"],MODEL,[TYPE,MOBILE]],[/[;\/]\s?(lvtel\-)?(v1[12])\sbuild/i],[[VENDOR,"LvTel"],MODEL,[TYPE,MOBILE]],[/;\s(ph-1)\s/i],[MODEL,[VENDOR,"Essential"],[TYPE,MOBILE]],[/[;\/]\s?(v(100md|700na|7011|917g).*\b)\sbuild/i],[MODEL,[VENDOR,"Envizen"],[TYPE,TABLET]],[/[;\/]\s?(trio[\s\w\-\.]+)\sbuild/i],[MODEL,[VENDOR,"MachSpeed"],[TYPE,TABLET]],[/[;\/]\s?tu_(1491)\sbuild/i],[MODEL,[VENDOR,"Rotor"],[TYPE,TABLET]],[/(shield[\w\s]+)\sbuild/i],[MODEL,[VENDOR,"Nvidia"],[TYPE,TABLET]],[/(sprint)\s(\w+)/i],[VENDOR,MODEL,[TYPE,MOBILE]],[/(kin\.[onetw]{3})/i],[[MODEL,/\./g," "],[VENDOR,"Microsoft"],[TYPE,MOBILE]],[/droid\s[\d\.]+;\s(cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i],[MODEL,[VENDOR,"Zebra"],[TYPE,TABLET]],[/droid\s[\d\.]+;\s(ec30|ps20|tc[2-8]\d[kx])\)/i],[MODEL,[VENDOR,"Zebra"],[TYPE,MOBILE]],[/\s(ouya)\s/i,/(nintendo)\s([wids3utch]+)/i],[VENDOR,MODEL,[TYPE,CONSOLE]],[/droid.+;\s(shield)\sbuild/i],[MODEL,[VENDOR,"Nvidia"],[TYPE,CONSOLE]],[/(playstation\s[345portablevi]+)/i],[MODEL,[VENDOR,"Sony"],[TYPE,CONSOLE]],[/[\s\(;](xbox(?:\sone)?(?!;\sxbox))[\s\);]/i],[MODEL,[VENDOR,"Microsoft"],[TYPE,CONSOLE]],[/smart-tv.+(samsung)/i],[VENDOR,[TYPE,SMARTTV]],[/hbbtv.+maple;(\d+)/i],[[MODEL,/^/,"SmartTV"],[VENDOR,"Samsung"],[TYPE,SMARTTV]],[/(?:linux;\snetcast.+smarttv|lg\snetcast\.tv-201\d)/i],[[VENDOR,"LG"],[TYPE,SMARTTV]],[/(apple)\s?tv/i],[VENDOR,[MODEL,"Apple TV"],[TYPE,SMARTTV]],[/crkey/i],[[MODEL,"Chromecast"],[VENDOR,"Google"],[TYPE,SMARTTV]],[/droid.+aft([\w])(\sbuild\/|\))/i],[MODEL,[VENDOR,"Amazon"],[TYPE,SMARTTV]],[/\(dtv[\);].+(aquos)/i],[MODEL,[VENDOR,"Sharp"],[TYPE,SMARTTV]],[/hbbtv\/\d+\.\d+\.\d+\s+\([\w\s]*;\s*(\w[^;]*);([^;]*)/i],[[VENDOR,util.trim],[MODEL,util.trim],[TYPE,SMARTTV]],[/[\s\/\(](android\s|smart[-\s]?|opera\s)tv[;\)\s]/i],[[TYPE,SMARTTV]],[/((pebble))app\/[\d\.]+\s/i],[VENDOR,MODEL,[TYPE,WEARABLE]],[/droid.+;\s(glass)\s\d/i],[MODEL,[VENDOR,"Google"],[TYPE,WEARABLE]],[/droid\s[\d\.]+;\s(wt63?0{2,3})\)/i],[MODEL,[VENDOR,"Zebra"],[TYPE,WEARABLE]],[/(tesla)(?:\sqtcarbrowser|\/20[12]\d\.[\w\.-]+)/i],[VENDOR,[TYPE,EMBEDDED]],[/droid .+?; ([^;]+?)(?: build|\) applewebkit).+? mobile safari/i],[MODEL,[TYPE,MOBILE]],[/droid .+?;\s([^;]+?)(?: build|\) applewebkit).+?(?! mobile) safari/i],[MODEL,[TYPE,TABLET]],[/\s(tablet|tab)[;\/]/i,/\s(mobile)(?:[;\/]|\ssafari)/i],[[TYPE,util.lowerize]],[/(android[\w\.\s\-]{0,9});.+build/i],[MODEL,[VENDOR,"Generic"]],[/(phone)/i],[[TYPE,MOBILE]]],engine:[[/windows.+\sedge\/([\w\.]+)/i],[VERSION,[NAME,"EdgeHTML"]],[/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i],[VERSION,[NAME,"Blink"]],[/(presto)\/([\w\.]+)/i,/(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i,/ekioh(flow)\/([\w\.]+)/i,/(khtml|tasman|links)[\/\s]\(?([\w\.]+)/i,/(icab)[\/\s]([23]\.[\d\.]+)/i],[NAME,VERSION],[/rv\:([\w\.]{1,9})\b.+(gecko)/i],[VERSION,NAME]],os:[[/microsoft\s(windows)\s(vista|xp)/i],[NAME,VERSION],[/(windows)\snt\s6\.2;\s(arm)/i,/(windows\sphone(?:\sos)*)[\s\/]?([\d\.\s\w]*)/i,/(windows\smobile|windows)[\s\/]?([ntce\d\.\s]+\w)(?!.+xbox)/i],[NAME,[VERSION,mapper.str,maps.os.windows.version]],[/(win(?=3|9|n)|win\s9x\s)([nt\d\.]+)/i],[[NAME,"Windows"],[VERSION,mapper.str,maps.os.windows.version]],[/ip[honead]{2,4}\b(?:.*os\s([\w]+)\slike\smac|;\sopera)/i,/cfnetwork\/.+darwin/i],[[VERSION,/_/g,"."],[NAME,"iOS"]],[/(mac\sos\sx)\s?([\w\s\.]*)/i,/(macintosh|mac(?=_powerpc)\s)(?!.+haiku)/i],[[NAME,"Mac OS"],[VERSION,/_/g,"."]],[/(android|webos|palm\sos|qnx|bada|rim\stablet\sos|meego|sailfish|contiki)[\/\s-]?([\w\.]*)/i,/(blackberry)\w*\/([\w\.]*)/i,/(tizen|kaios)[\/\s]([\w\.]+)/i,/\((series40);/i],[NAME,VERSION],[/\(bb(10);/i],[VERSION,[NAME,"BlackBerry"]],[/(?:symbian\s?os|symbos|s60(?=;)|series60)[\/\s-]?([\w\.]*)/i],[VERSION,[NAME,"Symbian"]],[/mozilla.+\(mobile;.+gecko.+firefox/i],[[NAME,"Firefox OS"]],[/web0s;.+rt(tv)/i,/\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i],[VERSION,[NAME,"webOS"]],[/crkey\/([\d\.]+)/i],[VERSION,[NAME,"Chromecast"]],[/(cros)\s[\w]+\s([\w\.]+\w)/i],[[NAME,"Chromium OS"],VERSION],[/(nintendo|playstation)\s([wids345portablevuch]+)/i,/(xbox);\s+xbox\s([^\);]+)/i,/(mint)[\/\s\(\)]?(\w*)/i,/(mageia|vectorlinux)[;\s]/i,/(joli|[kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?=\slinux)|slackware|fedora|mandriva|centos|pclinuxos|redhat|zenwalk|linpus|raspbian)(?:\sgnu\/linux)?(?:\slinux)?[\/\s-]?(?!chrom|package)([\w\.-]*)/i,/(hurd|linux)\s?([\w\.]*)/i,/(gnu)\s?([\w\.]*)/i,/\s([frentopc-]{0,4}bsd|dragonfly)\s?(?!amd|[ix346]{1,2}86)([\w\.]*)/i,/(haiku)\s(\w+)/i],[NAME,VERSION],[/(sunos)\s?([\w\.\d]*)/i],[[NAME,"Solaris"],VERSION],[/((?:open)?solaris)[\/\s-]?([\w\.]*)/i,/(aix)\s((\d)(?=\.|\)|\s)[\w\.])*/i,/(plan\s9|minix|beos|os\/2|amigaos|morphos|risc\sos|openvms|fuchsia)/i,/(unix)\s?([\w\.]*)/i],[NAME,VERSION]]};var UAParser=function(ua,extensions){if(typeof ua==="object"){extensions=ua;ua=undefined}if(!(this instanceof UAParser)){return new UAParser(ua,extensions).getResult()}var _ua=ua||(typeof window!=="undefined"&&window.navigator&&window.navigator.userAgent?window.navigator.userAgent:EMPTY);var _rgxmap=extensions?util.extend(regexes,extensions):regexes;this.getBrowser=function(){var _browser={name:undefined,version:undefined};mapper.rgx.call(_browser,_ua,_rgxmap.browser);_browser.major=util.major(_browser.version);return _browser};this.getCPU=function(){var _cpu={architecture:undefined};mapper.rgx.call(_cpu,_ua,_rgxmap.cpu);return _cpu};this.getDevice=function(){var _device={vendor:undefined,model:undefined,type:undefined};mapper.rgx.call(_device,_ua,_rgxmap.device);return _device};this.getEngine=function(){var _engine={name:undefined,version:undefined};mapper.rgx.call(_engine,_ua,_rgxmap.engine);return _engine};this.getOS=function(){var _os={name:undefined,version:undefined};mapper.rgx.call(_os,_ua,_rgxmap.os);return _os};this.getResult=function(){return{ua:this.getUA(),browser:this.getBrowser(),engine:this.getEngine(),os:this.getOS(),device:this.getDevice(),cpu:this.getCPU()}};this.getUA=function(){return _ua};this.setUA=function(ua){_ua=typeof ua===STR_TYPE&&ua.length>UA_MAX_LENGTH?util.trim(ua,UA_MAX_LENGTH):ua;return this};this.setUA(_ua);return this};UAParser.VERSION=LIBVERSION;UAParser.BROWSER={NAME:NAME,MAJOR:MAJOR,VERSION:VERSION};UAParser.CPU={ARCHITECTURE:ARCHITECTURE};UAParser.DEVICE={MODEL:MODEL,VENDOR:VENDOR,TYPE:TYPE,CONSOLE:CONSOLE,MOBILE:MOBILE,SMARTTV:SMARTTV,TABLET:TABLET,WEARABLE:WEARABLE,EMBEDDED:EMBEDDED};UAParser.ENGINE={NAME:NAME,VERSION:VERSION};UAParser.OS={NAME:NAME,VERSION:VERSION};if(typeof exports!==UNDEF_TYPE){if("object"!==UNDEF_TYPE&&module.exports){exports=module.exports=UAParser}exports.UAParser=UAParser}else{if(true){!(__WEBPACK_AMD_DEFINE_RESULT__ = (function(){return UAParser}).call(exports, __webpack_require__, exports, module),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))}else {}}var $=typeof window!=="undefined"&&(window.jQuery||window.Zepto);if($&&!$.ua){var parser=new UAParser;$.ua=parser.getResult();$.ua.get=function(){return parser.getUA()};$.ua.set=function(uastring){parser.setUA(uastring);var result=parser.getResult();for(var prop in result){$.ua[prop]=result[prop]}}}})(typeof window==="object"?window:this);
+
+/***/ }),
+
 /***/ "./node_modules/value-equal/esm/value-equal.js":
 /*!*****************************************************!*\
   !*** ./node_modules/value-equal/esm/value-equal.js ***!
@@ -84268,7 +86019,7 @@ webpackContext.id = "./resources/js/config sync recursive ^\\.\\/.*$";
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;

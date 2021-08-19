@@ -20,6 +20,7 @@ ReactDOM.render(
             <Router>
                 <Switch>
                     <Route exact path="/user/signin" component={StandAlone.SignIn} />
+                    <Route exact path="/user/signout" component={StandAlone.SignOut} />
                     <Route path="*" component={App} />
                 </Switch>
             </Router>

@@ -9,7 +9,7 @@ const _config = {
         },
 
         bgColor: {
-            main: '#fefefe',
+            main: '#fafafa',
         },
 
         kakao: {

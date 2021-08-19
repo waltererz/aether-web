@@ -1,5 +1,5 @@
-import React from 'react';
+import Paper from '../../../components/Paper';
 
-export default function Home() {
-    return <div>포트폴리오 첫 페이지</div>;
+export default function Portfolio() {
+    return <Paper>포트폴리오 첫 페이지</Paper>;
 }

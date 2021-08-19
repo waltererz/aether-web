@@ -1,5 +1,5 @@
-import React from 'react';
+import Paper from '../../components/Paper';
 
 export default function RightSide() {
-    return <React.Fragment>투자자산관리 오른쪽</React.Fragment>;
+    return <Paper>포트폴리오 오른쪽 콘텐츠</Paper>;
 }

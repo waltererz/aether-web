@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->share('title', $this->_getDocumentTitle($request));
         view()->share('description', $this->_getDocumentDescription($request));
+        view()->share('auth', $this->_getUserInformation($request));
     }
 
     /**
@@ -60,5 +62,21 @@ class AppServiceProvider extends ServiceProvider
         } else {
             return '';
         }
+    }
+
+    private function _getUserInformation(Request $request)
+    {
+        $cookies = $request->cookie();
+
+        if (!isset($cookies['personal_access_token']) || !isset($cookies['personal_unique_code'])) {
+            return '';
+        }
+
+        $response = Http::withToken($cookies['personal_access_token'])->post(config('app.api_url') . '/auth/check', [
+            'unique_code' => $cookies['personal_unique_code'],
+            'access_token' => $cookies['personal_access_token'],
+        ]);
+
+        return json_decode($response);
     }
 }

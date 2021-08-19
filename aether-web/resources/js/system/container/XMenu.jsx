@@ -27,7 +27,7 @@ export default function XMenu({ items }) {
                     sx={{
                         '&:hover': {
                             '& .MuiListItem-root': {
-                                backgroundColor: '#f9f9f9',
+                                backgroundColor: '#f5f5f5',
                             },
                         },
 

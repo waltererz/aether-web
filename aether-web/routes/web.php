@@ -27,6 +27,7 @@ Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index']);
     Route::get('/signup', [UserController::class, 'index']);
     Route::get('/signin', [UserController::class, 'index']);
+    Route::get('/signout', [UserController::class, 'index']);
 });
 
 Route::prefix('assets')->group(function () {
@@ -36,7 +37,11 @@ Route::prefix('assets')->group(function () {
 
 Route::prefix('investment')->group(function () {
     Route::get('/', [InvestmentController::class, 'index']);
-    Route::get('/portfolio', [InvestmentController::class, 'index']);
+
+    Route::prefix('portfolio')->group(function () {
+        Route::get('/', [InvestmentController::class, 'index']);
+        Route::get('/create', [InvestmentController::class, 'index']);
+    });
 });
 
 Route::prefix('advisors')->group(function () {

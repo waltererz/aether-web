@@ -5,7 +5,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\InvestmentThemeController;
-use App\Http\Controllers\DataController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +39,13 @@ Route::prefix('advisors')->group(function () {
 Route::prefix('investment/themes')->group(function () {
     Route::post('/', [InvestmentThemeController::class, 'store']);
     Route::post('/index', [InvestmentThemeController::class, 'index']);
+});
+
+
+
+
+Route::prefix('auth')->group(function () {
+    Route::post('/signin', [AuthController::class, 'signin']);
+    Route::middleware('auth:sanctum')->post('/signout', [AuthController::class, 'signout']);
+    Route::middleware('auth:sanctum')->post('/check', [AuthController::class, 'check']);
 });

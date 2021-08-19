@@ -19,7 +19,8 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
         window._aether = {
             name: "{{ $name }}",
             baseUrl: "{{ config('app.url') }}",
-            auth: null,
+            client: "{{ request()->ip() }}",
+            auth: "{{ $auth }}",
             currentTabName: null,
         }
     </script>

@@ -16,6 +16,9 @@ const routes = {
             signin: {
                 title: '회원로그인',
             },
+            signout: {
+                title: '로그아웃',
+            }
         },
     },
 
@@ -37,6 +40,11 @@ const routes = {
         children: {
             portfolio: {
                 title: '포트폴리오',
+                children: {
+                    create: {
+                        title: '포트폴리오 만들기',
+                    }
+                }
             },
         }
     },

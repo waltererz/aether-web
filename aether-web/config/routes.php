@@ -14,6 +14,9 @@ return [
             'signin' => [
                 'name' => '회원 로그인',
             ],
+            'signout' => [
+                'name' => '로그아웃',
+            ],
         ],
     ],
 
@@ -46,6 +49,12 @@ return [
             'portfolio' => [
                 'name' => '포트폴리오',
                 'description' => '포트폴리오를 직접 만들어 재미있게 투자하세요.',
+                'routes' => [
+                    'create' => [
+                        'name' => '포트폴리오 만들기',
+                        'description' => '포트폴리오를 직접 만들어 재미있게 투자하세요.',
+                    ]
+                ]
             ]
         ]
     ],

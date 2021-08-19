@@ -1,5 +1,7 @@
 const _config = {
     name: window._aether.name,
+    client: window._aether.client,
+    auth: window._aether.auth,
     url: {
         app: window._aether.baseUrl,
         backend: 'http://back.erzsphilos.com',

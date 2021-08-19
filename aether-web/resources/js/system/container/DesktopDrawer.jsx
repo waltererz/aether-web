@@ -35,7 +35,7 @@ export default function DesktopDrawer(props) {
 
                 '& .MuiPaper-root': {
                     display: 'flex',
-                    backgroundColor: config('templete.palette.bgColor'),
+                    backgroundColor: config('templete.palette.bgColor.main'),
                     border: '0px',
                     zIndex: config('templete.zIndex.drawer'),
                     boxSizing: 'border-box',
@@ -76,15 +76,6 @@ export default function DesktopDrawer(props) {
                             ' + ' +
                             config('templete.height.headerNavigation.desktop') +
                             ')',
-                    },
-
-                    '&.in': {
-                        height: {
-                            md:
-                                'calc(100vh - ' +
-                                config('templete.height.headerFixed.desktop') +
-                                ')',
-                        },
                     },
                 },
             }}

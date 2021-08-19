@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { osVersion, osName, fullBrowserVersion, browserName } from 'react-device-detect';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
@@ -12,20 +13,73 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import config from '../config';
 import * as common from '../services/common';
+import * as api from '../services/api';
 
 export default function SignIn() {
+    let history = useHistory();
+
+    const deviceName =
+        osName +
+        ' ' +
+        osVersion +
+        ' ' +
+        browserName +
+        ' ' +
+        fullBrowserVersion +
+        ' - ' +
+        config('app.client');
+
+    const ref = {
+        email: React.useRef(null),
+        password: React.useRef(null),
+    };
+
     const theme = createTheme({
         palette: config('templete.palette'),
         breakpoints: config('templete.breakpoints'),
     });
-
-    let history = useHistory();
 
     const Checkbox = withStyles({
         root: {
             color: config('templete.palette.secondary.main'),
         },
     })((props) => <MuiCheckbox color="default" {...props} />);
+
+    const process = () => {
+        const email = ref.email.current.querySelector('input').value;
+        const password = ref.password.current.querySelector('input').value;
+
+        api.post('auth/signin', {
+            email: email,
+            password: password,
+            device_name: deviceName,
+        }).then((response) => {
+            if (response.data) {
+                window.location.href = '/';
+            } else {
+                ref.email.current.querySelector('input').value = '';
+                ref.password.current.querySelector('input').value = '';
+                ref.email.current.querySelector('input').focus();
+                alert('로그인 정보가 잘못되었습니다.');
+            }
+        });
+    };
+
+    React.useEffect(() => {
+        const keyEvent = (event) => {
+            if (event.keyCode == 13) {
+                process();
+            }
+        };
+
+        ref.email.current.querySelector('input').addEventListener('keyup', (event) => {
+            keyEvent(event);
+        });
+
+        ref.password.current.querySelector('input').addEventListener('keyup', (event) => {
+            keyEvent(event);
+        });
+    }, []);
 
     common.init();
 
@@ -213,8 +267,8 @@ export default function SignIn() {
                         <Box className="input-item" sx={{ marginBottom: '25px' }}>
                             <TextField
                                 fullWidth
+                                ref={ref.email}
                                 label="이메일주소"
-                                id="input-user-email"
                                 variant="outlined"
                                 color="secondary"
                             />
@@ -222,9 +276,9 @@ export default function SignIn() {
                         <Box className="input-item" sx={{ marginBottom: '10px' }}>
                             <TextField
                                 fullWidth
+                                ref={ref.password}
                                 type="password"
                                 label="패스워드"
-                                id="input-user-password"
                                 variant="outlined"
                                 color="secondary"
                             />
@@ -245,7 +299,7 @@ export default function SignIn() {
                             >
                                 <FormControlLabel
                                     className="checkbox-container"
-                                    control={<Checkbox name="remember" id="input-remember" />}
+                                    control={<Checkbox name="remember" />}
                                     label="로그인 상태 유지하기"
                                 />
                             </Box>
@@ -258,6 +312,7 @@ export default function SignIn() {
                                 color="secondary"
                                 size="large"
                                 disableElevation
+                                onClick={process}
                             >
                                 로그인
                             </Button>

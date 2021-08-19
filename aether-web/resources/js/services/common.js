@@ -55,46 +55,38 @@ const getMetaData = () => {
     // 현재 경로가 어떤 탭 이름과 일치하는지 확인
     for (const [path, routeItem] of Object.entries(routes)) {
         if (path.replace('/', '') == currentPathArray[1]) {
-            // routes 오브젝트에 지정되어 있는 해당 경로의 탭 이름을 변수에 저장
-            // 탭 이름이 지정되지 않은 경우에는 그대로 'default' 저장
+
             if ('tabName' in routeItem) {
                 currentTabName = routeItem['tabName'];
             }
 
-            // 페이지 타이틀이 지정되어 있는 경우 변수에 저장
             if ('title' in routeItem) {
                 currentDocumentTitle = routeItem['title'];
             }
 
-            // 하위 경로가 지정되어 있는 경우 모든 경우의 수를 판단 (무한루프)
-            let pointer = 2;
             if ('children' in routeItem) {
-                let childRouteItem = null;
+                
+                let depth = 2;
+                let childItem = routeItem['children'];
+
                 while (true) {
-                    if (!childRouteItem) {
-                        childRouteItem = routeItem['children'];
-                    } else {
-                        if ('children' in childRouteItem) {
-                            childRouteItem = childRouteItem['children'];
-                        }
-                    }
+                    if (currentPathArray[depth] in childItem) {
+                        childItem = childItem[currentPathArray[depth]];
 
-                    // 현재 웹브라우저에 입력된 경로의 깊이 만큼만 루프를 수행
-                    if (pointer in currentPathArray) {
-                        if (currentPathArray[pointer] in childRouteItem) {
-                            // 탭 이름이 지정되어 있는 경우 현재 탭 이름으로 저장
-                            if ('tabName' in childRouteItem[currentPathArray[pointer]]) {
-                                currentTabName =
-                                    childRouteItem[currentPathArray[pointer]]['tabName'];
-                            }
-
-                            // 페이지 타이틀이 지정되어 있는 경우 변수에 저장
-                            if ('title' in routeItem) {
-                                currentDocumentTitle =
-                                    childRouteItem[currentPathArray[pointer]]['title'];
-                            }
+                        if ('tabName' in childItem) {
+                            currentTabName = childItem['tabName'];
                         }
-                        pointer++;
+            
+                        if ('title' in childItem) {
+                            currentDocumentTitle = childItem['title'];
+                        }
+
+                        if ('children' in childItem) {
+                            childItem = childItem['children'];
+                            depth++;
+                        } else {
+                            break;
+                        }
                     } else {
                         break;
                     }

@@ -271,10 +271,8 @@ export default function HeaderNavigation() {
             if (desktopSubmenuDOM) {
                 if (container.style.transform && container.style.transform !== 'none') {
                     desktopSubmenuDOM.style.transform = 'translateY(-40px)';
-                    desktopSubmenuDOM.classList.add('in');
                 } else {
                     desktopSubmenuDOM.style.transform = 'none';
-                    desktopSubmenuDOM.classList.remove('in');
                 }
             }
         });

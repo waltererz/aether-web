@@ -4,6 +4,7 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import LogoutIcon from '@material-ui/icons/Logout';
 import Container from '../system/Container';
 import RightSide from './home/RightSide';
 import * as Page from './home/pages';
@@ -14,11 +15,13 @@ export default function Home() {
         headerIcons: {
             desktop: [
                 { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon />, auth: false },
+                { to: '/user/signout', icon: <LogoutIcon />, auth: true },
             ],
             mobile: [
                 { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
+                { to: '/user/signin', icon: <AccountCircleIcon />, auth: false },
+                { to: '/user/signout', icon: <LogoutIcon />, auth: true },
             ],
         },
     });
