@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MuiCheckbox from '@material-ui/core/Checkbox';
@@ -11,6 +12,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import * as api from '../../../services/api';
+import config from '../../../config';
 
 export default function Search() {
     const [complete, setComplete] = React.useState(false);
@@ -99,7 +101,7 @@ export default function Search() {
         if ('theme' in filters) {
             const Checkbox = withStyles({
                 root: {
-                    color: '#46437a',
+                    color: config('templete.palette.secondary.main'),
                 },
             })((props) => <MuiCheckbox color="default" {...props} />);
 
@@ -118,6 +120,12 @@ export default function Search() {
                             label={theme.name}
                             key={`theme_filter_${index}`}
                             className="checkbox-item"
+                            sx={{
+                                flexShrink: 0,
+                                '& span': {
+                                    fontSize: '0.9em',
+                                },
+                            }}
                         />
                     );
                 });
@@ -125,100 +133,305 @@ export default function Search() {
         }
     };
 
-    const fetchAdvisorList = () => {
-        return advisors.data.map((advisor, index) => {
-            return (
-                <div className="advisor-item" key={`advisor_${index}`}>
-                    <div className="col fg-1">
-                        <div className="row">
-                            <div className="advisor-picture">
+    const Item = ({ skeleton, advisor }) => {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    marginTop: '10px',
+                    boxSizing: 'border-box',
+                    border: config('templete.border.1'),
+                    borderRadius: config('templete.borderRadius.1'),
+
+                    flexDirection: {
+                        xs: 'column',
+                        md: 'row',
+                    },
+
+                    padding: {
+                        xs: '10px',
+                        md: '20px',
+                    },
+
+                    fontSize: {
+                        xs: '0.8rem',
+                        md: '0.9rem',
+                    },
+                }}
+            >
+                <Box
+                    className="col fg-1"
+                    sx={{
+                        flexGrow: 1,
+                    }}
+                >
+                    <Box
+                        className="row"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}
+                    >
+                        <Box
+                            className="advisor-picture"
+                            sx={{
+                                flexGrow: 0,
+                                '& img': {
+                                    borderRadius: '50%',
+
+                                    width: {
+                                        xs: '60px',
+                                        md: '68px',
+                                    },
+
+                                    height: {
+                                        xs: '60px',
+                                        md: '68px',
+                                    },
+                                },
+                            }}
+                        >
+                            {skeleton ? (
+                                <Skeleton variant="circular" width={68} height={68} />
+                            ) : (
                                 <img
                                     alt="Walter London City"
                                     src="https://secure.gravatar.com/avatar/ad6464c0b0336b626439748ce56f0f3d?s=109&amp;d=mm&amp;r=g"
                                     loading="lazy"
                                 />
-                            </div>
-                            <div className="advisor-introduction">
-                                <div className="personal-information">
-                                    <div className="advisor-name">{`${advisor.user.lastname} ${advisor.user.firstname}`}</div>
-                                    <div className="advisor-job">
-                                        경제적 자유를 꿈꾸는 개미투자자
-                                    </div>
-                                    <div className="advisor-theme">
-                                        <b>투자성향:</b> {advisor.theme.name}
-                                    </div>
-                                </div>
-                                <div className="rating-information">
-                                    <div className="advisor-rating">
+                            )}
+                        </Box>
+                        <Box
+                            className="advisor-introduction"
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                flexGrow: 1,
+
+                                paddingLeft: {
+                                    xs: '10px',
+                                    md: '15px',
+                                },
+                            }}
+                        >
+                            <Box
+                                className="personal-information"
+                                sx={{
+                                    flexGrow: 1,
+                                }}
+                            >
+                                <Box
+                                    className="advisor-name"
+                                    sx={{
+                                        fontSize: '1.3em',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    {skeleton ? (
+                                        <Skeleton height={30} width="20%" />
+                                    ) : (
+                                        `${advisor.user.lastname} ${advisor.user.firstname}`
+                                    )}
+                                </Box>
+                                <Box
+                                    className="advisor-job"
+                                    sx={{
+                                        fontSize: '0.8em',
+                                        color: '#888888',
+
+                                        paddingBottom: {
+                                            xs: '3px',
+                                            md: '5px',
+                                        },
+                                    }}
+                                >
+                                    {skeleton ? (
+                                        <Skeleton height={20} width="50%" />
+                                    ) : (
+                                        '경제적자유를 꿈꾸는 개미투자자'
+                                    )}
+                                </Box>
+                                <Box
+                                    className="advisor-theme"
+                                    sx={{
+                                        fontSize: '0.75em',
+                                    }}
+                                >
+                                    {skeleton ? (
+                                        <Skeleton height={15} width="50%" />
+                                    ) : (
+                                        <React.Fragment>
+                                            <b>투자성향:</b> {advisor.theme.name}
+                                        </React.Fragment>
+                                    )}
+                                </Box>
+                            </Box>
+                            <Box
+                                className="rating-information"
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    flexGrow: 0,
+                                }}
+                            >
+                                <Box
+                                    className="advisor-rating"
+                                    sx={{
+                                        '& > span': {
+                                            fontSize: {
+                                                xs: '1.1em',
+                                                md: '1.3em',
+                                            },
+                                        },
+                                    }}
+                                >
+                                    {skeleton ? (
+                                        <Skeleton height={20} width={94} />
+                                    ) : (
                                         <Rating value={5.0} readOnly />
-                                    </div>
-                                    <div className="article-count">
-                                        {advisor.articles} Article(s)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="advisor-description">투자어드바이저 설명글</div>
-                        </div>
-                    </div>
-                    <div className="col fg-0">
-                        <div className="advisor-subscription">
-                            <Button variant="outlined" color="primary">
-                                구독하기
-                            </Button>
-                            <div className="price">무료</div>
-                        </div>
-                    </div>
-                </div>
-            );
+                                    )}
+                                </Box>
+                                <Box
+                                    className="article-count"
+                                    sx={{
+                                        textAlign: 'right',
+                                        color: '#aaaaaa',
+                                        fontSize: {
+                                            xs: '0.8em',
+                                            md: '0.9em',
+                                        },
+                                    }}
+                                >
+                                    {skeleton ? (
+                                        <Skeleton height={20} width={94} />
+                                    ) : (
+                                        <React.Fragment>
+                                            {advisor.articles} Article(s)
+                                        </React.Fragment>
+                                    )}
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box className="row">
+                        <Box
+                            className="advisor-description"
+                            sx={{
+                                width: '100%',
+                                marginTop: '10px',
+                                fontSize: '0.9em',
+                            }}
+                        >
+                            {skeleton ? (
+                                <Skeleton height={20} width="100%" />
+                            ) : (
+                                '투자어드바이저 설명글'
+                            )}
+                        </Box>
+                    </Box>
+                </Box>
+                <Box
+                    className="col fg-0"
+                    sx={{
+                        flexGrow: 0,
+                    }}
+                >
+                    <Box
+                        className="advisor-subscription"
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            flexWrap: 'wrap',
+                            alignContent: 'center',
+                            justifyContent: 'center',
+                            boxSizing: 'border-box',
+                            borderStyle: 'solid',
+                            borderColor: '#eeeeee',
+                            textAlign: 'center',
+
+                            width: {
+                                xs: '100%',
+                                md: '170px',
+                            },
+
+                            height: {
+                                md: '100%',
+                            },
+
+                            margin: {
+                                xs: '20px 0px 0px 0px',
+                                md: '0px 0px 0px 20px',
+                            },
+
+                            padding: {
+                                xs: '20px 0px 0px 0px',
+                                md: '0px 0px 0px 20px',
+                            },
+
+                            borderWidth: {
+                                xs: '1px 0px 0px 0px',
+                                md: '0px 0px 0px 1px',
+                            },
+                        }}
+                    >
+                        {skeleton ? (
+                            <Skeleton height={100} width={150} />
+                        ) : (
+                            <React.Fragment>
+                                <Button
+                                    variant="outlined"
+                                    color="primary"
+                                    sx={{
+                                        marginBottom: '15px',
+
+                                        width: {
+                                            md: '100%',
+                                        },
+
+                                        minWidth: {
+                                            xs: '150px',
+                                        },
+                                    }}
+                                >
+                                    구독하기
+                                </Button>
+                                <Box
+                                    className="price"
+                                    sx={{
+                                        fontFamily: config('templete.fontFamily.1'),
+                                        color: config('templete.palette.primary.main'),
+                                        fontWeight: 'bold',
+
+                                        fontSize: {
+                                            xs: '1.2em',
+                                        },
+
+                                        marginBottom: {
+                                            xs: '15px',
+                                            md: '0px',
+                                        },
+                                    }}
+                                >
+                                    무료
+                                </Box>
+                            </React.Fragment>
+                        )}
+                    </Box>
+                </Box>
+            </Box>
+        );
+    };
+
+    const fetchAdvisorList = () => {
+        return advisors.data.map((advisor, index) => {
+            return <Item advisor={advisor} key={`advisor-${advisor.user.firstname}-${index}`} />;
         });
     };
 
     const fetchSkeletonBox = () => {
         return [1, 2, 3, 4, 5].map((skeleton, index) => {
-            return (
-                <div className="advisor-item" key={`advisor-list-skeleton-${index}`}>
-                    <div className="col fg-1">
-                        <div className="row">
-                            <div className="advisor-picture">
-                                <Skeleton variant="circular" width={68} height={68} />
-                            </div>
-                            <div className="advisor-introduction">
-                                <div className="personal-information">
-                                    <div className="advisor-name">
-                                        <Skeleton height={30} width="20%" />
-                                    </div>
-                                    <div className="advisor-job">
-                                        <Skeleton height={20} width="50%" />
-                                    </div>
-                                    <div className="advisor-theme">
-                                        <Skeleton height={15} width="50%" />
-                                    </div>
-                                </div>
-                                <div className="rating-information">
-                                    <div className="advisor-rating">
-                                        <Skeleton height={20} width={94} />
-                                    </div>
-                                    <div className="article-count">
-                                        <Skeleton height={20} width={94} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="advisor-description">
-                                <Skeleton height={20} width="100%" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col fg-0">
-                        <div className="advisor-subscription">
-                            <Skeleton height={100} width={150} />
-                        </div>
-                    </div>
-                </div>
-            );
+            return <Item skeleton={true} key={`advisor-item-skeleton-${index}`} />;
         });
     };
 
@@ -232,20 +445,67 @@ export default function Search() {
 
     return (
         <React.Fragment>
-            <Accordion className="filter-box" id="search-filters">
-                <AccordionSummary className="title" expandIcon={<ExpandMoreIcon />}>
+            <Accordion
+                className="filter-box"
+                id="search-filters"
+                sx={{
+                    boxShadow: 'none',
+                    borderRadius: config('templete.borderRadius.1'),
+                    border: config('templete.border.1'),
+                    background: config('templete.gradient.silver'),
+                }}
+            >
+                <AccordionSummary
+                    className="title"
+                    expandIcon={<ExpandMoreIcon />}
+                    sx={{
+                        fontWeight: 'bold',
+                        fontFamily: config('templete.fontFamily.1'),
+                    }}
+                >
                     검색필터
                 </AccordionSummary>
-                <AccordionDetails className="filters">
-                    <div className="subject">투자성향</div>
-                    <FormGroup row className="filter">
+                <AccordionDetails
+                    className="filters"
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
+                    <Box
+                        className="subject"
+                        sx={{
+                            display: 'block',
+                            paddingBottom: '5px',
+                            width: '100%',
+                            fontWeight: 'bold',
+                            fontSize: '0.9em',
+                        }}
+                    >
+                        투자성향
+                    </Box>
+                    <FormGroup
+                        row
+                        className="filter"
+                        sx={{
+                            display: 'flex',
+                            flexWrap: {
+                                xs: 'nowrap',
+                                md: 'wrap',
+                            },
+                            overflowX: {
+                                xs: 'scroll',
+                                md: 'unset',
+                            },
+                        }}
+                    >
                         {fetchThemeFilters()}
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <div className="advisor-list">
+            <Box className="advisor-list">
                 {!complete ? fetchSkeletonBox() : advisors && fetchAdvisorList()}
-            </div>
+            </Box>
         </React.Fragment>
     );
 }

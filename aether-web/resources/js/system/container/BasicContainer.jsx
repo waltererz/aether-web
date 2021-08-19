@@ -1,121 +1,180 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
-import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
-import XMenu from '../XMenu';
+import DesktopDrawer from './DesktopDrawer';
 import config from '../../config';
 
-export default function BasicContainer({ styles, pages, secondary, submenus }) {
+export default function BasicContainer({ pages, secondary, submenus }) {
+    const currentTab = useSelector((state) => state.app.tab);
     const [desktopDrawer, setDesktopDrawer] = React.useState(null);
 
     React.useEffect(() => {
-        setDesktopDrawer(
-            <Drawer
-                classes={{
-                    root: 'app-drawer',
-                    paper: 'drawer-paper',
-                }}
-                variant="permanent"
-                anchor="left"
+        setDesktopDrawer(<DesktopDrawer submenus={submenus} />);
+    }, [currentTab]);
+
+    return (
+        <React.Fragment>
+            <Container
+                maxWidth={false}
                 sx={{
-                    display: {
-                        xs: 'none',
-                        md: 'inline-flex',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'nowrap',
+                    justifyContent: 'space-between',
+                    padding: '0px',
+
+                    height: {
+                        xs:
+                            'calc(100% - ' +
+                            config('templete.height.bottomNavigation.mobile') +
+                            ' + ' +
+                            config('templete.margin.default.mobile') +
+                            ')',
+                        md: 'auto',
                     },
 
-                    width: {
+                    marginBottom: {
+                        xs:
+                            'calc(' +
+                            config('templete.height.bottomNavigation.mobile') +
+                            ' + 20px)',
+                        md: '20px',
+                    },
+
+                    paddingTop: {
+                        xs:
+                            'calc(' +
+                            config('templete.height.headerNavigation.mobile') +
+                            ' + ' +
+                            config('templete.margin.default.mobile') +
+                            ')',
                         md:
                             'calc(' +
-                            config('templete.width.drawer.desktop') +
-                            ' - ((' +
-                            config('templete.breakpoints.values.xl') +
-                            'px - ' +
-                            config('templete.breakpoints.values.lg') +
-                            'px)) / 2)',
-                        lg:
-                            'calc(' +
-                            config('templete.width.drawer.desktop') +
-                            ' - ((' +
-                            config('templete.breakpoints.values.xl') +
-                            'px - 100vw) / 2))',
-                        xl: config('templete.width.drawer.desktop'),
+                            config('templete.height.headerNavigation.desktop') +
+                            ' + ' +
+                            config('templete.margin.default.desktop') +
+                            ')',
                     },
 
-                    '& .MuiPaper-root': {
+                    paddingLeft: {
+                        xs: config('templete.margin.default.mobile'),
+                        md: config('templete.margin.default.desktop'),
+                    },
+
+                    paddingRight: {
+                        xs: config('templete.margin.default.mobile'),
+                        md: config('templete.margin.default.desktop'),
+                    },
+                }}
+            >
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                    sx={{
                         display: 'flex',
-                        backgroundColor: config('templete.palette.bgColor'),
-                        border: '0px',
-                        zIndex: config('templete.zIndex.drawer'),
-                        boxSizing: 'border-box',
-                        transition:
-                            'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms, height 500ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+                        flexDirection: 'row',
+                        flexWrap: 'nowrap',
 
-                        width: {
-                            md:
-                                'calc(' +
-                                config('templete.width.drawer.desktop') +
-                                ' - ((' +
-                                config('templete.breakpoints.values.xl') +
-                                'px - ' +
-                                config('templete.breakpoints.values.lg') +
-                                'px)) / 2)',
-                            lg:
-                                'calc(' +
-                                config('templete.width.drawer.desktop') +
-                                ' - ((' +
-                                config('templete.breakpoints.values.xl') +
-                                'px - 100vw) / 2))',
-                            xl: config('templete.width.drawer.desktop'),
+                        justifyContent: {
+                            xs: 'center',
+                            sm: 'space-between',
                         },
 
-                        height: {
-                            md:
-                                'calc(100vh - ' +
-                                config('templete.height.headerFixed.desktop') +
-                                ' - ' +
-                                config('templete.height.headerNavigation.desktop') +
-                                ')',
-                        },
+                        '& .MuiGrid-item': {
+                            flexGrow: 0,
+                            flexShrink: 0,
+                            boxSizing: 'border-box',
+                            height: '3000px',
 
-                        marginTop: {
-                            md:
-                                'calc(' +
-                                config('templete.height.headerFixed.desktop') +
-                                ' + ' +
-                                config('templete.height.headerNavigation.desktop') +
-                                ')',
-                        },
-
-                        '&.in': {
-                            height: {
+                            minHeight: {
+                                xs:
+                                    'calc(100vh - ' +
+                                    config('templete.height.headerFixed.mobile') +
+                                    ')',
                                 md:
                                     'calc(100vh - ' +
                                     config('templete.height.headerFixed.desktop') +
                                     ')',
                             },
-                        },
-                    },
-                }}
-            >
-                {typeof submenus === 'object' && <XMenu items={submenus} />}
-            </Drawer>,
-        );
-    }, []);
 
-    return (
-        <React.Fragment>
-            <Container className="app-container aether" maxWidth={false} sx={styles.container}>
-                <Grid
-                    container
-                    className="grid-container"
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="flex-start"
-                    sx={styles.gridContainer}
+                            '&.primary': {
+                                width: {
+                                    xs: '100%',
+                                    sm: config('templete.width.primary.desktop'),
+                                },
+
+                                maxWidth: {
+                                    xs: config('templete.width.primary.mobile'),
+                                },
+
+                                margin: {
+                                    sm: 'initial',
+                                },
+
+                                flexShrink: {
+                                    sm: 1,
+                                },
+
+                                maxWidth: {
+                                    sm: 'none',
+                                },
+                            },
+
+                            '&.secondary': {
+                                display: {
+                                    xs: 'none',
+                                    sm: 'block',
+                                },
+
+                                flexShrink: {
+                                    sm: 1,
+                                },
+
+                                marginLeft: {
+                                    sm: config('templete.margin.default.mobile'),
+                                    md: config('templete.margin.default.desktop'),
+                                },
+
+                                width: {
+                                    sm: config('templete.width.secondary.desktop'),
+                                },
+                            },
+
+                            '&.trickery': {
+                                display: {
+                                    xs: 'none',
+                                    md: 'block',
+                                },
+
+                                width: '100%',
+
+                                maxWidth: {
+                                    md:
+                                        'calc(' +
+                                        config('templete.width.drawer.desktop') +
+                                        ' - ((' +
+                                        config('templete.breakpoints.values.xl') +
+                                        'px - ' +
+                                        config('templete.breakpoints.values.lg') +
+                                        'px)) / 2)',
+                                    lg:
+                                        'calc(' +
+                                        config('templete.width.drawer.desktop') +
+                                        ' - ((' +
+                                        config('templete.breakpoints.values.xl') +
+                                        'px - 100vw)) / 2)',
+                                    xl: config('templete.width.drawer.desktop'),
+                                },
+                            },
+                        },
+                    }}
                 >
-                    <Grid item className="grid-item-trickery trickery" sx={styles.gridItem}></Grid>
-                    <Grid item className="grid-item-1 primary" sx={styles.gridItem}>
+                    <Grid item className="trickery"></Grid>
+                    <Grid item className="primary">
                         <Switch>
                             {typeof pages === 'object' &&
                                 pages.map(({ path, component, exact }) => {
@@ -130,7 +189,7 @@ export default function BasicContainer({ styles, pages, secondary, submenus }) {
                                 })}
                         </Switch>
                     </Grid>
-                    <Grid item className="grid-item-2 secondary" sx={styles.gridItem}>
+                    <Grid item className="secondary">
                         {secondary}
                     </Grid>
                 </Grid>

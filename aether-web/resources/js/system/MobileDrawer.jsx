@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import PersonIcon from '@material-ui/icons/Person';
 import { setMobileDrawerOpen } from '../redux/actions/app';
-import headerNavigationLinks from './headerNavigation/headerNavigationLinks';
+import menuLinks from './menuLinks';
 import config from '../config';
 
 export default function MobileDrawer() {
@@ -24,7 +24,7 @@ export default function MobileDrawer() {
     };
 
     const fetchDrawerMenuLinks = () => {
-        return headerNavigationLinks.map((link) => {
+        return menuLinks.map((link) => {
             if (!(link.slug in mobileDrawerSubMenuOpen)) {
                 setMobileDrawerSubMenuOpen({
                     ...mobileDrawerSubMenuOpen,
@@ -83,7 +83,6 @@ export default function MobileDrawer() {
                         )}
                         <Link to={link.to} onClick={toggleMobileDrawer}>
                             <ListItemText
-                                className="text"
                                 primary={link.name}
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -95,7 +94,6 @@ export default function MobileDrawer() {
                     </ListItemButton>
                     {mobileDrawerSubMenuOpen[link.slug] && (
                         <Box
-                            className="submenus"
                             sx={{
                                 marginLeft: '40px',
                             }}
@@ -146,7 +144,6 @@ export default function MobileDrawer() {
             }}
         >
             <Box
-                className="userInformation"
                 sx={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -157,7 +154,6 @@ export default function MobileDrawer() {
                 }}
             >
                 <Box
-                    className="avatar"
                     sx={{
                         marginRight: '20px',
 
@@ -177,7 +173,6 @@ export default function MobileDrawer() {
                     </Avatar>
                 </Box>
                 <Box
-                    className="content"
                     sx={{
                         flexGrow: 1,
                         fontSize: '1.2em',
@@ -191,7 +186,7 @@ export default function MobileDrawer() {
                     <Link to="/user/signin">로그인을 해주세요.</Link>
                 </Box>
             </Box>
-            <div className="drawer-menus">
+            <div>
                 <List>{fetchDrawerMenuLinks()}</List>
             </div>
         </Drawer>

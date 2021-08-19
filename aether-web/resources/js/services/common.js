@@ -7,6 +7,7 @@ import routes from '../routes';
 
 export function init(props = {}) {
     const currentTab = useSelector((state) => state.app.tab);
+    const currentURI = useSelector((state) => state.app.uri);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export function init(props = {}) {
 
         // 웹브라우저 스크롤를 최상단으로 이동시킴
         browser.scrollTop();
-    }, []);
+    }, [currentURI]);
 
     useEffect(() => {
         dispatch(setURI(window.location.pathname));

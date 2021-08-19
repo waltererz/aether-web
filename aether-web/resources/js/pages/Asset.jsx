@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
+
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -14,7 +14,6 @@ export default function Asset() {
         headerIcons: {
             desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
             mobile: [
-                { to: '/assets/investment/portfolio', icon: <PieChartOutlinedIcon /> },
                 { to: '/assets/moneybook', icon: <CreditCardOutlinedIcon /> },
                 { to: '/user/signin', icon: <AccountCircleIcon /> },
             ],

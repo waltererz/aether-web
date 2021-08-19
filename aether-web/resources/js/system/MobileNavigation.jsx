@@ -32,7 +32,6 @@ export default function MobileNavigation() {
         >
             <BottomNavigation
                 value={currentTab}
-                className="bottomNavigation"
                 sx={{
                     height: config('templete.height.bottomNavigation.mobile'),
                     display: 'flex',
@@ -59,35 +58,30 @@ export default function MobileNavigation() {
             >
                 <BottomNavigationAction
                     icon={<HomeRoundedIcon />}
-                    className="navButton"
                     value={config('app.route.home')}
                     component={Link}
                     to="/"
                 />
                 <BottomNavigationAction
                     icon={<PieChartRoundedIcon />}
-                    className="navButton"
                     value={config('app.route.asset')}
                     component={Link}
                     to="/assets"
                 />
                 <BottomNavigationAction
                     icon={<SupervisedUserCircleRoundedIcon />}
-                    className="navButton"
                     value={config('app.route.advisor')}
                     component={Link}
                     to="/advisors"
                 />
                 <BottomNavigationAction
                     icon={<TrendingUpRoundedIcon />}
-                    className="navButton"
                     value={config('app.route.investment')}
                     component={Link}
                     to="/investment"
                 />
                 <BottomNavigationAction
                     icon={<AccountBoxRoundedIcon />}
-                    className="navButton"
                     value={config('app.route.user')}
                     component={Link}
                     to="/user"

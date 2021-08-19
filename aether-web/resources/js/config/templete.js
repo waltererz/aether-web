@@ -85,6 +85,28 @@ const _config = {
         headerNavigation: 1180,
         bottomNavigation: 1190,
     },
+
+    border: {
+        1: '1px solid #eeeeee',
+    },
+
+    borderRadius: {
+        1: '4px',
+        2: '6px',
+    },
+
+    boxShadow: {
+        1: '0 1px 4px 0 rgba(0, 0, 0, 0.15)',
+    },
+
+    gradient: {
+        secondary: 'linear-gradient(0deg, rgba(70, 67, 122, 1) 0%, rgba(73, 70, 128, 1) 35%, rgba(73, 70, 128, 1) 65%, rgba(70, 67, 122, 1) 100%)',
+        silver: 'linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(247, 247, 247, 1) 40%, rgba(254, 254, 254, 1) 100%)',
+    },
+
+    fontFamily: {
+        1: 'Noto Sans KR',
+    }
 }
 
 export default _config;

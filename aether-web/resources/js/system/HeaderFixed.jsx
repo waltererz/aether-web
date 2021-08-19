@@ -20,7 +20,6 @@ export default function HeaderFixed() {
     return (
         <AppBar
             position="fixed"
-            className="aether-header"
             sx={{
                 backgrounColor: config('templete.palette.primary.main'),
                 transition: 'none',
@@ -34,7 +33,6 @@ export default function HeaderFixed() {
             }}
         >
             <Toolbar
-                className="header-toolbar"
                 disableGutters={true}
                 sx={{
                     display: 'flex',
@@ -62,7 +60,6 @@ export default function HeaderFixed() {
                 }}
             >
                 <Box
-                    className="header-title"
                     sx={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -84,7 +81,6 @@ export default function HeaderFixed() {
                     }}
                 >
                     <Box
-                        className="mobile-menuButton"
                         onClick={toggleMobileDrawer}
                         sx={{
                             display: {
@@ -109,12 +105,7 @@ export default function HeaderFixed() {
                     </Box>
                     <MuiLink href="/">Aether</MuiLink>
                 </Box>
-                <Box
-                    className="header-icon-container"
-                    sx={{
-                        display: 'flex',
-                    }}
-                >
+                <Box sx={{ display: 'flex' }}>
                     <XHeaderIcons />
                 </Box>
             </Toolbar>

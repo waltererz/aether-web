@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import HeaderFixed from './HeaderFixed';
 import MobileDrawer from './MobileDrawer';
 import HeaderNavigation from './HeaderNavigation';
@@ -19,14 +20,23 @@ export default function App() {
             <MobileDrawer />
             <HeaderFixed />
             <HeaderNavigation />
-            <Switch>
-                <Route exact path="/" component={Page.Home} />
-                <Route path="/user" component={Page.User} />
-                <Route path="/assets" component={Page.Asset} />
-                <Route path="/investment" component={Page.Investment} />
-                <Route path="/advisors" component={Page.Advisor} />
-                <Route path="/developer" component={Page.Developer} />
-            </Switch>
+            <Box
+                sx={{
+                    marginTop: {
+                        xs: config('templete.height.headerFixed.mobile'),
+                        md: config('templete.height.headerFixed.desktop'),
+                    },
+                }}
+            >
+                <Switch>
+                    <Route exact path="/" component={Page.Home} />
+                    <Route path="/user" component={Page.User} />
+                    <Route path="/assets" component={Page.Asset} />
+                    <Route path="/investment" component={Page.Investment} />
+                    <Route path="/advisors" component={Page.Advisor} />
+                    <Route path="/developer" component={Page.Developer} />
+                </Switch>
+            </Box>
             <MobileNavigation />
         </ThemeProvider>
     );

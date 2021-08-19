@@ -1,4 +1,4 @@
-const headerNavigationLinks = [
+const _menuLinks = [
     {
         name: '종합자산관리',
         slug: 'asset',
@@ -42,4 +42,4 @@ const headerNavigationLinks = [
     },
 ];
 
-export default headerNavigationLinks;
+export default _menuLinks;

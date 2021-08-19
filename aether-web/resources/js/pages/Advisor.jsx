@@ -6,7 +6,6 @@ import Container from '../system/Container';
 import RightSide from './advisor/RightSide';
 import * as common from '../services/common';
 import * as Page from './advisor/pages';
-import '../../sass/pages/_advisors.scss';
 
 export default function Advisor() {
     common.init({

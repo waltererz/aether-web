@@ -28,9 +28,9 @@ export default function Home() {
             pages={[{ path: '/', component: Page.Home, exact: true }]}
             secondary={<RightSide />}
             submenus={[
-                { path: '/', text: '즐겨찾기', icon: <FolderSpecialIcon /> },
-                { path: '/', text: '저장됨', icon: <LocalActivityIcon /> },
-                { path: '/', text: '다이렉트메시지', icon: <QuestionAnswerIcon /> },
+                { path: '#', text: '즐겨찾기', icon: <FolderSpecialIcon /> },
+                { path: '#', text: '저장됨', icon: <LocalActivityIcon /> },
+                { path: '#', text: '다이렉트메시지', icon: <QuestionAnswerIcon /> },
             ]}
         />
     );

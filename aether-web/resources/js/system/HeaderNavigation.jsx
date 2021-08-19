@@ -6,61 +6,67 @@ import Box from '@material-ui/core/Box';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
 import HideOnScroll from '../components/HideOnScroll';
-import headerNavigationLinks from './headerNavigation/headerNavigationLinks';
+import menuLinks from './menuLinks';
 import config from '../config';
 
 export default function HeaderNavigation() {
     const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
     const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
     const currentURI = useSelector((state) => state.app.uri);
-    const headerNavigationBoxRef = React.useRef(null);
+    const ref = {
+        container: React.useRef(null),
+        subContainer: React.useRef(null),
+        listBox: React.useRef(null),
+        items: React.useRef(null),
+    };
 
-    const toggleHeaderNavigationShadow = (navBox, containerBox) => {
-        const containerBoxWidth = containerBox.offsetWidth;
-        const itemsWidth = containerBox.querySelector('.items').clientWidth;
-        const offsetScroll = containerBox.scrollLeft;
+    const toggleHeaderNavigationShadow = () => {
+        const subContainer = ref.subContainer.current;
+        const listBox = ref.listBox.current;
+        const items = ref.items.current;
+
+        const listBoxWidth = listBox.offsetWidth;
+        const offsetScroll = listBox.scrollLeft;
+        const itemsWidth = items.clientWidth;
 
         if (offsetScroll <= 0) {
-            if (itemsWidth > containerBoxWidth) {
-                navBox.classList.add('start');
-                navBox.classList.remove('end');
-                navBox.classList.remove('scrolling');
+            if (itemsWidth > listBoxWidth) {
+                subContainer.classList.add('start');
+                subContainer.classList.remove('end', 'scrolling');
             }
-        } else if (offsetScroll >= itemsWidth - containerBoxWidth - 10) {
-            navBox.classList.remove('start');
-            navBox.classList.add('end');
-            navBox.classList.remove('scrolling');
+        } else if (offsetScroll >= itemsWidth - listBoxWidth - 10) {
+            subContainer.classList.add('end');
+            subContainer.classList.remove('start', 'scrolling');
         } else {
-            navBox.classList.remove('start');
-            navBox.classList.remove('end');
-            navBox.classList.add('scrolling');
+            subContainer.classList.add('scrolling');
+            subContainer.classList.remove('start', 'end');
         }
     };
 
-    const toggleHeaderNavigationLink = (event, headerNavigationLinks) => {
+    const toggleHeaderNavigationLink = (event, itemArray) => {
         if (event.type === 'mouseenter') {
-            headerNavigationLinks.map((link) => {
-                const linkItem = link.querySelector('.linkItem');
-                if (linkItem.dataset['key'] === event.target.dataset['key']) {
-                    linkItem.classList.add('highlight');
+            itemArray.map((itemBox) => {
+                const item = itemBox.querySelector('.item');
+
+                if (item.dataset['key'] === event.target.dataset['key']) {
+                    item.classList.add('highlight');
                 } else {
-                    linkItem.classList.add('externel');
+                    item.classList.add('externel');
                 }
             });
         } else if (event.type === 'mouseleave') {
-            headerNavigationLinks.map((link) => {
-                const linkItem = link.querySelector('.linkItem');
-                linkItem.classList.remove('highlight');
-                linkItem.classList.remove('externel');
+            itemArray.map((itemBox) => {
+                const item = itemBox.querySelector('.item');
+
+                item.classList.remove('highlight', 'externel');
             });
         }
     };
 
     const initHeaderNavigationLinks = () => {
         setSubLinkBoxAnchor({});
-        Array.from(headerNavigationBoxRef.current.children).map((link) => {
-            link.querySelector('.linkItem').classList.remove('highlight');
-            link.querySelector('.linkItem').classList.remove('externel');
+        Array.from(ref.items.current.children).map((item) => {
+            item.querySelector('.item').classList.remove('highlight', 'externel');
         });
     };
 
@@ -70,7 +76,6 @@ export default function HeaderNavigation() {
                 return (
                     <Box
                         component="li"
-                        className="sublinkItem"
                         key={`headerNavigationLink-${slug}-sub-${index}`}
                         sx={{
                             display: 'block',
@@ -102,7 +107,7 @@ export default function HeaderNavigation() {
     };
 
     const fetchHeaderNavigationLinks = () => {
-        return headerNavigationLinks.map((link, index) => {
+        return menuLinks.map((link, index) => {
             return (
                 <Box
                     component="li"
@@ -121,7 +126,7 @@ export default function HeaderNavigation() {
                     }
                     onMouseOut={
                         'children' in link && isDesktop
-                            ? (event) => {
+                            ? () => {
                                   setSubLinkBoxAnchor({
                                       ...subLinkBoxAnchor,
                                       [link.slug]: false,
@@ -153,7 +158,7 @@ export default function HeaderNavigation() {
                     }}
                 >
                     <Box
-                        className="linkItem"
+                        className="item"
                         data-key={index}
                         sx={{
                             '& a': {
@@ -203,13 +208,11 @@ export default function HeaderNavigation() {
                                 {({ TransitionProps }) => (
                                     <Grow timeout={0} {...TransitionProps}>
                                         <Box
-                                            className="sublinksParent"
                                             sx={{
                                                 position: 'absolute',
                                             }}
                                         >
                                             <Box
-                                                className={`sublinksBox parent${index}`}
                                                 sx={{
                                                     marginTop: '7px',
                                                     backgroundColor: '#ffffff',
@@ -221,7 +224,6 @@ export default function HeaderNavigation() {
                                             >
                                                 <Box
                                                     component="ol"
-                                                    className="sublinks"
                                                     sx={{
                                                         display: 'flex',
                                                         flexDirection: 'column',
@@ -249,56 +251,54 @@ export default function HeaderNavigation() {
     };
 
     React.useEffect(() => {
-        const navBox = document.querySelector('.header-navigation-box');
-        const containerBox = navBox.querySelector('ul');
-        const headerNavigationLinks = Array.from(headerNavigationBoxRef.current.children);
+        const listBox = ref.listBox.current;
+        const itemArray = Array.from(ref.items.current.children);
 
-        headerNavigationLinks.map((link) => {
-            link.querySelector('.linkItem').addEventListener('mouseenter', (event) => {
-                toggleHeaderNavigationLink(event, headerNavigationLinks);
+        itemArray.map((itemBox) => {
+            itemBox.querySelector('.item').addEventListener('mouseenter', (event) => {
+                toggleHeaderNavigationLink(event, itemArray);
             });
 
-            link.querySelector('.linkItem').addEventListener('mouseleave', (event) => {
-                toggleHeaderNavigationLink(event, headerNavigationLinks);
+            itemBox.querySelector('.item').addEventListener('mouseleave', (event) => {
+                toggleHeaderNavigationLink(event, itemArray);
             });
         });
 
-        window.addEventListener('scroll', (event) => {
-            const headerNavigationDOM = document.querySelector('.header-navigation');
-            const appDrawerPaperDOM = document.querySelector('.app-drawer .drawer-paper');
+        window.addEventListener('scroll', () => {
+            const container = ref.container.current;
+            const desktopSubmenuDOM = document.querySelector('.desktop-submenu-box .MuiPaper-root');
 
-            if (
-                headerNavigationDOM.style.transform &&
-                headerNavigationDOM.style.transform !== 'none'
-            ) {
-                appDrawerPaperDOM.style.transform = 'translateY(-40px)';
-                appDrawerPaperDOM.classList.add('in');
-            } else {
-                appDrawerPaperDOM.style.transform = 'none';
-                appDrawerPaperDOM.classList.remove('in');
+            if (desktopSubmenuDOM) {
+                if (container.style.transform && container.style.transform !== 'none') {
+                    desktopSubmenuDOM.style.transform = 'translateY(-40px)';
+                    desktopSubmenuDOM.classList.add('in');
+                } else {
+                    desktopSubmenuDOM.style.transform = 'none';
+                    desktopSubmenuDOM.classList.remove('in');
+                }
             }
         });
 
-        containerBox.addEventListener('scroll', (event) => {
-            toggleHeaderNavigationShadow(navBox, containerBox);
+        listBox.addEventListener('scroll', () => {
+            toggleHeaderNavigationShadow();
         });
 
-        toggleHeaderNavigationShadow(navBox, containerBox);
+        toggleHeaderNavigationShadow();
     }, []);
 
     React.useEffect(() => {
-        const currentPathArray = window.location.pathname.split('/');
-        const headerNavigationLinks = Array.from(headerNavigationBoxRef.current.children);
+        const currentPathArray = currentURI.split('/');
+        const links = Array.from(ref.items.current.children);
 
-        headerNavigationLinks.map((link) => {
+        links.map((link) => {
             const linkPathArray = link.dataset['path'].split('/');
 
             for (let i = 1; i < linkPathArray.length; i++) {
                 if (i in currentPathArray) {
                     if (linkPathArray[i] == currentPathArray[i]) {
-                        link.querySelector('.linkItem').classList.add('selected');
+                        link.querySelector('.item').classList.add('selected');
                     } else {
-                        link.querySelector('.linkItem').classList.remove('selected');
+                        link.querySelector('.item').classList.remove('selected');
                     }
                 } else {
                     break;
@@ -310,7 +310,7 @@ export default function HeaderNavigation() {
     return (
         <HideOnScroll timeout={500}>
             <Box
-                className="header-navigation"
+                ref={ref.container}
                 sx={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -335,7 +335,7 @@ export default function HeaderNavigation() {
                 }}
             >
                 <Box
-                    className="header-navigation-box"
+                    ref={ref.subContainer}
                     sx={{
                         display: 'flex',
                         position: 'relative',
@@ -401,6 +401,7 @@ export default function HeaderNavigation() {
                     }}
                 >
                     <Box
+                        ref={ref.listBox}
                         component="ul"
                         sx={{
                             display: 'flex',
@@ -421,8 +422,7 @@ export default function HeaderNavigation() {
                         }}
                     >
                         <Box
-                            className="items"
-                            ref={headerNavigationBoxRef}
+                            ref={ref.items}
                             sx={{
                                 display: 'flex',
                                 alignItems: 'center',

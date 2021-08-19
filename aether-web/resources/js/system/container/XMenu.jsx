@@ -1,25 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import config from '../config';
+import config from '../../config';
 
 export default function XMenu({ items }) {
+    const currentURI = useSelector((state) => state.app.uri);
+    const refContainer = React.useRef(null);
+
+    React.useEffect(() => {
+        // 경로가 변경될 때마다 리렌더링
+    }, [currentURI]);
+
     const MenuItems = () => {
         return items.map((item, index) => {
             return (
-                <Link to={item.path} key={`XMenu-submenus-${item.path}-${index}`}>
-                    <ListItem button>
-                        <ListItemAvatar>
-                            <Avatar>{item.icon}</Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={item.text} />
-                    </ListItem>
-                </Link>
+                <Box
+                    data-path={item.path}
+                    className={window.location.pathname === item.path ? 'selected' : null}
+                    key={`XMenu-submenus-${item.path}-${index}`}
+                    sx={{
+                        '&:hover': {
+                            '& .MuiListItem-root': {
+                                backgroundColor: '#f9f9f9',
+                            },
+                        },
+
+                        '&.selected': {
+                            '& .MuiListItem-root': {
+                                backgroundColor: '#efefef',
+                            },
+                        },
+                    }}
+                >
+                    <Link to={item.path}>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>{item.icon}</Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary={item.text} />
+                        </ListItem>
+                    </Link>
+                </Box>
             );
         });
     };
@@ -27,7 +54,6 @@ export default function XMenu({ items }) {
     return (
         <List
             component="nav"
-            className="app-drawer-list"
             sx={{
                 overflowX: 'hidden',
                 overflowY: 'auto',
@@ -52,7 +78,7 @@ export default function XMenu({ items }) {
         >
             <Box
                 component="div"
-                className="items"
+                ref={refContainer}
                 sx={{
                     paddingTop: {
                         md: config('templete.margin.default.desktop'),
