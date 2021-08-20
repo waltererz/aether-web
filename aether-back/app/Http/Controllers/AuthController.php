@@ -24,30 +24,34 @@ class AuthController extends Controller
             return response()->json(false);
         }
 
-        $token = $user->createToken($request->post('device_name'))->plainTextToken;
+        $token = $user->createToken(md5($request->ip() . ' - ' . $request->server('HTTP_USER_AGENT')))->plainTextToken;
+        $remember_token = array($token, $request->post('remember'), $request->ip(), $request->server('HTTP_USER_AGENT'), time());
 
         if ($user->remember_tokens) {
             $new_tokens = json_decode($user->remember_tokens);
-            array_push($new_tokens, array($token, 0));
+            array_push($new_tokens, $remember_token);
             $new_tokens = json_encode($new_tokens);
         } else {
-            $new_tokens = json_encode(array(array($token, 0)));
+            $new_tokens = json_encode(array($remember_token));
         }
 
         $user->remember_tokens = $new_tokens;
         $user->save();
 
-        Cookie::queue('personal_access_token', $token, 0, null, null, false, false);
-        Cookie::queue('personal_unique_code', $this->_encrypt($user->unique_code));
+        $expire = $request->post('remember') === true ? 43200 : 0;
 
-        return response()->json(true);
+        return response()->json([
+            'auth' => true,
+            'cookie_expire' => $expire,
+            'access_token' => $token,
+            'unique_code' => $this->_encrypt($user->unique_code),
+        ]);
     }
 
     public function signout(Request $request): \Illuminate\Http\JsonResponse
     {
-        $cookies = $request->cookie();
-        $unique_code = isset($cookies['personal_unique_code']) ? $this->_decrypt($cookies['personal_unique_code']) : null;
-        $access_token = isset($cookies['personal_access_token']) ? $cookies['personal_access_token'] : null;
+        $access_token = $request->post('access_token');
+        $unique_code = $this->_decrypt($request->post('unique_code'));
 
         if (!$unique_code || !$access_token) {
             return response()->json(false);
@@ -67,12 +71,12 @@ class AuthController extends Controller
             foreach ($remember_tokens as $token) {
                 if ($token[0] == $access_token) {
                     $signout = true;
-                    Cookie::queue(Cookie::forget('personal_unique_code'));
-                    Cookie::queue(Cookie::forget('personal_access_token'));
                     break;
                 } else {
-                    if ($token[1] !== 0) {
-                        $new_tokens[] = $token;
+                    if ($token[1] === true) {
+                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
+                            $new_tokens[] = $token;
+                        }
                     }
                 }
             }
@@ -88,30 +92,50 @@ class AuthController extends Controller
 
     public function check(Request $request): \Illuminate\Http\JsonResponse
     {
-        if (!$request->post('unique_code') || !$request->post('access_token')) {
-            return response()->json(false);
+        if (!$request->post('unique_code') || !$request->post('access_token') || !$request->post('user_agent')) {
+            return response()->json(['auth' => false]);
         }
 
-        $user = User::where('unique_code', $this->_decrypt($request->post('unique_code')))->first();
+        $unique_code = $request->post('unique_code');
+        $access_token = $request->post('access_token');
+        $user_agent = $request->post('user_agent');
+
+        $user = User::where('unique_code', $this->_decrypt($unique_code))->first();
 
         if (!$user) {
-            return response()->json(false);
+            return response()->json(['auth' => false]);
         }
 
         if ($user->remember_tokens) {
             $authorized = false;
             $remember_tokens = json_decode($user->remember_tokens);
             $new_tokens = [];
+            $remember = false;
 
             foreach ($remember_tokens as $token) {
-
-                if ($token[0] == $request->post('access_token')) {
-                    $new_tokens[] = $token;
-                    $authorized = true;
-                    break;
+                if ($token[0] == $access_token) {
+                    if ($token[1] !== false) {
+                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
+                            if (isset($token[3]) && is_string($token[3]) && $token[3] == $user_agent) {
+                                $authorized = true;
+                                $remember = true;
+                                $token[4] = time();
+                                $new_tokens[] = $token;
+                                break;
+                            }
+                        }
+                    } else {
+                        if (isset($token[3]) && is_string($token[3]) && $token[3] == $user_agent) {
+                            $authorized = true;
+                            $new_tokens[] = $token;
+                            break;
+                        }
+                    }
                 } else {
-                    if ($token[1] !== 0) {
-                        $new_tokens[] = $token;
+                    if ($token[1] !== false) {
+                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
+                            $new_tokens[] = $token;
+                        }
                     }
                 }
             }
@@ -120,12 +144,19 @@ class AuthController extends Controller
             $user->save();
 
             if ($authorized) {
-                return response()->json($user->uuid);
+                $expire = $remember ? 43200 : 0;
+                return response()->json([
+                    'auth' => true,
+                    'user_uuid' => $user->uuid,
+                    'cookie_expire' => $expire,
+                    'access_token' => $access_token,
+                    'unique_code' => $unique_code,
+                ]);
             } else {
-                return response()->json(false);
+                return response()->json(['auth' => false, 'destroy_cookies' => true]);
             }
         } else {
-            return response()->json(false);
+            return response()->json(['auth' => false]);
         }
     }
 }

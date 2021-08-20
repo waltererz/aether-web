@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
@@ -64,19 +66,37 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    private function _getUserInformation(Request $request)
+    private function _getUserInformation(Request $request): string
     {
+        $result = '';
         $cookies = $request->cookie();
 
         if (!isset($cookies['personal_access_token']) || !isset($cookies['personal_unique_code'])) {
             return '';
         }
 
-        $response = Http::withToken($cookies['personal_access_token'])->post(config('app.api_url') . '/auth/check', [
-            'unique_code' => $cookies['personal_unique_code'],
-            'access_token' => $cookies['personal_access_token'],
-        ]);
+        $response = Http::withToken($cookies['personal_access_token'])
+            ->accept('application/json')->post(config('app.api_url') . '/auth/check', [
+                'unique_code' => $cookies['personal_unique_code'],
+                'access_token' => $cookies['personal_access_token'],
+                'ipaddress' => $request->ip(),
+                'user_agent' => $request->server('HTTP_USER_AGENT'),
+            ]);
 
-        return json_decode($response);
+        $response = json_decode($response);
+
+        if (isset($response->auth) && $response->auth === false) {
+            if (isset($response->destroy_cookies) && $response->destroy_cookies === true) {
+                Cookie::queue(Cookie::forget('personal_access_token'));
+                Cookie::queue(Cookie::forget('personal_unique_code'));
+            }
+        } else if (isset($response->auth) && $response->auth === true) {
+            $result = $response->user_uuid;
+
+            Cookie::queue('personal_access_token', $response->access_token, $response->cookie_expire, null, null, false, false);
+            Cookie::queue('personal_unique_code', $response->unique_code, $response->cookie_expire, null, null, false, false);
+        }
+
+        return $result;
     }
 }

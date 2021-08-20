@@ -18,6 +18,7 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
     <script type="text/javascript">
         window._aether = {
             name: "{{ $name }}",
+            sessionDomain: "{{ config('session.domain') }}",
             baseUrl: "{{ config('app.url') }}",
             client: "{{ request()->ip() }}",
             auth: "{{ $auth }}",

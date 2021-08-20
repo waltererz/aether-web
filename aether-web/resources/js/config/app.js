@@ -2,6 +2,7 @@ const _config = {
     name: window._aether.name,
     client: window._aether.client,
     auth: window._aether.auth,
+    domain: window._aether.sessionDomain,
     url: {
         app: window._aether.baseUrl,
         backend: 'http://back.erzsphilos.com',

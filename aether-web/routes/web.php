@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;

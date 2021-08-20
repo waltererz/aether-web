@@ -1,6 +1,6 @@
 import React from 'react';
+import Cookie from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
-import { osVersion, osName, fullBrowserVersion, browserName } from 'react-device-detect';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
@@ -18,20 +18,10 @@ import * as api from '../services/api';
 export default function SignIn() {
     let history = useHistory();
 
-    const deviceName =
-        osName +
-        ' ' +
-        osVersion +
-        ' ' +
-        browserName +
-        ' ' +
-        fullBrowserVersion +
-        ' - ' +
-        config('app.client');
-
     const ref = {
         email: React.useRef(null),
         password: React.useRef(null),
+        remember: React.useRef(null),
     };
 
     const theme = createTheme({
@@ -48,14 +38,34 @@ export default function SignIn() {
     const process = () => {
         const email = ref.email.current.querySelector('input').value;
         const password = ref.password.current.querySelector('input').value;
+        const remember = ref.remember.current.querySelector('input').checked;
 
         api.post('auth/signin', {
             email: email,
             password: password,
-            device_name: deviceName,
+            remember: remember,
         }).then((response) => {
             if (response.data) {
-                window.location.href = '/';
+                if (response.data.auth) {
+                    const cookie = new Cookie();
+
+                    cookie.set('personal_access_token', response.data.access_token, {
+                        path: '/',
+                        domain: '.' + config('app.domain'),
+                        expires: response.data.expire,
+                    });
+                    cookie.set('personal_unique_code', response.data.unique_code, {
+                        path: '/',
+                        domain: '.' + config('app.domain'),
+                        expires: response.data.expire,
+                    });
+
+                    if (cookie.get('personal_access_token')) {
+                        window.location.href = '/';
+                    } else {
+                        alert('로그인 장애가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                    }
+                }
             } else {
                 ref.email.current.querySelector('input').value = '';
                 ref.password.current.querySelector('input').value = '';
@@ -301,6 +311,7 @@ export default function SignIn() {
                                     className="checkbox-container"
                                     control={<Checkbox name="remember" />}
                                     label="로그인 상태 유지하기"
+                                    ref={ref.remember}
                                 />
                             </Box>
                             <a href="#">패스워드 초기화</a>
