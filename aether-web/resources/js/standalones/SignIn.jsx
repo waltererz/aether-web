@@ -31,7 +31,7 @@ export default function SignIn() {
 
     const Checkbox = withStyles({
         root: {
-            color: config('templete.palette.secondary.main'),
+            color: config('templete.palette.primary.main'),
         },
     })((props) => <MuiCheckbox color="default" {...props} />);
 
@@ -44,6 +44,8 @@ export default function SignIn() {
             email: email,
             password: password,
             remember: remember,
+            ip_address: config('app.client'),
+            user_agent: config('app.agent'),
         }).then((response) => {
             if (response.data) {
                 if (response.data.auth) {
@@ -121,7 +123,7 @@ export default function SignIn() {
                 >
                     <Box
                         sx={{
-                            background: config('templete.gradient.secondary'),
+                            background: config('templete.gradient.primary_0d'),
                             border: '0px',
                             borderRadius: config('templete.borderRadius.2'),
                             margin: '-20px 20px 10px 20px',
@@ -280,7 +282,7 @@ export default function SignIn() {
                                 ref={ref.email}
                                 label="이메일주소"
                                 variant="outlined"
-                                color="secondary"
+                                color="primary"
                             />
                         </Box>
                         <Box className="input-item" sx={{ marginBottom: '10px' }}>
@@ -290,7 +292,7 @@ export default function SignIn() {
                                 type="password"
                                 label="패스워드"
                                 variant="outlined"
-                                color="secondary"
+                                color="primary"
                             />
                         </Box>
                         <Box
@@ -320,7 +322,7 @@ export default function SignIn() {
                             <Button
                                 fullWidth
                                 variant="contained"
-                                color="secondary"
+                                color="primary"
                                 size="large"
                                 disableElevation
                                 onClick={process}

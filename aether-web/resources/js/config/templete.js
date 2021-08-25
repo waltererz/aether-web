@@ -1,15 +1,11 @@
 const _config = {
     palette: {
         primary: {
-            main: '#282828',
+            main: '#6a00ff',
         },
 
         secondary: {
-            main: '#46437a',
-        },
-
-        bgColor: {
-            main: '#fafafa',
+            main: '#9e2bff',
         },
 
         kakao: {
@@ -27,6 +23,10 @@ const _config = {
         facebook: {
             main: '#1877f2',
         },
+
+        bgColor: {
+            main: '#f5f5f5',
+        }
     },
 
     breakpoints: {
@@ -63,8 +63,8 @@ const _config = {
         },
 
         headerNavigation: {
-            desktop: '40px',
-            mobile: '40px',
+            desktop: '50px',
+            mobile: '50px',
         },
 
         bottomNavigation: {
@@ -100,8 +100,8 @@ const _config = {
     },
 
     gradient: {
-        secondary: 'linear-gradient(0deg, rgba(70, 67, 122, 1) 0%, rgba(73, 70, 128, 1) 35%, rgba(73, 70, 128, 1) 65%, rgba(70, 67, 122, 1) 100%)',
-        silver: 'linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(247, 247, 247, 1) 40%, rgba(254, 254, 254, 1) 100%)',
+        primary: 'linear-gradient(90deg, rgba(158,43,255,1) 0%, rgba(106,0,255,1) 100%)',
+        primary_0d: 'linear-gradient(0deg, rgba(96,0,231,1) 0%, rgba(106,0,255,1) 35%, rgba(106,0,255,1) 65%, rgba(96,0,231,1) 100%)',
     },
 
     fontFamily: {

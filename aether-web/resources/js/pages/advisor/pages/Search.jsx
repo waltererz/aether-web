@@ -11,6 +11,7 @@ import Skeleton from '@material-ui/core/Skeleton';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Paper from '../../../components/Paper';
 import * as api from '../../../services/api';
 import config from '../../../config';
 
@@ -142,6 +143,7 @@ export default function Search() {
                     boxSizing: 'border-box',
                     border: config('templete.border.1'),
                     borderRadius: config('templete.borderRadius.1'),
+                    backgroundColor: '#ffffff',
 
                     flexDirection: {
                         xs: 'column',
@@ -380,8 +382,9 @@ export default function Search() {
                         ) : (
                             <React.Fragment>
                                 <Button
-                                    variant="outlined"
-                                    color="primary"
+                                    disableElevation
+                                    variant="contained"
+                                    color="secondary"
                                     sx={{
                                         marginBottom: '15px',
 
@@ -444,7 +447,7 @@ export default function Search() {
     }, []);
 
     return (
-        <React.Fragment>
+        <Paper>
             <Accordion
                 className="filter-box"
                 id="search-filters"
@@ -452,7 +455,7 @@ export default function Search() {
                     boxShadow: 'none',
                     borderRadius: config('templete.borderRadius.1'),
                     border: config('templete.border.1'),
-                    background: config('templete.gradient.silver'),
+                    backgroundColor: '#ffffff',
                 }}
             >
                 <AccordionSummary
@@ -506,6 +509,6 @@ export default function Search() {
             <Box className="advisor-list">
                 {!complete ? fetchSkeletonBox() : advisors && fetchAdvisorList()}
             </Box>
-        </React.Fragment>
+        </Paper>
     );
 }

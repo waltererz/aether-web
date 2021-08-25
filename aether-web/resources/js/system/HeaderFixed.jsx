@@ -19,10 +19,10 @@ export default function HeaderFixed() {
 
     return (
         <AppBar
-            position="fixed"
+            position="static"
             sx={{
-                backgrounColor: config('templete.palette.primary.main'),
                 transition: 'none',
+                background: config('templete.gradient.primary'),
                 boxShadow: 'none',
                 zIndex: config('templete.zIndex.header'),
 
@@ -99,6 +99,10 @@ export default function HeaderFixed() {
                             cursor: 'pointer',
                             userSelect: 'none',
                             WebkitTapHighlightColor: 'transparent',
+
+                            '&:active': {
+                                transform: 'scale(0.9, 0.9)',
+                            },
                         }}
                     >
                         <MenuIcon />

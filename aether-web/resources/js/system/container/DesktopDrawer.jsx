@@ -1,14 +1,17 @@
 import React from 'react';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Drawer from '@material-ui/core/Drawer';
 import XMenu from './XMenu';
 import config from '../../config';
 
 export default function DesktopDrawer(props) {
+    const scrollTrigger = useScrollTrigger();
+
     return (
         <Drawer
             variant="permanent"
             anchor="left"
-            className="desktop-submenu-box"
+            className={scrollTrigger ? 'up' : ''}
             sx={{
                 display: {
                     xs: 'none',
@@ -31,6 +34,18 @@ export default function DesktopDrawer(props) {
                         config('templete.breakpoints.values.xl') +
                         'px - 100vw) / 2))',
                     xl: config('templete.width.drawer.desktop'),
+                },
+
+                '&.up': {
+                    '& .MuiPaper-root': {
+                        transform: {
+                            xs: 'translateY(-' + config('templete.height.headerFixed.mobile') + ')',
+                            md:
+                                'translateY(-' +
+                                config('templete.height.headerFixed.desktop') +
+                                ')',
+                        },
+                    },
                 },
 
                 '& .MuiPaper-root': {
@@ -76,6 +91,14 @@ export default function DesktopDrawer(props) {
                             ' + ' +
                             config('templete.height.headerNavigation.desktop') +
                             ')',
+                    },
+
+                    marginLeft: {
+                        md: config('templete.margin.default.desktop'),
+                    },
+
+                    paddingRight: {
+                        md: config('templete.margin.default.desktop'),
                     },
                 },
             }}

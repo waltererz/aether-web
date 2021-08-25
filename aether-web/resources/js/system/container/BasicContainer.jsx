@@ -59,12 +59,14 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                     },
 
                     paddingLeft: {
-                        xs: config('templete.margin.default.mobile'),
+                        xs: '0px',
+                        sm: config('templete.margin.default.mobile'),
                         md: config('templete.margin.default.desktop'),
                     },
 
                     paddingRight: {
-                        xs: config('templete.margin.default.mobile'),
+                        xs: '0px',
+                        sm: config('templete.margin.default.mobile'),
                         md: config('templete.margin.default.desktop'),
                     },
                 }}
@@ -108,18 +110,16 @@ export default function BasicContainer({ pages, secondary, submenus }) {
 
                                 maxWidth: {
                                     xs: config('templete.width.primary.mobile'),
+                                    sm: 'none',
                                 },
 
                                 margin: {
+                                    xs: '0px',
                                     sm: 'initial',
                                 },
 
                                 flexShrink: {
                                     sm: 1,
-                                },
-
-                                maxWidth: {
-                                    sm: 'none',
                                 },
                             },
 

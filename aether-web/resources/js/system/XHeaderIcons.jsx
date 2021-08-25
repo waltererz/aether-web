@@ -42,6 +42,10 @@ export default function XHeaderIcons() {
                 textDecoration: 'none',
                 color: '#ffffff',
 
+                '&:active': {
+                    transform: 'scale(0.9, 0.9)',
+                },
+
                 '& .MuiSvgIcon-root': {
                     fontSize: '1.5rem',
                 },

@@ -5,7 +5,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Box from '@material-ui/core/Box';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
-import HideOnScroll from '../components/HideOnScroll';
 import menuLinks from './menuLinks';
 import config from '../config';
 
@@ -89,6 +88,7 @@ export default function HeaderNavigation() {
                                 backgroundColor: '#ffffff',
                                 color: '#000000',
                                 transition: 'none',
+                                opacity: '1',
 
                                 '&:hover': {
                                     backgroundColor: config('templete.palette.secondary.main'),
@@ -163,27 +163,29 @@ export default function HeaderNavigation() {
                         sx={{
                             '& a': {
                                 display: 'block',
-                                color: '#bbbbbb',
+                                color: '#ffffff',
+                                opacity: '0.6',
                                 textDecoration: 'none',
-                                transition: 'color 0.2s linear',
+                                transition: 'opacity 0.2s linear',
+                                fontFamily: config('templete.fontFamily.1'),
                                 webkitTapHighlightColor: 'transparent',
                                 userSelect: 'none',
                                 fontSize: {
-                                    xs: '0.8em',
-                                    md: '0.85em',
+                                    xs: '0.9em',
+                                    md: '1em',
                                 },
                             },
 
                             '&.selected > a': {
-                                color: '#ffffff',
+                                opacity: '0.9',
                             },
 
                             '&.highlight > a': {
-                                color: '#ffffff',
+                                opacity: '1',
                             },
 
                             '&.externel > a': {
-                                color: '#777777',
+                                opacity: '0.4',
                             },
                         }}
                     >
@@ -264,19 +266,6 @@ export default function HeaderNavigation() {
             });
         });
 
-        window.addEventListener('scroll', () => {
-            const container = ref.container.current;
-            const desktopSubmenuDOM = document.querySelector('.desktop-submenu-box .MuiPaper-root');
-
-            if (desktopSubmenuDOM) {
-                if (container.style.transform && container.style.transform !== 'none') {
-                    desktopSubmenuDOM.style.transform = 'translateY(-40px)';
-                } else {
-                    desktopSubmenuDOM.style.transform = 'none';
-                }
-            }
-        });
-
         listBox.addEventListener('scroll', () => {
             toggleHeaderNavigationShadow();
         });
@@ -306,131 +295,128 @@ export default function HeaderNavigation() {
     }, [currentURI]);
 
     return (
-        <HideOnScroll timeout={500}>
+        <Box
+            ref={ref.container}
+            sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                width: '100%',
+                paddingLeft: {
+                    xs: config('templete.margin.default.mobile'),
+                    md: config('templete.margin.default.desktop'),
+                },
+                paddingRight: {
+                    xs: config('templete.margin.default.mobile'),
+                    md: config('templete.margin.default.desktop'),
+                },
+                boxSizing: 'border-box',
+                background: config('templete.gradient.primary'),
+                zIndex: config('templete.zIndex.headerNavigation'),
+                height: {
+                    xs: config('templete.height.headerNavigation.mobile'),
+                    md: config('templete.height.headerNavigation.desktop'),
+                },
+            }}
+        >
             <Box
-                ref={ref.container}
+                ref={ref.subContainer}
                 sx={{
                     display: 'flex',
+                    position: 'relative',
                     flexDirection: 'row',
-                    justifyContent: 'center',
-                    position: 'fixed',
+                    alignItems: 'center',
                     width: '100%',
-                    paddingLeft: {
-                        xs: config('templete.margin.default.mobile'),
-                        md: config('templete.margin.default.desktop'),
-                    },
-                    paddingRight: {
-                        xs: config('templete.margin.default.mobile'),
-                        md: config('templete.margin.default.desktop'),
-                    },
+                    height: '100%',
                     boxSizing: 'border-box',
-                    backgroundColor: config('templete.palette.primary.main'),
-                    zIndex: config('templete.zIndex.headerNavigation'),
-                    height: {
-                        xs: config('templete.height.headerNavigation.mobile'),
-                        md: config('templete.height.headerNavigation.desktop'),
+
+                    '&::before, &::after': {
+                        content: '""',
+                        display: 'block',
+                        visibility: 'hidden',
+                        position: 'absolute',
+                        width: '50px',
+                        height: '100%',
+                        opacity: 0,
+                        transition: 'opacity 0.4s linear, visibility 0.4s linear',
+                    },
+
+                    '&::before': {
+                        background:
+                            'linear-gradient(90deg, rgba(40, 40, 40, 1) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 0) 100%)',
+                        left: '0px',
+                    },
+
+                    '&::after': {
+                        background:
+                            'linear-gradient(90deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 1) 100%)',
+                        right: '0px',
+                    },
+
+                    '&.start': {
+                        '&::after': {
+                            visibility: 'visible',
+                            opacity: 1,
+                        },
+
+                        '&::before': {
+                            visibility: 'hidden',
+                            opacity: 0,
+                        },
+                    },
+
+                    '&.scrolling': {
+                        '&::before, &::after': {
+                            visibility: 'visible',
+                            opacity: 1,
+                        },
+                    },
+
+                    '&.end': {
+                        '&::after': {
+                            visibility: 'hidden',
+                            opacity: 0,
+                        },
+
+                        '&::before': {
+                            visibility: 'visible',
+                            opacity: 1,
+                        },
                     },
                 }}
             >
                 <Box
-                    ref={ref.subContainer}
+                    ref={ref.listBox}
+                    component="ul"
                     sx={{
                         display: 'flex',
-                        position: 'relative',
-                        flexDirection: 'row',
-                        alignItems: 'center',
+                        listStyle: 'none',
                         width: '100%',
                         height: '100%',
-                        boxSizing: 'border-box',
+                        padding: '0px',
+                        margin: '0px',
+                        overflowX: 'auto',
+                        overflowY: 'hidden',
+                        whiteSpace: 'nowrap',
+                        scrollbarWidth: 'none',
+                        msOverflowStyle: 'none',
 
-                        '&::before, &::after': {
-                            content: '""',
-                            display: 'block',
-                            visibility: 'hidden',
-                            position: 'absolute',
-                            width: '50px',
-                            height: '100%',
-                            opacity: 0,
-                            transition: 'opacity 0.4s linear, visibility 0.4s linear',
-                        },
-
-                        '&::before': {
-                            background:
-                                'linear-gradient(90deg, rgba(40, 40, 40, 1) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 0) 100%)',
-                            left: '0px',
-                        },
-
-                        '&::after': {
-                            background:
-                                'linear-gradient(90deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 1) 100%)',
-                            right: '0px',
-                        },
-
-                        '&.start': {
-                            '&::after': {
-                                visibility: 'visible',
-                                opacity: 1,
-                            },
-
-                            '&::before': {
-                                visibility: 'hidden',
-                                opacity: 0,
-                            },
-                        },
-
-                        '&.scrolling': {
-                            '&::before, &::after': {
-                                visibility: 'visible',
-                                opacity: 1,
-                            },
-                        },
-
-                        '&.end': {
-                            '&::after': {
-                                visibility: 'hidden',
-                                opacity: 0,
-                            },
-
-                            '&::before': {
-                                visibility: 'visible',
-                                opacity: 1,
-                            },
+                        '&::-webkit-scrollbar': {
+                            display: 'none',
                         },
                     }}
                 >
                     <Box
-                        ref={ref.listBox}
-                        component="ul"
+                        ref={ref.items}
                         sx={{
                             display: 'flex',
-                            listStyle: 'none',
-                            width: '100%',
-                            height: '100%',
-                            padding: '0px',
-                            margin: '0px',
-                            overflowX: 'auto',
-                            overflowY: 'hidden',
-                            whiteSpace: 'nowrap',
-                            scrollbarWidth: 'none',
-                            msOverflowStyle: 'none',
-
-                            '&::-webkit-scrollbar': {
-                                display: 'none',
-                            },
+                            alignItems: 'center',
                         }}
                     >
-                        <Box
-                            ref={ref.items}
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                            }}
-                        >
-                            {fetchHeaderNavigationLinks()}
-                        </Box>
+                        {fetchHeaderNavigationLinks()}
                     </Box>
                 </Box>
             </Box>
-        </HideOnScroll>
+        </Box>
     );
 }

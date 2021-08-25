@@ -25,15 +25,21 @@ export default function XMenu({ items }) {
                     className={window.location.pathname === item.path ? 'selected' : null}
                     key={`XMenu-submenus-${item.path}-${index}`}
                     sx={{
-                        '&:hover': {
+                        '&.selected': {
                             '& .MuiListItem-root': {
-                                backgroundColor: '#f5f5f5',
+                                backgroundColor: '#eeeeee',
                             },
                         },
 
-                        '&.selected': {
+                        '&:hover': {
                             '& .MuiListItem-root': {
-                                backgroundColor: '#efefef',
+                                backgroundColor: '#e9e9e9',
+                            },
+                        },
+
+                        '&:active': {
+                            '& .MuiListItem-root': {
+                                backgroundColor: '#e0e0e0',
                             },
                         },
                     }}
@@ -90,10 +96,6 @@ export default function XMenu({ items }) {
 
                     paddingBottom: {
                         md: '10px',
-                    },
-
-                    paddingLeft: {
-                        md: config('templete.margin.default.desktop'),
                     },
                 }}
             >

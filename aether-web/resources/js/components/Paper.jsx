@@ -6,6 +6,10 @@ export default function Paper({ children }) {
             elevation={0}
             sx={{
                 padding: '15px',
+                borderRadius: {
+                    xs: '0px',
+                    sm: '5px',
+                },
                 backgroundColor: '#ffffff',
             }}
         >

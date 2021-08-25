@@ -14,15 +14,15 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
     <meta property="og:url" content="{{ config('app.url') . $_SERVER['REQUEST_URI'] }}" />
     <meta property="og:description" content="{{ $description }}" />
     <meta property="og:locale" content="ko_KR" />
-    <meta name="theme-color" content="#282828" />
+    <meta name="theme-color" content="#222222" />
     <script type="text/javascript">
         window._aether = {
             name: "{{ $name }}",
-            sessionDomain: "{{ config('session.domain') }}",
+            domain: "{{ config('session.domain') }}",
             baseUrl: "{{ config('app.url') }}",
             client: "{{ request()->ip() }}",
+            agent: "{{ request()->server('HTTP_USER_AGENT') }}",
             auth: "{{ $auth }}",
-            currentTabName: null,
         }
     </script>
 @endsection

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
 import HeaderFixed from './HeaderFixed';
 import MobileDrawer from './MobileDrawer';
@@ -10,6 +11,8 @@ import * as Page from '../pages';
 import config from '../config';
 
 export default function App() {
+    const scrollTrigger = useScrollTrigger();
+
     return (
         <ThemeProvider
             theme={createTheme({
@@ -18,8 +21,29 @@ export default function App() {
             })}
         >
             <MobileDrawer />
-            <HeaderFixed />
-            <HeaderNavigation />
+            <Box
+                className={scrollTrigger ? 'invisible' : ''}
+                sx={{
+                    position: 'fixed',
+                    width: '100%',
+                    top: 0,
+                    zIndex: config('templete.zIndex.header'),
+                    transition: 'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;',
+
+                    '&.invisible': {
+                        transform: {
+                            xs: 'translateY(-' + config('templete.height.headerFixed.mobile') + ')',
+                            md:
+                                'translateY(-' +
+                                config('templete.height.headerFixed.desktop') +
+                                ')',
+                        },
+                    },
+                }}
+            >
+                <HeaderFixed />
+                <HeaderNavigation />
+            </Box>
             <Box
                 sx={{
                     marginTop: {
