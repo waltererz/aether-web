@@ -1,6 +1,6 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import Container from '../system/Container';
@@ -11,11 +11,8 @@ import * as common from '../services/common';
 export default function Investment() {
     common.init({
         headerIcons: {
-            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
-            mobile: [
-                { to: '/investment/portfolio', icon: <PieChartOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
-            ],
+            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
+            mobile: [{ path: '/investment/portfolio', icon: <PieChartRoundedIcon /> }],
         },
     });
 
@@ -28,7 +25,11 @@ export default function Investment() {
             secondary={<RightSide />}
             submenus={[
                 { path: '/investment', text: '투자자산 대시보드', icon: <DashboardIcon /> },
-                { path: '/investment/portfolio', text: '포트폴리오관리', icon: <PieChartIcon /> },
+                {
+                    path: '/investment/portfolio',
+                    text: '포트폴리오관리',
+                    icon: <PieChartRoundedIcon />,
+                },
             ]}
         />
     );

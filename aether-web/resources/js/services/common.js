@@ -6,9 +6,16 @@ import config from '../config';
 import routes from '../routes';
 
 export function init(props = {}) {
+    const error = useSelector((state) => state.app.error);
     const currentTab = useSelector((state) => state.app.tab);
     const currentURI = useSelector((state) => state.app.uri);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (error !== null && typeof error === 'object' && 'error' in error && 'callback' in error) {
+            error.callback();
+        }
+    }, [error]);
 
     useEffect(() => {
         // 현재 페이지의 메타데이터를 가져옴

@@ -1,6 +1,7 @@
 import reduxConstants from '../constants';
 
 const initialStates = {
+    complete: false,
     title: null,
     tab: null,
     headerIcons: null,
@@ -24,6 +25,9 @@ function app(state = initialStates, action) {
             break;    
         case reduxConstants.app.mobileDrawerOpen:
             return { ...state, mobileDrawerOpen: action.state }
+            break;
+        case reduxConstants.app.complete:
+            return { ...state, complete: action.state }
             break;
     }
 

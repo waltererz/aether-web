@@ -1,5 +1,6 @@
 const reduxConstants = {
     app: {
+        complete: 'APP_COMPLETE',
         title: 'APP_DOCUMENT_TITLE',
         tab: 'APP_TAB',
         uri: 'APP_URI',

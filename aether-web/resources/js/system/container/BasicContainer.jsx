@@ -24,6 +24,7 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                     flexWrap: 'nowrap',
                     justifyContent: 'space-between',
                     padding: '0px',
+                    minHeight: '3000px', // 테스트용
 
                     height: {
                         xs:

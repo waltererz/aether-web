@@ -348,7 +348,21 @@ export default function SignIn() {
                             }}
                         />
                         <Box sx={{ textAlign: 'center' }}>
-                            아직 회원이 아니신가요? <a href="#">회원가입</a>
+                            아직 회원이 아니신가요?
+                            <Box
+                                onClick={() => {
+                                    window.location.href = '/user/signup';
+                                }}
+                                sx={{
+                                    display: 'inline-block',
+                                    marginLeft: '10px',
+                                    color: config('templete.palette.primary.main'),
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                회원가입
+                            </Box>
                         </Box>
                     </Box>
                 </Box>

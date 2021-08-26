@@ -19,8 +19,12 @@ ReactDOM.render(
         <Provider store={store}>
             <Router>
                 <Switch>
+                    {/* 단독실행 페이지 */}
                     <Route exact path="/user/signin" component={StandAlone.SignIn} />
+                    <Route exact path="/user/signup" component={StandAlone.SignUp} />
                     <Route exact path="/user/signout" component={StandAlone.SignOut} />
+
+                    {/* 단독실행 페이지 이외 */}
                     <Route path="*" component={App} />
                 </Switch>
             </Router>

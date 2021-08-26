@@ -34,3 +34,10 @@ export const setMobileDrawerOpen = (open) => {
         state: open,
     }
 }
+
+export const setComplete = (complete) => {
+    return {
+        type: reduxConstants.app.complete,
+        state: complete,
+    }
+}

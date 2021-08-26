@@ -43,7 +43,7 @@ export default function MobileNavigation() {
                     right: '0px',
                     left: 'auto',
                     zIndex: config('templete.zIndex.bottomNavigation'),
-                    borderTop: '1px solid #eeeeee',
+                    borderTop: '1px solid #eaeaea',
 
                     '& .MuiBottomNavigationAction-root': {
                         padding: '0px',

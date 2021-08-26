@@ -1,8 +1,7 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import AccountBalanceWalletRoundedIcon from '@material-ui/icons/AccountBalanceWalletRounded';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
 import Container from '../system/Container';
 import RightSide from './asset/RightSide';
 import * as Page from './asset/pages';
@@ -11,11 +10,8 @@ import * as common from '../services/common';
 export default function Asset() {
     common.init({
         headerIcons: {
-            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
-            mobile: [
-                { to: '/assets/moneybook', icon: <CreditCardOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
-            ],
+            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
+            mobile: [{ path: '/assets/moneybook', icon: <AccountBalanceWalletRoundedIcon /> }],
         },
     });
 
@@ -28,7 +24,11 @@ export default function Asset() {
             secondary={<RightSide />}
             submenus={[
                 { path: '/assets', text: '자산관리 대시보드', icon: <DashboardIcon /> },
-                { path: '/assets/moneybook', text: '가계부', icon: <CreditCardIcon /> },
+                {
+                    path: '/assets/moneybook',
+                    text: '가계부',
+                    icon: <AccountBalanceWalletRoundedIcon />,
+                },
             ]}
         />
     );

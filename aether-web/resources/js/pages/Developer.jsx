@@ -1,6 +1,6 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
 import Container from '../system/Container';
 import RightSide from './developer/RightSide';
 import * as Page from './developer/pages';
@@ -9,11 +9,8 @@ import * as common from '../services/common';
 export default function Developer() {
     common.init({
         headerIcons: {
-            desktop: [{ to: '/user/signin', icon: <AccountCircleIcon /> }],
-            mobile: [
-                { to: '/developer/forum', icon: <SpeakerNotesIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
-            ],
+            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
+            mobile: [{ path: '/developer/forum', icon: <ForumRoundedIcon /> }],
         },
     });
 
@@ -25,7 +22,7 @@ export default function Developer() {
             ]}
             secondary={<RightSide />}
             submenus={[
-                { path: '/developer/forum', text: '개발자게시판', icon: <SpeakerNotesIcon /> },
+                { path: '/developer/forum', text: '개발자게시판', icon: <ForumRoundedIcon /> },
             ]}
         />
     );

@@ -1,10 +1,9 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import FolderSpecialIcon from '@material-ui/icons/FolderSpecial';
 import LocalActivityIcon from '@material-ui/icons/LocalActivity';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import LogoutIcon from '@material-ui/icons/Logout';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import Container from '../system/Container';
 import RightSide from './home/RightSide';
 import * as Page from './home/pages';
@@ -14,15 +13,16 @@ export default function Home() {
     common.init({
         headerIcons: {
             desktop: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon />, auth: false },
-                { to: '/user/signout', icon: <LogoutIcon />, auth: true },
+                {
+                    path: '/user/signin',
+                    icon: <AccountCircleRoundedIcon />,
+                    auth: false,
+                    standalone: true,
+                },
+                { path: '/user', icon: <AccountCircleRoundedIcon />, auth: true },
+                { path: '/app/setting', icon: <SettingsRoundedIcon /> },
             ],
-            mobile: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon />, auth: false },
-                { to: '/user/signout', icon: <LogoutIcon />, auth: true },
-            ],
+            mobile: [{ path: '/app/setting', icon: <SettingsRoundedIcon /> }],
         },
     });
 

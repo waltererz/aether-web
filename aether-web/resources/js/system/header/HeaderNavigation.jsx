@@ -5,8 +5,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Box from '@material-ui/core/Box';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
-import menuLinks from './menuLinks';
-import config from '../config';
+import menuLinks from '../menuLinks';
+import config from '../../config';
 
 export default function HeaderNavigation() {
     const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
@@ -84,7 +84,7 @@ export default function HeaderNavigation() {
                             '& a': {
                                 display: 'block',
                                 padding: '8px 20px',
-                                fontSize: '0.9em',
+                                fontSize: '1em',
                                 backgroundColor: '#ffffff',
                                 color: '#000000',
                                 transition: 'none',

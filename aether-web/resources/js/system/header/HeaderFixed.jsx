@@ -6,8 +6,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuIcon from '@material-ui/icons/Menu';
 import XHeaderIcons from './XHeaderIcons';
-import { setMobileDrawerOpen } from '../redux/actions/app';
-import config from '../config';
+import { setMobileDrawerOpen } from '../../redux/actions/app';
+import config from '../../config';
 
 export default function HeaderFixed() {
     const mobileDrawerOpen = useSelector((state) => state.app.mobileDrawerOpen);

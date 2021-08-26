@@ -1,17 +1,58 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
-import HeaderFixed from './HeaderFixed';
+import Header from './Header';
 import MobileDrawer from './MobileDrawer';
-import HeaderNavigation from './HeaderNavigation';
 import MobileNavigation from './MobileNavigation';
 import * as Page from '../pages';
 import config from '../config';
 
 export default function App() {
-    const scrollTrigger = useScrollTrigger();
+    React.useEffect(() => {
+        (function () {
+            var w = window;
+            if (w.ChannelIO) {
+                return (window.console.error || window.console.log || function () {})(
+                    'ChannelIO script included twice.',
+                );
+            }
+            var ch = function () {
+                ch.c(arguments);
+            };
+            ch.q = [];
+            ch.c = function (args) {
+                ch.q.push(args);
+            };
+            w.ChannelIO = ch;
+
+            function l() {
+                if (w.ChannelIOInitialized) {
+                    return;
+                }
+                w.ChannelIOInitialized = true;
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+                s.charset = 'UTF-8';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
+            if (document.readyState === 'complete') {
+                l();
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', l);
+            } else {
+                window.addEventListener('DOMContentLoaded', l, false);
+                window.addEventListener('load', l, false);
+            }
+        })();
+
+        ChannelIO('boot', {
+            pluginKey: 'a2370838-95e6-43dd-9508-0cb10daa84ba',
+        });
+    }, []);
 
     return (
         <ThemeProvider
@@ -21,29 +62,7 @@ export default function App() {
             })}
         >
             <MobileDrawer />
-            <Box
-                className={scrollTrigger ? 'invisible' : ''}
-                sx={{
-                    position: 'fixed',
-                    width: '100%',
-                    top: 0,
-                    zIndex: config('templete.zIndex.header'),
-                    transition: 'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;',
-
-                    '&.invisible': {
-                        transform: {
-                            xs: 'translateY(-' + config('templete.height.headerFixed.mobile') + ')',
-                            md:
-                                'translateY(-' +
-                                config('templete.height.headerFixed.desktop') +
-                                ')',
-                        },
-                    },
-                }}
-            >
-                <HeaderFixed />
-                <HeaderNavigation />
-            </Box>
+            <Header />
             <Box
                 sx={{
                     marginTop: {

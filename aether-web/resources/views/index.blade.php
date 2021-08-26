@@ -23,6 +23,6 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
             client: "{{ request()->ip() }}",
             agent: "{{ request()->server('HTTP_USER_AGENT') }}",
             auth: "{{ $auth }}",
-        }
+        };
     </script>
 @endsection

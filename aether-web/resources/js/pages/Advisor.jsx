@@ -1,7 +1,6 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import FindInPageIcon from '@material-ui/icons/FindInPage';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
+import PersonSearchRoundedIcon from '@material-ui/icons/PersonSearchRounded';
 import Container from '../system/Container';
 import RightSide from './advisor/RightSide';
 import * as common from '../services/common';
@@ -10,13 +9,10 @@ import * as Page from './advisor/pages';
 export default function Advisor() {
     common.init({
         headerIcons: {
-            desktop: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
-            ],
+            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
             mobile: [
-                { to: '/advisors/search', icon: <SearchOutlinedIcon /> },
-                { to: '/user/signin', icon: <AccountCircleIcon /> },
+                { path: '/advisors/search', icon: <PersonSearchRoundedIcon /> },
+                { path: '/user', icon: <AccountCircleRoundedIcon />, auth: true },
             ],
         },
     });
@@ -29,7 +25,11 @@ export default function Advisor() {
             ]}
             secondary={<RightSide />}
             submenus={[
-                { path: '/advisors/search', text: '투자어드바이저 검색', icon: <FindInPageIcon /> },
+                {
+                    path: '/advisors/search',
+                    text: '투자어드바이저 검색',
+                    icon: <PersonSearchRoundedIcon />,
+                },
             ]}
         />
     );

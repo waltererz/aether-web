@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import MuiLink from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
-import config from '../config';
+import config from '../../config';
 
 export default function XHeaderIcons() {
     const headerIcons = useSelector((state) => state.app.headerIcons);
@@ -73,14 +74,18 @@ export default function XHeaderIcons() {
                             ) {
                                 return (
                                     <Box className="icon" key={index} sx={styles.item}>
-                                        <Link to={item.to}>{item.icon}</Link>
+                                        {'standalone' in item && item.standalone === true ? (
+                                            <MuiLink href={item.path}>{item.icon}</MuiLink>
+                                        ) : (
+                                            <Link to={item.path}>{item.icon}</Link>
+                                        )}
                                     </Box>
                                 );
                             }
                         } else {
                             return (
                                 <Box className="icon" key={index} sx={styles.item}>
-                                    <Link to={item.to}>{item.icon}</Link>
+                                    <Link to={item.path}>{item.icon}</Link>
                                 </Box>
                             );
                         }
@@ -97,14 +102,14 @@ export default function XHeaderIcons() {
                             ) {
                                 return (
                                     <Box className="icon" key={index} sx={styles.item}>
-                                        <Link to={item.to}>{item.icon}</Link>
+                                        <Link to={item.path}>{item.icon}</Link>
                                     </Box>
                                 );
                             }
                         } else {
                             return (
                                 <Box className="icon" key={index} sx={styles.item}>
-                                    <Link to={item.to}>{item.icon}</Link>
+                                    <Link to={item.path}>{item.icon}</Link>
                                 </Box>
                             );
                         }
