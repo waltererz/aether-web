@@ -91,7 +91,7 @@ export default function HeaderNavigation() {
                                 opacity: '1',
 
                                 '&:hover': {
-                                    backgroundColor: config('templete.palette.secondary.main'),
+                                    backgroundColor: config('templete.palette.primary.main'),
                                     color: '#ffffff',
                                 },
                             },

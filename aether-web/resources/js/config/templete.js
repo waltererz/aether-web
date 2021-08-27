@@ -1,11 +1,11 @@
 const _config = {
     palette: {
         primary: {
-            main: '#6a00ff',
+            main: '#5900d4',
         },
 
         secondary: {
-            main: '#9e2bff',
+            main: '#e30075',
         },
 
         kakao: {
@@ -101,8 +101,8 @@ const _config = {
     },
 
     gradient: {
-        primary: 'linear-gradient(90deg, rgba(158,43,255,1) 0%, rgba(106,0,255,1) 100%)',
-        primary_0d: 'linear-gradient(0deg, rgba(96,0,231,1) 0%, rgba(106,0,255,1) 35%, rgba(106,0,255,1) 65%, rgba(96,0,231,1) 100%)',
+        primary: 'linear-gradient(90deg, rgba(89,0,212,1) 0%, rgba(227,0,117,1) 100%)',
+        primary_0d: 'linear-gradient(0deg, rgba(78,0,190,1) 0%, rgba(89,0,212,1) 30%, rgba(89,0,212,1) 60%, rgba(78,0,190,1) 100%)',
     },
 
     fontFamily: {

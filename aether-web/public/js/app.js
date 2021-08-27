@@ -34590,10 +34590,10 @@ __webpack_require__.r(__webpack_exports__);
 var _config = {
   palette: {
     primary: {
-      main: '#6a00ff'
+      main: '#5900d4'
     },
     secondary: {
-      main: '#9e2bff'
+      main: '#e30075'
     },
     kakao: {
       main: '#fee500'
@@ -34671,8 +34671,8 @@ var _config = {
     2: '0 2px 5px 1px rgba(0, 0, 0, 0.30)'
   },
   gradient: {
-    primary: 'linear-gradient(90deg, rgba(158,43,255,1) 0%, rgba(106,0,255,1) 100%)',
-    primary_0d: 'linear-gradient(0deg, rgba(96,0,231,1) 0%, rgba(106,0,255,1) 35%, rgba(106,0,255,1) 65%, rgba(96,0,231,1) 100%)'
+    primary: 'linear-gradient(90deg, rgba(89,0,212,1) 0%, rgba(227,0,117,1) 100%)',
+    primary_0d: 'linear-gradient(0deg, rgba(78,0,190,1) 0%, rgba(89,0,212,1) 30%, rgba(89,0,212,1) 60%, rgba(78,0,190,1) 100%)'
   },
   fontFamily: {
     1: 'Noto Sans KR'
@@ -35668,7 +35668,7 @@ function Search() {
               className: "price",
               sx: {
                 fontFamily: (0,_config__WEBPACK_IMPORTED_MODULE_4__.default)('templete.fontFamily.1'),
-                color: (0,_config__WEBPACK_IMPORTED_MODULE_4__.default)('templete.palette.primary.main'),
+                color: (0,_config__WEBPACK_IMPORTED_MODULE_4__.default)('templete.palette.secondary.main'),
                 fontWeight: 'bold',
                 fontSize: {
                   xs: '1.2em'
@@ -38667,7 +38667,7 @@ function HeaderNavigation() {
               transition: 'none',
               opacity: '1',
               '&:hover': {
-                backgroundColor: (0,_config__WEBPACK_IMPORTED_MODULE_3__.default)('templete.palette.secondary.main'),
+                backgroundColor: (0,_config__WEBPACK_IMPORTED_MODULE_3__.default)('templete.palette.primary.main'),
                 color: '#ffffff'
               }
             }

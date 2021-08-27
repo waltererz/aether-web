@@ -403,7 +403,7 @@ export default function Search() {
                                     className="price"
                                     sx={{
                                         fontFamily: config('templete.fontFamily.1'),
-                                        color: config('templete.palette.primary.main'),
+                                        color: config('templete.palette.secondary.main'),
                                         fontWeight: 'bold',
 
                                         fontSize: {
