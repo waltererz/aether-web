@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
+import { styled } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
@@ -13,6 +13,43 @@ import PersonIcon from '@material-ui/icons/Person';
 import { setMobileDrawerOpen } from '../redux/actions/app';
 import menuLinks from './menuLinks';
 import config from '../config';
+
+const UserInfoContainer = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    alignItems: 'center',
+    padding: '10px',
+    marginBottom: '20px',
+});
+
+const AvatarContainer = styled('div')({
+    marginRight: '20px',
+
+    '& .MuiAvatar-root': {
+        width: '56px',
+        height: '56px',
+    },
+
+    '& svg': {
+        width: '32px',
+        height: '32px',
+    },
+});
+
+const UserNameContainer = styled('div')({
+    flexGrow: 1,
+    fontSize: '1.2em',
+    textAlign: 'center',
+
+    '& a': {
+        color: '#dddddd',
+    },
+});
+
+const SubMenuContainer = styled('div')({
+    marginLeft: '40px',
+});
 
 export default function MobileDrawer() {
     const [mobileDrawerSubMenuOpen, setMobileDrawerSubMenuOpen] = React.useState({});
@@ -93,11 +130,7 @@ export default function MobileDrawer() {
                         </Link>
                     </ListItemButton>
                     {mobileDrawerSubMenuOpen[link.slug] && (
-                        <Box
-                            sx={{
-                                marginLeft: '40px',
-                            }}
-                        >
+                        <SubMenuContainer>
                             {link.children.map((sublink) => {
                                 return (
                                     <ListItemButton
@@ -118,7 +151,7 @@ export default function MobileDrawer() {
                                     </ListItemButton>
                                 );
                             })}
-                        </Box>
+                        </SubMenuContainer>
                     )}
                 </ListItem>
             );
@@ -143,49 +176,16 @@ export default function MobileDrawer() {
                 },
             }}
         >
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'nowrap',
-                    alignItems: 'center',
-                    padding: '10px',
-                    marginBottom: '20px',
-                }}
-            >
-                <Box
-                    sx={{
-                        marginRight: '20px',
-
-                        '& .MuiAvatar-root': {
-                            width: '56px',
-                            height: '56px',
-                        },
-
-                        '& svg': {
-                            width: '32px',
-                            height: '32px',
-                        },
-                    }}
-                >
+            <UserInfoContainer>
+                <AvatarContainer>
                     <Avatar>
                         <PersonIcon />
                     </Avatar>
-                </Box>
-                <Box
-                    sx={{
-                        flexGrow: 1,
-                        fontSize: '1.2em',
-                        textAlign: 'center',
-
-                        '& a': {
-                            color: '#dddddd',
-                        },
-                    }}
-                >
+                </AvatarContainer>
+                <UserNameContainer>
                     <Link to="/user/signin">로그인을 해주세요.</Link>
-                </Box>
-            </Box>
+                </UserNameContainer>
+            </UserInfoContainer>
             <div>
                 <List>{fetchDrawerMenuLinks()}</List>
             </div>

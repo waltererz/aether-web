@@ -1,9 +1,31 @@
 import React from 'react';
+import { styled } from '@material-ui/core';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
 import HeaderFixed from './header/HeaderFixed';
 import HeaderNavigation from './header/HeaderNavigation';
 import config from '../config';
+
+const Container = styled('div')(({ theme }) => ({
+    position: 'fixed',
+    width: '100%',
+    top: 0,
+    zIndex: config('templete.zIndex.header'),
+    transition: 'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+
+    '&.invisible': {
+        [theme.breakpoints.up('xs')]: {
+            transform: 'translateY(-' + config('templete.height.headerFixed.mobile') + ')',
+        },
+
+        [theme.breakpoints.up('md')]: {
+            transform: 'translateY(-' + config('templete.height.headerFixed.desktop') + ')',
+        },
+    },
+
+    '&.shadow': {
+        boxShadow: config('templete.boxShadow.2'),
+    },
+}));
 
 export default function Header() {
     const refHeader = React.useRef(null);
@@ -20,30 +42,9 @@ export default function Header() {
     }, []);
 
     return (
-        <Box
-            className={scrollTrigger ? 'invisible' : ''}
-            ref={refHeader}
-            sx={{
-                position: 'fixed',
-                width: '100%',
-                top: 0,
-                zIndex: config('templete.zIndex.header'),
-                transition: 'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms',
-
-                '&.invisible': {
-                    transform: {
-                        xs: 'translateY(-' + config('templete.height.headerFixed.mobile') + ')',
-                        md: 'translateY(-' + config('templete.height.headerFixed.desktop') + ')',
-                    },
-                },
-
-                '&.shadow': {
-                    boxShadow: config('templete.boxShadow.2'),
-                },
-            }}
-        >
+        <Container ref={refHeader} className={scrollTrigger ? 'invisible' : ''}>
             <HeaderFixed />
             <HeaderNavigation />
-        </Box>
+        </Container>
     );
 }

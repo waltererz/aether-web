@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Box from '@material-ui/core/Box';
+import { styled } from '@material-ui/core';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
@@ -10,6 +10,16 @@ import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import config from '../config';
+
+const Container = styled('div')(({ theme }) => ({
+    [theme.breakpoints.up('xs')]: {
+        display: 'block',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        display: 'none',
+    },
+}));
 
 export default function MobileNavigation() {
     const [currentTab, setCurrentTab] = React.useState(null);
@@ -22,14 +32,7 @@ export default function MobileNavigation() {
     }, [newTab]);
 
     return (
-        <Box
-            sx={{
-                display: {
-                    xs: 'block',
-                    md: 'none',
-                },
-            }}
-        >
+        <Container>
             <BottomNavigation
                 value={currentTab}
                 sx={{
@@ -87,6 +90,6 @@ export default function MobileNavigation() {
                     to="/user"
                 />
             </BottomNavigation>
-        </Box>
+        </Container>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Box from '@material-ui/core/Box';
+import { styled } from '@material-ui/core';
 import MuiLink from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +8,53 @@ import MenuIcon from '@material-ui/icons/Menu';
 import XHeaderIcons from './XHeaderIcons';
 import { setMobileDrawerOpen } from '../../redux/actions/app';
 import config from '../../config';
+
+const HeaderAppNameContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+
+    [theme.breakpoints.up('xs')]: {
+        fontSize: '1.2rem',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        fontSize: '1.5rem',
+    },
+
+    '& a': {
+        display: 'block',
+        color: '#ffffff',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        userSelect: 'none',
+        WebkitTapHighlightColor: 'transparent',
+    },
+}));
+
+const MobileMenuIconContainer = styled('div')(({ theme }) => ({
+    cursor: 'pointer',
+    userSelect: 'none',
+    WebkitTapHighlightColor: 'transparent',
+
+    [theme.breakpoints.up('xs')]: {
+        display: 'flex',
+        alignItems: 'center',
+        marginRight: '15px',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        display: 'none',
+    },
+
+    '&:active': {
+        transform: 'scale(0.9, 0.9)',
+    },
+}));
+
+const HeaderIconContainer = styled('div')({
+    display: 'flex',
+});
 
 export default function HeaderFixed() {
     const mobileDrawerOpen = useSelector((state) => state.app.mobileDrawerOpen);
@@ -59,59 +106,15 @@ export default function HeaderFixed() {
                     },
                 }}
             >
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        flexWrap: 'nowrap',
-
-                        fontSize: {
-                            xs: '1.2rem',
-                            md: '1.5rem',
-                        },
-
-                        '& a': {
-                            display: 'block',
-                            color: '#ffffff',
-                            fontWeight: 'bold',
-                            textDecoration: 'none',
-                            userSelect: 'none',
-                            WebkitTapHighlightColor: 'transparent',
-                        },
-                    }}
-                >
-                    <Box
-                        onClick={toggleMobileDrawer}
-                        sx={{
-                            display: {
-                                xs: 'flex',
-                                md: 'none',
-                            },
-
-                            alignItems: {
-                                xs: 'center',
-                            },
-
-                            marginRight: {
-                                xs: '15px',
-                            },
-
-                            cursor: 'pointer',
-                            userSelect: 'none',
-                            WebkitTapHighlightColor: 'transparent',
-
-                            '&:active': {
-                                transform: 'scale(0.9, 0.9)',
-                            },
-                        }}
-                    >
+                <HeaderAppNameContainer>
+                    <MobileMenuIconContainer onClick={toggleMobileDrawer}>
                         <MenuIcon />
-                    </Box>
+                    </MobileMenuIconContainer>
                     <MuiLink href="/">Aether</MuiLink>
-                </Box>
-                <Box sx={{ display: 'flex' }}>
+                </HeaderAppNameContainer>
+                <HeaderIconContainer>
                     <XHeaderIcons />
-                </Box>
+                </HeaderIconContainer>
             </Toolbar>
         </AppBar>
     );

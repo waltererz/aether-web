@@ -1,12 +1,223 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { styled } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Box from '@material-ui/core/Box';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
 import menuLinks from '../menuLinks';
 import config from '../../config';
+
+const Container = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    boxSizing: 'border-box',
+    background: config('templete.gradient.primary'),
+    zIndex: config('templete.zIndex.headerNavigation'),
+
+    [theme.breakpoints.up('xs')]: {
+        paddingLeft: config('templete.margin.default.mobile'),
+        paddingRight: config('templete.margin.default.mobile'),
+        height: config('templete.height.headerNavigation.mobile'),
+    },
+
+    [theme.breakpoints.up('md')]: {
+        paddingLeft: config('templete.margin.default.desktop'),
+        paddingRight: config('templete.margin.default.desktop'),
+        height: config('templete.height.headerNavigation.desktop'),
+    },
+}));
+
+const SubContainer = styled('div')({
+    display: 'flex',
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+
+    '&::before, &::after': {
+        content: '""',
+        display: 'block',
+        visibility: 'hidden',
+        position: 'absolute',
+        width: '50px',
+        height: '100%',
+        opacity: 0,
+        transition: 'opacity 0.4s linear, visibility 0.4s linear',
+    },
+
+    '&::before': {
+        background:
+            'linear-gradient(90deg, rgba(40, 40, 40, 1) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 0) 100%)',
+        left: '0px',
+    },
+
+    '&::after': {
+        background:
+            'linear-gradient(90deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 1) 100%)',
+        right: '0px',
+    },
+
+    '&.start': {
+        '&::after': {
+            visibility: 'visible',
+            opacity: 1,
+        },
+
+        '&::before': {
+            visibility: 'hidden',
+            opacity: 0,
+        },
+    },
+
+    '&.scrolling': {
+        '&::before, &::after': {
+            visibility: 'visible',
+            opacity: 1,
+        },
+    },
+
+    '&.end': {
+        '&::after': {
+            visibility: 'hidden',
+            opacity: 0,
+        },
+
+        '&::before': {
+            visibility: 'visible',
+            opacity: 1,
+        },
+    },
+});
+
+const HeaderNavListContainer = styled('ul')({
+    display: 'flex',
+    listStyle: 'none',
+    width: '100%',
+    height: '100%',
+    padding: '0px',
+    margin: '0px',
+    overflowX: 'auto',
+    overflowY: 'hidden',
+    whiteSpace: 'nowrap',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+
+    '&::-webkit-scrollbar': {
+        display: 'none',
+    },
+});
+
+const HeaderNavItemContainer = styled('div')({
+    display: 'flex',
+    alignItems: 'center',
+});
+
+const HeaderNavItem = styled('li')(({ theme }) => ({
+    display: 'inline-flex',
+
+    '& > div > a': {
+        [theme.breakpoints.up('xs')]: {
+            padding: '0px 10px',
+        },
+
+        [theme.breakpoints.up('md')]: {
+            padding: '0px 15px',
+        },
+    },
+
+    '&:first-of-type': {
+        '& > div > a': {
+            paddingLeft: '0px',
+        },
+    },
+
+    '&:last-of-type': {
+        '& > div > a': {
+            paddingRight: '0px',
+        },
+    },
+}));
+
+const HeaderNavItemText = styled('div')(({ theme }) => ({
+    '& a': {
+        display: 'block',
+        color: '#ffffff',
+        opacity: '0.6',
+        textDecoration: 'none',
+        transition: 'opacity 0.2s linear',
+        fontFamily: config('templete.fontFamily.1'),
+        webkitTapHighlightColor: 'transparent',
+        userSelect: 'none',
+
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '0.9em',
+        },
+
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1em',
+        },
+    },
+
+    '&.selected > a': {
+        opacity: '0.9',
+    },
+
+    '&.highlight > a': {
+        opacity: '1',
+    },
+
+    '&.externel > a': {
+        opacity: '0.4',
+    },
+}));
+
+const SubNavigationContainer = styled('div')({
+    position: 'absolute',
+});
+
+const SubNavigationSubContainer = styled('div')({
+    marginTop: '7px',
+    backgroundColor: '#ffffff',
+    width: '250px',
+    overflowX: 'hidden',
+    boxShadow: '0 1px 5px 0px rgba(0, 0, 0, 0.2)',
+    borderRadius: '2px',
+});
+
+const SubNavigationListContainer = styled('ol')({
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    listStyle: 'none',
+    margin: '0px',
+    padding: '10px 0px',
+});
+
+const SubNavigationItem = styled('li')({
+    display: 'block',
+    width: '100%',
+    boxSizing: 'border-box',
+
+    '& a': {
+        display: 'block',
+        padding: '8px 20px',
+        fontSize: '1em',
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        transition: 'none',
+        opacity: '1',
+
+        '&:hover': {
+            backgroundColor: config('templete.palette.primary.main'),
+            color: '#ffffff',
+        },
+    },
+});
 
 export default function HeaderNavigation() {
     const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
@@ -73,34 +284,14 @@ export default function HeaderNavigation() {
         if (typeof links == 'object') {
             return links.map((link, index) => {
                 return (
-                    <Box
+                    <SubNavigationItem
                         component="li"
                         key={`headerNavigationLink-${slug}-sub-${index}`}
-                        sx={{
-                            display: 'block',
-                            width: '100%',
-                            boxSizing: 'border-box',
-
-                            '& a': {
-                                display: 'block',
-                                padding: '8px 20px',
-                                fontSize: '1em',
-                                backgroundColor: '#ffffff',
-                                color: '#000000',
-                                transition: 'none',
-                                opacity: '1',
-
-                                '&:hover': {
-                                    backgroundColor: config('templete.palette.primary.main'),
-                                    color: '#ffffff',
-                                },
-                            },
-                        }}
                     >
                         <Link to={link.to} onClick={initHeaderNavigationLinks}>
                             {link.name}
                         </Link>
-                    </Box>
+                    </SubNavigationItem>
                 );
             });
         }
@@ -109,8 +300,7 @@ export default function HeaderNavigation() {
     const fetchHeaderNavigationLinks = () => {
         return menuLinks.map((link, index) => {
             return (
-                <Box
-                    component="li"
+                <HeaderNavItem
                     key={`headerNavigationLink-${index}`}
                     data-path={link.to}
                     onMouseOver={
@@ -134,61 +324,8 @@ export default function HeaderNavigation() {
                               }
                             : null
                     }
-                    sx={{
-                        display: 'inline-flex',
-
-                        '& > .MuiBox-root > a': {
-                            padding: {
-                                xs: '0px 10px',
-                                md: '0px 15px',
-                            },
-                        },
-
-                        '&:first-of-type': {
-                            '& > .MuiBox-root > a': {
-                                paddingLeft: '0px',
-                            },
-                        },
-
-                        '&:last-of-type': {
-                            '& > .MuiBox-root > a': {
-                                paddingRight: '0px',
-                            },
-                        },
-                    }}
                 >
-                    <Box
-                        className="item"
-                        data-key={index}
-                        sx={{
-                            '& a': {
-                                display: 'block',
-                                color: '#ffffff',
-                                opacity: '0.6',
-                                textDecoration: 'none',
-                                transition: 'opacity 0.2s linear',
-                                fontFamily: config('templete.fontFamily.1'),
-                                webkitTapHighlightColor: 'transparent',
-                                userSelect: 'none',
-                                fontSize: {
-                                    xs: '0.9em',
-                                    md: '1em',
-                                },
-                            },
-
-                            '&.selected > a': {
-                                opacity: '0.9',
-                            },
-
-                            '&.highlight > a': {
-                                opacity: '1',
-                            },
-
-                            '&.externel > a': {
-                                opacity: '0.4',
-                            },
-                        }}
-                    >
+                    <HeaderNavItemText className="item" data-key={index}>
                         <Link
                             id={`header-navigation-link-${link.slug}`}
                             to={link.to}
@@ -209,45 +346,22 @@ export default function HeaderNavigation() {
                             >
                                 {({ TransitionProps }) => (
                                     <Grow timeout={0} {...TransitionProps}>
-                                        <Box
-                                            sx={{
-                                                position: 'absolute',
-                                            }}
-                                        >
-                                            <Box
-                                                sx={{
-                                                    marginTop: '7px',
-                                                    backgroundColor: '#ffffff',
-                                                    width: '250px',
-                                                    overflowX: 'hidden',
-                                                    boxShadow: '0 1px 5px 0px rgba(0, 0, 0, 0.2)',
-                                                    borderRadius: '2px',
-                                                }}
-                                            >
-                                                <Box
-                                                    component="ol"
-                                                    sx={{
-                                                        display: 'flex',
-                                                        flexDirection: 'column',
-                                                        flexWrap: 'nowrap',
-                                                        listStyle: 'none',
-                                                        margin: '0px',
-                                                        padding: '10px 0px',
-                                                    }}
-                                                >
+                                        <SubNavigationContainer>
+                                            <SubNavigationSubContainer>
+                                                <SubNavigationListContainer>
                                                     {fetchHeaderNavigationSubLinks(
                                                         link.children,
                                                         link.slug,
                                                     )}
-                                                </Box>
-                                            </Box>
-                                        </Box>
+                                                </SubNavigationListContainer>
+                                            </SubNavigationSubContainer>
+                                        </SubNavigationContainer>
                                     </Grow>
                                 )}
                             </Popper>
                         ) : null}
-                    </Box>
-                </Box>
+                    </HeaderNavItemText>
+                </HeaderNavItem>
             );
         });
     };
@@ -295,128 +409,14 @@ export default function HeaderNavigation() {
     }, [currentURI]);
 
     return (
-        <Box
-            ref={ref.container}
-            sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                width: '100%',
-                paddingLeft: {
-                    xs: config('templete.margin.default.mobile'),
-                    md: config('templete.margin.default.desktop'),
-                },
-                paddingRight: {
-                    xs: config('templete.margin.default.mobile'),
-                    md: config('templete.margin.default.desktop'),
-                },
-                boxSizing: 'border-box',
-                background: config('templete.gradient.primary'),
-                zIndex: config('templete.zIndex.headerNavigation'),
-                height: {
-                    xs: config('templete.height.headerNavigation.mobile'),
-                    md: config('templete.height.headerNavigation.desktop'),
-                },
-            }}
-        >
-            <Box
-                ref={ref.subContainer}
-                sx={{
-                    display: 'flex',
-                    position: 'relative',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    width: '100%',
-                    height: '100%',
-                    boxSizing: 'border-box',
-
-                    '&::before, &::after': {
-                        content: '""',
-                        display: 'block',
-                        visibility: 'hidden',
-                        position: 'absolute',
-                        width: '50px',
-                        height: '100%',
-                        opacity: 0,
-                        transition: 'opacity 0.4s linear, visibility 0.4s linear',
-                    },
-
-                    '&::before': {
-                        background:
-                            'linear-gradient(90deg, rgba(40, 40, 40, 1) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 0) 100%)',
-                        left: '0px',
-                    },
-
-                    '&::after': {
-                        background:
-                            'linear-gradient(90deg, rgba(40, 40, 40, 0) 0%, rgba(40, 40, 40, 0.5) 50%, rgba(40, 40, 40, 1) 100%)',
-                        right: '0px',
-                    },
-
-                    '&.start': {
-                        '&::after': {
-                            visibility: 'visible',
-                            opacity: 1,
-                        },
-
-                        '&::before': {
-                            visibility: 'hidden',
-                            opacity: 0,
-                        },
-                    },
-
-                    '&.scrolling': {
-                        '&::before, &::after': {
-                            visibility: 'visible',
-                            opacity: 1,
-                        },
-                    },
-
-                    '&.end': {
-                        '&::after': {
-                            visibility: 'hidden',
-                            opacity: 0,
-                        },
-
-                        '&::before': {
-                            visibility: 'visible',
-                            opacity: 1,
-                        },
-                    },
-                }}
-            >
-                <Box
-                    ref={ref.listBox}
-                    component="ul"
-                    sx={{
-                        display: 'flex',
-                        listStyle: 'none',
-                        width: '100%',
-                        height: '100%',
-                        padding: '0px',
-                        margin: '0px',
-                        overflowX: 'auto',
-                        overflowY: 'hidden',
-                        whiteSpace: 'nowrap',
-                        scrollbarWidth: 'none',
-                        msOverflowStyle: 'none',
-
-                        '&::-webkit-scrollbar': {
-                            display: 'none',
-                        },
-                    }}
-                >
-                    <Box
-                        ref={ref.items}
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
-                    >
+        <Container ref={ref.container}>
+            <SubContainer ref={ref.subContainer}>
+                <HeaderNavListContainer ref={ref.listBox}>
+                    <HeaderNavItemContainer ref={ref.items}>
                         {fetchHeaderNavigationLinks()}
-                    </Box>
-                </Box>
-            </Box>
-        </Box>
+                    </HeaderNavItemContainer>
+                </HeaderNavListContainer>
+            </SubContainer>
+        </Container>
     );
 }

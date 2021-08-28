@@ -1,12 +1,22 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { styled } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
 import Header from './Header';
 import MobileDrawer from './MobileDrawer';
 import MobileNavigation from './MobileNavigation';
 import * as Page from '../pages';
 import config from '../config';
+
+const Container = styled('div')(({ theme }) => ({
+    [theme.breakpoints.up('xs')]: {
+        marginTop: config('templete.height.headerFixed.mobile'),
+    },
+
+    [theme.breakpoints.up('md')]: {
+        marginTop: config('templete.height.headerFixed.desktop'),
+    },
+}));
 
 export default function App() {
     React.useEffect(() => {
@@ -63,14 +73,7 @@ export default function App() {
         >
             <MobileDrawer />
             <Header />
-            <Box
-                sx={{
-                    marginTop: {
-                        xs: config('templete.height.headerFixed.mobile'),
-                        md: config('templete.height.headerFixed.desktop'),
-                    },
-                }}
-            >
+            <Container>
                 <Switch>
                     <Route exact path="/" component={Page.Home} />
                     <Route path="/user" component={Page.User} />
@@ -79,7 +82,7 @@ export default function App() {
                     <Route path="/advisors" component={Page.Advisor} />
                     <Route path="/developer" component={Page.Developer} />
                 </Switch>
-            </Box>
+            </Container>
             <MobileNavigation />
         </ThemeProvider>
     );
