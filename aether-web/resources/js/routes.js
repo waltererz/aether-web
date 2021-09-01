@@ -59,17 +59,6 @@ const routes = {
             },
         },
     },
-
-    developer: {
-        tabName: 'developer',
-        component: 'Developer',
-        title: '개발자페이지',
-        children: {
-            forum: {
-                title: '개발자포럼',
-            },
-        },
-    },
 };
 
 export default routes;

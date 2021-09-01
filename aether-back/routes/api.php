@@ -18,34 +18,36 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::prefix('groups')->group(function () {
-    Route::post('/', [GroupController::class, 'store']);
-    Route::post('/index', [GroupController::class, 'index']);
-    Route::delete('/{group}', [GroupController::class, 'destroy'])->where('group', '[0-9a-z\-]+');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('/signout', [AuthController::class, 'signout']);
+        Route::post('/check', [AuthController::class, 'check']);
+    });
+
+    Route::prefix('groups')->group(function () {
+        Route::post('/', [GroupController::class, 'store']);
+        Route::post('/index', [GroupController::class, 'index']);
+        Route::delete('/{group}', [GroupController::class, 'destroy'])->where('group', '[0-9a-z\-]+');
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::post('/', [UserController::class, 'store']);
+        Route::post('/index', [UserController::class, 'index']);
+        Route::post('/check/email', [UserController::class, 'checkEmail']);
+        Route::delete('/{user}', [UserController::class, 'destroy'])->where('user', '[0-9a-z\-]+');
+    });
+
+    Route::prefix('advisors')->group(function () {
+        Route::post('/', [AdvisorController::class, 'store']);
+        Route::post('/index', [AdvisorController::class, 'index']);
+    });
+
+    Route::prefix('investment/themes')->group(function () {
+        Route::post('/', [InvestmentThemeController::class, 'store']);
+        Route::post('/index', [InvestmentThemeController::class, 'index']);
+    });
 });
-
-Route::prefix('users')->group(function () {
-    Route::post('/', [UserController::class, 'store']);
-    Route::post('/index', [UserController::class, 'index']);
-    Route::post('/check/email', [UserController::class, 'checkEmail']);
-    Route::delete('/{user}', [UserController::class, 'destroy'])->where('user', '[0-9a-z\-]+');
-});
-
-Route::prefix('advisors')->group(function () {
-    Route::post('/', [AdvisorController::class, 'store']);
-    Route::post('/index', [AdvisorController::class, 'index']);
-});
-
-Route::prefix('investment/themes')->group(function () {
-    Route::post('/', [InvestmentThemeController::class, 'store']);
-    Route::post('/index', [InvestmentThemeController::class, 'index']);
-});
-
-
-
 
 Route::prefix('auth')->group(function () {
     Route::post('/signin', [AuthController::class, 'signin']);
-    Route::middleware('auth:sanctum')->post('/signout', [AuthController::class, 'signout']);
-    Route::middleware('auth:sanctum')->post('/check', [AuthController::class, 'check']);
 });

@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookie from 'universal-cookie';
 import { withStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -29,13 +30,20 @@ export default function Search() {
             (!updated && advisors && advisors.current_page != page) ||
             !advisors
         ) {
+            const cookie = new Cookie();
+            const access_token = cookie.get('personal_access_token');
+
             await api
-                .post('advisors/index', {
-                    page: page,
-                    pagination: true,
-                    filtering: currentFilters,
-                    filters: filters,
-                })
+                .post(
+                    'advisors/index',
+                    {
+                        page: page,
+                        pagination: true,
+                        filtering: currentFilters,
+                        filters: filters,
+                    },
+                    access_token,
+                )
                 .then((response) => {
                     if (response.data) {
                         setComplete(true);
@@ -48,7 +56,10 @@ export default function Search() {
     };
 
     const getThemes = async () => {
-        await api.post('investment/themes/index').then((response) => {
+        const cookie = new Cookie();
+        const access_token = cookie.get('personal_access_token');
+
+        await api.post('investment/themes/index', {}, access_token).then((response) => {
             if (response.data) {
                 const theme_filters = {};
                 response.data.map((theme) => {

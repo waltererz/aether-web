@@ -38,43 +38,48 @@ export default function SignIn() {
     const process = () => {
         const email = ref.email.current.querySelector('input').value;
         const password = ref.password.current.querySelector('input').value;
-        const remember = ref.remember.current.querySelector('input').checked;
+        const remember_me = ref.remember.current.querySelector('input').checked;
+        const user_agent = config('app.agent');
 
         api.post('auth/signin', {
             email: email,
             password: password,
-            remember: remember,
+            remember_me: remember_me,
             ip_address: config('app.client'),
-            user_agent: config('app.agent'),
-        }).then((response) => {
-            if (response.data) {
-                if (response.data.auth) {
+            user_agent: {
+                device: user_agent.device,
+                platform: user_agent.platform,
+                platform_version: user_agent.platform_version,
+                browser: user_agent.browser,
+            },
+        })
+            .then((response) => {
+                if (response.status === 200) {
                     const cookie = new Cookie();
+                    cookie.set('personal_access_token', response.headers['aether-access-token'], {
+                        path: '/',
+                        domain: '.' + config('app.domain'),
+                    });
 
-                    cookie.set('personal_access_token', response.data.access_token, {
-                        path: '/',
-                        domain: '.' + config('app.domain'),
-                        expires: response.data.expire,
-                    });
-                    cookie.set('personal_unique_code', response.data.unique_code, {
-                        path: '/',
-                        domain: '.' + config('app.domain'),
-                        expires: response.data.expire,
-                    });
+                    cookie.set(
+                        'personal_unique_code',
+                        response.headers['aether-user-unique-code'],
+                        {
+                            path: '/',
+                            domain: '.' + config('app.domain'),
+                        },
+                    );
 
                     if (cookie.get('personal_access_token')) {
                         window.location.href = '/';
                     } else {
-                        alert('로그인 장애가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                        console.log('cookie: ' + cookie.get('personal_access_token'));
                     }
                 }
-            } else {
-                ref.email.current.querySelector('input').value = '';
-                ref.password.current.querySelector('input').value = '';
-                ref.email.current.querySelector('input').focus();
-                alert('로그인 정보가 잘못되었습니다.');
-            }
-        });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     React.useEffect(() => {

@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\AssetController;
-use App\Http\Controllers\CookieController;
-use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestmentController;
@@ -20,37 +18,37 @@ use App\Http\Controllers\InvestmentController;
 |
 */
 
-Route::prefix('')->group(function () {
-    Route::get('/', [HomeController::class, 'index']);
-});
+Route::middleware('auth')->group(function () {
+    Route::prefix('')->group(function () {
+        Route::get('/', [HomeController::class, 'index']);
+    });
 
-Route::prefix('user')->group(function () {
-    Route::get('/', [UserController::class, 'index']);
-    Route::get('/signup', [UserController::class, 'index']);
-    Route::get('/signin', [UserController::class, 'index']);
-    Route::get('/signout', [UserController::class, 'index']);
-});
+    Route::prefix('assets')->group(function () {
+        Route::get('/', [AssetController::class, 'index']);
+        Route::get('/moneybook', [AssetController::class, 'index']);
+    });
 
-Route::prefix('assets')->group(function () {
-    Route::get('/', [AssetController::class, 'index']);
-    Route::get('/moneybook', [AssetController::class, 'index']);
-});
-
-Route::prefix('investment')->group(function () {
-    Route::get('/', [InvestmentController::class, 'index']);
-
-    Route::prefix('portfolio')->group(function () {
+    Route::prefix('investments', function () {
         Route::get('/', [InvestmentController::class, 'index']);
-        Route::get('/create', [InvestmentController::class, 'index']);
+
+        Route::prefix('portfolio')->group(function () {
+            Route::get('/', [InvestmentController::class, 'index']);
+            Route::get('/create', [InvestmentController::class, 'index']);
+        });
+    });
+
+    Route::prefix('advisors')->group(function () {
+        Route::get('/', [AdvisorController::class, 'index']);
+        Route::get('/search', [AdvisorController::class, 'index']);
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('user');
+        Route::get('/signout', [UserController::class, 'index'])->name('signout');
     });
 });
 
-Route::prefix('advisors')->group(function () {
-    Route::get('/', [AdvisorController::class, 'index']);
-    Route::get('/search', [AdvisorController::class, 'index']);
-});
-
-Route::prefix('developer')->group(function () {
-    Route::get('/', [DeveloperController::class, 'index']);
-    Route::get('/forum', [DeveloperController::class, 'index']);
+Route::prefix('user')->group(function () {
+    Route::get('/signup', [UserController::class, 'index'])->name('signup');
+    Route::get('/signin', [UserController::class, 'index'])->name('signin');
 });

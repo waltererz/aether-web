@@ -31,15 +31,6 @@ const _menuLinks = [
             }
         ],
     },
-    
-    {
-        name: '개발자페이지',
-        slug: 'developer',
-        to: '/developer',
-        children: [
-            { name: '개발자게시판', slug: 'developerforum', to: '/developer/forum' },
-        ],
-    },
 ];
 
 export default _menuLinks;

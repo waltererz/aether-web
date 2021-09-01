@@ -1,18 +1,20 @@
-import axios from 'axios';
-import config from '../config';
+import { createInstance } from './axios';
+
+const backend = createInstance('backend');
+const api = createInstance();
 
 export const post = async (path, params = {}, token = null) => {
-    return await axios.get(config('app.url.backend') + '/sanctum/csrf-cookie').then(async () => {
+    return await backend.get('sanctum/csrf-cookie').then(async () => {
         const headers = {};
 
-        headers['Content-type'] = 'application/json';
-        
+        headers['Content-Type'] = 'application/json';
+
         if (token) {
             headers['Authorization'] = 'Bearer ' + token;
         }
 
-        return await axios
-            .post(config('app.url.api') + '/' + path, params, {
+        return await api
+            .post(path, params, {
                 headers: headers,
             })
             .then(async (response) => {

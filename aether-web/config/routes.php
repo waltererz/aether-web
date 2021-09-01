@@ -20,17 +20,6 @@ return [
         ],
     ],
 
-    'developer' => [
-        'name' => '개발자페이지',
-        'description' => 'AETHER를 개발할 때에만 사용되는 임시 페이지입니다. 반드시 개발자만 접근하세요.',
-        'routes' => [
-            'forum' => [
-                'name' => '개발자게시판',
-                'description' => 'AETHER를 개발할 때에만 사용되는 임시 페이지입니다. 반드시 개발자만 접근하세요.',
-            ]
-        ],
-    ],
-
     'assets' => [
         'name' => '자산관리',
         'description' => 'AETHER에서 자신의 모든 자산을 종합적으로 관리하세요.',

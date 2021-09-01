@@ -54,7 +54,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://www.erzsphilos.com'),
-
+    'backend_url' => env('BACKEND_URL', 'http://back.erzsphilos.com'),
     'api_url' => env('API_URL', 'http://back.erzsphilos.com/api'),
 
     'asset_url' => env('ASSET_URL', null),
@@ -177,7 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        \Jenssegers\Agent\AgentServiceProvider::class,
     ],
 
     /*
@@ -230,7 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Agent' => \Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

@@ -11,7 +11,7 @@ use App\Models\InvestmentTheme;
 class AdvisorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 투자어드바이저 목록을 반환하는 함수
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse

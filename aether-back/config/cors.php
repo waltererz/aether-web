@@ -25,7 +25,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => ['Aether-Auth-Expires-Time', 'Aether-Access-Token', 'Aether-User-Unique-Code'],
 
     'max_age' => 0,
 
