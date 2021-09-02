@@ -1,5 +1,9 @@
 <?php
 
+use Jenssegers\Agent\Agent;
+
+$agent = new Agent();
+
 return [
 
     /*
@@ -231,6 +235,13 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Agent' => \Jenssegers\Agent\Facades\Agent::class,
+    ],
+
+    'agent' => [
+        'device' => $agent->device(),
+        'platform' => ($_platform = $agent->platform()),
+        'platform_version' => str_replace('_', '.', $agent->version($_platform)),
+        'browser' => $agent->browser(),
     ],
 
 ];

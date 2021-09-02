@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,13 +27,7 @@ class AppServiceProvider extends ServiceProvider
         /**
          * 클라이언트 에이전트 정보를 가져옵니다.
          */
-        $agent = new Agent();
-        $user_agent = [
-            'device' => $agent->device(),
-            'platform' => ($_platform = $agent->platform()),
-            'platform_version' => str_replace('_', '.', $agent->version($_platform)),
-            'browser' => $agent->browser(),
-        ];
+        $user_agent = config('app.agent');
 
         $page = $this->_getPageInformation($request);
 

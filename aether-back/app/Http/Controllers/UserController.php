@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Password;
-use App\Models\Group;
-
 
 class UserController extends Controller
 {
@@ -38,34 +37,39 @@ class UserController extends Controller
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
         $user_uuid = Str::uuid();
-        $password = trim($request->post('password'));
-        $firstname = trim($request->post('firstname'));
-        $lastname = trim($request->post('lastname'));
-        $middlename = trim($request->post('middlename'));
-        $email = trim($request->post('email'));
-        $group_uuid = trim($request->post('group'));
-        $group = Group::where('uuid', $group_uuid)->first();
-        $group_id = $group->id;
+        $email = $request->post('email');
+        $password = $request->post('password');
+        $firstname = $request->post('firstname');
+        $lastname = $request->post('lastname');
+        $middlename = '';
+        $group_id = 1;
+
+        if (User::where('email', $email)->first()) {
+            return response()->json(null, 400);
+        }
 
         $userModel = new User;
         $userModel->uuid = $user_uuid;
-        $userModel->unique_code = md5($this->_encrypt(time() . $request->post('email') . $_SERVER['REMOTE_ADDR']));
+        $userModel->unique_code = md5($this->_encrypt(time() . $email . $request->ip()));
         $userModel->firstname = $firstname;
         $userModel->lastname = $lastname;
         $userModel->middlename = $middlename;
         $userModel->email = $email;
         $userModel->group_id = $group_id;
-        $userModel->save();
 
         $passwordModel = new Password;
-        $passwordModel->user_id = $userModel->id;
         $passwordModel->password = Hash::make($password);
-        $passwordModel->save();
 
-        if (User::where('uuid', $user_uuid)->count() && Password::where('user_id', $userModel->id)->count()) {
-            return response()->json(true);
+        DB::transaction(function () use ($userModel, $passwordModel) {
+            $userModel->save();
+            $passwordModel->user_id = $userModel->id;
+            $passwordModel->save();
+        });
+
+        if (User::where('uuid', $user_uuid)->count()) {
+            return response()->json(null, 201);
         } else {
-            return response()->json(false);
+            return response()->json(null, 400);
         }
     }
 

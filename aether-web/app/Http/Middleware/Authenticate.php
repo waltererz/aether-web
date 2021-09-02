@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
-use Jenssegers\Agent\Agent;
 
 class Authenticate
 {
@@ -23,7 +22,7 @@ class Authenticate
         /**
          * 클라이언트 쿠키 값을 저장하는 변수
          * 
-         * @var array
+         * @var array $cookies
          */
         $cookies = $request->cookie();
 
@@ -43,13 +42,7 @@ class Authenticate
         /**
          * 클라이언트 에이전트 정보를 가져옵니다.
          */
-        $agent = new Agent();
-        $user_agent = [
-            'device' => $agent->device(),
-            'platform' => ($_platform = $agent->platform()),
-            'platform_version' => str_replace('_', '.', $agent->version($_platform)),
-            'browser' => $agent->browser(),
-        ];
+        $user_agent = config('app.agent');
 
         /**
          * 인증 관련 쿠키가 모두 생성되어 있는 경우,
@@ -91,7 +84,7 @@ class Authenticate
              * 뷰에서 사용할 수 있는 인증 변수를 생성합니다. (auth)
              */
             if ($role != 'guest') {
-                $expires = (int)$response->header('Aether-Auth-Expires-Time');
+                $expires = (int)$response->header('Aether-Auth-Expires');
 
                 Cookie::queue('personal_access_token', $response->header('Aether-Access-Token'), $expires, null, null, false, false);
                 Cookie::queue('personal_unique_code', $response->header('Aether-User-Unique-Code'), $expires, null, null, false, false);
@@ -105,6 +98,8 @@ class Authenticate
                  */
                 return redirect('/');
             }
+        } else {
+            return response()->json(null, 400);
         }
     }
 }

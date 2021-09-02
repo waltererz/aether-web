@@ -114,4 +114,9 @@ return [
 
     'password_timeout' => 10800,
 
+    /**
+     * 로그인 유지 시 쿠키 만료일 (분 단위)
+     */
+    'cookie_expires' => 43200,
+
 ];

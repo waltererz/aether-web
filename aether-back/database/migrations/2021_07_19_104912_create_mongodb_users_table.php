@@ -19,7 +19,7 @@ class CreateMongodbUsersTable extends Migration
         Schema::connection($this->connection)->create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->json('history');
+            $table->json('authorization_history');
             $table->timestamps();
             $table->softDeletes();
         });

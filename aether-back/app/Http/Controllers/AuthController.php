@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Password;
+use App\Models\MongoDBUser;
 
 /**
  * 인증 컨트롤러
@@ -23,32 +24,85 @@ class AuthController extends Controller
      * 패스워드 일치여부 확인 및 토큰을 생성하고 필요한 내용을 JSON 형태로 반환합니다.
      * 클라이언트에서는 쿠키를 생성함으로써 사용자 인증 절차를 마무리합니다.
      * 
-     * <해당 함수에서 클라이언트에 요청하는 값>
-     * 1. email: 사용자 이메일주소
-     * 2. password: 사용자 패스워드
-     * 3. user_agent: 사용자 에이전트 정보
-     * 4. ip_address: 클라이언트 IP 주소
+     * <Parameters>
+     *  - body
+     *      - string email 사용자 이메일 주소
+     *      - string password 사용자 패스워드
+     *      - string ip_address 클라이언트 IP 주소
+     *      - object user_agent 에이전트 정보
+     *          - string device 에이전트 디바이스 이름
+     *          - string platform 에이전트 운영체제 이름
+     *          - string platform_version 에이전트 운영체제 버전
+     *          - string browser 에이전트 웹브라우저 이름
+     *      - boolean remember_me 로그인 유지 유무 (최대 30일)
      * 
-     * <클라이언트에서 사용할 수 있는 값>
-     * 1. auth: 인증 성공여부 (boolean)
-     * 2. cookie_expire: 쿠키 지속시간 (integer)
-     * 3. access_token: 인증토큰 (string)
-     * 4. unique_code: 암호화된 상태의 사용자 식별코드 (string)
+     * <Responses>
+     *  - Headers
+     *      - Aether-Access-Token 인증 토큰
+     *      - Aether-User-Unique-Code 사용자 식별 코드
      * 
-     * @param Illuminate\Http\Request $request 라라벨 요청객체 (자동 의존성 주입)
-     * @return Illuminate\Http\JsonResponse
+     * @param \Illuminate\Http\Request $request 라라벨 요청객체 (자동 의존성 주입)
+     * @return \Illuminate\Http\JsonResponse
      */
     public function signin(Request $request): \Illuminate\Http\JsonResponse
     {
+        /**
+         * POST 값으로 넘어온 사용자 이메일 주소
+         * 
+         * @var string $email
+         */
         $email = $request->post('email');
-        $password = $request->post('password');
-        $user_agent = $request->post('user_agent');
-        $ip_address = $request->post('ip_address');
-        $remember_me = $request->post('remember_me') ? true : false;
 
-        if (!$email || !$password || !$user_agent || !$ip_address) {
+        /**
+         * 이메일 주소를 검증해 정상적인 이메일 주소인지 확인 후,
+         * 정상적인 이메일 주소가 아니라면 오류를 반환합니다.
+         */
+        if (!$email || preg_match('/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/', $email) === false) {
             return response()->json(null, 400);
         }
+
+        /**
+         * POST 값으로 넘어온 에이전트 정보
+         * 
+         * @var object $user_agent
+         */
+        $user_agent = $request->post('user_agent');
+
+        /**
+         * 에이전트 정보가 충분하게 전달되었는지 확인 후,
+         * 정상적인 정보가 아니라면 오류를 반환합니다.
+         */
+        if (!$user_agent || !isset($user_agent['device']) || !isset($user_agent['platform']) || !isset($user_agent['platform_version']) || !isset($user_agent['browser'])) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * POST 값으로 넘어온 사용자 패스워드
+         * 
+         * @var string $password
+         */
+        $password = $request->post('password');
+
+        /**
+         * POST 값으로 넘어온 클라이언트 IP 주소
+         * 
+         * @var string $ip_address
+         */
+        $ip_address = $request->post('ip_address');
+
+        /**
+         * 인증에 필요한 값이 설정되지 않은 경우 오류 반환
+         */
+        if (!$password || !$ip_address) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * POST 값으로 넘어온 로그인 유지 유무 변수
+         * 
+         * @var boolean $remember_me
+         */
+        $remember_me = $request->post('remember_me') ? true : false;
 
         /**
          * 사용자 데이터 저장변수
@@ -56,12 +110,12 @@ class AuthController extends Controller
          * 입력된 이메일주소를 이용해 현재 활성화된 사용자인지 확인합니다.
          * 라라벨에서는 기본적으로 deleted_at 값이 지정되지 않은 레코드만 검색합니다. (소프트삭제 기능)
          * 
-         * @var App\Models\User
+         * @var \App\Models\User $user
          */
         $user = User::where('email', $email)->first();
 
         /**
-         * 데이터베이스에 활성화된 사용자가 없는 경우에는 false 값을 반환합니다.
+         * 데이터베이스에 활성화된 사용자가 없는 경우에는 인증실패를 반환합니다.
          */
         if (!$user) {
             return response()->json(null, 401);
@@ -72,14 +126,14 @@ class AuthController extends Controller
          * 
          * 활성화된 사용자가 있다면 패스워드 일치여부를 확인하기 위해 패스워드 테이블에서 해당 값을 가져와 변수에 저장합니다.
          * 
-         * @var App\Models\Password
+         * @var \App\Models\Password
          */
         $stored_password = Password::where('user_id', $user->id)->first();
 
         /**
          * 라라벨에서 패스워드는 Hash 파사드로 해싱되어 저장되며,
          * check 메소드를 이용해 해싱된 값과 일반 문자열의 일치여부를 확인할 수 있습니다.
-         * 패스워드가 일치하지 않는 경우에는 false 값을 반환합니다.
+         * 패스워드가 일치하지 않는 경우에는 인증실패를 반환합니다.
          */
         if (!Hash::check($password, $stored_password->password)) {
             return response()->json(null, 401);
@@ -141,23 +195,15 @@ class AuthController extends Controller
          * 쿠키에 인증정보를 저장할 때 사용자가 로그인 상태유지를 희망하는 경우에는 최대 30일까지 쿠키를 유지합니다.
          * 그렇지 않은 경우에는 웹브라우저 실행 중에만 쿠키를 유지합니다. (세션)
          * 
-         * 43,200분 = 30(일) * 24(시간) * 60(분)
-         * 
-         * @var integer
+         * @var integer $expires
          */
-        $expires = $remember_me === true ? 43200 : 0;
+        $expires = $remember_me === true ? config('auth.cookie_expires') : 0;
 
         /**
-         * 클라이언트에서는 아래의 데이터를 활용해 인증상태를 유지해야 합니다.
+         * 로그인 성공 시 헤더를 통해 인증 정보를 반환합니다. (Http Status 200)
          * 
-         * 사용자 인증에 성공했는지 여부를 확인 후, (auth === true)
-         * 인증토큰(access_token)과 사용자 식별코드(unique_code)를 쿠키에 저장합니다.
-         * 이때 쿠키 유지시간은 지정된 값으로 설정합니다. (cookie_expire)
-         * 
-         * 1. auth: 인증 성공여부 (boolean)
-         * 2. cookie_expire: 쿠키 지속시간 (integer)
-         * 3. access_token: 인증토큰 (string)
-         * 4. unique_code: 암호화된 상태의 사용자 식별코드 (string)
+         * Aether-Access-Token: 인증 토큰
+         * Aether-User-Unique-Code: 사용자 식별 코드
          */
         return response()->json(null, 200)->header('Aether-Access-Token', $token)
             ->header('Aether-User-Unique-Code', $this->_encrypt($user->unique_code));
@@ -169,12 +215,14 @@ class AuthController extends Controller
      * 현재 로그인 상태인 경우 로그아웃 기능을 수행합니다.
      * 만들어진 로그인 상태유지 토큰을 데이터베이스에서 삭제하고, 로그아웃 성공 유무를 반환합니다.
      * 
-     * <해당 함수에서 클라이언트에 요청하는 값>
-     * 1. access_token: 인증토큰
-     * 2. unique_code: 사용자 식별코드
+     * <Parameters>
+     *  - header
+     *      - Authorization Bearer 인증 토큰
+     *      - Cookie
+     *          - personal_unique_code 사용자 식별 코드
      * 
-     * @param Illuminate\Http\Request $request
-     * @return Illuminate\Http\JsonResponse
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function signout(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -250,7 +298,6 @@ class AuthController extends Controller
             foreach ($remember_tokens as $token) {
                 if ($token[0] == $access_token) {
                     $signout = true;
-                    break;
                 } else {
                     if ($token[1] === true) {
                         if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
@@ -281,6 +328,22 @@ class AuthController extends Controller
      * 
      * 클라이언트에서 현재 사용자 로그인이 된 상태인지 확인하기 위해 API 요청에 사용되는 메소드입니다.
      * 
+     * <Parameters>
+     *  - header
+     *      - Authorization Bearer 인증 토큰
+     *      - Cookie
+     *          - personal_unique_code 사용자 식별 코드
+     * - body
+     *  - object user_agent 에이전트 정보
+     *      - string device 에이전트 디바이스 이름
+     *      - string platform 에이전트 운영체제 이름
+     *      - string platform_version 에이전트 운영체제 버전
+     *      - string browser 에이전트 웹브라우저 이름
+     * 
+     * <Responses>
+     *  - header
+     *      - 
+     * 
      * @param Illuminate\Http\Request $request
      * @return Illuminate\Http\JsonResponse
      */
@@ -308,14 +371,22 @@ class AuthController extends Controller
          * - platform_version: 에이전트 운영체제 버전
          * - browser: 에이전트 웹브라우저 이름
          * 
-         * @var object $user_agent
+         * @var array $user_agent
          */
         $user_agent = $request->post('user_agent');
 
         /**
-         * 사용자 인증에 필요한 값이 하나라도 없으면 미인증 사용자임을 반환합니다.
+         * 에이전트 정보가 충분하게 전달되었는지 확인 후,
+         * 정상적인 정보가 아니라면 오류를 반환합니다.
          */
-        if (!$access_token || !$unique_code || !$user_agent) {
+        if (!$user_agent || !isset($user_agent['device']) || !isset($user_agent['platform']) || !isset($user_agent['platform_version']) || !isset($user_agent['browser'])) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * 사용자 인증에 필요한 값이 하나라도 없으면 오류를 반환합니다.
+         */
+        if (!$access_token || !$unique_code) {
             return response()->json(null, 400);
         }
 
@@ -326,21 +397,21 @@ class AuthController extends Controller
         $user = User::where('unique_code', $this->_decrypt($unique_code))->first();
 
         /**
-         * 데이터베이스에 활성화된 사용자가 없는 경우에는 false 값을 반환합니다.
+         * 데이터베이스에 활성화된 사용자가 없는 경우에는 인증실패를 반환합니다.
          */
         if (!$user) {
-            response()->json(null, 401);
+            return response()->json(null, 401);
         }
 
         /**
          * 데이터베이스에 로그인 상태유지 토큰이 존재하는지 확인합니다.
-         * 토큰이 존재하지 않으면 로그인되지 않은 상태이므로, false 값을 반환합니다.
+         * 토큰이 존재하지 않으면 로그인되지 않은 상태이므로 인증실패를 반환합니다.
          */
         if ($user->remember_tokens) {
             /**
              * 사용자 로그인 유무 저장변수
              * 
-             * @var boolean
+             * @var boolean $authorized
              */
             $authorized = false;
 
@@ -348,21 +419,21 @@ class AuthController extends Controller
              * 데이터베이스에 저장되어 있는 로그인 상태유지 토큰을 배열로 저장합니다.
              * (데이터베이스에는 JSON 스트링으로 저장되어 있음)
              * 
-             * @var array
+             * @var array $remember_tokens
              */
             $remember_tokens = json_decode($user->remember_tokens);
 
             /**
              * 로그인 유무 확인 후 데이터베이스에 저장될 새로운 로그인 상태유지 토큰을 저장하는 배열
              * 
-             * @var array
+             * @var array $new_tokens
              */
             $new_tokens = [];
 
             /**
              * 현재 로그인된 토큰이 로그인 상태유지 토큰인지 확인하기 위한 변수
              * 
-             * @var boolean
+             * @var boolean $remember_me
              */
             $remember_me = false;
 
@@ -370,6 +441,7 @@ class AuthController extends Controller
              * 데이터베이스에 저장되어 있는 로그인 상태유지 토큰 갯수만큼 반복합니다.
              */
             foreach ($remember_tokens as $token) {
+
                 /**
                  * 로그인 상태유지 토큰에 저장되어 있는 인증토큰과 현재 클라이언트에서 요청한 인증토큰이 동일하면,
                  */
@@ -380,32 +452,26 @@ class AuthController extends Controller
                      * 로그인 상태유지가 활성회되어 있다면, (remember_me === true)
                      * 1. 토큰에 저장되어 있는 시간에 30일을 더한 값이 현재 시간보다 크고,
                      * 2. 토큰에 저장되어 있는 사용자 에이전트가 동일하다면,
-                     * 동일한 기기에서 접속한 유효한 로그인으로 확정하고,
-                     * 인증유무(authorized) = true
-                     * 로그인 상태유지 유무(remember_me) = true
-                     * 토큰에 현재 시간을 저장해 로그인 상태유지 시간을 지금으로부터 30일을 연장하고
-                     * 새로운 토큰 배열에 저장합니다.
+                     * 동일한 기기에서 접속한 유효한 로그인으로 확정합니다.
                      */
                     if ($token[1] === true) {
-                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
+                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + config('auth.cookie_expires')) >= time()) {
                             if (isset($token[3]) && is_string($token[3]) && $token[3] == json_encode($user_agent)) {
                                 $authorized = true;
                                 $remember_me = true;
                                 $token[4] = time();
                                 $new_tokens[] = $token;
-                                break;
                             }
                         }
                     } else {
                         /**
                          * 로그인 상태유지 유무가 false 인 경우에는,
                          * 사용자 에이전트만 일치하는지 확인 후,
-                         * 에이전트가 일치하는 경우에만 로그인 상태유지 유무를 true로 설정합니다. (새로운 토큰으로 저장)
+                         * 에이전트가 일치하는 경우에는 유효한 로그인으로 확정합니다. (새로운 토큰으로 저장)
                          */
                         if (isset($token[3]) && is_string($token[3]) && $token[3] == json_encode($user_agent)) {
                             $authorized = true;
                             $new_tokens[] = $token;
-                            break;
                         }
                     }
                 } else {
@@ -415,7 +481,7 @@ class AuthController extends Controller
                      * 저장된 시간 값에 30일을 더한 값이 현재 시간보다 큰 경우 해당 토큰을 그대로 데이터베이스에 저장합니다.
                      */
                     if ($token[1] === true) {
-                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
+                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + config('auth.cookie_expires')) >= time()) {
                             $new_tokens[] = $token;
                         }
                     }
@@ -431,17 +497,17 @@ class AuthController extends Controller
             /**
              * 로그인 상태가 확인된 경우 다음의 값을 반환합니다.
              * 
-             * 1. auth: 인증유무 (boolean)
-             * 2. user_uuid: 사용자 UUID (클라이언트에서 사용자를 식별하기 위해 사용되는 문자열)
-             * 3. cookie_expire: 쿠키 상태를 업데이트하기 위한 쿠키 존속시간
-             * 4. access_token: 인증토큰 문자열
-             * 5. unique_code: 식별코드 문자열
+             * <Responses>
+             *  - headers
+             *      - Aether-Access-Token 사용자 인증 토큰
+             *      - Aether-User-Unique-Code 사용자 식별 코드
+             *      - Aether-Auth-Expires 쿠키 만료일자 (분 단위)
              */
             if ($authorized) {
                 return response()->json(['user_uuid' => $user->uuid], 200)
                     ->header('Aether-Access-Token', $access_token)
                     ->header('Aether-User-Unique-Code', $unique_code)
-                    ->header('Aether-Auth-Expires-Time', $remember_me ? 43200 : 0);
+                    ->header('Aether-Auth-Expires', $remember_me ? 43200 : 0);
             } else {
                 return response()->json(null, 401);
             }

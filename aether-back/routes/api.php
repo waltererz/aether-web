@@ -31,9 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('users')->group(function () {
-        Route::post('/', [UserController::class, 'store']);
         Route::post('/index', [UserController::class, 'index']);
-        Route::post('/check/email', [UserController::class, 'checkEmail']);
         Route::delete('/{user}', [UserController::class, 'destroy'])->where('user', '[0-9a-z\-]+');
     });
 
@@ -50,4 +48,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('auth')->group(function () {
     Route::post('/signin', [AuthController::class, 'signin']);
+});
+
+Route::prefix('users')->group(function () {
+    Route::post('/', [UserController::class, 'store']);
+    Route::post('/check/email', [UserController::class, 'checkEmail']);
 });

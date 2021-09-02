@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookie from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
+import { styled } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
@@ -11,9 +12,83 @@ import MuiCheckbox from '@material-ui/core/Checkbox';
 import GoogleIcon from '@material-ui/icons/Google';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import SingleBox from '../components/SingleBox';
+import { FloatingBox, GrowBox } from '../components/Elements';
 import config from '../config';
 import * as common from '../services/common';
 import * as api from '../services/api';
+
+const SocialContainer = styled('div')({
+    width: '300px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+});
+
+const SocialServiceButton = styled('div')({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '60px',
+    height: '60px',
+    marginRight: '20px',
+    border: '3px solid rgba(73, 70, 128, 0.1)',
+    borderRadius: '50%',
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    color: 'rgba(0, 0, 0, 0.5)',
+    transition:
+        'color 500ms cubic-bezier(0, 0, 0.2, 1) 0ms, border-color 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;',
+    WebkitTapHighlightColor: 'transparent',
+    userSelect: 'none',
+
+    '&:last-of-type': {
+        marginRight: '0px',
+    },
+
+    '&:hover': {
+        '&.kakao': {
+            color: config('templete.palette.kakao.main'),
+            borderColor: config('templete.palette.kakao.main'),
+        },
+
+        '&.naver': {
+            color: config('templete.palette.naver.main'),
+            borderColor: config('templete.palette.naver.main'),
+        },
+
+        '&.google': {
+            color: config('templete.palette.google.main'),
+            borderColor: config('templete.palette.google.main'),
+        },
+
+        '&.facebook': {
+            color: config('templete.palette.facebook.main'),
+            borderColor: config('templete.palette.facebook.main'),
+        },
+    },
+});
+
+const InputItem = styled('div')({
+    width: '100%',
+
+    '&:last-of-type': {
+        marginBottom: '0px',
+    },
+
+    '&.button-box button': {
+        boxShadow: '0 7px 10px 0 rgba(73, 70, 128, 0.3)',
+    },
+
+    '& .MuiInputBase-formControl': {
+        borderRadius: '6px',
+    },
+
+    '& .checkbox-container .MuiTypography-root': {
+        fontSize: 'inherit',
+    },
+});
 
 export default function SignIn() {
     let history = useHistory();
@@ -36,14 +111,14 @@ export default function SignIn() {
     })((props) => <MuiCheckbox color="default" {...props} />);
 
     const process = () => {
-        const email = ref.email.current.querySelector('input').value;
-        const password = ref.password.current.querySelector('input').value;
+        const email = ref.email.current.querySelector('input');
+        const password = ref.password.current.querySelector('input');
         const remember_me = ref.remember.current.querySelector('input').checked;
         const user_agent = config('app.agent');
 
         api.post('auth/signin', {
-            email: email,
-            password: password,
+            email: email.value,
+            password: password.value,
             remember_me: remember_me,
             ip_address: config('app.client'),
             user_agent: {
@@ -78,7 +153,9 @@ export default function SignIn() {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                alert('사용자 정보가 잘못되었습니다.');
+                password.value = '';
+                password.focus();
             });
     };
 
@@ -102,186 +179,29 @@ export default function SignIn() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '0 10px',
-                    height: '100vh',
-                }}
-            >
-                <Box
-                    sx={{
-                        width: '100%',
-                        maxWidth: '450px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flexWrap: 'nowrap',
-                        marginTop: '40px',
-                        backgroundColor: '#ffffff',
-                        boxShadow: config('templete.boxShadow.1'),
-                        borderRadius: config('templete.borderRadius.2'),
-                        border: '0px',
-                    }}
-                >
-                    <Box
-                        sx={{
-                            background: config('templete.gradient.primary_0d'),
-                            border: '0px',
-                            borderRadius: config('templete.borderRadius.2'),
-                            margin: '-20px 20px 10px 20px',
-                            boxShadow: '0 1px 4px 0 rgba(73, 70, 128, 0.3)',
-                            padding: '13px',
-                            boxSizing: 'border-box',
-                        }}
-                    >
-                        <Box
-                            component="h4"
-                            sx={{
-                                margin: '0px',
-                                padding: '0px 10px 5px 10px',
-                                boxSizing: 'border-box',
-                                color: 'rgba(255, 255, 255, 0.8)',
-                                fontSize: '1.2em',
-                            }}
-                        >
-                            SIGN IN
-                        </Box>
-                        <Box
-                            sx={{
-                                margin: '0px',
-                                padding: '0px 10px',
-                                boxSizing: 'border-box',
-                                color: 'rgba(255, 255, 255, 0.5)',
-                                fontSize: '0.8em',
-                            }}
-                        >
+            <SingleBox>
+                <FloatingBox.Container sx={{ width: '100%', maxWidth: '450px' }}>
+                    <FloatingBox.Header.Container>
+                        <FloatingBox.Header.Primary>SIGN IN</FloatingBox.Header.Primary>
+                        <FloatingBox.Header.Secondary>
                             회원으로 로그인하면 모든 기능을 이용할 수 있습니다.
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            padding: '20px',
-                            boxSizing: 'border-box',
-                            fontSize: '0.9em',
-
-                            '& .input-item': {
-                                width: '100%',
-
-                                '&:last-of-type': {
-                                    marginBottom: '0px',
-                                },
-
-                                '&.button-box button': {
-                                    boxShadow: '0 7px 10px 0 rgba(73, 70, 128, 0.3)',
-                                },
-
-                                '& .MuiInputBase-formControl': {
-                                    borderRadius: '6px',
-                                },
-
-                                '& .checkbox-container .MuiTypography-root': {
-                                    fontSize: 'inherit',
-                                },
-                            },
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: '300px',
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-
-                                '& .social-button': {
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    width: '60px',
-                                    height: '60px',
-                                    marginRight: '20px',
-                                    border: '3px solid rgba(73, 70, 128, 0.1)',
-                                    borderRadius: '50%',
-                                    boxSizing: 'border-box',
-                                    cursor: 'pointer',
-                                    color: 'rgba(0, 0, 0, 0.5)',
-                                    transition:
-                                        'color 500ms cubic-bezier(0, 0, 0.2, 1) 0ms, border-color 500ms cubic-bezier(0, 0, 0.2, 1) 0ms;',
-                                    WebkitTapHighlightColor: 'transparent',
-                                    userSelect: 'none',
-
-                                    '&:last-of-type': {
-                                        marginRight: '0px',
-                                    },
-
-                                    '&:hover': {
-                                        '&.kakao': {
-                                            color: config('templete.palette.kakao.main'),
-                                            borderColor: config('templete.palette.kakao.main'),
-                                        },
-
-                                        '&.naver': {
-                                            color: config('templete.palette.naver.main'),
-                                            borderColor: config('templete.palette.naver.main'),
-                                        },
-
-                                        '&.google': {
-                                            color: config('templete.palette.google.main'),
-                                            borderColor: config('templete.palette.google.main'),
-                                        },
-
-                                        '&.facebook': {
-                                            color: config('templete.palette.facebook.main'),
-                                            borderColor: config('templete.palette.facebook.main'),
-                                        },
-                                    },
-                                },
-                            }}
-                        >
-                            <Box className="social-button kakao">K</Box>
-                            <Box className="social-button naver">N</Box>
-                            <Box className="social-button google">
+                        </FloatingBox.Header.Secondary>
+                    </FloatingBox.Header.Container>
+                    <FloatingBox.Body>
+                        <SocialContainer>
+                            <SocialServiceButton className="kakao">K</SocialServiceButton>
+                            <SocialServiceButton className="naver">N</SocialServiceButton>
+                            <SocialServiceButton className="google">
                                 <GoogleIcon />
-                            </Box>
-                            <Box className="social-button facebook">
+                            </SocialServiceButton>
+                            <SocialServiceButton className="facebook">
                                 <FacebookIcon />
-                            </Box>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                position: 'relative',
-                                width: '100%',
-                                margin: '20px 10px',
-                                boxSizing: 'border-box',
-
-                                '&:before, &:after': {
-                                    content: '""',
-                                    width: '100%',
-                                    borderTop: '1px solid #efefef',
-                                },
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    width: '100px',
-                                    textAlign: 'center',
-                                    fontWeight: 'bold',
-                                    color: 'rgba(73, 70, 128, 0.3)',
-                                }}
-                            >
-                                OR
-                            </Box>
-                        </Box>
-                        <Box className="input-item" sx={{ marginBottom: '25px' }}>
+                            </SocialServiceButton>
+                        </SocialContainer>
+                        <FloatingBox.Divider>
+                            <FloatingBox.DividerText>OR</FloatingBox.DividerText>
+                        </FloatingBox.Divider>
+                        <InputItem sx={{ marginBottom: '20px' }}>
                             <TextField
                                 fullWidth
                                 ref={ref.email}
@@ -289,8 +209,8 @@ export default function SignIn() {
                                 variant="outlined"
                                 color="primary"
                             />
-                        </Box>
-                        <Box className="input-item" sx={{ marginBottom: '10px' }}>
+                        </InputItem>
+                        <InputItem sx={{ marginBottom: '10px' }}>
                             <TextField
                                 fullWidth
                                 ref={ref.password}
@@ -299,9 +219,8 @@ export default function SignIn() {
                                 variant="outlined"
                                 color="primary"
                             />
-                        </Box>
-                        <Box
-                            className="input-item"
+                        </InputItem>
+                        <InputItem
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
@@ -309,21 +228,17 @@ export default function SignIn() {
                                 marginBottom: '10px',
                             }}
                         >
-                            <Box
-                                sx={{
-                                    flexGrow: 1,
-                                }}
-                            >
+                            <GrowBox>
                                 <FormControlLabel
                                     className="checkbox-container"
                                     control={<Checkbox name="remember" />}
                                     label="로그인 상태 유지하기"
                                     ref={ref.remember}
                                 />
-                            </Box>
+                            </GrowBox>
                             <a href="#">패스워드 초기화</a>
-                        </Box>
-                        <Box className="input-item button-box" sx={{ marginBottom: '10px' }}>
+                        </InputItem>
+                        <InputItem className="button-box" sx={{ marginBottom: '10px' }}>
                             <Button
                                 fullWidth
                                 variant="contained"
@@ -334,24 +249,8 @@ export default function SignIn() {
                             >
                                 로그인
                             </Button>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                position: 'relative',
-                                width: '100%',
-                                margin: '20px 10px',
-                                boxSizing: 'border-box',
-
-                                '&:before, &:after': {
-                                    content: '""',
-                                    width: '100%',
-                                    borderTop: '1px solid #efefef',
-                                },
-                            }}
-                        />
+                        </InputItem>
+                        <FloatingBox.Divider />
                         <Box sx={{ textAlign: 'center' }}>
                             아직 회원이 아니신가요?
                             <Box
@@ -369,10 +268,9 @@ export default function SignIn() {
                                 회원가입
                             </Box>
                         </Box>
-                    </Box>
-                </Box>
+                    </FloatingBox.Body>
+                </FloatingBox.Container>
                 <Box
-                    className="back-button"
                     onClick={() => {
                         history.goBack();
                     }}
@@ -390,7 +288,7 @@ export default function SignIn() {
                     <ArrowBackIcon sx={{ marginRight: '10px' }} />
                     돌아가기
                 </Box>
-            </Box>
+            </SingleBox>
         </ThemeProvider>
     );
 }

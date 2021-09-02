@@ -1,6 +1,7 @@
 import React from 'react';
 import Cookie from 'universal-cookie';
 import { withStyles } from '@material-ui/styles';
+import { styled } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,6 +16,174 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '../../../components/Paper';
 import * as api from '../../../services/api';
 import config from '../../../config';
+
+const ItemContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    marginTop: '10px',
+    boxSizing: 'border-box',
+    border: config('templete.border.1'),
+    borderRadius: config('templete.borderRadius.1'),
+    backgroundColor: '#ffffff',
+
+    [theme.breakpoints.up('xs')]: {
+        flexDirection: 'column',
+        padding: '10px',
+        fontSize: '0.8rem',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        flexDirection: 'row',
+        padding: '20px',
+        fontSize: '0.9rem',
+    },
+}));
+
+const AdvisorImage = styled('div')(({ theme }) => ({
+    flexGrow: 0,
+
+    '& img': {
+        borderRadius: '50%',
+
+        [theme.breakpoints.up('xs')]: {
+            width: '60px',
+            height: '60px',
+        },
+
+        [theme.breakpoints.up('md')]: {
+            width: '68px',
+            height: '68px',
+        },
+    },
+}));
+
+const AdvisorInformation = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexGrow: 1,
+
+    [theme.breakpoints.up('xs')]: {
+        paddingLeft: '10px',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        paddingLeft: '15px',
+    },
+}));
+
+const AdvisorName = styled('div')({
+    fontSize: '1.3em',
+    fontWeight: 'bold',
+});
+
+const AdvisorJob = styled('div')(({ theme }) => ({
+    fontSize: '0.8em',
+    color: '#888888',
+
+    [theme.breakpoints.up('xs')]: {
+        paddingBottom: '3px',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        paddingBottom: '5px',
+    },
+}));
+
+const AdvisorTheme = styled('div')({
+    fontSize: '0.75em',
+});
+
+const AdvisorActivity = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 0,
+});
+
+const AdvisorRating = styled('div')(({ theme }) => ({
+    '& > span': {
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '1.1em',
+        },
+
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.3em',
+        },
+    },
+}));
+
+const AdvisorArticleCount = styled('div')(({ theme }) => ({
+    textAlign: 'right',
+    color: '#aaaaaa',
+
+    [theme.breakpoints.up('xs')]: {
+        fontSize: '0.8em',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        fontSize: '0.9em',
+    },
+}));
+
+const AdvisorDescription = styled('div')({
+    width: '100%',
+    marginTop: '10px',
+    fontSize: '0.9em',
+});
+
+const FlexRowBox = styled('div')({
+    display: 'flex',
+    flexDirection: 'row',
+});
+
+const GrowBox = styled('div')({
+    flexGrow: 1,
+});
+
+const NotGrowBox = styled('div')({
+    flexGrow: 0,
+});
+
+const SubscriptionContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    alignContent: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    borderStyle: 'solid',
+    borderColor: '#eeeeee',
+    textAlign: 'center',
+
+    [theme.breakpoints.up('xs')]: {
+        width: '100%',
+        margin: '20px 0px 0px 0px',
+        padding: '20px 0px 0px 0px',
+        borderWidth: '1px 0px 0px 0px',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        width: '170px',
+        height: '100%',
+        margin: '0px 0px 0px 20px',
+        padding: '0px 0px 0px 20px',
+        borderWidth: '0px 0px 0px 1px',
+    },
+}));
+
+const SubscriptionPrice = styled('div')(({ theme }) => ({
+    fontFamily: config('templete.fontFamily.1'),
+    color: config('templete.palette.secondary.main'),
+    fontWeight: 'bold',
+
+    [theme.breakpoints.up('xs')]: {
+        fontSize: '1.2em',
+        marginBottom: '15px',
+    },
+
+    [theme.breakpoints.up('md')]: {
+        marginBottom: '0px',
+    },
+}));
 
 export default function Search() {
     const [complete, setComplete] = React.useState(false);
@@ -147,63 +316,10 @@ export default function Search() {
 
     const Item = ({ skeleton, advisor }) => {
         return (
-            <Box
-                sx={{
-                    display: 'flex',
-                    marginTop: '10px',
-                    boxSizing: 'border-box',
-                    border: config('templete.border.1'),
-                    borderRadius: config('templete.borderRadius.1'),
-                    backgroundColor: '#ffffff',
-
-                    flexDirection: {
-                        xs: 'column',
-                        md: 'row',
-                    },
-
-                    padding: {
-                        xs: '10px',
-                        md: '20px',
-                    },
-
-                    fontSize: {
-                        xs: '0.8rem',
-                        md: '0.9rem',
-                    },
-                }}
-            >
-                <Box
-                    className="col fg-1"
-                    sx={{
-                        flexGrow: 1,
-                    }}
-                >
-                    <Box
-                        className="row"
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                        }}
-                    >
-                        <Box
-                            className="advisor-picture"
-                            sx={{
-                                flexGrow: 0,
-                                '& img': {
-                                    borderRadius: '50%',
-
-                                    width: {
-                                        xs: '60px',
-                                        md: '68px',
-                                    },
-
-                                    height: {
-                                        xs: '60px',
-                                        md: '68px',
-                                    },
-                                },
-                            }}
-                        >
+            <ItemContainer>
+                <GrowBox>
+                    <FlexRowBox>
+                        <AdvisorImage>
                             {skeleton ? (
                                 <Skeleton variant="circular" width={68} height={68} />
                             ) : (
@@ -213,109 +329,42 @@ export default function Search() {
                                     loading="lazy"
                                 />
                             )}
-                        </Box>
-                        <Box
-                            className="advisor-introduction"
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                flexGrow: 1,
-
-                                paddingLeft: {
-                                    xs: '10px',
-                                    md: '15px',
-                                },
-                            }}
-                        >
-                            <Box
-                                className="personal-information"
-                                sx={{
-                                    flexGrow: 1,
-                                }}
-                            >
-                                <Box
-                                    className="advisor-name"
-                                    sx={{
-                                        fontSize: '1.3em',
-                                        fontWeight: 'bold',
-                                    }}
-                                >
+                        </AdvisorImage>
+                        <AdvisorInformation>
+                            <GrowBox>
+                                <AdvisorName>
                                     {skeleton ? (
                                         <Skeleton height={30} width="20%" />
                                     ) : (
                                         `${advisor.user.lastname} ${advisor.user.firstname}`
                                     )}
-                                </Box>
-                                <Box
-                                    className="advisor-job"
-                                    sx={{
-                                        fontSize: '0.8em',
-                                        color: '#888888',
-
-                                        paddingBottom: {
-                                            xs: '3px',
-                                            md: '5px',
-                                        },
-                                    }}
-                                >
+                                </AdvisorName>
+                                <AdvisorJob sx={{}}>
                                     {skeleton ? (
                                         <Skeleton height={20} width="50%" />
                                     ) : (
                                         '경제적자유를 꿈꾸는 개미투자자'
                                     )}
-                                </Box>
-                                <Box
-                                    className="advisor-theme"
-                                    sx={{
-                                        fontSize: '0.75em',
-                                    }}
-                                >
+                                </AdvisorJob>
+                                <AdvisorTheme>
                                     {skeleton ? (
                                         <Skeleton height={15} width="50%" />
                                     ) : (
-                                        <React.Fragment>
+                                        <>
                                             <b>투자성향:</b> {advisor.theme.name}
-                                        </React.Fragment>
+                                        </>
                                     )}
-                                </Box>
-                            </Box>
-                            <Box
-                                className="rating-information"
-                                sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    flexGrow: 0,
-                                }}
-                            >
-                                <Box
-                                    className="advisor-rating"
-                                    sx={{
-                                        '& > span': {
-                                            fontSize: {
-                                                xs: '1.1em',
-                                                md: '1.3em',
-                                            },
-                                        },
-                                    }}
-                                >
+                                </AdvisorTheme>
+                            </GrowBox>
+                            <AdvisorActivity>
+                                <AdvisorRating>
                                     {skeleton ? (
                                         <Skeleton height={20} width={94} />
                                     ) : (
                                         <Rating value={5.0} readOnly />
                                     )}
-                                </Box>
-                                <Box
-                                    className="article-count"
-                                    sx={{
-                                        textAlign: 'right',
-                                        color: '#aaaaaa',
-                                        fontSize: {
-                                            xs: '0.8em',
-                                            md: '0.9em',
-                                        },
-                                    }}
-                                >
+                                </AdvisorRating>
+                                <AdvisorArticleCount>
                                     {skeleton ? (
                                         <Skeleton height={20} width={94} />
                                     ) : (
@@ -323,75 +372,26 @@ export default function Search() {
                                             {advisor.articles} Article(s)
                                         </React.Fragment>
                                     )}
-                                </Box>
-                            </Box>
-                        </Box>
-                    </Box>
-                    <Box className="row">
-                        <Box
-                            className="advisor-description"
-                            sx={{
-                                width: '100%',
-                                marginTop: '10px',
-                                fontSize: '0.9em',
-                            }}
-                        >
+                                </AdvisorArticleCount>
+                            </AdvisorActivity>
+                        </AdvisorInformation>
+                    </FlexRowBox>
+                    <FlexRowBox>
+                        <AdvisorDescription>
                             {skeleton ? (
                                 <Skeleton height={20} width="100%" />
                             ) : (
                                 '투자어드바이저 설명글'
                             )}
-                        </Box>
-                    </Box>
-                </Box>
-                <Box
-                    className="col fg-0"
-                    sx={{
-                        flexGrow: 0,
-                    }}
-                >
-                    <Box
-                        className="advisor-subscription"
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            flexWrap: 'wrap',
-                            alignContent: 'center',
-                            justifyContent: 'center',
-                            boxSizing: 'border-box',
-                            borderStyle: 'solid',
-                            borderColor: '#eeeeee',
-                            textAlign: 'center',
-
-                            width: {
-                                xs: '100%',
-                                md: '170px',
-                            },
-
-                            height: {
-                                md: '100%',
-                            },
-
-                            margin: {
-                                xs: '20px 0px 0px 0px',
-                                md: '0px 0px 0px 20px',
-                            },
-
-                            padding: {
-                                xs: '20px 0px 0px 0px',
-                                md: '0px 0px 0px 20px',
-                            },
-
-                            borderWidth: {
-                                xs: '1px 0px 0px 0px',
-                                md: '0px 0px 0px 1px',
-                            },
-                        }}
-                    >
+                        </AdvisorDescription>
+                    </FlexRowBox>
+                </GrowBox>
+                <NotGrowBox>
+                    <SubscriptionContainer>
                         {skeleton ? (
                             <Skeleton height={100} width={150} />
                         ) : (
-                            <React.Fragment>
+                            <>
                                 <Button
                                     disableElevation
                                     variant="contained"
@@ -410,30 +410,12 @@ export default function Search() {
                                 >
                                     구독하기
                                 </Button>
-                                <Box
-                                    className="price"
-                                    sx={{
-                                        fontFamily: config('templete.fontFamily.1'),
-                                        color: config('templete.palette.secondary.main'),
-                                        fontWeight: 'bold',
-
-                                        fontSize: {
-                                            xs: '1.2em',
-                                        },
-
-                                        marginBottom: {
-                                            xs: '15px',
-                                            md: '0px',
-                                        },
-                                    }}
-                                >
-                                    무료
-                                </Box>
-                            </React.Fragment>
+                                <SubscriptionPrice>무료</SubscriptionPrice>
+                            </>
                         )}
-                    </Box>
-                </Box>
-            </Box>
+                    </SubscriptionContainer>
+                </NotGrowBox>
+            </ItemContainer>
         );
     };
 
@@ -517,9 +499,7 @@ export default function Search() {
                     </FormGroup>
                 </AccordionDetails>
             </Accordion>
-            <Box className="advisor-list">
-                {!complete ? fetchSkeletonBox() : advisors && fetchAdvisorList()}
-            </Box>
+            <Box>{!complete ? fetchSkeletonBox() : advisors && fetchAdvisorList()}</Box>
         </Paper>
     );
 }
