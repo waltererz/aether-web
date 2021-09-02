@@ -13,5 +13,10 @@ class MongoDBUser extends Model
 
     protected $collection = 'users';
 
+    protected $fillable = [
+        'uuid',
+        'authorization_history',
+    ];
+
     protected $dates = ['deleted_at'];
 }

@@ -174,19 +174,21 @@ class AuthController extends Controller
          * 
          * 데이터베이스에 토큰을 저장할 때에는 JSON 스트링으로 저장 (json_encode 함수 사용)
          */
-        if ($user->remember_tokens) {
-            $new_tokens = json_decode($user->remember_tokens);
-            array_push($new_tokens, $remember_token);
-            $new_tokens = json_encode($new_tokens);
-        } else {
-            $new_tokens = json_encode(array($remember_token));
+        $authorization_history = MongoDBUser::where('uuid', $user->uuid)->get(['authorization_history']);
+
+        if (!is_array($authorization_history)) {
+            $authorization_history = [];
         }
+
+        array_push($authorization_history, $remember_token);
+
+        MongoDBUser::where('uuid', $user->uuid)->push('authorization_history', $authorization_history);
 
         /**
          * 라라벨 엘로퀀트ORM을 활용하여 새로운 토큰 데이터를 데이터베이스에 저장합니다.
          */
-        $user->remember_tokens = $new_tokens;
-        $user->save();
+        //$user->remember_tokens = $new_tokens;
+        //$user->save();
 
         /**
          * 로그인에 성공하는 경우 클라이언트에서는 인증토큰(access_token)과 사용자 식별코드(unique_code)를 쿠키에 저장해야 하며,
@@ -276,7 +278,15 @@ class AuthController extends Controller
          * 로그인 상태유지 토큰이 존재하지 않는다면 로그인되지 않은 겻이므로, 로그아웃 실패 즉, false 값을 반환합니다.
          * 로그인 상태유지 토큰이 존재하는 경우에는 로그아웃 절차를 진행합니다.
          */
-        if ($user->remember_tokens) {
+        $authorization_history = MongoDBUser::where('uuid', $user->uuid)->get(['authorization_history']);
+
+        if (isset($authorization_history[0])) {
+            $authorization_history = $authorization_history[0]->authorization_history;
+        } else {
+            $authorization_history = [];
+        }
+
+        if ($authorization_history) {
             /**
              * 로그아웃 성공 유무를 저장하는 변수
              * 
@@ -292,12 +302,6 @@ class AuthController extends Controller
             $new_tokens = [];
 
             /**
-             * 현재 데이터베이스에 저장되어 있는 로그안 상태유지 토큰을 변수에 배열로 저장합니다.
-             * (데이터베이스에는 JSON 스트링으로 저장되어 있음)
-             */
-            $remember_tokens = json_decode($user->remember_tokens);
-
-            /**
              * 데이터베이스에 저장되어 있는 로그인 상태유지 토큰 갯수만큼 절차를 반복합니다.
              * 클라이언트에서 로그아웃을 요청한 인증토큰과 동일한 인증토큰을 포함하는 로그인 상태유지 토큰이 있는지 확인합니다.
              * 존재하지 않는다면 로그아웃은 실패, false 값을 반환합니다.
@@ -306,24 +310,26 @@ class AuthController extends Controller
              * 로그인 상태유지 값이 true이고, 토큰 생성시간에 30일을 더한 값이 현재의 시간보다 큰 경우에만 토큰을 유지합니다.
              * 이 조건에 부합하지 않는 로그인 상태유지 토큰을 모두 폐기합니다.
              */
-            foreach ($remember_tokens as $token) {
-                if ($token[0] == $access_token) {
+            foreach ($authorization_history as $item) {
+                if ($item[0] == $access_token) {
                     $user->tokens()->where('id', $access_token_id)->delete();
                     $signout = true;
                 } else {
-                    if ($token[1] === true) {
-                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + (30 * 24 * 60 * 60)) >= time()) {
-                            $new_tokens[] = $token;
+                    if ($item[1] === true) {
+                        if (isset($item[4]) && is_numeric($item[4]) && ($item[4] + (30 * 24 * 60 * 60)) >= time()) {
+                            $new_tokens[] = $item;
                         }
                     }
                 }
             }
 
+            MongoDBUser::where('uuid', $user->uuid)->update(['authorization_history' => $new_tokens]);
+
             /**
              * 라라벨 엘로퀀트ORM을 사용해 새로 만들어진 로그인 상태유지 토큰을 데이터베이스에 저장합니다.
              */
-            $user->remember_tokens = json_encode($new_tokens);
-            $user->save();
+            //$user->remember_tokens = json_encode($new_tokens);
+            //$user->save();
 
             if ($signout) {
                 return response()->json(null, 200);
@@ -426,25 +432,25 @@ class AuthController extends Controller
             return response()->json(null, 401);
         }
 
+        $authorization_history = MongoDBUser::where('uuid', $user->uuid)->get(['authorization_history']);
+
+        if (isset($authorization_history[0])) {
+            $authorization_history = $authorization_history[0]->authorization_history;
+        } else {
+            $authorization_history = [];
+        }
+
         /**
          * 데이터베이스에 로그인 상태유지 토큰이 존재하는지 확인합니다.
          * 토큰이 존재하지 않으면 로그인되지 않은 상태이므로 인증실패를 반환합니다.
          */
-        if ($user->remember_tokens) {
+        if ($authorization_history) {
             /**
              * 사용자 로그인 유무 저장변수
              * 
              * @var boolean $authorized
              */
             $authorized = false;
-
-            /**
-             * 데이터베이스에 저장되어 있는 로그인 상태유지 토큰을 배열로 저장합니다.
-             * (데이터베이스에는 JSON 스트링으로 저장되어 있음)
-             * 
-             * @var array $remember_tokens
-             */
-            $remember_tokens = json_decode($user->remember_tokens);
 
             /**
              * 로그인 유무 확인 후 데이터베이스에 저장될 새로운 로그인 상태유지 토큰을 저장하는 배열
@@ -463,12 +469,11 @@ class AuthController extends Controller
             /**
              * 데이터베이스에 저장되어 있는 로그인 상태유지 토큰 갯수만큼 반복합니다.
              */
-            foreach ($remember_tokens as $token) {
-
+            foreach ($authorization_history as $item) {
                 /**
                  * 로그인 상태유지 토큰에 저장되어 있는 인증토큰과 현재 클라이언트에서 요청한 인증토큰이 동일하면,
                  */
-                if ($token[0] == $access_token) {
+                if ($item[0] == $access_token) {
                     /**
                      * 로그인 상태유지 유무를 확인합니다.
                      * 
@@ -477,13 +482,13 @@ class AuthController extends Controller
                      * 2. 토큰에 저장되어 있는 사용자 에이전트가 동일하다면,
                      * 동일한 기기에서 접속한 유효한 로그인으로 확정합니다.
                      */
-                    if ($token[1] === true) {
-                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + config('auth.cookie_expires')) >= time()) {
-                            if (isset($token[3]) && is_string($token[3]) && $token[3] == json_encode($user_agent)) {
+                    if ($item[1] === true) {
+                        if (isset($item[4]) && is_numeric($item[4]) && ($item[4] + config('auth.cookie_expires')) >= time()) {
+                            if (isset($item[3]) && is_string($item[3]) && $item[3] == json_encode($user_agent)) {
                                 $authorized = true;
                                 $remember_me = true;
-                                $token[4] = time();
-                                $new_tokens[] = $token;
+                                $item[4] = time();
+                                $new_tokens[] = $item;
                             }
                         }
                     } else {
@@ -492,9 +497,9 @@ class AuthController extends Controller
                          * 사용자 에이전트만 일치하는지 확인 후,
                          * 에이전트가 일치하는 경우에는 유효한 로그인으로 확정합니다. (새로운 토큰으로 저장)
                          */
-                        if (isset($token[3]) && is_string($token[3]) && $token[3] == json_encode($user_agent)) {
+                        if (isset($item[3]) && is_string($item[3]) && $item[3] == json_encode($user_agent)) {
                             $authorized = true;
-                            $new_tokens[] = $token;
+                            $new_tokens[] = $item;
                         }
                     }
                 } else {
@@ -503,19 +508,21 @@ class AuthController extends Controller
                      * 로그인 상태유지 활성화 상태인 경우에 한하여 (로그인 상태유지 값이 true 일 때)
                      * 저장된 시간 값에 30일을 더한 값이 현재 시간보다 큰 경우 해당 토큰을 그대로 데이터베이스에 저장합니다.
                      */
-                    if ($token[1] === true) {
-                        if (isset($token[4]) && is_numeric($token[4]) && ($token[4] + config('auth.cookie_expires')) >= time()) {
-                            $new_tokens[] = $token;
+                    if ($item[1] === true) {
+                        if (isset($item[4]) && is_numeric($item[4]) && ($item[4] + config('auth.cookie_expires')) >= time()) {
+                            $new_tokens[] = $item;
                         }
                     }
                 }
             }
 
+            MongoDBUser::where('uuid', $user->uuid)->update(['authorization_history' => $new_tokens]);
+
             /**
              * 라라벨 엘로퀀트ORM을 사용해 새롭게 만들어진 로그인 상태유지 토큰 배열을 데이터베이스에 저장합니다.
              */
-            $user->remember_tokens = json_encode($new_tokens);
-            $user->save();
+            //$user->remember_tokens = json_encode($new_tokens);
+            //$user->save();
 
             /**
              * 로그인 상태가 확인된 경우 다음의 값을 반환합니다.

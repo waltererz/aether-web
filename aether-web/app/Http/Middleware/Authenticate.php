@@ -112,7 +112,8 @@ class Authenticate
                 return redirect()->route('home');
             }
         } else {
-            return 'error';
+            echo $response->body();
+            exit();
         }
     }
 }

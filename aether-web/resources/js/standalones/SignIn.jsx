@@ -153,6 +153,7 @@ export default function SignIn() {
                 }
             })
             .catch((error) => {
+                console.log(error.response);
                 alert('사용자 정보가 잘못되었습니다.');
                 password.value = '';
                 password.focus();
