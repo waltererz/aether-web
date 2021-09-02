@@ -2875,7 +2875,7 @@ function SignOut() {
         window.location.href = '/';
       }
     })["catch"](function (error) {
-      console.log(error);
+      console.log(error.response);
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {});

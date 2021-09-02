@@ -234,6 +234,17 @@ class AuthController extends Controller
         $access_token = str_replace('Bearer ', '', $request->header('Authorization'));
 
         /**
+         * 인증 토큰 번호
+         * 
+         * @var integer $access_token_id
+         */
+        $access_token_id = 0;
+
+        if (preg_match('/([0-9]+)\|([a-zA-Z0-9]+)/', $access_token, $access_token_id) !== false) {
+            $access_token_id = $access_token_id[1];
+        }
+
+        /**
          * 사용자 식별 코드
          * 
          * @var string $unique_code
@@ -297,6 +308,7 @@ class AuthController extends Controller
              */
             foreach ($remember_tokens as $token) {
                 if ($token[0] == $access_token) {
+                    $user->tokens()->where('id', $access_token_id)->delete();
                     $signout = true;
                 } else {
                     if ($token[1] === true) {
@@ -355,6 +367,17 @@ class AuthController extends Controller
          * @var string $access_token
          */
         $access_token = str_replace('Bearer ', '', $request->header('Authorization'));
+
+        /**
+         * 인증 토큰 번호
+         * 
+         * @var integer $access_token_id
+         */
+        $access_token_id = 0;
+
+        if (preg_match('/([0-9]+)\|([a-zA-Z0-9]+)/', $access_token, $access_token_id) !== false) {
+            $access_token_id = $access_token_id[1];
+        }
 
         /**
          * 사용자 식별 코드

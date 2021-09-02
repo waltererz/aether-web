@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Route;
 
 class Authenticate
 {
@@ -33,7 +34,12 @@ class Authenticate
          */
         if (!isset($cookies['personal_access_token']) || !isset($cookies['personal_unique_code'])) {
             if ($role != 'guest') {
-                return redirect(route('signin'));
+                if (Route::currentRouteName() === 'home') {
+                    $request->attributes->add(['landing' => true]);
+                    return $next($request);
+                } else {
+                    return redirect()->route('home');
+                }
             } else {
                 return $next($request);
             }
@@ -74,7 +80,12 @@ class Authenticate
                 Cookie::queue(Cookie::forget('personal_access_token'));
                 Cookie::queue(Cookie::forget('personal_unique_code'));
 
-                return redirect(route('signin'));
+                if (Route::currentRouteName() === 'home') {
+                    $request->attributes->add(['landing' => true]);
+                    return $next($request);
+                } else {
+                    return redirect()->route('home');
+                }
             } else {
                 return $next($request);
             }
@@ -85,9 +96,11 @@ class Authenticate
              */
             if ($role != 'guest') {
                 $expires = (int)$response->header('Aether-Auth-Expires');
+                $access_token = $response->header('Aether-Access-Token');
+                $unique_code = $response->header('Aether-User-Unique-Code');
 
-                Cookie::queue('personal_access_token', $response->header('Aether-Access-Token'), $expires, null, null, false, false);
-                Cookie::queue('personal_unique_code', $response->header('Aether-User-Unique-Code'), $expires, null, null, false, false);
+                Cookie::queue('personal_access_token', $access_token, $expires, null, null, false, false);
+                Cookie::queue('personal_unique_code', $unique_code, $expires, null, null, false, false);
 
                 view()->share('auth', json_decode($response->body())->user_uuid);
 
@@ -96,10 +109,10 @@ class Authenticate
                 /**
                  * 지정된 로그인 인증 대상자가 guest인 경우 웹 디렉토리 루트로 이동시킵니다.
                  */
-                return redirect('/');
+                return redirect()->route('home');
             }
         } else {
-            return response()->json(null, 400);
+            return 'error';
         }
     }
 }

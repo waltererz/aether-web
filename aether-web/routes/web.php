@@ -19,8 +19,8 @@ use App\Http\Controllers\InvestmentController;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('')->group(function () {
-        Route::get('/', [HomeController::class, 'index']);
+    Route::prefix('/')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
     });
 
     Route::prefix('assets')->group(function () {
