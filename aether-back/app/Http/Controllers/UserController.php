@@ -73,6 +73,29 @@ class UserController extends Controller
         $lastname = $request->post('lastname');
 
         /**
+         * 필수 입력 항목 중 하나라도 공백 또는 null 값이 있는 경우에는 오류를 반환합니다.
+         */
+        if (!$email || !$password || !$firstname || !$lastname) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * 이메일 주소가 정상적인 형식이 아닌 경우에는 오류를 반환합니다.
+         */
+        $validation_email = preg_match('/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/', $email);
+        if ($validation_email === false || $validation_email === 0) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * 패스워드가 보안에 취약한 형태로 되어있는 경우에는 오류를 반환합니다.
+         */
+        $validation_password = preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&\*\(\)])[A-Za-z\d!@#$%^&\*\(\)]{12,}$/', $password);
+        if ($validation_password === false || $validation_password === 0) {
+            return response()->json(null, 400);
+        }
+
+        /**
          * 사용자 중간이름 (middle name) 저장 변수
          * 기본적으로 공백을 저장하며 본인 희망에 따라 미들네임 추가 가능
          * 
@@ -179,7 +202,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 지정된 사용자를 삭제하는 메소드 (소프트삭제)
      *
      * @param  string  $uuid
      * @return \Illuminate\Http\JsonResponse
@@ -195,10 +218,33 @@ class UserController extends Controller
         return response()->json($result);
     }
 
+    /**
+     * 현재 가입되어 있는 활성된 사용자 중 중복된 이메일 주소를 가진 사용자가 있는지 확인 후 가입 가능여부를 반환하는 메소드
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function checkEmail(Request $request): \Illuminate\Http\JsonResponse
     {
-        $email = trim($request->post('email'));
+        /**
+         * 이메일주소를 저장하는 변수
+         * 
+         * @var string $email
+         */
+        $email = $request->post('email');
+
+        /**
+         * 이메일주소가 공백 또는 null이라면 오류를 반환합니다.
+         */
+        if (!$email) {
+            return response()->json(null, 400);
+        }
+
+        /**
+         * 사용자 테이블에서 활성화된 회원이 있는지 확인합니다.
+         */
         $user = User::where('email', $email)->count();
-        return response()->json($user ? false : true);
+
+        return response()->json($user ? 'duplicated' : 'ok');
     }
 }

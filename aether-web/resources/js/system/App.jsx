@@ -80,7 +80,12 @@ export default function App() {
                     <Route path="/assets" component={Page.Asset} />
                     <Route path="/investment" component={Page.Investment} />
                     <Route path="/advisors" component={Page.Advisor} />
-                    <Route path="/developer" component={Page.Developer} />
+                    <Route
+                        path="*"
+                        render={({ path }) => {
+                            window.location.href = path;
+                        }}
+                    />
                 </Switch>
             </Container>
             <MobileNavigation />
