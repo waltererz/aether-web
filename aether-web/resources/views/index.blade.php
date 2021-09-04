@@ -5,13 +5,13 @@ $description = isset($description) && strlen($description) > 0 ? $description : 
 $type = isset($type) && strlen($type) > 0 ? $type : 'website';
 ?>
 
-@extends('layout.react')
+@extends('layouts.react')
 
 @section('header')
     <title>{{ $title }}</title>
     <meta property="og:title" content="{{ $title }}" />
     <meta property="og:type" content="{{ $type }}" />
-    <meta property="og:url" content="{{ config('app.url') . '/' . request()->path() }}" />
+    <meta property="og:url" content="{{ config('app.url') . request()->path() }}" />
     <meta property="og:description" content="{{ $description }}" />
     <meta property="og:locale" content="ko_KR" />
     <meta name="theme-color" content="#222222" />

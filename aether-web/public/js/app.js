@@ -333,7 +333,9 @@ var _config = {
     primary_0d: 'linear-gradient(0deg, rgba(78,0,190,1) 0%, rgba(89,0,212,1) 30%, rgba(89,0,212,1) 60%, rgba(78,0,190,1) 100%)'
   },
   fontFamily: {
-    1: 'Noto Sans KR'
+    0: 'sans-serif',
+    1: 'Noto Sans KR',
+    2: 'Nanum Gothic'
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_config);
@@ -369,28 +371,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var store = (0,redux__WEBPACK_IMPORTED_MODULE_7__.createStore)(_redux_reducers__WEBPACK_IMPORTED_MODULE_4__.default);
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-    store: store,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          exact: true,
-          path: "/user/signin",
-          component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignIn
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          exact: true,
-          path: "/user/signup",
-          component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignUp
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          exact: true,
-          path: "/user/signout",
-          component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignOut
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-          path: "*",
-          component: _system_App__WEBPACK_IMPORTED_MODULE_3__.default
-        })]
-      })
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+  store: store,
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        exact: true,
+        path: "/user/signin",
+        component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignIn
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        exact: true,
+        path: "/user/signup",
+        component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignUp
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        exact: true,
+        path: "/user/signout",
+        component: _standalones__WEBPACK_IMPORTED_MODULE_5__.SignOut
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        path: "*",
+        component: _system_App__WEBPACK_IMPORTED_MODULE_3__.default
+      })]
     })
   })
 }), document.getElementById('app'));
@@ -5158,19 +5158,6 @@ var _menuLinks = [{
 
 /***/ }),
 
-/***/ "./resources/sass/index.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/index.scss ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./resources/js/config sync recursive ^\\.\\/.*$":
 /*!********************************************!*\
   !*** ./resources/js/config/ sync ^\.\/.*$ ***!
@@ -5214,7 +5201,7 @@ webpackContext.id = "./resources/js/config sync recursive ^\\.\\/.*$";
 /******/ "use strict";
 /******/ 
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["css/app","/js/vendor"], () => (__webpack_exec__("./resources/js/index.jsx"), __webpack_exec__("./resources/sass/index.scss")));
+/******/ __webpack_require__.O(0, ["/js/vendor"], () => (__webpack_exec__("./resources/js/index.jsx")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

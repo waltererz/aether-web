@@ -106,8 +106,10 @@ const _config = {
     },
 
     fontFamily: {
+        0: 'sans-serif',
         1: 'Noto Sans KR',
-    }
+        2: 'Nanum Gothic',
+    },
 }
 
 export default _config;
