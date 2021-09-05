@@ -51,8 +51,8 @@ const _config = {
         },
 
         drawer: {
-            desktop: '320px',
-            mobile: '320px',
+            desktop: '280px',
+            mobile: '280px',
         }
     },
 

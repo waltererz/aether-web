@@ -41,3 +41,10 @@ export const setComplete = (complete) => {
         state: complete,
     }
 }
+
+export const setAuth = (auth) => {
+    return {
+        type: reduxConstants.app.auth,
+        state: auth,
+    }
+}

@@ -4,6 +4,7 @@ const _config = {
     agent: window._aether.agent,                // 클라이언트 에이전트 이름
     auth: window._aether.auth,                  // 현재 로그인된 사용자 UUID
     domain: window._aether.domain,              // 세션 도메인
+    is_mobile: window._aether.is_mobile,              // 모바일기기 접속 유무
 
     url: {
         app: window._aether.baseUrl,
@@ -20,6 +21,12 @@ const _config = {
         developer: 6,
         user: 7,
     },
+
+    user: {
+        email: window._aether.user_email,
+        name: window._aether.user_name,
+        image: window._aether.user_image,
+    }
 }
 
 export default _config;

@@ -9,7 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemButton from '@material-ui/core/ListItemButton';
 import ListItemText from '@material-ui/core/ListItemText';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import PersonIcon from '@material-ui/icons/Person';
+import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import { setMobileDrawerOpen } from '../redux/actions/app';
 import menuLinks from './menuLinks';
 import config from '../config';
@@ -24,8 +24,6 @@ const UserInfoContainer = styled('div')({
 });
 
 const AvatarContainer = styled('div')({
-    marginRight: '20px',
-
     '& .MuiAvatar-root': {
         width: '56px',
         height: '56px',
@@ -34,6 +32,11 @@ const AvatarContainer = styled('div')({
     '& svg': {
         width: '32px',
         height: '32px',
+    },
+
+    '& img': {
+        width: '56px',
+        height: '56px',
     },
 });
 
@@ -179,11 +182,15 @@ export default function MobileDrawer() {
             <UserInfoContainer>
                 <AvatarContainer>
                     <Avatar>
-                        <PersonIcon />
+                        {config('app.user.image') ? (
+                            <img src={config('app.user.image')} />
+                        ) : (
+                            <PersonRoundedIcon />
+                        )}
                     </Avatar>
                 </AvatarContainer>
                 <UserNameContainer>
-                    <Link to="/user/signin">로그인을 해주세요.</Link>
+                    <Link to="/user">{config('app.user.name')}님 환영합니다.</Link>
                 </UserNameContainer>
             </UserInfoContainer>
             <div>

@@ -24,7 +24,6 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                     flexWrap: 'nowrap',
                     justifyContent: 'space-between',
                     padding: '0px',
-                    minHeight: '3000px', // 테스트용
 
                     height: {
                         xs:
@@ -87,7 +86,7 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                             sm: 'space-between',
                         },
 
-                        '& .MuiGrid-item': {
+                        '& .MuiGrid-item.system__layouts': {
                             flexGrow: 0,
                             flexShrink: 0,
                             boxSizing: 'border-box',
@@ -173,8 +172,8 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                         },
                     }}
                 >
-                    <Grid item className="trickery"></Grid>
-                    <Grid item className="primary">
+                    <Grid item className="system__layouts trickery"></Grid>
+                    <Grid item className="system__layouts primary">
                         <Switch>
                             {typeof pages === 'object' &&
                                 pages.map(({ path, component, exact }) => {
@@ -189,7 +188,7 @@ export default function BasicContainer({ pages, secondary, submenus }) {
                                 })}
                         </Switch>
                     </Grid>
-                    <Grid item className="secondary">
+                    <Grid item className="system__layouts secondary">
                         {secondary}
                     </Grid>
                 </Grid>

@@ -22,6 +22,8 @@ var _config = {
   // 현재 로그인된 사용자 UUID
   domain: window._aether.domain,
   // 세션 도메인
+  is_mobile: window._aether.is_mobile,
+  // 모바일기기 접속 유무
   url: {
     app: window._aether.baseUrl,
     backend: 'http://back.erzsphilos.com',
@@ -37,6 +39,11 @@ var _config = {
     advisor: 5,
     developer: 6,
     user: 7
+  },
+  user: {
+    email: window._aether.user_email,
+    name: window._aether.user_name,
+    image: window._aether.user_image
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_config);
@@ -143,8 +150,8 @@ var _config = {
       mobile: '300px'
     },
     drawer: {
-      desktop: '320px',
-      mobile: '320px'
+      desktop: '280px',
+      mobile: '280px'
     }
   },
   height: {
@@ -365,9 +372,9 @@ function LandingPage() {
               }
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__.default, {
-              href: "https://blog.naver.com/erzsmatory",
+              href: "https://blog.naver.com/erzsamatory",
               target: "_blank",
-              children: "\uB7F0\uB358\uC2DC\uD2F0 \uB124\uC774\uBC84\uBE14\uB85C\uADF8"
+              children: "\uCC3D\uC870\uC801 \uB178\uB9C8\uB4DC \uB7F0\uB358\uC2DC\uD2F0 \uBE14\uB85C\uADF8"
             }), "/", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__.default, {
               href: "https://www.walterz.net",
               target: "_blank",

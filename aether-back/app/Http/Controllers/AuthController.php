@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Password;
 use App\Models\MongoDBUser;
@@ -325,12 +326,6 @@ class AuthController extends Controller
 
             MongoDBUser::where('uuid', $user->uuid)->update(['authorization_history' => $new_tokens]);
 
-            /**
-             * 라라벨 엘로퀀트ORM을 사용해 새로 만들어진 로그인 상태유지 토큰을 데이터베이스에 저장합니다.
-             */
-            //$user->remember_tokens = json_encode($new_tokens);
-            //$user->save();
-
             if ($signout) {
                 return response()->json(null, 200);
             } else {
@@ -519,10 +514,34 @@ class AuthController extends Controller
             MongoDBUser::where('uuid', $user->uuid)->update(['authorization_history' => $new_tokens]);
 
             /**
-             * 라라벨 엘로퀀트ORM을 사용해 새롭게 만들어진 로그인 상태유지 토큰 배열을 데이터베이스에 저장합니다.
+             * 사용자 이미지가 존재하는지 확인한 후, 이미지 경로를 가져옵니다.
+             * 존재하지 않으면 공백을 가져옵니다.
              */
-            //$user->remember_tokens = json_encode($new_tokens);
-            //$user->save();
+
+            /**
+             * 클라우드 스토리지 인스턴스 저장 변수
+             * 
+             * @var \Illuminate\Contracts\Filesystem\Filesystem $storage
+             */
+            $storage = Storage::disk('azure');
+
+            /**
+             * 스토리지 내 사용자 이미지 저장 경로
+             * 
+             * @var string $path
+             */
+            $user_image_path = 'user_image/' . $user->uuid;
+
+            /**
+             * 스토리지에 사용자 이미지 파일이 존재하는지 확인합니다.
+             * 파일이 존재하지 않으면 공백을 반환합니다.
+             * 파일이 존재하면 백엔드 서버를 경유하는 이미지 경로를 반환합니다.
+             */
+            if (!$storage->exists($user_image_path)) {
+                $user_image = '';
+            } else {
+                $user_image = url(route('user.image', ['user' => $user->uuid]));
+            }
 
             /**
              * 로그인 상태가 확인된 경우 다음의 값을 반환합니다.
@@ -534,7 +553,13 @@ class AuthController extends Controller
              *      - Aether-Auth-Expires 쿠키 만료일자 (분 단위)
              */
             if ($authorized) {
-                return response()->json(['user_uuid' => $user->uuid], 200)
+                return response()->json([
+                    'user_uuid' => $user->uuid,
+                    'user_email' => $user->email,
+                    'user_firstname' => $user->firstname,
+                    'user_lastname' => $user->lastname,
+                    'user_image' => $user_image,
+                ], 200)
                     ->header('Aether-Access-Token', $access_token)
                     ->header('Aether-User-Unique-Code', $unique_code)
                     ->header('Aether-Auth-Expires', $remember_me ? 43200 : 0);

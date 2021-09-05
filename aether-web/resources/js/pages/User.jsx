@@ -1,7 +1,6 @@
 import React from 'react';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
-import RightSide from './user/RightSide';
 import * as Page from './user/pages';
 import * as common from '../services/common';
 
@@ -13,11 +12,5 @@ export default function User() {
         },
     });
 
-    return (
-        <Container
-            pages={[{ path: '/user', component: Page.Home, exact: true }]}
-            secondary={<RightSide />}
-            submenus={[]}
-        />
-    );
+    return <Container pages={[{ path: '/user', component: Page.Home, exact: true }]} />;
 }

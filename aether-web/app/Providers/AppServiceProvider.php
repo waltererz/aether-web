@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Jenssegers\Agent\Agent;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,16 +25,33 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        /**
-         * 클라이언트 에이전트 정보를 가져옵니다.
-         */
-        $user_agent = config('app.agent');
+        $agent = new Agent();
 
+        /**
+         * 클라이언트 에이전트 정보
+         * 
+         * @var array $user_agent
+         */
+        $user_agent = config('client.user_agent');
+
+        /**
+         * 현재 페이지 정보
+         * 
+         * @var array $page
+         */
         $page = $this->_getPageInformation($request);
+
+        /**
+         * 모바일 접속 유무
+         * 
+         * @var boolean
+         */
+        $is_mobile = ($agent->isMobile() || !$agent->isDesktop());
 
         view()->share('title', $page['name']);
         view()->share('description', $page['description']);
         view()->share('user_agent', $user_agent);
+        view()->share('is_mobile', $is_mobile);
     }
 
     /**

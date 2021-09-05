@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Cookie from 'universal-cookie';
 import * as browser from './browser';
-import { setTab, setHeaderIcons, setURI } from '../redux/actions/app';
+import * as api from './api';
+import { setTab, setHeaderIcons, setURI, setAuth } from '../redux/actions/app';
 import config from '../config';
 import routes from '../routes';
 
@@ -9,6 +11,7 @@ export function init(props = {}) {
     const error = useSelector((state) => state.app.error);
     const currentTab = useSelector((state) => state.app.tab);
     const currentURI = useSelector((state) => state.app.uri);
+    const auth = useSelector((state) => state.app.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -45,7 +48,27 @@ export function init(props = {}) {
     }, [currentURI]);
 
     useEffect(() => {
+        const cookie = new Cookie();
+        const access_token = cookie.get('personal_access_token');
+        const unique_code = cookie.get('personal_unique_code');
+
+        // 현재 페이지 경로를 리덕스에 저장합니다.
         dispatch(setURI(window.location.pathname));
+
+        // 현재 로그인 유무를 확인합니다.
+        if (!access_token || !unique_code) {
+            dispatch(setAuth(false));
+        }
+
+        api.post('auth/check', { user_agent: config('app.agent') }, access_token).then((response) => {
+            if (response.data.user_uuid === config('app.auth')) {
+                if (auth !== true) {
+                    dispatch(setAuth(true));
+                }
+            }
+        }).catch((error) => {
+            console.log(error.response);
+        });
     })
 }
 

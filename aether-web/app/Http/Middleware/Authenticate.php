@@ -48,7 +48,7 @@ class Authenticate
         /**
          * 클라이언트 에이전트 정보를 가져옵니다.
          */
-        $user_agent = config('app.agent');
+        $user_agent = config('client.user_agent');
 
         /**
          * 인증 관련 쿠키가 모두 생성되어 있는 경우,
@@ -102,7 +102,15 @@ class Authenticate
                 Cookie::queue('personal_access_token', $access_token, $expires, null, null, false, false);
                 Cookie::queue('personal_unique_code', $unique_code, $expires, null, null, false, false);
 
-                view()->share('auth', json_decode($response->body())->user_uuid);
+                /**
+                 * 인증이 완료된 경우에는 View에 회원 정보를 넘겨줍니다.
+                 */
+                $user = json_decode($response->body());
+                view()->share('auth', $user->user_uuid);
+                view()->share('user_email', $user->user_email);
+                view()->share('user_firstname', $user->user_firstname);
+                view()->share('user_lastname', $user->user_lastname);
+                view()->share('user_image', $user->user_image);
 
                 return $next($request);
             } else {

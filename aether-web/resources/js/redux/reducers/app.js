@@ -1,6 +1,7 @@
 import reduxConstants from '../constants';
 
 const initialStates = {
+    auth: false,
     complete: false,
     title: null,
     tab: null,
@@ -28,6 +29,9 @@ function app(state = initialStates, action) {
             break;
         case reduxConstants.app.complete:
             return { ...state, complete: action.state }
+            break;
+        case reduxConstants.app.auth:
+            return { ...state, auth: action.state }
             break;
     }
 

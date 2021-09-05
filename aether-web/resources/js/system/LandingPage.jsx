@@ -145,8 +145,8 @@ export default function LandingPage() {
                                 },
                             }}
                         >
-                            <Link href="https://blog.naver.com/erzsmatory" target="_blank">
-                                런던시티 네이버블로그
+                            <Link href="https://blog.naver.com/erzsamatory" target="_blank">
+                                창조적 노마드 런던시티 블로그
                             </Link>
                             /
                             <Link href="https://www.walterz.net" target="_blank">
