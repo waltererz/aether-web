@@ -7,6 +7,7 @@ const initialStates = {
     tab: null,
     headerIcons: null,
     mobileDrawerOpen: false,
+    uri: '/',
 };
 
 function app(state = initialStates, action) {
@@ -28,6 +29,9 @@ function app(state = initialStates, action) {
             break;
         case reduxConstants.app.auth:
             return { ...state, auth: action.state }
+            break;
+        case reduxConstants.app.uri:
+            return { ...state, uri: action.state }
             break;
     }
 

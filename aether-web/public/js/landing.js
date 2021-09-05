@@ -212,7 +212,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_system_LandingPage__WEBPACK_IMPORTED_MODULE_2__.default, {}), document.getElementById('app'));
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_system_LandingPage__WEBPACK_IMPORTED_MODULE_2__["default"], {}), document.getElementById('app'));
 
 /***/ }),
 
@@ -227,7 +227,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ LandingPage)
 /* harmony export */ });
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/node_modules/@material-ui/system/esm/ThemeProvider/ThemeProvider.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/system/esm/ThemeProvider/ThemeProvider.js");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/createTheme.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/styles/styled.js");
 /* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Link */ "./node_modules/@material-ui/core/Link/Link.js");
@@ -245,7 +245,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Divider = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default)('div')({
+var Divider = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["default"])('div')({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
@@ -260,15 +260,15 @@ var Divider = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default)('div')(
   }
 });
 function LandingPage() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__.default, {
-    theme: (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__.default)({
-      palette: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette'),
-      breakpoints: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.breakpoints')
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    theme: (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      palette: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.palette'),
+      breakpoints: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.breakpoints')
     }),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Container, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Body, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Primary, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               display: 'flex',
               justifyContent: 'flex-start',
@@ -279,7 +279,7 @@ function LandingPage() {
                 md: 'row'
               }
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
               component: "h3",
               sx: {
                 margin: 0,
@@ -288,7 +288,7 @@ function LandingPage() {
                 fontWeight: 'bold'
               },
               children: "Aether"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
               sx: {
                 fontSize: '1.3em',
                 marginLeft: {
@@ -300,19 +300,19 @@ function LandingPage() {
             })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Secondary, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               fontSize: '1.2em',
               marginBottom: '20px'
             },
             children: "\uC9C0\uAE08 \uBC14\uB85C \uD68C\uC6D0\uC73C\uB85C \uC2DC\uC791\uD558\uC138\uC694."
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center'
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
               disableElevation: true,
               variant: "contained",
               color: "primary",
@@ -325,7 +325,7 @@ function LandingPage() {
                 window.location.href = '/user/signin';
               },
               children: "\uB85C\uADF8\uC778"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Divider, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__.default, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Divider, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
               disableElevation: true,
               variant: "contained",
               color: "secondary",
@@ -344,14 +344,14 @@ function LandingPage() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Footer, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.FooterContent, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               fontSize: '0.8em',
               color: '#555555',
               '& a': {
                 display: 'inline-flex',
                 margin: '0px 10px',
-                color: (0,_config__WEBPACK_IMPORTED_MODULE_1__.default)('templete.palette.primary.main'),
+                color: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.palette.primary.main'),
                 textDecoration: 'none',
                 webkitTapHighlightColor: 'transparent',
                 userSelect: 'none',
@@ -363,16 +363,16 @@ function LandingPage() {
                 }
               }
             },
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__.default, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
               href: "https://blog.naver.com/erzsamatory",
               target: "_blank",
               children: "\uCC3D\uC870\uC801 \uB178\uB9C8\uB4DC \uB7F0\uB358\uC2DC\uD2F0 \uBE14\uB85C\uADF8"
-            }), "/", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__.default, {
+            }), "/", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
               href: "https://www.walterz.net",
               target: "_blank",
               children: "\uB7F0\uB358\uC2DC\uD2F0 \uC6CC\uB4DC\uD504\uB808\uC2A4"
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Divider, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__.default, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Divider, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               fontSize: '0.8em',
               color: '#555555'
@@ -409,7 +409,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var Container = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref) {
+var Container = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref) {
   var theme = _ref.theme;
   return {
     display: 'flex',
@@ -423,7 +423,7 @@ var Container = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div'
     boxSizing: 'border-box'
   };
 });
-var Body = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref2) {
+var Body = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref2) {
   var _ref3;
 
   var theme = _ref2.theme;
@@ -444,7 +444,7 @@ var Body = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(fun
     padding: '100px 0px 50px 0px'
   }), _ref3;
 });
-var Primary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref4) {
+var Primary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref4) {
   var _ref5;
 
   var theme = _ref4.theme;
@@ -460,14 +460,14 @@ var Primary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(
     margin: '0px 10px 0px 0px'
   }), _ref5;
 });
-var Secondary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref6) {
+var Secondary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref6) {
   var _ref7;
 
   var theme = _ref6.theme;
   return _ref7 = {
     width: '100%',
     height: 'fit-content',
-    borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_0__.default)('templete.borderRadius.1'),
+    borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_0__["default"])('templete.borderRadius.1'),
     backgroundColor: '#ffffff',
     boxSizing: 'border-box',
     padding: '30px 20px 30px 20px'
@@ -479,7 +479,7 @@ var Secondary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div'
     margin: '0px 0px 0px 10px'
   }), _ref7;
 });
-var Footer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref8) {
+var Footer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref8) {
   var _ref9;
 
   var theme = _ref8.theme;
@@ -497,7 +497,7 @@ var Footer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(f
     padding: '30px'
   }), _ref9;
 });
-var FooterContent = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default)('div')(function (_ref10) {
+var FooterContent = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref10) {
   var theme = _ref10.theme;
   return _defineProperty({
     width: '100%',
@@ -549,8 +549,6 @@ webpackContext.id = "./resources/js/config sync recursive ^\\.\\/.*$";
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
-/******/ "use strict";
-/******/ 
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
 /******/ __webpack_require__.O(0, ["/js/vendor"], () => (__webpack_exec__("./resources/js/landing.jsx")));
 /******/ var __webpack_exports__ = __webpack_require__.O();

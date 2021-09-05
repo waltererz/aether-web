@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import Cookie from 'universal-cookie';
 import * as browser from './browser';
 import * as api from './api';
-import { setHeaderIcons, setAuth, setTab } from '../redux/actions/app';
+import { setHeaderIcons, setAuth, setTab, setURI } from '../redux/actions/app';
 import config from '../config';
 
 export function init(props = {}) {
     const auth = useSelector((state) => state.app.auth);
+    const currentUri = useSelector((state) => state.app.uri);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,12 +34,15 @@ export function init(props = {}) {
 
         // 웹브라우저 스크롤를 최상단으로 이동시킴
         browser.scrollTop();
-    }, [window.location.pathname]);
+    }, [currentUri]);
 
     useEffect(() => {
         const cookie = new Cookie();
         const access_token = cookie.get('personal_access_token');
         const unique_code = cookie.get('personal_unique_code');
+
+        // 현재 경로를 리덕스 컨테이너에 저장합니다.
+        dispatch(setURI(window.location.pathname));
 
         // 현재 로그인 유무를 확인합니다.
         if (!access_token || !unique_code) {

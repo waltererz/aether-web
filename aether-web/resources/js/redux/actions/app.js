@@ -41,3 +41,10 @@ export const setAuth = (auth) => {
         state: auth,
     }
 }
+
+export const setURI = (uri) => {
+    return {
+        type: reduxConstants.app.uri,
+        state: uri,
+    }
+}

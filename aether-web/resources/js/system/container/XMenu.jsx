@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import MuiLink from '@material-ui/core/Link';
 import { styled } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -38,29 +39,38 @@ const MenuContainer = styled('div')({
 });
 
 export default function XMenu({ items }) {
-    const currentURI = useSelector((state) => state.app.uri);
+    const currentUri = useSelector((state) => state.app.uri);
     const refContainer = React.useRef(null);
 
-    React.useEffect(() => {
-        // 경로가 변경될 때마다 리렌더링
-    }, [currentURI]);
+    const LinkContent = ({ icon, text }) => {
+        return (
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>{icon}</Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={text} />
+            </ListItem>
+        );
+    };
 
     const MenuItems = () => {
         return items.map((item, index) => {
             return (
                 <MenuContainer
                     data-path={item.path}
-                    className={window.location.pathname === item.path ? 'selected' : null}
+                    data-standalone={item.standalone ? true : false}
+                    className={currentUri === item.path ? 'selected' : null}
                     key={`XMenu-submenus-${item.path}-${index}`}
                 >
-                    <Link to={item.path}>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>{item.icon}</Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={item.text} />
-                        </ListItem>
-                    </Link>
+                    {item.standalone ? (
+                        <MuiLink href={item.path}>
+                            <LinkContent icon={item.icon} text={item.text} />
+                        </MuiLink>
+                    ) : (
+                        <Link to={item.path}>
+                            <LinkContent icon={item.icon} text={item.text} />
+                        </Link>
+                    )}
                 </MenuContainer>
             );
         });
