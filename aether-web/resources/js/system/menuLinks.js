@@ -10,13 +10,13 @@ const _menuLinks = [
 
     {
         name: '투자자산관리',
-        slug: 'investment',
-        to: '/investment',
+        slug: 'investments',
+        to: '/investments',
         children: [
             {
                 name: '포트폴리오 관리',
                 slug: 'portfolio',
-                to: '/investment/portfolio',
+                to: '/investments/portfolio',
             }
         ]
     },

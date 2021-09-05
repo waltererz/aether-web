@@ -96,6 +96,14 @@ class UserController extends Controller
         }
 
         /**
+         * 사용자 닉네임 저장 변수 (랜덤)
+         * 가입 시에는 랜덤으로 닉네임이 지정되고 이후에 본인 희망에 따라 변경 가능
+         * 
+         * @var string $nickname
+         */
+        $nickname = Str::random(40);
+
+        /**
          * 사용자 중간이름 (middle name) 저장 변수
          * 기본적으로 공백을 저장하며 본인 희망에 따라 미들네임 추가 가능
          * 
@@ -131,6 +139,7 @@ class UserController extends Controller
         $userModel->firstname = $firstname;
         $userModel->lastname = $lastname;
         $userModel->middlename = $middlename;
+        $userModel->nickname = $nickname;
         $userModel->group_id = $group_id;
 
         /**

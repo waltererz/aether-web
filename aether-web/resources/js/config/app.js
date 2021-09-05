@@ -12,19 +12,10 @@ const _config = {
         api: 'http://back.erzsphilos.com/api',  // API 서버 URL
     },
 
-    route: {
-        default: 1,
-        home: 2,
-        asset: 3,
-        investment: 4,
-        advisor: 5,
-        developer: 6,
-        user: 7,
-    },
-
     user: {
         email: window._aether.user_email,
         name: window._aether.user_name,
+        nickname: window._aether.user_nickname,
         image: window._aether.user_image,
     }
 }

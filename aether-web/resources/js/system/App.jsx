@@ -76,14 +76,15 @@ export default function App() {
             <Container>
                 <Switch>
                     <Route exact path="/" component={Page.Home} />
-                    <Route path="/user" component={Page.User} />
+                    <Route path="/app/setting" component={Page.Setting} />
+                    <Route path={['/user', '/@:user_nickname']} component={Page.User} />
                     <Route path="/assets" component={Page.Asset} />
-                    <Route path="/investment" component={Page.Investment} />
+                    <Route path="/investments" component={Page.Investment} />
                     <Route path="/advisors" component={Page.Advisor} />
                     <Route
                         path="*"
-                        render={({ path }) => {
-                            window.location.href = path;
+                        render={() => {
+                            window.location.href = '/';
                         }}
                     />
                 </Switch>

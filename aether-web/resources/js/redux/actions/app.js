@@ -21,13 +21,6 @@ export const setHeaderIcons = (headerIcons) => {
     }
 }
 
-export const setURI = (uri) => {
-    return {
-        type: reduxConstants.app.uri,
-        state: uri,
-    }
-}
-
 export const setMobileDrawerOpen = (open) => {
     return {
         type: reduxConstants.app.mobileDrawerOpen,

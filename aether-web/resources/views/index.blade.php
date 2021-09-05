@@ -30,6 +30,7 @@ $type = isset($type) && strlen($type) > 0 ? $type : 'website';
             auth: "{{ isset($auth) ? $auth : '' }}",
             user_email: "{{ isset($user_email) ? $user_email : '' }}",
             user_name: "{{ isset($user_lastname) && isset($user_firstname) ? $user_lastname . $user_firstname : '' }}",
+            user_nickname: "{{ isset($user_nickname) ? $user_nickname : '' }}",
             user_image: "{{ isset($user_image) ? $user_image : '' }}",
             is_mobile: {{ isset($is_mobile) ? ($is_mobile ? 'true' : 'false') : 'false' }},
         };

@@ -190,7 +190,9 @@ export default function MobileDrawer() {
                     </Avatar>
                 </AvatarContainer>
                 <UserNameContainer>
-                    <Link to="/user">{config('app.user.name')}님 환영합니다.</Link>
+                    <Link to={`/@${config('app.user.nickname')}`} onClick={toggleMobileDrawer}>
+                        {config('app.user.name')}님 환영합니다.
+                    </Link>
                 </UserNameContainer>
             </UserInfoContainer>
             <div>

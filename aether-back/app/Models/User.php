@@ -26,6 +26,7 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'middlename',
+        'nickname',
         'email',
         'group_id',
     ];
@@ -40,7 +41,6 @@ class User extends Authenticatable
         'group_id',
         'unique_code',
         'deleted_at',
-        'remember_tokens',
     ];
 
     /**

@@ -12,5 +12,7 @@ export default function User() {
         },
     });
 
-    return <Container pages={[{ path: '/user', component: Page.Home, exact: true }]} />;
+    return (
+        <Container pages={[{ path: '/@:user_nickname', component: Page.Profile, exact: true }]} />
+    );
 }

@@ -4,14 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
 
-class UserController extends Controller
+class SettingController extends Controller
 {
     public function index(): View
-    {
-        return view('index');
-    }
-
-    public function profile()
     {
         return view('index');
     }

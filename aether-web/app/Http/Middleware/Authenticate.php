@@ -110,6 +110,7 @@ class Authenticate
                 view()->share('user_email', $user->user_email);
                 view()->share('user_firstname', $user->user_firstname);
                 view()->share('user_lastname', $user->user_lastname);
+                view()->share('user_nickname', $user->user_nickname);
                 view()->share('user_image', $user->user_image);
 
                 return $next($request);

@@ -1,19 +1,25 @@
 import React from 'react';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import PersonSearchRoundedIcon from '@material-ui/icons/PersonSearchRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
 import RightSide from './advisor/RightSide';
 import * as common from '../services/common';
 import * as Page from './advisor/pages';
+import config from '../config';
 
 export default function Advisor() {
     common.init({
         headerIcons: {
-            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
-            mobile: [
-                { path: '/advisors/search', icon: <PersonSearchRoundedIcon /> },
-                { path: '/user', icon: <AccountCircleRoundedIcon />, auth: true },
+            desktop: [
+                {
+                    path: '/@' + config('app.user.nickname'),
+                    icon: <AccountCircleRoundedIcon />,
+                    auth: true,
+                },
+                { path: '/app/setting', icon: <SettingsRoundedIcon /> },
             ],
+            mobile: [{ path: '/advisors/search', icon: <PersonSearchRoundedIcon /> }],
         },
     });
 

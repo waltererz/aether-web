@@ -3,6 +3,6 @@ import User from './User';
 import Advisor from './Advisor';
 import Asset from './Asset';
 import Investment from './Investment';
-import Developer from './Developer';
+import Setting from './Setting';
 
-export { Home, User, Asset, Investment, Advisor, Developer };
+export { Home, User, Asset, Investment, Advisor, Setting };

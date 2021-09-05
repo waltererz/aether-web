@@ -8,21 +8,20 @@ import Container from '../system/Container';
 import RightSide from './home/RightSide';
 import * as Page from './home/pages';
 import * as common from '../services/common';
+import config from '../config';
 
 export default function Home() {
     common.init({
         headerIcons: {
             desktop: [
                 {
-                    path: '/user/signin',
+                    path: '/@' + config('app.user.nickname'),
                     icon: <AccountCircleRoundedIcon />,
-                    auth: false,
-                    standalone: true,
+                    auth: true,
                 },
-                { path: '/user', icon: <AccountCircleRoundedIcon />, auth: true },
                 { path: '/app/setting', icon: <SettingsRoundedIcon /> },
             ],
-            mobile: [{ path: '/app/setting', icon: <SettingsRoundedIcon /> }],
+            mobile: [],
         },
     });
 

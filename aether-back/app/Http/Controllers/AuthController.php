@@ -558,6 +558,7 @@ class AuthController extends Controller
                     'user_email' => $user->email,
                     'user_firstname' => $user->firstname,
                     'user_lastname' => $user->lastname,
+                    'user_nickname' => $user->nickname,
                     'user_image' => $user_image,
                 ], 200)
                     ->header('Aether-Access-Token', $access_token)

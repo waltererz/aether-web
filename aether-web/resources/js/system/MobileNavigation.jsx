@@ -6,7 +6,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
-import AccountBoxRoundedIcon from '@material-ui/icons/AccountBoxRounded';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import config from '../config';
@@ -61,33 +61,33 @@ export default function MobileNavigation() {
             >
                 <BottomNavigationAction
                     icon={<HomeRoundedIcon />}
-                    value={config('app.route.home')}
+                    value="/"
                     component={Link}
                     to="/"
                 />
                 <BottomNavigationAction
                     icon={<PieChartRoundedIcon />}
-                    value={config('app.route.asset')}
+                    value="assets"
                     component={Link}
                     to="/assets"
                 />
                 <BottomNavigationAction
                     icon={<SupervisedUserCircleRoundedIcon />}
-                    value={config('app.route.advisor')}
+                    value="advisors"
                     component={Link}
                     to="/advisors"
                 />
                 <BottomNavigationAction
                     icon={<TrendingUpRoundedIcon />}
-                    value={config('app.route.investment')}
+                    value="investments"
                     component={Link}
-                    to="/investment"
+                    to="/investments"
                 />
                 <BottomNavigationAction
-                    icon={<AccountBoxRoundedIcon />}
-                    value={config('app.route.user')}
+                    icon={<AccountCircleRoundedIcon />}
+                    value="@"
                     component={Link}
-                    to="/user"
+                    to={`/@${config('app.user.nickname')}`}
                 />
             </BottomNavigation>
         </Container>

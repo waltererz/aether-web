@@ -2,15 +2,24 @@ import React from 'react';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import AccountBalanceWalletRoundedIcon from '@material-ui/icons/AccountBalanceWalletRounded';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
 import RightSide from './asset/RightSide';
 import * as Page from './asset/pages';
 import * as common from '../services/common';
+import config from '../config';
 
 export default function Asset() {
     common.init({
         headerIcons: {
-            desktop: [{ path: '/user', icon: <AccountCircleRoundedIcon />, auth: true }],
+            desktop: [
+                {
+                    path: '/@' + config('app.user.nickname'),
+                    icon: <AccountCircleRoundedIcon />,
+                    auth: true,
+                },
+                { path: '/app/setting', icon: <SettingsRoundedIcon /> },
+            ],
             mobile: [{ path: '/assets/moneybook', icon: <AccountBalanceWalletRoundedIcon /> }],
         },
     });

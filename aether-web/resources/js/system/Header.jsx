@@ -10,7 +10,8 @@ const Container = styled('div')(({ theme }) => ({
     width: '100%',
     top: 0,
     zIndex: config('templete.zIndex.header'),
-    transition: 'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+    transition:
+        'transform 500ms cubic-bezier(0, 0, 0.2, 1) 0ms, box-shadow 600ms cubic-bezier(0, 0, 0.2, 1) 0ms',
 
     '&.invisible': {
         [theme.breakpoints.up('xs')]: {

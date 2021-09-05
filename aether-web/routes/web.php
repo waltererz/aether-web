@@ -6,6 +6,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ use App\Http\Controllers\InvestmentController;
 Route::middleware('auth')->group(function () {
     Route::prefix('/')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/@{user_nickname}', [UserController::class, 'profile'])->where('user_nickname', '[0-9a-z\-\_]+');
+    });
+
+    Route::prefix('app')->group(function () {
+        Route::get('/setting', [SettingController::class, 'index']);
     });
 
     Route::prefix('assets')->group(function () {
@@ -28,7 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/moneybook', [AssetController::class, 'index']);
     });
 
-    Route::prefix('investments', function () {
+    Route::prefix('investments')->group(function () {
         Route::get('/', [InvestmentController::class, 'index']);
 
         Route::prefix('portfolio')->group(function () {
@@ -43,7 +49,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('user')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('user');
         Route::get('/signout', [UserController::class, 'index'])->name('signout');
     });
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { styled } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Popper from '@material-ui/core/Popper';
@@ -222,7 +221,6 @@ const SubNavigationItem = styled('li')({
 export default function HeaderNavigation() {
     const [subLinkBoxAnchor, setSubLinkBoxAnchor] = React.useState({});
     const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
-    const currentURI = useSelector((state) => state.app.uri);
     const ref = {
         container: React.useRef(null),
         subContainer: React.useRef(null),
@@ -388,7 +386,7 @@ export default function HeaderNavigation() {
     }, []);
 
     React.useEffect(() => {
-        const currentPathArray = currentURI.split('/');
+        const currentPathArray = window.location.pathname.split('/');
         const links = Array.from(ref.items.current.children);
 
         links.map((link) => {
@@ -406,7 +404,7 @@ export default function HeaderNavigation() {
                 }
             }
         });
-    }, [currentURI]);
+    }, [window.location.pathname]);
 
     return (
         <Container ref={ref.container}>

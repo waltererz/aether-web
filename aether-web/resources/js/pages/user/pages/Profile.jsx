@@ -108,7 +108,7 @@ const UserInformation = styled('div')(({ theme }) => ({
         flexDirection: 'column',
     },
 
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
         flexDirection: 'row',
     },
 }));
@@ -120,29 +120,52 @@ const ProfileLeftBox = styled('div')(({ theme }) => ({
         flexGrow: 0,
     },
 
-    [theme.breakpoints.up('md')]: {
-        marginRight: '30px',
+    [theme.breakpoints.up('sm')]: {
+        marginRight: '20px',
         flexGrow: 1,
     },
 }));
 
-const ProfileRightBox = styled('div')({
+const ProfileRightBox = styled('div')(({ theme }) => ({
     flexGrow: 0,
     flexShrink: 1,
-    width: '200px',
-});
+    boxSizing: 'border-box',
+
+    [theme.breakpoints.up('xs')]: {
+        padding: '20px 0 0 0',
+        borderTop: '1px solid #eeeeee',
+    },
+
+    [theme.breakpoints.up('sm')]: {
+        padding: '0 0 0 20px',
+        borderTop: 0,
+        borderLeft: '1px solid #eeeeee',
+        width: '300px',
+    },
+}));
 
 const ContentBox = styled('div')({
     marginBottom: '15px',
 });
 
-export default function Home() {
+export default function Profile({ match }) {
+    /**
+     * 사용자 이미지를 변경할 때 사용되는 상태(state)
+     */
     const [userImage, setUserImage] = React.useState(config('app.user.image'));
 
+    /**
+     * 사용자 이미지를 업로드할 때 사용되는 ref
+     */
     const ref = {
         imageFileInput: React.useRef(null),
     };
 
+    /**
+     * 사용자 이미지를 선택한 경우 실행되는 함수
+     *
+     * @param {*} event
+     */
     const handleImageFileChange = (event) => {
         event.preventDefault();
 
@@ -160,6 +183,11 @@ export default function Home() {
         });
     };
 
+    /**
+     * 사용자 이미지를 변경하기 위해 박스를 클릭하면 실행되는 함수
+     *
+     * @param {*} event
+     */
     const handleImageFileUploadButtonClick = (event) => {
         event.preventDefault();
         if (config('app.is_mobile')) {
@@ -216,18 +244,7 @@ export default function Home() {
                             {config('app.user.email')}
                         </Box>
                     </ProfileLeftBox>
-                    <ProfileRightBox>
-                        <Box
-                            sx={{
-                                fontSize: {
-                                    xs: '0.8em',
-                                    md: '0.9em',
-                                },
-                            }}
-                        >
-                            설명 2
-                        </Box>
-                    </ProfileRightBox>
+                    <ProfileRightBox></ProfileRightBox>
                 </UserInformation>
             </ProfileContainer>
             <Grid container columnSpacing={2}>

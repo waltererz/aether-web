@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have emailed your password reset link!',
-    'throttled' => 'Please wait before retrying.',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that email address.",
+    'reset' => '패스워드가 초기화되었습니다.',
+    'sent' => '가입하신 이메일 주소로 패스워드 초기화 링크를 보냈습니다.',
+    'throttled' => '동시에 같은 동작을 수행할 수 없습니다.',
+    'token' => '패스워드 초기화 링크가 잘못되었습니다.',
+    'user' => "요청하신 사용자를 찾을 수 없습니다.",
 
 ];

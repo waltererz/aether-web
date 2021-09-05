@@ -48,8 +48,8 @@ class AppServiceProvider extends ServiceProvider
          */
         $is_mobile = ($agent->isMobile() || !$agent->isDesktop());
 
-        view()->share('title', $page['name']);
-        view()->share('description', $page['description']);
+        view()->share('title', isset($page['name']) ? $page['name'] : null);
+        view()->share('description', isset($page['description']) ? $page['description'] : null);
         view()->share('user_agent', $user_agent);
         view()->share('is_mobile', $is_mobile);
     }
