@@ -1,8 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setTitle } from '../../../redux/actions/app';
 import { styled } from '@material-ui/core';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import Paper from '../../../components/Paper';
 import * as api from '../../../services/api';
@@ -149,16 +159,35 @@ const ContentBox = styled('div')({
 });
 
 export default function Profile({ match }) {
+    const dispatch = useDispatch();
+
+    /**
+     * 다이얼로그(모달창) 출력 여부에 사용되는 상태(state)
+     */
+    const [open, setOpen] = React.useState({
+        change_nickname: false,
+    });
+
     /**
      * 사용자 이미지를 변경할 때 사용되는 상태(state)
      */
     const [userImage, setUserImage] = React.useState(config('app.user.image'));
 
     /**
-     * 사용자 이미지를 업로드할 때 사용되는 ref
+     * 닉네임을 변경할 때 사용되는 상태(state)
+     */
+    const [nickname, setNickname] = React.useState({
+        current: config('app.user.nickname'),
+        new: '',
+        duplicated: false,
+    });
+
+    /**
+     * DOM 제어를 위한 ref
      */
     const ref = {
         imageFileInput: React.useRef(null),
+        nicknameInput: React.useRef(null),
     };
 
     /**
@@ -196,6 +225,34 @@ export default function Profile({ match }) {
             ref.imageFileInput.current.click();
         }
     };
+
+    const handleDialogClickOpen = (event) => {
+        setOpen({
+            ...open,
+            [event.target.dataset.modal]: true,
+        });
+    };
+
+    const handleDialogClose = () => {
+        for (let k in open) {
+            if (open[k] === true) {
+                setOpen({
+                    ...open,
+                    [k]: false,
+                });
+
+                break;
+            }
+        }
+    };
+
+    React.useEffect(() => {
+        /**
+         * 페이지 타이틀을 설정합니다.
+         * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+         */
+        dispatch(setTitle(config('app.user.name')));
+    }, []);
 
     return (
         <>
@@ -243,8 +300,105 @@ export default function Profile({ match }) {
                         >
                             {config('app.user.email')}
                         </Box>
+                        <Box
+                            sx={{
+                                fontSize: {
+                                    xs: '0.9em',
+                                    md: '1em',
+                                },
+                            }}
+                        >
+                            @{config('app.user.nickname')}{' '}
+                            <Link
+                                data-modal="change_nickname"
+                                onClick={handleDialogClickOpen}
+                                sx={{
+                                    cursor: 'pointer',
+                                    fontSize: '0.7em',
+                                    textDecoration: 'none',
+                                    color: config('templete.palette.secondary.main'),
+
+                                    '&:hover': {
+                                        textDecoration: 'underline',
+                                    },
+                                }}
+                            >
+                                변경하기
+                            </Link>
+                            <Dialog
+                                open={open.change_nickname}
+                                onClose={handleDialogClose}
+                                maxWidth="xs"
+                            >
+                                <DialogTitle>닉네임 변경하기</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText
+                                        sx={{
+                                            marginBottom: '10px',
+                                        }}
+                                    >
+                                        닉네임은 다른 사용자와 중복될 수 없으며, Aether에서 사용자를
+                                        식별하기 위해 사용됩니다. 사용자 프로필에 접근할 때 닉네임이
+                                        사용되므로 신중히 결정해 변경하시기 바랍니다.
+                                    </DialogContentText>
+                                    <DialogContentText
+                                        sx={{
+                                            marginBottom: '10px',
+                                            fontSize: '0.9em',
+                                        }}
+                                    >
+                                        현재 닉네임: {nickname.current}
+                                    </DialogContentText>
+                                    <DialogContentText
+                                        sx={{
+                                            marginBottom: '10px',
+                                            color: config('templete.palette.secondary.main'),
+                                            fontSize: '0.9em',
+                                        }}
+                                    >
+                                        회원가입 시 자동으로 설정된 닉네임은 변경을 권장합니다.
+                                    </DialogContentText>
+                                    <TextField
+                                        autoFocus
+                                        fullWidth
+                                        ref={ref.nicknameInput}
+                                        margin="dense"
+                                        label="변경할 닉네임"
+                                        variant="standard"
+                                        onChange={(event) => {
+                                            setNickname({
+                                                ...nickname,
+                                                new: event.target.value,
+                                            });
+                                        }}
+                                    />
+                                    <Box
+                                        sx={{
+                                            marginTop: '5px',
+                                            fontSize: '0.8em',
+                                            fontWeight: 'bold',
+                                            textAlign: 'right',
+                                            color: '#cc0000',
+                                            display:
+                                                nickname.new.length > 0 && !nickname.duplicated
+                                                    ? 'block'
+                                                    : 'none',
+                                        }}
+                                    >
+                                        이미 사용중인 닉네임입니다.
+                                    </Box>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleDialogClose}>변경하기</Button>
+                                    <Button onClick={handleDialogClose}>취소</Button>
+                                </DialogActions>
+                            </Dialog>
+                        </Box>
                     </ProfileLeftBox>
-                    <ProfileRightBox></ProfileRightBox>
+                    <ProfileRightBox>
+                        <Box>투자 어드바이저 지원하기</Box>
+                        <Box>레밀(Revolutionize Military)</Box>
+                    </ProfileRightBox>
                 </UserInformation>
             </ProfileContainer>
             <Grid container columnSpacing={2}>

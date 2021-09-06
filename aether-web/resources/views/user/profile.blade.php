@@ -1,7 +1,7 @@
 <?php
 $app_name = config('app.name');
-$title = isset($__title) && strlen($__title) > 0 ? $__title . ' | ' . $app_name : $app_name;
-$description = isset($__desc) && strlen($__desc) > 0 ? $__desc : config('app.description');
+$title = $__user->lastname . $__user->firstname . ' | ' . $app_name;
+$description = isset($__user->signature) ? $__user->signature : config('app.description');
 $pagetype = isset($__pagetype) && strlen($__pagetype) > 0 ? $__pagetype : 'website';
 ?>
 

@@ -177,10 +177,10 @@ var _config = {
 
   },
   user: {
-    email: window._aether.user_email,
-    name: window._aether.user_name,
-    nickname: window._aether.user_nickname,
-    image: window._aether.user_image
+    email: window._aether.user.email,
+    name: window._aether.user.name,
+    nickname: window._aether.user.nickname,
+    image: window._aether.user.image
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_config);
@@ -428,6 +428,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Advisor() {
+  /**
+   * 기본적인 사항들을 초기화합니다.
+   */
   _services_common__WEBPACK_IMPORTED_MODULE_3__.init({
     headerIcons: {
       desktop: [{
@@ -812,13 +815,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('투자 어드바이저 찾아보기'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uC790\uC2E0\uC758 \uD22C\uC790\uC131\uD5A5\uACFC \uBE44\uC2B7\uD55C \uC804\uBB38\uAC00\uC640 \uD568\uAED8 \uD22C\uC790\uD558\uAE30"
   });
 }
@@ -839,24 +854,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
-/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/withStyles/withStyles.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/styles/styled.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
-/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/FormGroup/FormGroup.js");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js");
-/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/Checkbox.js");
-/* harmony import */ var _material_ui_core_Accordion__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Accordion */ "./node_modules/@material-ui/core/Accordion/Accordion.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/Button.js");
-/* harmony import */ var _material_ui_core_Rating__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Rating */ "./node_modules/@material-ui/core/Rating/Rating.js");
-/* harmony import */ var _material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Skeleton */ "./node_modules/@material-ui/core/Skeleton/Skeleton.js");
-/* harmony import */ var _material_ui_core_AccordionSummary__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/AccordionSummary */ "./node_modules/@material-ui/core/AccordionSummary/AccordionSummary.js");
-/* harmony import */ var _material_ui_core_AccordionDetails__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/AccordionDetails */ "./node_modules/@material-ui/core/AccordionDetails/AccordionDetails.js");
-/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/icons/ExpandMore */ "./node_modules/@material-ui/icons/ExpandMore.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/api */ "./resources/js/services/api.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/withStyles/withStyles.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/styles/styled.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
+/* harmony import */ var _material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/FormGroup/FormGroup.js");
+/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/Checkbox.js");
+/* harmony import */ var _material_ui_core_Accordion__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/Accordion */ "./node_modules/@material-ui/core/Accordion/Accordion.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/Button.js");
+/* harmony import */ var _material_ui_core_Rating__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Rating */ "./node_modules/@material-ui/core/Rating/Rating.js");
+/* harmony import */ var _material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Skeleton */ "./node_modules/@material-ui/core/Skeleton/Skeleton.js");
+/* harmony import */ var _material_ui_core_AccordionSummary__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/AccordionSummary */ "./node_modules/@material-ui/core/AccordionSummary/AccordionSummary.js");
+/* harmony import */ var _material_ui_core_AccordionDetails__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/AccordionDetails */ "./node_modules/@material-ui/core/AccordionDetails/AccordionDetails.js");
+/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/icons/ExpandMore */ "./node_modules/@material-ui/icons/ExpandMore.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/api */ "./resources/js/services/api.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -902,7 +919,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ItemContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref) {
+
+
+var ItemContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref) {
   var _ref2;
 
   var theme = _ref.theme;
@@ -910,8 +929,8 @@ var ItemContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"]
     display: 'flex',
     marginTop: '10px',
     boxSizing: 'border-box',
-    border: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.border.1'),
-    borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.borderRadius.1'),
+    border: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.border.1'),
+    borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.borderRadius.1'),
     backgroundColor: '#ffffff'
   }, _defineProperty(_ref2, theme.breakpoints.up('xs'), {
     flexDirection: 'column',
@@ -923,7 +942,7 @@ var ItemContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"]
     fontSize: '0.9rem'
   }), _ref2;
 });
-var AdvisorImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref3) {
+var AdvisorImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref3) {
   var _img;
 
   var theme = _ref3.theme;
@@ -940,7 +959,7 @@ var AdvisorImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])
     }), _img)
   };
 });
-var AdvisorInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref4) {
+var AdvisorInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref4) {
   var _ref5;
 
   var theme = _ref4.theme;
@@ -955,11 +974,11 @@ var AdvisorInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["defa
     paddingLeft: '15px'
   }), _ref5;
 });
-var AdvisorName = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var AdvisorName = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   fontSize: '1.3em',
   fontWeight: 'bold'
 });
-var AdvisorJob = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref6) {
+var AdvisorJob = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref6) {
   var _ref7;
 
   var theme = _ref6.theme;
@@ -972,15 +991,15 @@ var AdvisorJob = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('
     paddingBottom: '5px'
   }), _ref7;
 });
-var AdvisorTheme = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var AdvisorTheme = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   fontSize: '0.75em'
 });
-var AdvisorActivity = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var AdvisorActivity = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   display: 'flex',
   flexDirection: 'column',
   flexGrow: 0
 });
-var AdvisorRating = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref8) {
+var AdvisorRating = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref8) {
   var _span;
 
   var theme = _ref8.theme;
@@ -992,7 +1011,7 @@ var AdvisorRating = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), _span)
   };
 });
-var AdvisorArticleCount = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref9) {
+var AdvisorArticleCount = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref9) {
   var _ref10;
 
   var theme = _ref9.theme;
@@ -1005,22 +1024,22 @@ var AdvisorArticleCount = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["def
     fontSize: '0.9em'
   }), _ref10;
 });
-var AdvisorDescription = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var AdvisorDescription = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   width: '100%',
   marginTop: '10px',
   fontSize: '0.9em'
 });
-var FlexRowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var FlexRowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   display: 'flex',
   flexDirection: 'row'
 });
-var GrowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var GrowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   flexGrow: 1
 });
-var NotGrowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')({
+var NotGrowBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')({
   flexGrow: 0
 });
-var SubscriptionContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref11) {
+var SubscriptionContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref11) {
   var _ref12;
 
   var theme = _ref11.theme;
@@ -1047,13 +1066,13 @@ var SubscriptionContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["d
     borderWidth: '0px 0px 0px 1px'
   }), _ref12;
 });
-var SubscriptionPrice = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"])('div')(function (_ref13) {
+var SubscriptionPrice = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_8__["default"])('div')(function (_ref13) {
   var _ref14;
 
   var theme = _ref13.theme;
   return _ref14 = {
-    fontFamily: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.fontFamily.1'),
-    color: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.palette.secondary.main'),
+    fontFamily: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.fontFamily.1'),
+    color: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.palette.secondary.main'),
     fontWeight: 'bold'
   }, _defineProperty(_ref14, theme.breakpoints.up('xs'), {
     fontSize: '1.2em',
@@ -1093,6 +1112,8 @@ function Search() {
       page = _React$useState12[0],
       setPage = _React$useState12[1];
 
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+
   var getAdvisors = /*#__PURE__*/function () {
     var _ref15 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var updated,
@@ -1110,10 +1131,10 @@ function Search() {
                 break;
               }
 
-              cookie = new universal_cookie__WEBPACK_IMPORTED_MODULE_7__["default"]();
+              cookie = new universal_cookie__WEBPACK_IMPORTED_MODULE_9__["default"]();
               access_token = cookie.get('personal_access_token');
               _context.next = 6;
-              return _services_api__WEBPACK_IMPORTED_MODULE_3__.post('advisors/index', {
+              return _services_api__WEBPACK_IMPORTED_MODULE_5__.post('advisors/index', {
                 page: page,
                 pagination: true,
                 filtering: currentFilters,
@@ -1147,10 +1168,10 @@ function Search() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              cookie = new universal_cookie__WEBPACK_IMPORTED_MODULE_7__["default"]();
+              cookie = new universal_cookie__WEBPACK_IMPORTED_MODULE_9__["default"]();
               access_token = cookie.get('personal_access_token');
               _context2.next = 4;
-              return _services_api__WEBPACK_IMPORTED_MODULE_3__.post('investment/themes/index', {}, access_token).then(function (response) {
+              return _services_api__WEBPACK_IMPORTED_MODULE_5__.post('investment/themes/index', {}, access_token).then(function (response) {
                 if (response.data) {
                   var theme_filters = {};
                   response.data.map(function (theme) {
@@ -1209,20 +1230,20 @@ function Search() {
 
   var fetchThemeFilters = function fetchThemeFilters() {
     if ('theme' in filters) {
-      var Checkbox = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_8__["default"])({
+      var Checkbox = (0,_material_ui_styles__WEBPACK_IMPORTED_MODULE_10__["default"])({
         root: {
-          color: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.palette.secondary.main')
+          color: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.palette.secondary.main')
         }
       })(function (props) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_9__["default"], _objectSpread({
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_11__["default"], _objectSpread({
           color: "default"
         }, props));
       });
 
       if (themes) {
         return themes.map(function (theme, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_10__["default"], {
-            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Checkbox, {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_12__["default"], {
+            control: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Checkbox, {
               checked: filters.theme[theme.slug],
               onChange: changeTheme,
               name: theme.slug,
@@ -1245,76 +1266,76 @@ function Search() {
   var Item = function Item(_ref17) {
     var skeleton = _ref17.skeleton,
         advisor = _ref17.advisor;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(ItemContainer, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(GrowBox, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(FlexRowBox, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorImage, {
-            children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(ItemContainer, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(GrowBox, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(FlexRowBox, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorImage, {
+            children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
               variant: "circular",
               width: 68,
               height: 68
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
               alt: "Walter London City",
               src: "https://secure.gravatar.com/avatar/ad6464c0b0336b626439748ce56f0f3d?s=109&d=mm&r=g",
               loading: "lazy"
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(AdvisorInformation, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(GrowBox, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorName, {
-                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(AdvisorInformation, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(GrowBox, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorName, {
+                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
                   height: 30,
                   width: "20%"
                 }) : "".concat(advisor.user.lastname, " ").concat(advisor.user.firstname)
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorJob, {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorJob, {
                 sx: {},
-                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
                   height: 20,
                   width: "50%"
                 }) : '경제적자유를 꿈꾸는 개미투자자'
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorTheme, {
-                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorTheme, {
+                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
                   height: 15,
                   width: "50%"
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("b", {
                     children: "\uD22C\uC790\uC131\uD5A5:"
                   }), " ", advisor.theme.name]
                 })
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(AdvisorActivity, {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorRating, {
-                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(AdvisorActivity, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorRating, {
+                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
                   height: 20,
                   width: 94
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Rating__WEBPACK_IMPORTED_MODULE_12__["default"], {
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Rating__WEBPACK_IMPORTED_MODULE_14__["default"], {
                   value: 5.0,
                   readOnly: true
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorArticleCount, {
-                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorArticleCount, {
+                children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
                   height: 20,
                   width: 94
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
                   children: [advisor.articles, " Article(s)"]
                 })
               })]
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FlexRowBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AdvisorDescription, {
-            children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(FlexRowBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(AdvisorDescription, {
+            children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
               height: 20,
               width: "100%"
             }) : '투자어드바이저 설명글'
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(NotGrowBox, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(SubscriptionContainer, {
-          children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(NotGrowBox, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(SubscriptionContainer, {
+          children: skeleton ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Skeleton__WEBPACK_IMPORTED_MODULE_13__["default"], {
             height: 100,
             width: 150
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_13__["default"], {
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__["default"], {
               disableElevation: true,
               variant: "contained",
               color: "secondary",
@@ -1328,7 +1349,7 @@ function Search() {
                 }
               },
               children: "\uAD6C\uB3C5\uD558\uAE30"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(SubscriptionPrice, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(SubscriptionPrice, {
               children: "\uBB34\uB8CC"
             })]
           })
@@ -1339,51 +1360,71 @@ function Search() {
 
   var fetchAdvisorList = function fetchAdvisorList() {
     return advisors.data.map(function (advisor, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Item, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Item, {
         advisor: advisor
       }, "advisor-".concat(advisor.user.firstname, "-").concat(index));
     });
   };
+  /**
+   * 첫 번째 페이지의 투자 어드바이저 목록을 가져올 때 출력할 5개의 스켈레톤을 생성합니다.
+   *
+   * @returns JSX.Element
+   */
+
 
   var fetchSkeletonBox = function fetchSkeletonBox() {
     return [1, 2, 3, 4, 5].map(function (skeleton, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Item, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Item, {
         skeleton: true
       }, "advisor-item-skeleton-".concat(index));
     });
   };
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    /**
+     * 선택된 필터가 변경되는 경우 투자 어드바이저 목록을 서버에서 다시 가져옵니다.
+     * 해당 함수 첫 번째 파라미터에 true 값을 넣어줌으로써 리프레시의 여무를 설정합니다.
+     */
     getAdvisors(true);
   }, [currentFilters]);
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    /**
+     * 투자 어드바이저 페이지를 처음 로드한 경우 테마필터를 새롭게 가져옵니다.
+     * 이후 컴포넌트 리렌더링이 발생하더라도 테마필터를 다시 가져오지 않아도 됩니다.
+     */
     getThemes();
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_4__.setTitle)('투자 어드바이저'));
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_components_Paper__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_Accordion__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_Accordion__WEBPACK_IMPORTED_MODULE_16__["default"], {
       className: "filter-box",
       id: "search-filters",
       sx: {
         boxShadow: 'none',
-        borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.borderRadius.1'),
-        border: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.border.1'),
+        borderRadius: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.borderRadius.1'),
+        border: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.border.1'),
         backgroundColor: '#ffffff'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_AccordionSummary__WEBPACK_IMPORTED_MODULE_15__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_AccordionSummary__WEBPACK_IMPORTED_MODULE_17__["default"], {
         className: "title",
-        expandIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_16__["default"], {}),
+        expandIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_18__["default"], {}),
         sx: {
           fontWeight: 'bold',
-          fontFamily: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.fontFamily.1')
+          fontFamily: (0,_config__WEBPACK_IMPORTED_MODULE_6__["default"])('templete.fontFamily.1')
         },
         children: "\uAC80\uC0C9\uD544\uD130"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_material_ui_core_AccordionDetails__WEBPACK_IMPORTED_MODULE_17__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_material_ui_core_AccordionDetails__WEBPACK_IMPORTED_MODULE_19__["default"], {
         className: "filters",
         sx: {
           display: 'flex',
           flexDirection: 'column'
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
           className: "subject",
           sx: {
             display: 'block',
@@ -1393,7 +1434,7 @@ function Search() {
             fontSize: '0.9em'
           },
           children: "\uD22C\uC790\uC131\uD5A5"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_19__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_FormGroup__WEBPACK_IMPORTED_MODULE_21__["default"], {
           row: true,
           className: "filter",
           sx: {
@@ -1410,7 +1451,7 @@ function Search() {
           children: fetchThemeFilters()
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_20__["default"], {
       children: !complete ? fetchSkeletonBox() : advisors && fetchAdvisorList()
     })]
   });
@@ -1475,13 +1516,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('자산관리'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uC790\uC0B0\uAD00\uB9AC \uCCAB \uD398\uC774\uC9C0"
   });
 }
@@ -1500,13 +1553,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ MoneyBook)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 function MoneyBook() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('가계부'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uAC00\uACC4\uBD80 \uCCAB \uD398\uC774\uC9C0"
   });
 }
@@ -1570,13 +1635,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)(''));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uCCAB \uD398\uC774\uC9C0"
   });
 }
@@ -1666,12 +1743,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('투자자산 관리'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uD22C\uC790 \uD398\uC774\uC9C0"
   });
 }
@@ -1689,12 +1780,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Portfolio)
 /* harmony export */ });
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 function Portfolio() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('포트폴리오 관리'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: "\uD3EC\uD2B8\uD3F4\uB9AC\uC624 \uCCAB \uD398\uC774\uC9C0"
   });
 }
@@ -1732,27 +1837,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Home)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 
 
 
 function Home() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)('앱 설정'));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
       sx: {
         textAlign: 'right',
         fontSize: '0.8em',
         '& a': {
-          color: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.palette.secondary.main')
+          color: (0,_config__WEBPACK_IMPORTED_MODULE_4__["default"])('templete.palette.secondary.main')
         }
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
         to: "/user/signout",
         children: "\uB85C\uADF8\uC544\uC6C3"
       })
@@ -1791,15 +1910,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Profile)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/styles/styled.js");
-/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/Grid.js");
-/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
-/* harmony import */ var _material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Tooltip */ "./node_modules/@material-ui/core/Tooltip/Tooltip.js");
-/* harmony import */ var _material_ui_icons_PersonRounded__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/PersonRounded */ "./node_modules/@material-ui/icons/PersonRounded.js");
-/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
-/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/api */ "./resources/js/services/api.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _redux_actions_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../redux/actions/app */ "./resources/js/redux/actions/app.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/styles/styled.js");
+/* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core/Link */ "./node_modules/@material-ui/core/Link/Link.js");
+/* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/Grid.js");
+/* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/Box/Box.js");
+/* harmony import */ var _material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Tooltip */ "./node_modules/@material-ui/core/Tooltip/Tooltip.js");
+/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Dialog */ "./node_modules/@material-ui/core/Dialog/Dialog.js");
+/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "./node_modules/@material-ui/core/DialogActions/DialogActions.js");
+/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "./node_modules/@material-ui/core/DialogContent/DialogContent.js");
+/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "./node_modules/@material-ui/core/DialogContentText/DialogContentText.js");
+/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "./node_modules/@material-ui/core/DialogTitle/DialogTitle.js");
+/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/TextField/TextField.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/Button.js");
+/* harmony import */ var _material_ui_icons_PersonRounded__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/icons/PersonRounded */ "./node_modules/@material-ui/icons/PersonRounded.js");
+/* harmony import */ var _components_Paper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../components/Paper */ "./resources/js/components/Paper.jsx");
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/api */ "./resources/js/services/api.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../config */ "./resources/js/config/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1826,7 +1959,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var ProfileContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')({
+
+
+
+
+
+
+
+
+
+
+var ProfileContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -1834,7 +1977,7 @@ var ProfileContainer = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["defaul
   padding: '20px',
   boxSizing: 'border-box'
 });
-var UserImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref) {
+var UserImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref) {
   var _ref2;
 
   var theme = _ref.theme;
@@ -1849,7 +1992,7 @@ var UserImage = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('d
     width: '150px'
   }), _ref2;
 });
-var TransparentBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref3) {
+var TransparentBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref3) {
   var _ref4;
 
   var theme = _ref3.theme;
@@ -1877,7 +2020,7 @@ var TransparentBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"
     height: '150px'
   }), _ref4;
 });
-var ImageCircle = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref5) {
+var ImageCircle = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref5) {
   var _ref6;
 
   var theme = _ref5.theme;
@@ -1910,7 +2053,7 @@ var ImageCircle = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])(
     }
   }), _ref6;
 });
-var UserInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref7) {
+var UserInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref7) {
   var _ref8;
 
   var theme = _ref7.theme;
@@ -1923,7 +2066,7 @@ var UserInformation = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default
     flexDirection: 'row'
   }), _ref8;
 });
-var ProfileLeftBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref9) {
+var ProfileLeftBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref9) {
   var _ref10;
 
   var theme = _ref9.theme;
@@ -1936,7 +2079,7 @@ var ProfileLeftBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"
     flexGrow: 1
   }), _ref10;
 });
-var ProfileRightBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')(function (_ref11) {
+var ProfileRightBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')(function (_ref11) {
   var _ref12;
 
   var theme = _ref11.theme;
@@ -1954,26 +2097,52 @@ var ProfileRightBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default
     width: '300px'
   }), _ref12;
 });
-var ContentBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_5__["default"])('div')({
+var ContentBox = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"])('div')({
   marginBottom: '15px'
 });
 function Profile(_ref13) {
   var match = _ref13.match;
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  /**
+   * 다이얼로그(모달창) 출력 여부에 사용되는 상태(state)
+   */
 
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState({
+    change_nickname: false
+  }),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      open = _React$useState2[0],
+      setOpen = _React$useState2[1];
   /**
    * 사용자 이미지를 변경할 때 사용되는 상태(state)
    */
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState((0,_config__WEBPACK_IMPORTED_MODULE_3__["default"])('app.user.image')),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      userImage = _React$useState2[0],
-      setUserImage = _React$useState2[1];
+
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState((0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.image')),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      userImage = _React$useState4[0],
+      setUserImage = _React$useState4[1];
   /**
-   * 사용자 이미지를 업로드할 때 사용되는 ref
+   * 닉네임을 변경할 때 사용되는 상태(state)
+   */
+
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState({
+    current: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.nickname'),
+    "new": '',
+    duplicated: false
+  }),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      nickname = _React$useState6[0],
+      setNickname = _React$useState6[1];
+  /**
+   * DOM 제어를 위한 ref
    */
 
 
   var ref = {
-    imageFileInput: react__WEBPACK_IMPORTED_MODULE_0__.useRef(null)
+    imageFileInput: react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
+    nicknameInput: react__WEBPACK_IMPORTED_MODULE_0__.useRef(null)
   };
   /**
    * 사용자 이미지를 선택한 경우 실행되는 함수
@@ -1986,8 +2155,8 @@ function Profile(_ref13) {
     var formData = new FormData();
     var imageFile = event.target.files[0];
     formData.append('user_image', imageFile);
-    formData.append('user_uuid', (0,_config__WEBPACK_IMPORTED_MODULE_3__["default"])('app.auth'));
-    _services_api__WEBPACK_IMPORTED_MODULE_2__.upload('user/image', formData).then(function (response) {
+    formData.append('user_uuid', (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.auth'));
+    _services_api__WEBPACK_IMPORTED_MODULE_4__.upload('user/image', formData).then(function (response) {
       if (response.status === 201) {
         setUserImage(response.data + '?reload=' + Math.random().toString(36).substr(2, 30));
         alert('사용자 이미지가 변경되었습니다.');
@@ -2004,39 +2173,59 @@ function Profile(_ref13) {
   var handleImageFileUploadButtonClick = function handleImageFileUploadButtonClick(event) {
     event.preventDefault();
 
-    if ((0,_config__WEBPACK_IMPORTED_MODULE_3__["default"])('app.is_mobile')) {
+    if ((0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.is_mobile')) {
       alert('현재 사용자 이미지 변경은 데스크탑에서만 가능합니다.');
     } else {
       ref.imageFileInput.current.click();
     }
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(ProfileContainer, {
+  var handleDialogClickOpen = function handleDialogClickOpen(event) {
+    setOpen(_objectSpread(_objectSpread({}, open), {}, _defineProperty({}, event.target.dataset.modal, true)));
+  };
+
+  var handleDialogClose = function handleDialogClose() {
+    for (var k in open) {
+      if (open[k] === true) {
+        setOpen(_objectSpread(_objectSpread({}, open), {}, _defineProperty({}, k, false)));
+        break;
+      }
+    }
+  };
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    /**
+     * 페이지 타이틀을 설정합니다.
+     * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+     */
+    dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_2__.setTitle)((0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.name')));
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(ProfileContainer, {
       sx: {
         marginBottom: '20px'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(UserImage, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(UserImage, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
           hidden: true,
           ref: ref.imageFileInput,
           type: "file",
           accept: "image/*",
           name: "image",
           onChange: handleImageFileChange
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_8__["default"], {
           title: userImage ? '사진 바꾸기' : '사진 등록하기',
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(TransparentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(TransparentBox, {
             onClick: handleImageFileUploadButtonClick
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ImageCircle, {
-          children: userImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ImageCircle, {
+          children: userImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
             src: userImage
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_icons_PersonRounded__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_icons_PersonRounded__WEBPACK_IMPORTED_MODULE_9__["default"], {})
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(UserInformation, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(ProfileLeftBox, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(UserInformation, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(ProfileLeftBox, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
             sx: {
               fontSize: {
                 xs: '1.3em',
@@ -2044,48 +2233,132 @@ function Profile(_ref13) {
               },
               fontWeight: 'bold'
             },
-            children: (0,_config__WEBPACK_IMPORTED_MODULE_3__["default"])('app.user.name')
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            children: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.name')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
             sx: {
               fontSize: {
                 xs: '0.9em',
                 md: '1em'
               }
             },
-            children: (0,_config__WEBPACK_IMPORTED_MODULE_3__["default"])('app.user.email')
+            children: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.email')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            sx: {
+              fontSize: {
+                xs: '0.9em',
+                md: '1em'
+              }
+            },
+            children: ["@", (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.user.nickname'), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_11__["default"], {
+              "data-modal": "change_nickname",
+              onClick: handleDialogClickOpen,
+              sx: {
+                cursor: 'pointer',
+                fontSize: '0.7em',
+                textDecoration: 'none',
+                color: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('templete.palette.secondary.main'),
+                '&:hover': {
+                  textDecoration: 'underline'
+                }
+              },
+              children: "\uBCC0\uACBD\uD558\uAE30"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_12__["default"], {
+              open: open.change_nickname,
+              onClose: handleDialogClose,
+              maxWidth: "xs",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_13__["default"], {
+                children: "\uB2C9\uB124\uC784 \uBCC0\uACBD\uD558\uAE30"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_14__["default"], {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                  sx: {
+                    marginBottom: '10px'
+                  },
+                  children: "\uB2C9\uB124\uC784\uC740 \uB2E4\uB978 \uC0AC\uC6A9\uC790\uC640 \uC911\uBCF5\uB420 \uC218 \uC5C6\uC73C\uBA70, Aether\uC5D0\uC11C \uC0AC\uC6A9\uC790\uB97C \uC2DD\uBCC4\uD558\uAE30 \uC704\uD574 \uC0AC\uC6A9\uB429\uB2C8\uB2E4. \uC0AC\uC6A9\uC790 \uD504\uB85C\uD544\uC5D0 \uC811\uADFC\uD560 \uB54C \uB2C9\uB124\uC784\uC774 \uC0AC\uC6A9\uB418\uBBC0\uB85C \uC2E0\uC911\uD788 \uACB0\uC815\uD574 \uBCC0\uACBD\uD558\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4."
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                  sx: {
+                    marginBottom: '10px',
+                    fontSize: '0.9em'
+                  },
+                  children: ["\uD604\uC7AC \uB2C9\uB124\uC784: ", nickname.current]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_15__["default"], {
+                  sx: {
+                    marginBottom: '10px',
+                    color: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('templete.palette.secondary.main'),
+                    fontSize: '0.9em'
+                  },
+                  children: "\uD68C\uC6D0\uAC00\uC785 \uC2DC \uC790\uB3D9\uC73C\uB85C \uC124\uC815\uB41C \uB2C9\uB124\uC784\uC740 \uBCC0\uACBD\uC744 \uAD8C\uC7A5\uD569\uB2C8\uB2E4."
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_16__["default"], {
+                  autoFocus: true,
+                  fullWidth: true,
+                  ref: ref.nicknameInput,
+                  margin: "dense",
+                  label: "\uBCC0\uACBD\uD560 \uB2C9\uB124\uC784",
+                  variant: "standard",
+                  onChange: function onChange(event) {
+                    setNickname(_objectSpread(_objectSpread({}, nickname), {}, {
+                      "new": event.target.value
+                    }));
+                  }
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+                  sx: {
+                    marginTop: '5px',
+                    fontSize: '0.8em',
+                    fontWeight: 'bold',
+                    textAlign: 'right',
+                    color: '#cc0000',
+                    display: nickname["new"].length > 0 && !nickname.duplicated ? 'block' : 'none'
+                  },
+                  children: "\uC774\uBBF8 \uC0AC\uC6A9\uC911\uC778 \uB2C9\uB124\uC784\uC785\uB2C8\uB2E4."
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_17__["default"], {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_18__["default"], {
+                  onClick: handleDialogClose,
+                  children: "\uBCC0\uACBD\uD558\uAE30"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_18__["default"], {
+                  onClick: handleDialogClose,
+                  children: "\uCDE8\uC18C"
+                })]
+              })]
+            })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ProfileRightBox, {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(ProfileRightBox, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            children: "\uD22C\uC790 \uC5B4\uB4DC\uBC14\uC774\uC800 \uC9C0\uC6D0\uD558\uAE30"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            children: "\uB808\uBC00(Revolutionize Military)"
+          })]
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_19__["default"], {
       container: true,
       columnSpacing: 2,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_19__["default"], {
         item: true,
         xs: 12,
         md: 6,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ContentBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
             children: "a"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ContentBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
             children: "b"
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_19__["default"], {
         item: true,
         xs: 12,
         md: 6,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ContentBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
             children: "c"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ContentBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
             children: "d"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(ContentBox, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContentBox, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_Paper__WEBPACK_IMPORTED_MODULE_3__["default"], {
             children: "e"
           })
         })]
@@ -2579,13 +2852,20 @@ __webpack_require__.r(__webpack_exports__);
 
 function init() {
   var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var auth = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
-    return state.app.auth;
-  });
   var currentUri = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
     return state.app.uri;
   });
+  var title = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.app.title;
+  });
+  var auth = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(function (state) {
+    return state.app.auth;
+  });
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  /**
+   * 웹브라우저 URL이 변경되면 실행하는 명령들
+   */
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // 헤더에 추가되는 아이콘 리스트를 리덕스 컨테이너에 저장
     if ('headerIcons' in props) {
@@ -2609,6 +2889,17 @@ function init() {
 
     _browser__WEBPACK_IMPORTED_MODULE_2__.scrollTop();
   }, [currentUri]);
+  /**
+   * 웹브라우저 타이틀이 변경될 때마다 실행되는 명령들
+   */
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    _browser__WEBPACK_IMPORTED_MODULE_2__.changeTitle(title);
+  }, [title]);
+  /**
+   * 컴포넌트 리렌더링이 발생할 때마다 실행되는 명령들
+   */
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var cookie = new universal_cookie__WEBPACK_IMPORTED_MODULE_6__["default"]();
     var access_token = cookie.get('personal_access_token');
@@ -2618,20 +2909,20 @@ function init() {
 
     if (!access_token || !unique_code) {
       dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_4__.setAuth)(false));
-    }
-
-    _api__WEBPACK_IMPORTED_MODULE_3__.post('auth/check', {
-      user_agent: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.agent')
-    }, access_token).then(function (response) {
-      if (response.data.user_uuid === (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.auth')) {
-        if (auth !== true) {
-          dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_4__.setAuth)(true));
+    } else {
+      _api__WEBPACK_IMPORTED_MODULE_3__.post('auth/check', {
+        user_agent: (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.agent')
+      }, access_token).then(function (response) {
+        if (response.data.user_uuid === (0,_config__WEBPACK_IMPORTED_MODULE_5__["default"])('app.auth')) {
+          if (auth !== true) {
+            dispatch((0,_redux_actions_app__WEBPACK_IMPORTED_MODULE_4__.setAuth)(true));
+          }
         }
-      }
-    })["catch"](function (error) {
-      console.log(error.response);
-    });
-  });
+      })["catch"](function (error) {
+        console.log(error.response);
+      });
+    }
+  }, []);
 }
 
 /***/ }),

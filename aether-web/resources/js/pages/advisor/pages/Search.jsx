@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Cookie from 'universal-cookie';
 import { withStyles } from '@material-ui/styles';
 import { styled } from '@material-ui/core';
@@ -14,6 +15,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '../../../components/Paper';
+import { setTitle } from '../../../redux/actions/app';
 import * as api from '../../../services/api';
 import config from '../../../config';
 
@@ -192,6 +194,7 @@ export default function Search() {
     const [themes, setThemes] = React.useState(null);
     const [advisors, setAdvisors] = React.useState(null);
     const [page, setPage] = React.useState(1);
+    const dispatch = useDispatch();
 
     const getAdvisors = async (updated = false) => {
         if (
@@ -425,6 +428,11 @@ export default function Search() {
         });
     };
 
+    /**
+     * 첫 번째 페이지의 투자 어드바이저 목록을 가져올 때 출력할 5개의 스켈레톤을 생성합니다.
+     *
+     * @returns JSX.Element
+     */
     const fetchSkeletonBox = () => {
         return [1, 2, 3, 4, 5].map((skeleton, index) => {
             return <Item skeleton={true} key={`advisor-item-skeleton-${index}`} />;
@@ -432,11 +440,25 @@ export default function Search() {
     };
 
     React.useEffect(() => {
+        /**
+         * 선택된 필터가 변경되는 경우 투자 어드바이저 목록을 서버에서 다시 가져옵니다.
+         * 해당 함수 첫 번째 파라미터에 true 값을 넣어줌으로써 리프레시의 여무를 설정합니다.
+         */
         getAdvisors(true);
     }, [currentFilters]);
 
     React.useEffect(() => {
+        /**
+         * 투자 어드바이저 페이지를 처음 로드한 경우 테마필터를 새롭게 가져옵니다.
+         * 이후 컴포넌트 리렌더링이 발생하더라도 테마필터를 다시 가져오지 않아도 됩니다.
+         */
         getThemes();
+
+        /**
+         * 페이지 타이틀을 설정합니다.
+         * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+         */
+        dispatch(setTitle('투자 어드바이저'));
     }, []);
 
     return (

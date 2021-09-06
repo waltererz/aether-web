@@ -554,12 +554,12 @@ class AuthController extends Controller
              */
             if ($authorized) {
                 return response()->json([
-                    'user_uuid' => $user->uuid,
-                    'user_email' => $user->email,
-                    'user_firstname' => $user->firstname,
-                    'user_lastname' => $user->lastname,
-                    'user_nickname' => $user->nickname,
-                    'user_image' => $user_image,
+                    'uuid' => $user->uuid,
+                    'email' => $user->email,
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname,
+                    'nickname' => $user->nickname,
+                    'image' => $user_image,
                 ], 200)
                     ->header('Aether-Access-Token', $access_token)
                     ->header('Aether-User-Unique-Code', $unique_code)

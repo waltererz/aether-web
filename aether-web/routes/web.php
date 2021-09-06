@@ -22,38 +22,38 @@ use App\Http\Controllers\SettingController;
 Route::middleware('auth')->group(function () {
     Route::prefix('/')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get('/@{user_nickname}', [UserController::class, 'profile'])->where('user_nickname', '[0-9a-z\-\_]+');
+        Route::get('/@{user_nickname}', [UserController::class, 'profile'])->where('user_nickname', '[0-9A-Za-z\-\_]+')->name('profile');
     });
 
     Route::prefix('app')->group(function () {
-        Route::get('/setting', [SettingController::class, 'index']);
+        Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     });
 
     Route::prefix('assets')->group(function () {
-        Route::get('/', [AssetController::class, 'index']);
-        Route::get('/moneybook', [AssetController::class, 'index']);
+        Route::get('/', [AssetController::class, 'index'])->name('asset.home');
+        Route::get('/moneybook', [AssetController::class, 'moneybook'])->name('asset.moneybook');
     });
 
     Route::prefix('investments')->group(function () {
-        Route::get('/', [InvestmentController::class, 'index']);
+        Route::get('/', [InvestmentController::class, 'index'])->name('investment.home');
 
         Route::prefix('portfolio')->group(function () {
-            Route::get('/', [InvestmentController::class, 'index']);
-            Route::get('/create', [InvestmentController::class, 'index']);
+            Route::get('/', [InvestmentController::class, 'portfolio'])->name('investment.portfolio');
+            Route::get('/create', [InvestmentController::class, 'createPortfolio']);
         });
     });
 
     Route::prefix('advisors')->group(function () {
-        Route::get('/', [AdvisorController::class, 'index']);
-        Route::get('/search', [AdvisorController::class, 'index']);
+        Route::get('/', [AdvisorController::class, 'index'])->name('advisor.home');
+        Route::get('/search', [AdvisorController::class, 'search'])->name('advisor.search');
     });
 
     Route::prefix('user')->group(function () {
-        Route::get('/signout', [UserController::class, 'index'])->name('signout');
+        Route::get('/signout', [UserController::class, 'signout'])->name('signout');
     });
 });
 
 Route::prefix('user')->group(function () {
-    Route::get('/signup', [UserController::class, 'index'])->name('signup');
-    Route::get('/signin', [UserController::class, 'index'])->name('signin');
+    Route::get('/signup', [UserController::class, 'signup'])->name('signup');
+    Route::get('/signin', [UserController::class, 'signin'])->name('signin');
 });

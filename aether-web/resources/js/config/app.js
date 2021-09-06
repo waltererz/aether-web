@@ -13,10 +13,10 @@ const _config = {
     },
 
     user: {
-        email: window._aether.user_email,
-        name: window._aether.user_name,
-        nickname: window._aether.user_nickname,
-        image: window._aether.user_image,
+        email: window._aether.user.email,
+        name: window._aether.user.name,
+        nickname: window._aether.user.nickname,
+        image: window._aether.user.image,
     }
 }
 

@@ -7,10 +7,14 @@ import { setHeaderIcons, setAuth, setTab, setURI } from '../redux/actions/app';
 import config from '../config';
 
 export function init(props = {}) {
-    const auth = useSelector((state) => state.app.auth);
     const currentUri = useSelector((state) => state.app.uri);
+    const title = useSelector((state) => state.app.title);
+    const auth = useSelector((state) => state.app.auth);
     const dispatch = useDispatch();
 
+    /**
+     * 웹브라우저 URL이 변경되면 실행하는 명령들
+     */
     useEffect(() => {
         // 헤더에 추가되는 아이콘 리스트를 리덕스 컨테이너에 저장
         if ('headerIcons' in props) {
@@ -36,6 +40,16 @@ export function init(props = {}) {
         browser.scrollTop();
     }, [currentUri]);
 
+    /**
+     * 웹브라우저 타이틀이 변경될 때마다 실행되는 명령들
+     */
+    useEffect(() => {
+        browser.changeTitle(title);
+    }, [title])
+
+    /**
+     * 컴포넌트 리렌더링이 발생할 때마다 실행되는 명령들
+     */
     useEffect(() => {
         const cookie = new Cookie();
         const access_token = cookie.get('personal_access_token');
@@ -47,16 +61,16 @@ export function init(props = {}) {
         // 현재 로그인 유무를 확인합니다.
         if (!access_token || !unique_code) {
             dispatch(setAuth(false));
-        }
-
-        api.post('auth/check', { user_agent: config('app.agent') }, access_token).then((response) => {
-            if (response.data.user_uuid === config('app.auth')) {
-                if (auth !== true) {
-                    dispatch(setAuth(true));
+        } else {
+            api.post('auth/check', { user_agent: config('app.agent') }, access_token).then((response) => {
+                if (response.data.user_uuid === config('app.auth')) {
+                    if (auth !== true) {
+                        dispatch(setAuth(true));
+                    }
                 }
-            }
-        }).catch((error) => {
-            console.log(error.response);
-        });
-    })
+            }).catch((error) => {
+                console.log(error.response);
+            });
+        }
+    }, []);
 }

@@ -68,6 +68,8 @@ class Authenticate
 
         $response_status = $response->status();
 
+        unset($cookies, $user_agent);
+
         if ($response_status == '401') {
             /**
              * 인증된 사용자가 아닌 경우 현재 생성되어 있는 인증 관련 쿠키를 제거하고,
@@ -95,23 +97,30 @@ class Authenticate
              * 뷰에서 사용할 수 있는 인증 변수를 생성합니다. (auth)
              */
             if ($role != 'guest') {
-                $expires = (int)$response->header('Aether-Auth-Expires');
+                $expires = (int)$response->header('Aether-Auth-Expires');       // 반드시 정수화를 시켜줘야 합니다.
                 $access_token = $response->header('Aether-Access-Token');
                 $unique_code = $response->header('Aether-User-Unique-Code');
 
                 Cookie::queue('personal_access_token', $access_token, $expires, null, null, false, false);
                 Cookie::queue('personal_unique_code', $unique_code, $expires, null, null, false, false);
 
+                unset($expires, $access_token, $unique_code);
+
                 /**
                  * 인증이 완료된 경우에는 View에 회원 정보를 넘겨줍니다.
                  */
+
+                /**
+                 * 데이터베이스에서 가져온 현재 로그인된 사용자의 정보를 가진 변수
+                 * 
+                 * @var \stdClass $user
+                 */
                 $user = json_decode($response->body());
-                view()->share('auth', $user->user_uuid);
-                view()->share('user_email', $user->user_email);
-                view()->share('user_firstname', $user->user_firstname);
-                view()->share('user_lastname', $user->user_lastname);
-                view()->share('user_nickname', $user->user_nickname);
-                view()->share('user_image', $user->user_image);
+
+                view()->share('__auth', $user->uuid);
+                view()->share('__user', $user);
+
+                unset($user);
 
                 return $next($request);
             } else {

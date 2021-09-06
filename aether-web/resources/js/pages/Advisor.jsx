@@ -9,6 +9,9 @@ import * as Page from './advisor/pages';
 import config from '../config';
 
 export default function Advisor() {
+    /**
+     * 기본적인 사항들을 초기화합니다.
+     */
     common.init({
         headerIcons: {
             desktop: [
