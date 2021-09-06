@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SingleBox from '../components/SingleBox';
 import { FloatingBox } from '../components/Elements';
 import config from '../config';
+import { setTitle } from '../redux/actions/app';
 import * as common from '../services/common';
 import * as api from '../services/api';
 import * as validation from '../services/validation';
@@ -47,6 +49,7 @@ const Alert = styled('div')({
 });
 
 export default function SignUp() {
+    const dispatch = useDispatch();
     let history = useHistory();
 
     const [value, setValue] = React.useState({
@@ -213,6 +216,14 @@ export default function SignUp() {
         const check = value_password !== value_password_confirmation ? false : true;
         setPasswordCheck(check);
     }, [value.password_confirmation]);
+
+    React.useEffect(() => {
+        /**
+         * 페이지 타이틀을 설정합니다.
+         * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+         */
+        dispatch(setTitle('회원가입'));
+    }, []);
 
     common.init();
 

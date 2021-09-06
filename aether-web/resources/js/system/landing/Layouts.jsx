@@ -29,8 +29,8 @@ export const Body = styled('div')(({ theme }) => ({
         maxWidth: '1000px',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'end',
-        padding: '100px 0px 50px 0px',
+        alignItems: 'flex-start',
+        padding: '150px 0px 50px 0px',
     },
 }));
 

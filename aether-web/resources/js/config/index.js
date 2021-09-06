@@ -10,7 +10,7 @@ function config(path) {
     try {
         currentPointer = require('./' + configFile).default;
     } catch {
-        console.log('config 파일을 불러오는데 오류가 발생했습니다. [' + configFile + ']');
+        console.log('config 파일을 불러오는데 오류가 발생했습니다. [config/' + configFile + '.js]');
     }
     
     if (!currentPointer) {

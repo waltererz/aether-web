@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookie from 'universal-cookie';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SingleBox from '../components/SingleBox';
 import { FloatingBox, GrowBox } from '../components/Elements';
+import { setTitle } from '../redux/actions/app';
 import config from '../config';
 import * as common from '../services/common';
 import * as api from '../services/api';
@@ -91,6 +93,7 @@ const InputItem = styled('div')({
 });
 
 export default function SignIn() {
+    const dispatch = useDispatch();
     let history = useHistory();
 
     const ref = {
@@ -174,6 +177,12 @@ export default function SignIn() {
         ref.password.current.querySelector('input').addEventListener('keyup', (event) => {
             keyEvent(event);
         });
+
+        /**
+         * 페이지 타이틀을 설정합니다.
+         * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
+         */
+        dispatch(setTitle('로그인'));
     }, []);
 
     common.init();

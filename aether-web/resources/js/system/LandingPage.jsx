@@ -39,6 +39,11 @@ export default function LandingPage() {
                                 justifyContent: 'flex-start',
                                 width: '100%',
                                 alignItems: 'baseline',
+                                marginBottom: '40px',
+
+                                lineHeight: {
+                                    md: 1,
+                                },
 
                                 flexDirection: {
                                     xs: 'column',
@@ -47,7 +52,6 @@ export default function LandingPage() {
                             }}
                         >
                             <Box
-                                component="h3"
                                 sx={{
                                     margin: 0,
                                     padding: 0,
@@ -68,6 +72,25 @@ export default function LandingPage() {
                             >
                                 개인형 투자정보 플랫폼
                             </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                marginBottom: '10px',
+                                fontSize: '1.4em',
+                                fontWeight: 'bold',
+                                color: config('templete.palette.primary.main'),
+                            }}
+                        >
+                            돈은 세상의 근본이자 처음과 끝
+                        </Box>
+                        <Box
+                            sx={{
+                                fontSize: '1.1em',
+                                fontWeight: 'bold',
+                                color: config('templete.palette.secondary.main'),
+                            }}
+                        >
+                            성공의 열쇠를 찾기 위한 여정을 우리가 함께합니다.
                         </Box>
                     </Primary>
                     <Secondary>

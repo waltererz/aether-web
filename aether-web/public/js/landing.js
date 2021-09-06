@@ -31,13 +31,19 @@ var _config = {
     api: 'http://back.erzsphilos.com/api' // API 서버 URL
 
   },
-  user: {
+  user: {}
+};
+
+if ('user' in window._aether) {
+  _config.user = {
     email: window._aether.user.email,
     name: window._aether.user.name,
     nickname: window._aether.user.nickname,
     image: window._aether.user.image
-  }
-};
+  };
+}
+
+Object.freeze(_config);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_config);
 
 /***/ }),
@@ -65,7 +71,7 @@ function config(path) {
   try {
     currentPointer = __webpack_require__("./resources/js/config sync recursive ^\\.\\/.*$")("./" + configFile)["default"];
   } catch (_unused) {
-    console.log('config 파일을 불러오는데 오류가 발생했습니다. [' + configFile + ']');
+    console.log('config 파일을 불러오는데 오류가 발생했습니다. [config/' + configFile + '.js]');
   }
 
   if (!currentPointer) {
@@ -192,6 +198,7 @@ var _config = {
     2: 'Nanum Gothic'
   }
 };
+Object.freeze(_config);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_config);
 
 /***/ }),
@@ -267,20 +274,23 @@ function LandingPage() {
     }),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Container, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Body, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Primary, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Primary, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
               display: 'flex',
               justifyContent: 'flex-start',
               width: '100%',
               alignItems: 'baseline',
+              marginBottom: '40px',
+              lineHeight: {
+                md: 1
+              },
               flexDirection: {
                 xs: 'column',
                 md: 'row'
               }
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
-              component: "h3",
               sx: {
                 margin: 0,
                 padding: 0,
@@ -298,7 +308,22 @@ function LandingPage() {
               },
               children: "\uAC1C\uC778\uD615 \uD22C\uC790\uC815\uBCF4 \uD50C\uB7AB\uD3FC"
             })]
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            sx: {
+              marginBottom: '10px',
+              fontSize: '1.4em',
+              fontWeight: 'bold',
+              color: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.palette.primary.main')
+            },
+            children: "\uB3C8\uC740 \uC138\uC0C1\uC758 \uADFC\uBCF8\uC774\uC790 \uCC98\uC74C\uACFC \uB05D"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            sx: {
+              fontSize: '1.1em',
+              fontWeight: 'bold',
+              color: (0,_config__WEBPACK_IMPORTED_MODULE_1__["default"])('templete.palette.secondary.main')
+            },
+            children: "\uC131\uACF5\uC758 \uC5F4\uC1E0\uB97C \uCC3E\uAE30 \uC704\uD55C \uC5EC\uC815\uC744 \uC6B0\uB9AC\uAC00 \uD568\uAED8\uD569\uB2C8\uB2E4."
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_landing_Layouts__WEBPACK_IMPORTED_MODULE_0__.Secondary, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
             sx: {
@@ -440,8 +465,8 @@ var Body = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(
     maxWidth: '1000px',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'end',
-    padding: '100px 0px 50px 0px'
+    alignItems: 'flex-start',
+    padding: '150px 0px 50px 0px'
   }), _ref3;
 });
 var Primary = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["default"])('div')(function (_ref4) {

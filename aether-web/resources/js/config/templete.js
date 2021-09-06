@@ -112,4 +112,6 @@ const _config = {
     },
 }
 
+Object.freeze(_config);
+
 export default _config;
