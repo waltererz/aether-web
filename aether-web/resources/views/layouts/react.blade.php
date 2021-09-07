@@ -14,6 +14,8 @@
     @yield('footer')
     <script src="{{ mix('/js/extract/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ mix('/js/extract/chunk.1.js') }}" type="text/javascript"></script>
+    <script src="{{ mix('/js/extract/chunk.2.js') }}" type="text/javascript"></script>
+    <script src="{{ mix('/js/extract/chunk.3.js') }}" type="text/javascript"></script>
     <script src="{{ mix('/js/extract/chunk.a.js') }}" type="text/javascript"></script>
     @yield('scripts')
 </body>

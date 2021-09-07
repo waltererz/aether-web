@@ -280,7 +280,7 @@ export default function Profile({ history }) {
             cookie.get('personal_access_token'),
         ).then((response) => {
             alert('닉네임이 변경되었습니다.');
-
+            history.replace('/@' + response.data);
             location.reload();
         });
     };
@@ -477,21 +477,18 @@ export default function Profile({ history }) {
             <Grid container columnSpacing={2}>
                 <Grid item xs={12} md={6}>
                     <ContentBox>
-                        <Paper>a</Paper>
+                        <Paper>경력</Paper>
                     </ContentBox>
                     <ContentBox>
-                        <Paper>b</Paper>
+                        <Paper>참여클럽</Paper>
                     </ContentBox>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <ContentBox>
-                        <Paper>c</Paper>
+                        <Paper>투자자산</Paper>
                     </ContentBox>
                     <ContentBox>
-                        <Paper>d</Paper>
-                    </ContentBox>
-                    <ContentBox>
-                        <Paper>e</Paper>
+                        <Paper>포트폴리오 모아보기</Paper>
                     </ContentBox>
                 </Grid>
             </Grid>
