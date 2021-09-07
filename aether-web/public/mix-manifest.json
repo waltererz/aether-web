@@ -1,10 +1,10 @@
 {
-    "/js/app.js": "/js/app.js?id=1a70c496936d03e904a3",
-    "/js/landing.js": "/js/landing.js?id=fa7b31e1fcd81e6104ad",
-    "/admin/js/app.js": "/admin/js/app.js?id=ee70b5e4d49cee0d3cf7",
-    "/js/extract/manifest.js": "/js/extract/manifest.js?id=5a384606d57b2efcc166",
-    "/js/extract/chunk.2.js": "/js/extract/chunk.2.js?id=7bf7abb002ccdcdbb9f3",
-    "/js/extract/chunk.1.js": "/js/extract/chunk.1.js?id=38ee2dc7b1662c3843ab",
-    "/js/extract/chunk.3.js": "/js/extract/chunk.3.js?id=72262fceae988b6ee530",
-    "/js/extract/chunk.a.js": "/js/extract/chunk.a.js?id=83af3d77b63ee922db31"
+    "/js/app.js": "/js/app.js?id=8c0d5eaa17a500ee4dd5",
+    "/js/landing.js": "/js/landing.js?id=a5c96aa58b5118cf4296",
+    "/admin/js/app.js": "/admin/js/app.js?id=5e767b6f0d5485f5ecaa",
+    "/js/extract/manifest.js": "/js/extract/manifest.js?id=1e2ff45051ec53f44e05",
+    "/js/extract/chunk.1.js": "/js/extract/chunk.1.js?id=a5ff9d6f5f6b4dfed0ae",
+    "/js/extract/chunk.2.js": "/js/extract/chunk.2.js?id=376ff937e42d40b5fcef",
+    "/js/extract/chunk.3.js": "/js/extract/chunk.3.js?id=85984c0021ee13150b52",
+    "/js/extract/chunk.a.js": "/js/extract/chunk.a.js?id=d6de430622afedf999fd"
 }
