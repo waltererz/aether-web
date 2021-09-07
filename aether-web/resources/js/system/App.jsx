@@ -83,8 +83,8 @@ export default function App() {
                     <Route path="/advisors" component={Page.Advisor} />
                     <Route
                         path="*"
-                        render={() => {
-                            window.location.href = '/';
+                        render={({ match }) => {
+                            window.location.href = match.url;
                         }}
                     />
                 </Switch>

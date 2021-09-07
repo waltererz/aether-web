@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,12 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::get('/signout', [UserController::class, 'signout'])->name('signout');
+    });
+
+    Route::prefix('__admin')->group(function () {
+        Route::prefix('/')->group(function () {
+            Route::get('/', [AdminController::class, 'index'])->name('admin.home');
+        });
     });
 });
 

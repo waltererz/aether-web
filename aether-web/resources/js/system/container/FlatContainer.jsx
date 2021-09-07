@@ -9,7 +9,7 @@ const SubContainer = styled('div')(({ theme }) => ({
     width: '100%',
 }));
 
-export default function SingleContainer({ pages }) {
+export default function FlatContainer({ pages }) {
     return (
         <Container
             maxWidth={false}

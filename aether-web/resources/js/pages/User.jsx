@@ -1,7 +1,7 @@
 import React from 'react';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
-import * as Page from './user/pages';
+import * as Page from './user';
 import * as common from '../services/common';
 
 export default function User() {

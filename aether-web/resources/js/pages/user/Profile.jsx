@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setTitle } from '../../../redux/actions/app';
+import Cookie from 'universal-cookie';
 import { styled } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -14,9 +14,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
-import Paper from '../../../components/Paper';
-import * as api from '../../../services/api';
-import config from '../../../config';
+import { setTitle } from '../../redux/actions/app';
+import Paper from '../../components/Paper';
+import * as api from '../../services/api';
+import config from '../../config';
 
 const ProfileContainer = styled('div')({
     display: 'flex',
@@ -158,7 +159,8 @@ const ContentBox = styled('div')({
     marginBottom: '15px',
 });
 
-export default function Profile({ match }) {
+export default function Profile({ history }) {
+    const cookie = new Cookie();
     const dispatch = useDispatch();
 
     /**
@@ -177,7 +179,6 @@ export default function Profile({ match }) {
      * 닉네임을 변경할 때 사용되는 상태(state)
      */
     const [nickname, setNickname] = React.useState({
-        current: config('app.user.nickname'),
         new: '',
         duplicated: false,
     });
@@ -233,7 +234,7 @@ export default function Profile({ match }) {
         });
     };
 
-    const handleDialogClose = () => {
+    const handleDialogClose = (t) => {
         for (let k in open) {
             if (open[k] === true) {
                 setOpen({
@@ -244,6 +245,44 @@ export default function Profile({ match }) {
                 break;
             }
         }
+    };
+
+    const changeNickname = () => {
+        /**
+         * 닉네임이 입력되었는지 확인합니다.
+         */
+        if (nickname.new.length < 1) {
+            alert('닉네임을 입력해주십시오.');
+            return;
+        }
+
+        /**
+         * 현재 닉네임과 일치하는지 확인합니다.
+         */
+        if (nickname.new == config('app.user.nickname')) {
+            alert('현재 닉네임과 동일합니다.');
+            return;
+        }
+
+        /**
+         * 닉네임이 기존 사용자의 닉네임과 중복되지 않았는지 확인합니다.
+         */
+        if (!nickname.duplicated) {
+            alert('이미 사용중인 닉네임입니다.');
+            return;
+        }
+
+        api.patch(
+            'users/nickname/' + config('app.auth'),
+            {
+                nickname: nickname.new,
+            },
+            cookie.get('personal_access_token'),
+        ).then((response) => {
+            alert('닉네임이 변경되었습니다.');
+
+            location.reload();
+        });
     };
 
     React.useEffect(() => {
@@ -281,14 +320,34 @@ export default function Profile({ match }) {
                     <ProfileLeftBox>
                         <Box
                             sx={{
-                                fontSize: {
-                                    xs: '1.3em',
-                                    md: '1.5em',
-                                },
-                                fontWeight: 'bold',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'baseline',
                             }}
                         >
-                            {config('app.user.name')}
+                            <Box
+                                sx={{
+                                    fontSize: {
+                                        xs: '1.3em',
+                                        md: '1.5em',
+                                    },
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                {config('app.user.name')}
+                            </Box>
+                            <Box
+                                sx={{
+                                    marginLeft: '10px',
+
+                                    fontSize: {
+                                        xs: '0.9em',
+                                        md: '1em',
+                                    },
+                                }}
+                            >
+                                {config('app.user.group')}
+                            </Box>
                         </Box>
                         <Box
                             sx={{
@@ -298,23 +357,15 @@ export default function Profile({ match }) {
                                 },
                             }}
                         >
-                            {config('app.user.email')}
-                        </Box>
-                        <Box
-                            sx={{
-                                fontSize: {
-                                    xs: '0.9em',
-                                    md: '1em',
-                                },
-                            }}
-                        >
-                            @{config('app.user.nickname')}{' '}
+                            @{config('app.user.nickname')}
                             <Link
                                 data-modal="change_nickname"
                                 onClick={handleDialogClickOpen}
                                 sx={{
+                                    display: 'inline-flex',
+                                    marginLeft: '10px',
                                     cursor: 'pointer',
-                                    fontSize: '0.7em',
+                                    fontSize: '0.8em',
                                     textDecoration: 'none',
                                     color: config('templete.palette.secondary.main'),
 
@@ -339,7 +390,7 @@ export default function Profile({ match }) {
                                     >
                                         닉네임은 다른 사용자와 중복될 수 없으며, Aether에서 사용자를
                                         식별하기 위해 사용됩니다. 사용자 프로필에 접근할 때 닉네임이
-                                        사용되므로 신중히 결정해 변경하시기 바랍니다.
+                                        사용됩니다.
                                     </DialogContentText>
                                     <DialogContentText
                                         sx={{
@@ -347,7 +398,7 @@ export default function Profile({ match }) {
                                             fontSize: '0.9em',
                                         }}
                                     >
-                                        현재 닉네임: {nickname.current}
+                                        현재 닉네임: {config('app.user.nickname')}
                                     </DialogContentText>
                                     <DialogContentText
                                         sx={{
@@ -365,11 +416,33 @@ export default function Profile({ match }) {
                                         margin="dense"
                                         label="변경할 닉네임"
                                         variant="standard"
+                                        defaultValue={nickname.new}
                                         onChange={(event) => {
-                                            setNickname({
-                                                ...nickname,
-                                                new: event.target.value,
-                                            });
+                                            if (event.target.value.length > 0) {
+                                                api.post(
+                                                    'users/nickname',
+                                                    {
+                                                        nickname: event.target.value,
+                                                    },
+                                                    cookie.get('personal_access_token'),
+                                                ).then((response) => {
+                                                    if (response.status === 200) {
+                                                        if (response.data === true) {
+                                                            setNickname({
+                                                                ...nickname,
+                                                                new: event.target.value,
+                                                                duplicated: true,
+                                                            });
+                                                        } else {
+                                                            setNickname({
+                                                                ...nickname,
+                                                                new: event.target.value,
+                                                                duplicated: false,
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            }
                                         }}
                                     />
                                     <Box
@@ -389,7 +462,7 @@ export default function Profile({ match }) {
                                     </Box>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleDialogClose}>변경하기</Button>
+                                    <Button onClick={changeNickname}>변경하기</Button>
                                     <Button onClick={handleDialogClose}>취소</Button>
                                 </DialogActions>
                             </Dialog>

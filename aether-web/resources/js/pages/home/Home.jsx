@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setTitle } from '../../../redux/actions/app';
-import Paper from '../../../components/Paper';
+import { setTitle } from '../../redux/actions/app';
+import Paper from '../../components/Paper';
 
 export default function Home() {
     const dispatch = useDispatch();

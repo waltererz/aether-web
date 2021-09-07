@@ -5,8 +5,7 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import Container from '../system/Container';
-import RightSide from './home/RightSide';
-import * as Page from './home/pages';
+import * as Page from './home';
 import * as common from '../services/common';
 import config from '../config';
 
@@ -28,7 +27,6 @@ export default function Home() {
     return (
         <Container
             pages={[{ path: '/', component: Page.Home, exact: true }]}
-            secondary={<RightSide />}
             submenus={[
                 { path: '#', text: '즐겨찾기', icon: <FolderSpecialIcon /> },
                 { path: '#', text: '저장됨', icon: <LocalActivityIcon /> },

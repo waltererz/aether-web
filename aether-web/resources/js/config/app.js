@@ -20,6 +20,7 @@ if ('user' in window._aether) {
         email: window._aether.user.email,
         name: window._aether.user.name,
         nickname: window._aether.user.nickname,
+        group: window._aether.user.group,
         image: window._aether.user.image,
     }
 }

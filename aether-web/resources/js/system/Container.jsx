@@ -1,13 +1,16 @@
+import ExtendedContainer from './container/ExtendedContainer';
+import ContentContainer from './container/ContentContainer';
+import FlatContainer from './container/FlatContainer';
 import BasicContainer from './container/BasicContainer';
-import SimpleContainer from './container/SimpleContainer';
-import SingleContainer from './container/SingleContainer';
 
 export default function Container({ pages, secondary, submenus }) {
     if (!submenus && !secondary) {
-        return <SingleContainer pages={pages} />;
+        return <FlatContainer pages={pages} />;
+    } else if (submenus && !secondary) {
+        return <BasicContainer pages={pages} submenus={submenus} />;
     } else if (!submenus && secondary) {
-        return <SimpleContainer pages={pages} secondary={secondary} />;
+        return <ContentContainer pages={pages} secondary={secondary} />;
     } else {
-        return <BasicContainer pages={pages} secondary={secondary} submenus={submenus} />;
+        return <ExtendedContainer pages={pages} secondary={secondary} submenus={submenus} />;
     }
 }

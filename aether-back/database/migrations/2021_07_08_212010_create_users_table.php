@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('firstname', 100);
             $table->string('lastname', 100);
             $table->string('middlename', 100);
-            $table->string('nickname', 100);
+            $table->string('nickname', 100)->unique();
+            $table->boolean('public')->default(false);
             $table->string('email', 255);
             $table->bigInteger('group_id')->unsigned();
             $table->timestamp('email_verified_at')->nullable();

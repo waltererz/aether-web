@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../system/Container';
-import * as Page from './setting/pages';
+import * as Page from './setting';
 import * as common from '../services/common';
 
 export default function User() {

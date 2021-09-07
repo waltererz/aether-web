@@ -14,10 +14,10 @@ import Skeleton from '@material-ui/core/Skeleton';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Paper from '../../../components/Paper';
-import { setTitle } from '../../../redux/actions/app';
-import * as api from '../../../services/api';
-import config from '../../../config';
+import Paper from '../../components/Paper';
+import { setTitle } from '../../redux/actions/app';
+import * as api from '../../services/api';
+import config from '../../config';
 
 const ItemContainer = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -458,7 +458,7 @@ export default function Search() {
          * 페이지 타이틀을 설정합니다.
          * (주의) 라라벨에서 지정했던 내용들을 그대로 준수해야 합니다.
          */
-        dispatch(setTitle('투자 어드바이저'));
+        dispatch(setTitle('투자 어드바이저 찾아보기'));
     }, []);
 
     return (

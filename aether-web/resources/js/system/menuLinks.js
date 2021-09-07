@@ -31,6 +31,14 @@ const _menuLinks = [
             }
         ],
     },
+
+    {
+        name: '관리자',
+        slug: 'admin',
+        to: '/__admin',
+        children: [],
+        group: 'admin,owner',
+    }
 ];
 
 export default _menuLinks;

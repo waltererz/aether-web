@@ -199,15 +199,46 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 사용자 닉네임을 변경하는 메소드
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $user
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function updateNickname(Request $request, $user): \Illuminate\Http\JsonResponse
     {
-        //
+        $user = User::where('uuid', $user)->first();
+        $user->nickname = $request->post('nickname');
+        $result = $user->save();
+
+        if ($result) {
+            return response()->json($request->post('nickname'), 201);
+        } else {
+            return response()->json(null, 400);
+        }
+    }
+
+    /**
+     * 사용 가능한 사용자 닉네임인지 확인하는 메소드
+     * 
+     * @param  string  $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function checkNickname(Request $request)
+    {
+        $nickname = $request->post('nickname');
+
+        if (!$nickname) {
+            return response()->json(null, 400);
+        }
+
+        $user = User::where('nickname', $nickname)->first();
+
+        if (!$user) {
+            return response()->json(true);
+        } else {
+            return response()->json(false);
+        }
     }
 
     /**
@@ -219,6 +250,7 @@ class UserController extends Controller
     public function destroy(string $uuid): \Illuminate\Http\JsonResponse
     {
         User::where('uuid', $uuid)->delete();
+
         if (User::where('uuid', $uuid)->count()) {
             $result = false;
         } else {

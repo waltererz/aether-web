@@ -39,6 +39,7 @@ if ('user' in window._aether) {
     email: window._aether.user.email,
     name: window._aether.user.name,
     nickname: window._aether.user.nickname,
+    group: window._aether.user.group,
     image: window._aether.user.image
   };
 }
@@ -575,7 +576,7 @@ webpackContext.id = "./resources/js/config sync recursive ^\\.\\/.*$";
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["/js/vendor"], () => (__webpack_exec__("./resources/js/landing.jsx")));
+/******/ __webpack_require__.O(0, ["js/extract/chunk.1","js/extract/chunk.a"], () => (__webpack_exec__("./resources/js/landing.jsx")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

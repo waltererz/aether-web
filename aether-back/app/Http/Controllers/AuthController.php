@@ -418,7 +418,7 @@ class AuthController extends Controller
          * 식별코드를 사용해 데이터베이스에서 활성화된 사용자가 있는지 확인합니다.
          * 클라이언트에서 넘겨받은 식별코드는 암호화되어 있으므로 반드시 복호화한 후 절차를 진행해야 합니다.
          */
-        $user = User::where('unique_code', $this->_decrypt($unique_code))->first();
+        $user = User::with('group')->where('unique_code', $this->_decrypt($unique_code))->first();
 
         /**
          * 데이터베이스에 활성화된 사용자가 없는 경우에는 인증실패를 반환합니다.
@@ -559,6 +559,7 @@ class AuthController extends Controller
                     'firstname' => $user->firstname,
                     'lastname' => $user->lastname,
                     'nickname' => $user->nickname,
+                    'group' => $user->group->name,
                     'image' => $user_image,
                 ], 200)
                     ->header('Aether-Access-Token', $access_token)

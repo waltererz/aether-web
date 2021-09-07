@@ -4,8 +4,7 @@ import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
-import RightSide from './investment/RightSide';
-import * as Page from './investment/pages';
+import * as Page from './investment';
 import * as common from '../services/common';
 import config from '../config';
 
@@ -30,7 +29,6 @@ export default function Investment() {
                 { path: '/investments', component: Page.Home, exact: true },
                 { path: '/investments/portfolio', component: Page.Portfolio, exact: true },
             ]}
-            secondary={<RightSide />}
             submenus={[
                 { path: '/investments', text: '투자자산 대시보드', icon: <DashboardIcon /> },
                 {

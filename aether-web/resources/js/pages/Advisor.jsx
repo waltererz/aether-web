@@ -3,9 +3,8 @@ import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import PersonSearchRoundedIcon from '@material-ui/icons/PersonSearchRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
-import RightSide from './advisor/RightSide';
 import * as common from '../services/common';
-import * as Page from './advisor/pages';
+import * as Page from './advisor';
 import config from '../config';
 
 export default function Advisor() {
@@ -32,7 +31,6 @@ export default function Advisor() {
                 { path: '/advisors', component: Page.Home, exact: true },
                 { path: '/advisors/search', component: Page.Search, exact: true },
             ]}
-            secondary={<RightSide />}
             submenus={[
                 {
                     path: '/advisors/search',

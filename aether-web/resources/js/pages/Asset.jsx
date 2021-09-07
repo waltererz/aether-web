@@ -4,8 +4,7 @@ import AccountBalanceWalletRoundedIcon from '@material-ui/icons/AccountBalanceWa
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import Container from '../system/Container';
-import RightSide from './asset/RightSide';
-import * as Page from './asset/pages';
+import * as Page from './asset';
 import * as common from '../services/common';
 import config from '../config';
 
@@ -30,7 +29,6 @@ export default function Asset() {
                 { path: '/assets', component: Page.Home, exact: true },
                 { path: '/assets/moneybook', component: Page.Moneybook, exact: true },
             ]}
-            secondary={<RightSide />}
             submenus={[
                 { path: '/assets', text: '자산관리 대시보드', icon: <DashboardIcon /> },
                 {

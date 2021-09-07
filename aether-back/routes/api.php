@@ -33,7 +33,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::post('/index', [UserController::class, 'index']);
-        Route::post('/{user}', [UserController::class, 'show']);
+
+        Route::post('/nickname', [UserController::class, 'checkNickname']);
+        Route::patch('/nickname/{user}', [UserController::class, 'updateNickname'])->where('user', '[0-9a-z\-]+');
+
+        Route::post('/{user}', [UserController::class, 'show'])->where('user', '[0-9a-z\-]+');
         Route::delete('/{user}', [UserController::class, 'destroy'])->where('user', '[0-9a-z\-]+');
     });
 

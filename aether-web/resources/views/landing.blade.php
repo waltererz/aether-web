@@ -1,10 +1,10 @@
-@extends('layouts.standalone')
+@extends('layouts.react')
 
-@section('title', config('app.name'))
-@section('description', config('app.description'))
+@section('header')
+    @include('layouts.headerProperties')
+    @include('layouts.headerPropertiesDefaultExtended')
+@endsection
 
-@section('footer')
-    <script src="{{ mix('/js/manifest.js') }}" type="text/javascript"></script>
-    <script src="{{ mix('/js/vendor.js') }}" type="text/javascript"></script>
-    <script defer src="{{ mix('/js/landing.js') }}" type="text/javascript"></script>
+@section('scripts')
+    <script src="{{ mix('/js/landing.js') }}" type="text/javascript"></script>
 @endsection

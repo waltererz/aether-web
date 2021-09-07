@@ -7,5 +7,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
+    <script
+        src="{{ preg_replace('/^\/admin\/(.*?)$/', 'http://admin.erzsphilos.com:38591/$1', mix('/admin/js/app.js')) }}"
+        type="text/javascript"></script>
 @endsection

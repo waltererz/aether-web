@@ -103,8 +103,6 @@ export default function ExtendedContainer({ pages, secondary, submenus }) {
                             },
 
                             '&.primary': {
-                                flexGrow: 1,
-
                                 width: {
                                     xs: '100%',
                                     sm: config('templete.width.primary.desktop'),
@@ -122,6 +120,26 @@ export default function ExtendedContainer({ pages, secondary, submenus }) {
 
                                 flexShrink: {
                                     sm: 1,
+                                },
+                            },
+
+                            '&.secondary': {
+                                display: {
+                                    xs: 'none',
+                                    sm: 'block',
+                                },
+
+                                flexShrink: {
+                                    sm: 1,
+                                },
+
+                                marginLeft: {
+                                    sm: config('templete.margin.default.mobile'),
+                                    md: config('templete.margin.default.desktop'),
+                                },
+
+                                width: {
+                                    sm: config('templete.width.secondary.desktop'),
                                 },
                             },
 
@@ -169,6 +187,9 @@ export default function ExtendedContainer({ pages, secondary, submenus }) {
                                     );
                                 })}
                         </Switch>
+                    </Grid>
+                    <Grid item className="system__layouts secondary">
+                        {secondary}
                     </Grid>
                 </Grid>
             </Container>

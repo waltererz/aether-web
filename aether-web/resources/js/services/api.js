@@ -24,6 +24,23 @@ export const post = async (path, params = {}, token = null) => {
     });
 };
 
+export const patch = async (path, params = {}, token) => {
+    return await backend.get('sanctum/csrf-cookie').then(async () => {
+        const headers = {};
+
+        headers['Content-Type'] = 'application/json';
+        headers['Authorization'] = 'Bearer ' + token;
+
+        return await api
+            .patch(path, params, {
+                headers: headers,
+            })
+            .then(async (response) => {
+                return response;
+            });
+    });
+};
+
 export const upload = async (path, data) => {
     const cookie = new Cookie();
     const access_token = cookie.get('personal_access_token');
