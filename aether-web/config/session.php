@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', 'erzsphilos.com'),
+    'domain' => env('SESSION_DOMAIN', 'flintspark.kr'),
 
     /*
     |--------------------------------------------------------------------------

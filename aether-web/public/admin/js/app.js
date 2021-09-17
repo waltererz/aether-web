@@ -99,9 +99,9 @@ var _config = {
   // 모바일기기 접속 유무
   url: {
     app: window._aether.baseUrl,
-    backend: 'http://back.erzsphilos.com',
+    backend: 'https://back.flintspark.kr',
     // 백엔드 서버 URL
-    api: 'http://back.erzsphilos.com/api' // API 서버 URL
+    api: 'https://back.flintspark.kr/api' // API 서버 URL
 
   },
   user: {}

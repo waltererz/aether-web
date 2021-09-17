@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://erzsphilos.com', 'http://www.erzsphilos.com', 'http://admin.erzsphilos.com:38591'],
+    'allowed_origins' => ['https://flintspark.kr'],
 
     'allowed_origins_patterns' => [],
 

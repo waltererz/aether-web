@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Aether Backend'),
+    'name' => env('APP_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://back.erzsphilos.com'),
+    'url' => env('APP_URL'),
 
     'asset_url' => env('ASSET_URL', null),
 

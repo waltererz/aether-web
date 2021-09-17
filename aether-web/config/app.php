@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', '투자가 시작되는 곳, AETHER'),
-    'description' => env('APP_DESCRIPTION', '누구나 쉽고 재미있게 친구들과 함께하는 주식투자'),
+    'name' => env('APP_NAME'),
+    'description' => env('APP_DESCRIPTION'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,9 +53,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://www.erzsphilos.com'),
-    'backend_url' => env('BACKEND_URL', 'http://back.erzsphilos.com'),
-    'api_url' => env('API_URL', 'http://back.erzsphilos.com/api'),
+    'url' => env('APP_URL'),
+    'backend_url' => env('BACKEND_URL'),
+    'api_url' => env('API_URL'),
 
     'asset_url' => env('ASSET_URL', null),
 
