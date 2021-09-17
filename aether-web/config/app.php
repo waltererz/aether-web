@@ -56,8 +56,8 @@ return [
     'url' => env('APP_URL'),
     'backend_url' => env('BACKEND_URL'),
     'api_url' => env('API_URL'),
-
-    'asset_url' => env('ASSET_URL', null),
+    'asset_url' => env('ASSET_URL'),
+    'storage_url' => env('STORAGE_URL'),
 
     /*
     |--------------------------------------------------------------------------

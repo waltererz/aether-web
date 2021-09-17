@@ -6,5 +6,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ mix('/js/landing.js') }}" type="text/javascript"></script>
+    <script src="{{ config('app.asset_url') . mix('/js/landing.js') }}" type="text/javascript"></script>
 @endsection

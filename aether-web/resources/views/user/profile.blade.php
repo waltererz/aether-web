@@ -7,5 +7,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
+    <script src="{{ config('app.asset_url') . mix('/js/app.js') }}" type="text/javascript"></script>
 @endsection
