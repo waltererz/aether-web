@@ -182,7 +182,7 @@ export default function LandingPage() {
                         </Box>
                         <Divider />
                         <Box sx={{ fontSize: '0.8em', color: '#555555' }}>
-                            Erzsphilos.com © 2021
+                            Flintspark Group © 2021
                         </Box>
                     </FooterContent>
                 </Footer>

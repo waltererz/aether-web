@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\InvestmentThemeController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\StorageController;
+use App\Http\Controllers\UserImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('storage')->group(function () {
-        Route::post('user/image', [StorageController::class, 'storeUserImage']);
+        Route::post('user/image', [UserImageController::class, 'store']);
     });
 });
 
@@ -63,8 +63,4 @@ Route::prefix('auth')->group(function () {
 Route::prefix('users')->group(function () {
     Route::post('/', [UserController::class, 'store']);
     Route::post('/check/email', [UserController::class, 'checkEmail']);
-});
-
-Route::prefix('storage')->group(function () {
-    Route::get('user/image/{user}', [StorageController::class, 'showUserImage'])->where('user', '[0-9a-z\-]+')->name('user.image');
 });
