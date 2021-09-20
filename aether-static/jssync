@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rsync -avz -e ssh nuevowalter@20.196.222.96:/code/aether-web/aether-web/build/js/ /code/aether-web/aether-static/js/
