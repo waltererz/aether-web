@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,3 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::prefix('userimage')->group(function () {
+    Route::get('s/{uuid}', [UserImageController::class, 'show'])->where('uuid', '[0-9a-z\-]+');
+});
