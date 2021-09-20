@@ -30,14 +30,6 @@ const _menuLinks = [
                 name: '전문가 검색', slug: 'searchadvisors', to: '/advisors/search'
             }
         ],
-    },
-
-    {
-        name: '관리자',
-        slug: 'admin',
-        to: '/__admin',
-        children: [],
-        group: 'admin,owner',
     }
 ];
 

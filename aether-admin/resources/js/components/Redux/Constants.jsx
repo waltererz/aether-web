@@ -1,1 +1,0 @@
-export const LAYOUT_CURRENT_TAB = 'LAYOUT_CURRENT_TAB';

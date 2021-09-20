@@ -15,7 +15,6 @@ mix.setPublicPath('./build').options({ runtimeChunkPath: './js/common' });
 
 mix.js('resources/js/index.jsx', './js/app.js')
    .js('resources/js/landing.jsx', './js/landing.js')
-   .js('resources/js/admin.jsx', './admin/js/app.js')
    .react().version();
 
 mix.extract(['react', 'react-dom', 'react-redux', 'react-router-dom', 'redux', 'axios', 'universal-cookie'], './js/common/chunk.1.js')
