@@ -390,6 +390,10 @@ function LandingPage() {
               }
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
+              href: "https://notion.flintspark.kr",
+              target: "_blank",
+              children: "\uD50C\uB9B0\uCE20\uD30C\uD06C \uADF8\uB8F9"
+            }), "/", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_8__["default"], {
               href: "https://blog.naver.com/erzsamatory",
               target: "_blank",
               children: "\uCC3D\uC870\uC801 \uB178\uB9C8\uB4DC \uB7F0\uB358\uC2DC\uD2F0 \uBE14\uB85C\uADF8"
