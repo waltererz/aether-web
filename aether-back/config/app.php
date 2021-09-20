@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL'),
+    'storage_url' => env('STORAGE_URL'),
 
     'asset_url' => env('ASSET_URL', null),
 

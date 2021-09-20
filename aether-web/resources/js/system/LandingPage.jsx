@@ -168,6 +168,10 @@ export default function LandingPage() {
                                 },
                             }}
                         >
+                            <Link href="https://notion.flintspark.kr" target="_blank">
+                                플린츠파크 그룹
+                            </Link>
+                            /
                             <Link href="https://blog.naver.com/erzsamatory" target="_blank">
                                 창조적 노마드 런던시티 블로그
                             </Link>
@@ -178,7 +182,7 @@ export default function LandingPage() {
                         </Box>
                         <Divider />
                         <Box sx={{ fontSize: '0.8em', color: '#555555' }}>
-                            Erzsphilos.com © 2021
+                            Flintspark Group © 2021
                         </Box>
                     </FooterContent>
                 </Footer>
