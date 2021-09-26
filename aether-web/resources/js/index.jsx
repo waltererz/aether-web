@@ -7,6 +7,7 @@ import App from './system/App';
 import Reducers from './redux/reducers';
 import * as StandAlone from './standalones';
 
+// test
 const store = createStore(Reducers);
 
 ReactDOM.render(
