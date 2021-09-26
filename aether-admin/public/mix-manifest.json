@@ -1,3 +1,7 @@
 {
-    "/js/app.js": "/js/app.js?id=ad391a12f9b2ebbb95b1"
+    "/js/app.js": "/js/app.js?id=88983f3abdbc3b8f5f15",
+    "/js/common/manifest.js": "/js/common/manifest.js?id=377562faf43549b8a2e5",
+    "/js/common/chunk.1.js": "/js/common/chunk.1.js?id=4bfb8dd4f2039d4401d1",
+    "/js/common/chunk.2.js": "/js/common/chunk.2.js?id=4352938ee532b2d28fa0",
+    "/js/common/chunk.a.js": "/js/common/chunk.a.js?id=2b8c9b16b3d3e8fee106"
 }
